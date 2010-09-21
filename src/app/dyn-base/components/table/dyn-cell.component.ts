@@ -5,9 +5,9 @@ import { Store } from '@ngxs/store';
   selector: 'dyn-cell',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <form class="table__row__cell__container">
-        <input (blur)="disaptchAction(event.target.value)" [(ngModel)]="value" #cell [innerHtml]="value">
-    </form>
+    <div class="table__row__cell__container">
+        <input (blur)="dispatchAction(event)" [(ngModel)]="value" #cell [innerHtml]="value">
+    </div>
     `
 })
 export class DynCellComponent {
