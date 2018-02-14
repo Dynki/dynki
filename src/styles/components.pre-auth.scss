@@ -1,0 +1,51 @@
+
+.pre-auth {
+    background: url(/assets/img/signin-bg.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100%!important;
+
+    &__brand {
+        background-color: $primary-color-dark;
+        color: $logo-color;
+        font-family: $font-family;
+        font-size: $logo-font-size-large;
+        padding-left: 45px;
+        padding-bottom: 25px;
+        padding-right: 30px;
+        margin-right: 20px;
+        margin-bottom: 12px;
+        height: 70px;
+        cursor: hand;
+        cursor: pointer;
+    }
+
+    &__img {
+        height: 37px;
+        width: 48px;
+        padding-right: 5px;
+    }
+
+    &__cta {
+        margin-right: 200px;
+        background-color: $strapbox-background-color;
+        padding: 18px;
+        margin-bottom: 100px;
+    }        
+          
+    &__heading {
+        color: $strapbox-headline-color;
+        font-family: $font-family;
+        font-size: 34px;
+    }
+    
+    &__sub-heading {
+        color: $strapbox-subheading-color;
+        font-family: $font-family;
+        font-size: 34px;
+        font-weight:bolder;
+        margin-bottom: 30px;
+    }
+}

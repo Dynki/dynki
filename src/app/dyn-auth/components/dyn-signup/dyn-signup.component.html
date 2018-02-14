@@ -1,0 +1,25 @@
+<form class="login" nz-form [formGroup]="form" (ngSubmit)="submit()">
+  <h1 class="login__heading">Register</h1>
+  <div nz-form-item>
+    <div nz-form-control>
+      <nz-input formControlName="username" [nzPlaceHolder]="'email'" [nzSize]="'large'">
+        <ng-template #prefix>
+          <i class="anticon anticon-user"></i>
+        </ng-template>
+      </nz-input>
+      <div nz-form-explain *ngIf="form.controls.username.dirty&&form.controls.username.hasError('required')">Please input your email!</div>
+    </div>
+  </div>
+  <div nz-form-item>
+    <div nz-form-control>
+      <nz-input formControlName="password" [nzType]="'password'" [nzPlaceHolder]="'Password'" [nzSize]="'large'">
+        <ng-template #prefix>
+          <i class="anticon anticon-lock"></i>
+        </ng-template>
+      </nz-input>
+      <div nz-form-explain *ngIf="form.controls.password.dirty&&form.controls.password.hasError('required')">Please input your Password!</div>
+    </div>
+  </div>
+  <button nz-button [nzLoading]="(pending | async)" class="login__button" [nzType]="'primary'" [nzSize]="'large'" type="submit">Register</button>
+</form>
+

@@ -1,0 +1,16 @@
+<nz-layout>
+    <nz-sider class="side-menu__wrapper" nzCollapsible [nzCollapsed]="(isCollapsed | async)" [nzTrigger]="null">
+        <dyn-side-menu></dyn-side-menu>
+    </nz-sider>
+    <nz-layout>
+        <nz-header style="background: #fff; padding:0;">
+            <dyn-toolbar></dyn-toolbar>
+        </nz-header>
+        <nz-content style="margin:0 16px;">
+            <dyn-timer></dyn-timer>
+            <router-outlet></router-outlet>
+        </nz-content>
+        <nz-footer style="text-align: center;">Dynki Limited ©2018</nz-footer>
+
+    </nz-layout>
+</nz-layout>

@@ -1,0 +1,26 @@
+.side-menu__wrapper {
+    background: #ffffff!important;
+}
+
+.side-menu {
+
+    &__brand {
+        background-color: $primary-color;
+        min-height: 65px;
+    }
+    
+    &__img {
+        width: 37px;
+        height: 33px;
+    }
+
+    &__heading {
+            
+        color: $logo-color;
+        font-family: $font-family;
+        font-size: $logo-font-size;
+        background-color: $primary-color;
+        margin: 10px;
+    }
+}
+

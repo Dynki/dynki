@@ -1,0 +1,6 @@
+<form [formGroup]="timerForm">
+    <nz-input-group class="timer" [nzSize]="'large'" nzCompact>
+        <nz-input [nzSize]="'large'" formControlName="description" [nzPlaceHolder]="'A description for your log entry'" style="width: 94%;"></nz-input>
+        <button nz-button [nzSize]="'large'" [nzType]="'primary'" (click)="toggle()">{{ timerLabel }}</button>
+    </nz-input-group>
+</form>

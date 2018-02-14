@@ -1,0 +1,39 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+import { AuthGuard, AuthService } from '../../dyn-auth/services';
+
+import { HomeComponent, PostAuthComponent, PreAuthComponent } from '../components';
+import { LoginComponent } from '../../dyn-auth/components';
+
+const appRoutes: Routes = [
+  {
+    path: 'login', component: PreAuthComponent,
+    children: [
+      { path: 'login', redirectTo: 'auth', pathMatch: 'full' },
+      { path: 'auth', component: LoginComponent }
+    ]
+  },
+  {
+    path: '', component: PostAuthComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: HomeComponent }
+    ]
+  }
+
+];
+
+// other imports
+@NgModule({
+  imports: [
+    RouterModule.forRoot(appRoutes),
+  ],
+  exports: [
+    RouterModule,
+  ],
+  providers: [AuthGuard, AuthService],
+})
+export class ShellRoutingModule {
+}

@@ -1,0 +1,8 @@
+<div class="toolbar" fxLayout="row" fxLayoutAlign="end center">
+  <i class="anticon trigger icon-button" [class.anticon-menu-fold]="(isCollapsed | async) === false" [class.anticon-menu-unfold]="(isCollapsed | async)" (click)="toggleMenu()"></i>
+  <span fxFlex></span>
+  <button (click)="logout()" nz-button [nzType]="'primary'" class="toolbar__logout">
+    <i class="anticon anticon-logout"></i>
+    <span>Log Off</span>
+  </button>
+</div>
