@@ -6,13 +6,26 @@ export enum RegisterActionTypes {
     Register = '[Register] Sign Up',
     RegisterSuccess = '[Register] Success',
     RegisterFailure = '[Register] Failure',
-    RegisterConfirmation = '[Register] Confirm'
+    RegisterConfirmation = '[Register] Confirm',
+    RegisterConfirmSuccess = '[Register] Confirm Success',
+    RegisterConfirmFailure = '[Register] Confirm Failure'
 }
 
 export class RegisterConfirm implements Action {
     readonly type = RegisterActionTypes.RegisterConfirmation;
 
     constructor(public payload: Confirmation) { }
+}
+
+export class RegisterConfirmSuccess implements Action {
+    readonly type = RegisterActionTypes.RegisterConfirmSuccess;
+    constructor(public payload: any) { }
+}
+
+export class RegisterConfirmFailure implements Action {
+    readonly type = RegisterActionTypes.RegisterConfirmFailure;
+
+    constructor(public payload: any) { }
 }
 
 export class Register implements Action {

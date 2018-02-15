@@ -10,7 +10,9 @@ import {
     RegisterConfirm,
     RegisterFailure,
     RegisterSuccess,
-    RegisterActionTypes
+    RegisterActionTypes,
+    RegisterConfirmFailure,
+    RegisterConfirmSuccess
 } from '../actions/register';
 import { Confirmation, Registration } from '../models/register';
 import { NzNotificationService } from 'ng-zorro-antd';
@@ -18,7 +20,7 @@ import { NzNotificationService } from 'ng-zorro-antd';
 @Injectable()
 export class RegisterEffects {
   @Effect()
-  login$ = this.actions$.pipe(
+  register$ = this.actions$.pipe(
     ofType(RegisterActionTypes.Register),
     map((action: Register) => action.payload),
     exhaustMap((register: Registration) => this.authService
@@ -32,14 +34,29 @@ export class RegisterEffects {
         ))
   );
 
+  @Effect()
+  confirm$ = this.actions$.pipe(
+    ofType(RegisterActionTypes.RegisterConfirmation),
+    map((action: RegisterConfirm) => action.payload),
+    exhaustMap((confirmation: Confirmation) => this.authService
+        .confirmCode(confirmation.username, confirmation.code)
+        .pipe(
+          map(user => new RegisterConfirmSuccess(user)),
+          catchError(error => {
+            console.log(error);
+            return of(new RegisterConfirmFailure(error))
+          })
+        ))
+  );
+
   @Effect({ dispatch: false })
-  loginSuccess$ = this.actions$.pipe(
+  registrationSuccess$ = this.actions$.pipe(
     ofType(RegisterActionTypes.RegisterSuccess),
     tap(() => this.router.navigate(['/']))
   );
 
   @Effect({ dispatch: false })
-  loginError$ = this.actions$.pipe(
+  registrationError$ = this.actions$.pipe(
     ofType(RegisterActionTypes.RegisterFailure),
     map((action: RegisterFailure) => action.payload),
     tap((e) => this._notification.create('error', 'Registration Error',  e.message))
