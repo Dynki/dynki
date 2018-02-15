@@ -1,8 +1,8 @@
-<form class="login" nz-form [formGroup]="form" (ngSubmit)="submit()">
+<form class="login" nz-form [formGroup]="form" (ngSubmit)="submit()" name="loginForm">
   <h1 class="login__heading">Sign In</h1>
   <div nz-form-item>
     <div nz-form-control>
-      <nz-input formControlName="username" [nzPlaceHolder]="'email'" [nzSize]="'large'">
+      <nz-input formControlName="username"  name="username" [nzPlaceHolder]="'email'" [nzSize]="'large'" aria-label="enter email address">
         <ng-template #prefix>
           <i class="anticon anticon-user"></i>
         </ng-template>
@@ -12,7 +12,7 @@
   </div>
   <div nz-form-item>
     <div nz-form-control>
-      <nz-input formControlName="password" [nzType]="'password'" [nzPlaceHolder]="'Password'" [nzSize]="'large'">
+      <nz-input formControlName="password" name="password" [nzType]="'password'" [nzPlaceHolder]="'Password'" [nzSize]="'large'" aria-label="enter password">
         <ng-template #prefix>
           <i class="anticon anticon-lock"></i>
         </ng-template>
@@ -25,10 +25,10 @@
       <label nz-checkbox>
         <span>Remember me</span>
       </label>
-      <a class="login--forgot" (click)="forgot()">Forgot password</a>
-      <button nz-button [nzLoading]="(pending | async)" class="login__button" [nzType]="'primary'" [nzSize]="'large'" type="submit" aria-label="Log in">Log in</button>
+      <a class="login--forgot" (click)="forgot()" aria-label="forgot password">Forgot password</a>
+      <button nz-button name="loginBtn" [nzLoading]="(pending | async)" class="login__button" [nzType]="'primary'" [nzSize]="'large'" type="submit" aria-label="Log in">Log in</button>
       Or
-      <a href="" (click)="register()">register now!</a>
+      <a (click)="register()" name="registerlink" aria-label="register now">register now!</a>
     </div>
   </div>
 </form>

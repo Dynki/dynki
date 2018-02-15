@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { Store } from '@ngrx/store';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import * as Register from '../../store/actions/register';
 import * as fromAuth from '../../store/reducers';
 
@@ -10,15 +10,11 @@ import * as fromAuth from '../../store/reducers';
   templateUrl: './dyn-confirm.component.html'
 })
 export class ConfirmComponent {
-  code: string;
-  form: FormGroup;
+  form = new FormGroup({ code: new FormControl('') });
 
-  constructor (
-    private fb: FormBuilder,
-    private store: Store<fromAuth.State>
-  ) { }
+  constructor (private store: Store<fromAuth.State>) { }
 
-  confirmCode() {
+  submit() {
     this.store.dispatch(new Register.RegisterConfirm(this.form.value));
   }
 }

@@ -62,6 +62,15 @@ export class RegisterEffects {
     tap((e) => this._notification.create('error', 'Registration Error',  e.message))
   );
 
+  @Effect({ dispatch: false })
+  registerRedirect$ = this.actions$.pipe(
+    ofType(RegisterActionTypes.RegisterRedirect),
+    tap(() => console.log('Action::RegisterRedirect::Effect')),
+    tap(authed => {
+      this.router.navigate(['/login/register']);
+    }),
+  );
+
   constructor(
     private actions$: Actions,
     private authService: AuthService,

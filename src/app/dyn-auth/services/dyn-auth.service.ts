@@ -20,16 +20,6 @@ export class AuthService {
     public awsRegistration: UserRegistrationService,
     private store: Store<fromAuth.State>
    ) {
-
-    // this.awsAuth.userAuthenticated.subscribe(auth => {
-    //   if (auth === undefined || auth === null || auth === false) {
-    //     this.store.dispatch(new Auth.Logout());
-    //   } else {
-    //     this.store.dispatch(new Auth.LoginSuccess({ user: this.getUserDetails() }));
-    //   }
-    // });
-
-    this.awsAuth.checkAuthStatus();
   }
 
   private getUserDetails(): User {

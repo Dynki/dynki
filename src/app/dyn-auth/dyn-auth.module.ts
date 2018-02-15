@@ -12,7 +12,7 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { LoginComponent, SignupComponent, ConfirmComponent } from './components';
 import { AuthGuard, AuthService, UserLoginService, CognitoUtil, UserRegistrationService } from './services';
 
-import { AuthEffects } from './store/effects/auth.effect';
+import { AuthEffects, RegisterEffects } from './store/effects';
 import { authReducers } from './store/reducers';
 
 export const COMPONENTS = [LoginComponent, SignupComponent, ConfirmComponent];
@@ -40,7 +40,7 @@ export class AuthModule {
 
 const AUTH_ROUTES: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
+  { path: 'register', component: SignupComponent },
   { path: 'confirm', component: ConfirmComponent },
 ];
 
@@ -51,7 +51,7 @@ const AUTH_ROUTES: Routes = [
     // NgZorroAntdModule.forRoot(),
     RouterModule.forChild(AUTH_ROUTES),
     StoreModule.forFeature('auth', authReducers),
-    EffectsModule.forFeature([AuthEffects])
+    EffectsModule.forFeature([AuthEffects, RegisterEffects])
   ]
 })
 export class AuthRoutingModule { }

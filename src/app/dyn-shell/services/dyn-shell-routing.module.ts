@@ -4,14 +4,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard, AuthService } from '../../dyn-auth/services';
 
 import { HomeComponent, PostAuthComponent, PreAuthComponent } from '../components';
-import { LoginComponent } from '../../dyn-auth/components';
+import { LoginComponent, SignupComponent } from '../../dyn-auth/components';
 
 const appRoutes: Routes = [
   {
     path: 'login', component: PreAuthComponent,
     children: [
       { path: 'login', redirectTo: 'auth', pathMatch: 'full' },
-      { path: 'auth', component: LoginComponent }
+      { path: 'auth', component: LoginComponent },
+      { path: 'register', component: SignupComponent }
     ]
   },
   {

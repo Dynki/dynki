@@ -4,6 +4,7 @@ import { User } from '../models/user';
 
 export enum RegisterActionTypes {
     Register = '[Register] Sign Up',
+    RegisterRedirect = '[Register] Redirect',
     RegisterSuccess = '[Register] Success',
     RegisterFailure = '[Register] Failure',
     RegisterConfirmation = '[Register] Confirm',
@@ -32,6 +33,10 @@ export class Register implements Action {
     readonly type = RegisterActionTypes.Register;
 
     constructor(public payload: Registration) { }
+}
+
+export class RegisterRedirect implements Action {
+    readonly type = RegisterActionTypes.RegisterRedirect;
 }
 
 export class RegisterSuccess implements Action {

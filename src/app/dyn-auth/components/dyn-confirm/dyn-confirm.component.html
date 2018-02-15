@@ -1,11 +1,11 @@
-<form class="login" nz-form [formGroup]="loginForm" (ngSubmit)="login()">
-  <h1 class="signin-logo">Confirm</h1>
-  <h3 class="signup-text">Enter the code emailed to you.</h3>
+<form class="confirm" nz-form [formGroup]="form" (ngSubmit)="submit()" name="confirmForm">
+  <h1 class="confirm__heading">Confirm</h1>
+  <h3 class="confirm__text">Enter the code emailed to you.</h3>
   <div nz-form-item>
     <div nz-form-control>
-      <nz-input formControlName="code" [(ngModel)]="code" [nzPlaceHolder]="Code"></nz-input>
-      <div nz-form-explain *ngIf="loginForm.controls.code.dirty&&loginForm.controls.code.hasError('required')">Please enter the code!</div>
-      <button nz-button class="login__button" [nzType]="'primary'" [nzSize]="'large'" type="submit">Submit Code</button>
+      <nz-input required name="code" aria-label="enter confirmation code" formControlName="code" [(ngModel)]="code" [nzPlaceHolder]="Code"></nz-input>
+      <div nz-form-explain *ngIf="form.controls.code.dirty&&form.controls.code.hasError('required')">Please enter the code!</div>
+      <button nz-button name="confirm" aria-label="confirm code" class="confirm__button" [nzType]="'primary'" [nzSize]="'large'" type="submit">Submit Code</button>
     </div>
   </div>
 </form>
