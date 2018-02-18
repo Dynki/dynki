@@ -36,6 +36,9 @@ export function reducer(state = initialState, action: AuthActions) {
 
     case AuthActionTypes.LOGOUT:
       return {...state, loggedIn: false, loading: true}
+
+    default:
+      return state;
   }
 }
 
