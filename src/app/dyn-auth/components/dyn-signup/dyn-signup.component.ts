@@ -3,7 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 
 import * as fromAuth from '../../store/reducers';
-import * as Registration from '../../store/actions/register';
+import * as registerActions from '../../store/actions/register';
 
 @Component({
   selector: 'dyn-signup',
@@ -16,6 +16,6 @@ export class SignupComponent {
   constructor (private store: Store<fromAuth.State>) { }
 
   submit() {
-    this.store.dispatch(new Registration.Register(this.form.value));
+    this.store.dispatch(new registerActions.SignUp(this.form.value));
   }
 }

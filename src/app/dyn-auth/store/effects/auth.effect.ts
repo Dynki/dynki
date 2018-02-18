@@ -1,66 +1,80 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { Effect, Actions, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/observable';
+import { fromPromise } from 'rxjs/observable/fromPromise';
+import 'rxjs/add/observable/fromPromise';
 import { of } from 'rxjs/observable/of';
 import { tap, map, exhaustMap, catchError } from 'rxjs/operators';
-
-import { AuthService } from '../../services';
-import {
-  Login,
-  LoginSuccess,
-  LoginFailure,
-  AuthActionTypes,
-  LoginRedirect
-} from '../actions/auth';
-import { User, Authenticate } from '../models/user';
+import { AngularFireAuth  } from 'angularfire2/auth';
 import { NzNotificationService } from 'ng-zorro-antd';
-import { Store } from '@ngrx/store';
 
 import * as fromAuth from '../reducers/auth';
+import * as authActions from '../actions/auth';
+import { User, Credentials } from '../models/user';
+import { switchMap } from 'rxjs/operator/switchMap';
 
 @Injectable()
 export class AuthEffects {
   @Effect()
-  login$ = this.actions$.pipe(
-    ofType(AuthActionTypes.Login),
-    map((action: Login) => action.payload),
-    exhaustMap((auth: Authenticate) => this.authService
-        .login(auth)
+  getUser$ = this.actions$.pipe(
+    ofType(authActions.AuthActionTypes.GET_USER),
+    map((action: authActions.GetUser) => action.payload),
+    exhaustMap((payload) => this.afAuth.authState
         .pipe(
-          tap(() => console.log('Action::logged in::Effect', auth)),
-          map(user => new LoginSuccess({ user: user })),
+          map(authData => {
+            if (authData) {
+              const user = new User(authData.uid, authData.displayName);
+              return new authActions.Authenticated(user);
+            } else {
+              return new authActions.NotAuthenticated();
+            }
+          }),
           catchError(error => {
             console.log(error);
-            return of(new LoginFailure(error))
+            return of(new authActions.AuthError(error))
           })
         ))
   );
 
   @Effect()
-  checkAuthStatus$ = this.actions$.pipe(
-    ofType(AuthActionTypes.CheckAuthStatus),
-    exhaustMap(() => this.authService
-        .awsAuth.checkAuthStatus()
-        .pipe(
-          map(user => new LoginSuccess({ user: user })),
-          catchError(error => {
-            console.log(error);
-            return of(new LoginRedirect())
-          })
-        ))
+  login$ = this.actions$.pipe(
+    ofType(authActions.AuthActionTypes.LOGIN),
+    map((action: authActions.Login) => action.payload),
+    exhaustMap((creds: Credentials) => {
+        return this.afAuth.auth.signInAndRetrieveDataWithEmailAndPassword(creds.username, creds.password)
+        .then((user) => new authActions.Authenticated(new User(user.uid, user.displayName)))
+        .catch((err) => new authActions.AuthError(err))
+    }),
+    catchError(err => of(new authActions.AuthError(err)))
+
   );
+
+  // @Effect()
+  // checkAuthStatus$ = this.actions$.pipe(
+  //   ofType(AuthActionTypes.CheckAuthStatus),
+  //   exhaustMap(() => this.authService
+  //       .awsAuth.checkAuthStatus()
+  //       .pipe(
+  //         map(user => new LoginSuccess({ user: user })),
+  //         catchError(error => {
+  //           console.log(error);
+  //           return of(new LoginRedirect())
+  //         })
+  //       ))
+  // );
 
   @Effect({ dispatch: false })
   loginSuccess$ = this.actions$.pipe(
-    ofType(AuthActionTypes.LoginSuccess),
-    tap(() => console.log('Action::LoginSuccess::Effect')),
+    ofType(authActions.AuthActionTypes.AUTHENTICATED),
     tap(() => this.router.navigate(['/']))
   );
 
   @Effect({ dispatch: false })
   loginRedirect$ = this.actions$.pipe(
-    ofType(AuthActionTypes.LoginRedirect),
-    tap(() => console.log('Action::LoginRedirect::Effect')),
+    ofType(authActions.AuthActionTypes.NOT_AUTHENTICATED),
     tap(authed => {
       this.router.navigate(['/login/auth']);
     }),
@@ -68,24 +82,21 @@ export class AuthEffects {
 
   @Effect({ dispatch: false })
   logout$ = this.actions$.pipe(
-    ofType(AuthActionTypes.Logout),
-    tap(() => console.log('Action::Logout::Effect')),
-    tap(() => this.authService.logout()),
-    tap(() => this.store.dispatch(new LoginRedirect()))
+    ofType(authActions.AuthActionTypes.LOGOUT),
+    tap(() => this.afAuth.auth.signOut()),
+    tap(() => this.store.dispatch(new authActions.NotAuthenticated()))
   );
 
   @Effect({ dispatch: false })
   loginError$ = this.actions$.pipe(
-    ofType(AuthActionTypes.LoginFailure),
-    map((action: LoginFailure) => action.payload),
-    tap(() => console.log('Action::LoginFailure::Effect')),
+    ofType(authActions.AuthActionTypes.AUTH_ERROR),
+    map((action: any) => action.payload),
     tap((e) => this._notification.create('error', 'Login error',  e.message))
   );
 
-
   constructor(
     private actions$: Actions,
-    private authService: AuthService,
+    private afAuth: AngularFireAuth,
     private router: Router,
     private _notification: NzNotificationService,
     private store: Store<fromAuth.State>

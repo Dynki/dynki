@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store';
 
 import * as fromAuth from '../../store/reducers';
 import * as Auth from '../../store/actions/auth';
-import * as Registration from '../../store/actions/register';
+import * as registerActions from '../../store/actions/register';
 
 @Component({
   selector: 'dyn-login',
@@ -21,7 +21,7 @@ export class LoginComponent {
   }
   register() {
     console.log('Register Clicked');
-    this.store.dispatch(new Registration.RegisterRedirect());
+    this.store.dispatch(new registerActions.Redirect());
   }
   forgot() {
     this.store.dispatch(new Auth.Login(this.form.value));

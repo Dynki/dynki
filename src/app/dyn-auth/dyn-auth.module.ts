@@ -9,13 +9,14 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 
-import { LoginComponent, SignupComponent, ConfirmComponent } from './components';
-import { AuthGuard, AuthService, UserLoginService, CognitoUtil, UserRegistrationService } from './services';
+import { LoginComponent, SignupComponent } from './components';
 
 import { AuthEffects, RegisterEffects } from './store/effects';
 import { authReducers } from './store/reducers';
+import { AuthGuard } from 'app/dyn-auth/services';
+import { AngularFireAuth } from 'angularfire2/auth';
 
-export const COMPONENTS = [LoginComponent, SignupComponent, ConfirmComponent];
+export const COMPONENTS = [LoginComponent, SignupComponent];
 
 @NgModule({
   imports: [
@@ -26,22 +27,20 @@ export const COMPONENTS = [LoginComponent, SignupComponent, ConfirmComponent];
     NgZorroAntdModule.forRoot()
   ],
   declarations: COMPONENTS,
-  exports: COMPONENTS,
-  providers: [UserLoginService, CognitoUtil, UserRegistrationService]
+  exports: COMPONENTS
 })
 export class AuthModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: AuthRoutingModule,
-      providers: [AuthGuard, AuthService]
+      providers: [AuthGuard, AngularFireAuth]
     }
   }
 }
 
 const AUTH_ROUTES: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: SignupComponent },
-  { path: 'confirm', component: ConfirmComponent },
+  { path: 'register', component: SignupComponent }
 ];
 
 // other imports

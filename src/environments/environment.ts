@@ -1,20 +1,11 @@
-// The file contents for the current environment will overwrite these during build.
-// The build system defaults to the dev environment which uses `environment.ts`, but if you do
-// `ng build --env=prod` then `environment.prod.ts` will be used instead.
-// The list of which env maps to which file can be found in `angular-cli.json`.
-
 export const environment = {
   production: false,
-
-  region: 'eu-west-2',
-
-  identityPoolId: 'eu-west-2:30a734df-5477-47e5-a689-82bce8804ed3',
-  userPoolId: 'eu-west-2_QHrznNjw2',
-  clientId: '1r7htsvagbh7a0cp0r19utekrc',
-
-  rekognitionBucket: 'rekognition-pics',
-  albumName: "usercontent",
-  bucketRegion: 'eu-west-2',
-
-  ddbTableName: 'LoginTrail'
+  firebase: {
+    apiKey: 'AIzaSyD05_Ol0zocqnYK5FY95Wh__vlK45eXLdw',
+    authDomain: 'dynki-c5141.firebaseapp.com',
+    databaseURL: 'https://dynki-c5141.firebaseio.com',
+    projectId: 'dynki-c5141',
+    storageBucket: 'dynki-c5141.appspot.com',
+    messagingSenderId: '957203868799'
+  }
 };

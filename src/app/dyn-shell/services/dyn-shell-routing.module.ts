@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuard, AuthService } from '../../dyn-auth/services';
+import { AuthGuard } from '../../dyn-auth/services';
 
 import { HomeComponent, PostAuthComponent, PreAuthComponent } from '../components';
 import { LoginComponent, SignupComponent } from '../../dyn-auth/components';
@@ -34,7 +34,7 @@ const appRoutes: Routes = [
   exports: [
     RouterModule,
   ],
-  providers: [AuthGuard, AuthService],
+  providers: [AuthGuard],
 })
 export class ShellRoutingModule {
 }

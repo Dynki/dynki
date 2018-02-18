@@ -1,71 +1,46 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Effect, Actions, ofType } from '@ngrx/effects';
+import { Observable } from 'rxjs/observable';
+import 'rxjs/add/observable/fromPromise';
 import { of } from 'rxjs/observable/of';
 import { tap, map, exhaustMap, catchError } from 'rxjs/operators';
-
-import { AuthService } from '../../services';
-import {
-    Register,
-    RegisterConfirm,
-    RegisterFailure,
-    RegisterSuccess,
-    RegisterActionTypes,
-    RegisterConfirmFailure,
-    RegisterConfirmSuccess
-} from '../actions/register';
-import { Confirmation, Registration } from '../models/register';
 import { NzNotificationService } from 'ng-zorro-antd';
+import { AngularFireAuth  } from 'angularfire2/auth';
+
+import * as registerActions from '../actions/register';
+import * as authActions from '../actions/auth';
+import { User, Credentials } from '../models/user';
 
 @Injectable()
 export class RegisterEffects {
   @Effect()
   register$ = this.actions$.pipe(
-    ofType(RegisterActionTypes.Register),
-    map((action: Register) => action.payload),
-    exhaustMap((register: Registration) => this.authService
-        .signUp(register)
+    ofType(registerActions.RegisterActionTypes.SIGN_UP),
+    map((action: registerActions.SignUp) => action.payload),
+    exhaustMap((creds: Credentials) =>
+        Observable.fromPromise(
+          <Promise<any>> this.afAuth.auth.createUserAndRetrieveDataWithEmailAndPassword(creds.username, creds.password)
+        )
         .pipe(
-          map(user => new RegisterSuccess({ user: user })),
+          map(user => new authActions.Authenticated(new User(user.uid, user.displayName))),
           catchError(error => {
             console.log(error);
-            return of(new RegisterFailure(error))
+            return of(new registerActions.RegisterError(error))
           })
         ))
-  );
-
-  @Effect()
-  confirm$ = this.actions$.pipe(
-    ofType(RegisterActionTypes.RegisterConfirmation),
-    map((action: RegisterConfirm) => action.payload),
-    exhaustMap((confirmation: Confirmation) => this.authService
-        .confirmCode(confirmation.username, confirmation.code)
-        .pipe(
-          map(user => new RegisterConfirmSuccess(user)),
-          catchError(error => {
-            console.log(error);
-            return of(new RegisterConfirmFailure(error))
-          })
-        ))
-  );
-
-  @Effect({ dispatch: false })
-  registrationSuccess$ = this.actions$.pipe(
-    ofType(RegisterActionTypes.RegisterSuccess),
-    tap(() => this.router.navigate(['/']))
   );
 
   @Effect({ dispatch: false })
   registrationError$ = this.actions$.pipe(
-    ofType(RegisterActionTypes.RegisterFailure),
-    map((action: RegisterFailure) => action.payload),
+    ofType(registerActions.RegisterActionTypes.REGISTER_ERROR),
+    map((action: any) => action.payload),
     tap((e) => this._notification.create('error', 'Registration Error',  e.message))
   );
 
   @Effect({ dispatch: false })
   registerRedirect$ = this.actions$.pipe(
-    ofType(RegisterActionTypes.RegisterRedirect),
-    tap(() => console.log('Action::RegisterRedirect::Effect')),
+    ofType(registerActions.RegisterActionTypes.REDIRECT),
     tap(authed => {
       this.router.navigate(['/login/register']);
     }),
@@ -73,7 +48,7 @@ export class RegisterEffects {
 
   constructor(
     private actions$: Actions,
-    private authService: AuthService,
+    private afAuth: AngularFireAuth,
     private router: Router,
     private _notification: NzNotificationService
   ) {

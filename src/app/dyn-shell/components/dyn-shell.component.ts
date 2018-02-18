@@ -15,7 +15,7 @@ export class ShellComponent implements OnInit {
   constructor(private store: Store<fromAuth.State>) { }
 
  ngOnInit() {
-  this.store.dispatch(new Auth.CheckAuthStatus());
+  this.store.dispatch(new Auth.GetUser());
  }
 
 }
