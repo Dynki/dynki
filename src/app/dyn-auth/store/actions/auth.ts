@@ -5,9 +5,12 @@ export enum AuthActionTypes {
   GET_USER          = '[Auth] Get User',
   AUTHENTICATED     = '[Auth] Authenticated',
   NOT_AUTHENTICATED = '[Auth] Not Authenticated',
-  LOGIN             = '[Auth] Login attempt',
+  VERIFICATION_EMAIL= '[Auth] Send Verification Email',
+  NOT_VERIFIED      = '[Auth] Not Verified',
+  LOGIN             = '[Auth] Login Attempt',
+  LOGOUT            = '[Auth] Logout',
   AUTH_ERROR        = '[Auth] Error',
-  LOGOUT            = '[Auth] Logout'
+  VERIFICATION_ERROR= '[Auth] Verification Error'
 }
 
 export class GetUser implements Action {
@@ -30,8 +33,23 @@ export class NotAuthenticated implements Action {
   constructor(public payload?: any) {}
 }
 
+export class NotVerified implements Action {
+  readonly type = AuthActionTypes.NOT_VERIFIED;
+  constructor(public payload?: any) {}
+}
+
 export class AuthError implements Action {
   readonly type = AuthActionTypes.AUTH_ERROR;
+  constructor(public payload?: any) {}
+}
+
+export class VerificationError implements Action {
+  readonly type = AuthActionTypes.VERIFICATION_ERROR;
+  constructor(public payload?: any) {}
+}
+
+export class VerificationEmail implements Action {
+  readonly type = AuthActionTypes.VERIFICATION_EMAIL;
   constructor(public payload?: any) {}
 }
 
@@ -44,6 +62,9 @@ export type AuthActions =
   GetUser
   | Authenticated
   | NotAuthenticated
+  | NotVerified
+  | VerificationEmail
   | Login
+  | Logout
   | AuthError
-  | Logout;
+  | VerificationError;

@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 
 import * as fromAuth from '../../store/reducers';
+import * as authActions from '../../store/actions/auth';
 import * as registerActions from '../../store/actions/register';
 
 @Component({

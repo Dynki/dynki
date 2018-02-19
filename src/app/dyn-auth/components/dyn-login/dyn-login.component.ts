@@ -3,7 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 
 import * as fromAuth from '../../store/reducers';
-import * as Auth from '../../store/actions/auth';
+import * as authActions from '../../store/actions/auth';
 import * as registerActions from '../../store/actions/register';
 
 @Component({
@@ -13,17 +13,27 @@ import * as registerActions from '../../store/actions/register';
 export class LoginComponent {
   form = new FormGroup({ username: new FormControl(''), password: new FormControl('') });
   pending = this.store.pipe(select(fromAuth.getLoginPagePending));
+  user = this.store.pipe(select(fromAuth.getUser));
+  verificationError = this.store.pipe(select(fromAuth.getVerificationError));
 
   constructor (private store: Store<fromAuth.State>) { }
 
   submit() {
-    this.store.dispatch(new Auth.Login(this.form.value));
+    console.log('submit');
+    this.store.dispatch(new authActions.Login(this.form.value));
   }
   register() {
-    console.log('Register Clicked');
     this.store.dispatch(new registerActions.Redirect());
   }
   forgot() {
-    this.store.dispatch(new Auth.Login(this.form.value));
+    this.store.dispatch(new authActions.Login(this.form.value));
+  }
+
+  resendEmail() {
+    if (this.form.controls.username.invalid) {
+      this.store.dispatch(new authActions.VerificationError({ message: 'Please enter a valid email'}));
+    } else {
+      this.store.dispatch(new authActions.VerificationEmail(this.form.value.username));
+    }
   }
 }

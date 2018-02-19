@@ -25,7 +25,7 @@ export class AuthEffects {
     exhaustMap((payload) => this.afAuth.authState
         .pipe(
           map(authData => {
-            if (authData) {
+            if (authData && authData.emailVerified) {
               const user = new User(authData.uid, authData.displayName);
               return new authActions.Authenticated(user);
             } else {
@@ -45,11 +45,25 @@ export class AuthEffects {
     map((action: authActions.Login) => action.payload),
     exhaustMap((creds: Credentials) => {
         return this.afAuth.auth.signInAndRetrieveDataWithEmailAndPassword(creds.username, creds.password)
-        .then((user) => new authActions.Authenticated(new User(user.uid, user.displayName)))
+        .then((user) => {
+          if (user.emailVerified) {
+            return new authActions.Authenticated(new User(user.uid, user.displayName));
+          } else {
+            return new authActions.NotVerified();
+          }
+        })
         .catch((err) => new authActions.AuthError(err))
     }),
     catchError(err => of(new authActions.AuthError(err)))
 
+  );
+
+  @Effect()
+  notVerified$ = this.actions$.pipe(
+    ofType(authActions.AuthActionTypes.NOT_VERIFIED),
+    map((action: authActions.NotVerified) => action.payload),
+    map((e) => new authActions.VerificationError({ message: 'Account not verified - please check your email'})),
+    catchError(err => of(new authActions.AuthError(err)))
   );
 
   // @Effect()
@@ -92,6 +106,13 @@ export class AuthEffects {
     ofType(authActions.AuthActionTypes.AUTH_ERROR),
     map((action: any) => action.payload),
     tap((e) => this._notification.create('error', 'Login error',  e.message))
+  );
+
+  @Effect({ dispatch: false })
+  verificationError$ = this.actions$.pipe(
+    ofType(authActions.AuthActionTypes.VERIFICATION_ERROR),
+    map((action: any) => action.payload),
+    tap((e) => this._notification.create('error', 'Verification error',  e.message))
   );
 
   constructor(

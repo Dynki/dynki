@@ -18,17 +18,15 @@ export class RegisterEffects {
   register$ = this.actions$.pipe(
     ofType(registerActions.RegisterActionTypes.SIGN_UP),
     map((action: registerActions.SignUp) => action.payload),
-    exhaustMap((creds: Credentials) =>
-        Observable.fromPromise(
-          <Promise<any>> this.afAuth.auth.createUserAndRetrieveDataWithEmailAndPassword(creds.username, creds.password)
-        )
-        .pipe(
-          map(user => new authActions.Authenticated(new User(user.uid, user.displayName))),
-          catchError(error => {
-            console.log(error);
-            return of(new registerActions.RegisterError(error))
-          })
-        ))
+    exhaustMap((creds: Credentials) => {
+      return this.afAuth.auth.createUserAndRetrieveDataWithEmailAndPassword(creds.username, creds.password)
+      .then((user) => new authActions.Authenticated(new User(user.uid, user.displayName)))
+      .catch((err) => new registerActions.RegisterError(err))
+    }),
+    catchError(error => {
+      console.log(error);
+      return of(new registerActions.RegisterError(error))
+    })
   );
 
   @Effect({ dispatch: false })
