@@ -28,7 +28,16 @@
     &__button {
         width: 100%;
         margin-bottom: 20px;
+        background-color: $green!important;
+        border-color: $green!important;
+        margin-bottom: 7px!important;
+
+        &:hover{
+            background-color: $light-green!important;
+            border-color: $light-green!important;
+        }
     }
+
 
     &__heading {
         color: $primary-color;

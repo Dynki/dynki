@@ -19,4 +19,8 @@ export class SignupComponent {
   submit() {
     this.store.dispatch(new registerActions.SignUp(this.form.value));
   }
+
+  goToLogin() {
+    this.store.dispatch(new authActions.NotAuthenticated());
+  }
 }

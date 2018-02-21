@@ -20,7 +20,7 @@ export class RegisterEffects {
     map((action: registerActions.SignUp) => action.payload),
     exhaustMap((creds: Credentials) => {
       return this.afAuth.auth.createUserAndRetrieveDataWithEmailAndPassword(creds.username, creds.password)
-      .then((user) => new authActions.Authenticated(new User(user.uid, user.displayName)))
+      .then((user) => new authActions.VerificationEmail(this.afAuth.auth.currentUser.reload()))
       .catch((err) => new registerActions.RegisterError(err))
     }),
     catchError(error => {

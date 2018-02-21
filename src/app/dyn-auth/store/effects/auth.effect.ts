@@ -46,13 +46,28 @@ export class AuthEffects {
     exhaustMap((creds: Credentials) => {
         return this.afAuth.auth.signInAndRetrieveDataWithEmailAndPassword(creds.username, creds.password)
         .then((user) => {
-          if (user.emailVerified) {
-            return new authActions.Authenticated(new User(user.uid, user.displayName));
-          } else {
-            return new authActions.NotVerified();
-          }
+          return this.afAuth.auth.currentUser.reload().then(() => {
+            if (this.afAuth.auth.currentUser.emailVerified) {
+              return new authActions.Authenticated(new User(user.uid, user.displayName));
+            } else {
+              return new authActions.NotVerified();
+            }
+          })
         })
         .catch((err) => new authActions.AuthError(err))
+    }),
+    catchError(err => of(new authActions.AuthError(err)))
+
+  );
+
+  @Effect()
+  verificationEmail$ = this.actions$.pipe(
+    ofType(authActions.AuthActionTypes.VERIFICATION_EMAIL),
+    map((action: authActions.VerificationEmail) => action.payload),
+    exhaustMap((payload) => {
+        return this.afAuth.auth.currentUser.sendEmailVerification()
+        .then(() => this._notification.create('info', 'Please verify account', 'Please check your email to verify your account'))
+        .catch((err) => new authActions.VerificationError({ message: 'Failed to send verification email' }))
     }),
     catchError(err => of(new authActions.AuthError(err)))
 

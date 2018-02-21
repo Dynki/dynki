@@ -1,5 +1,5 @@
 <form class="login" nz-form [formGroup]="form" (ngSubmit)="submit()" name="loginForm">
-  <h1 class="login__heading">Sign In</h1>
+  <h1 class="login__heading">Log In</h1>
   <div nz-form-item>
     <div nz-form-control>
       <nz-input formControlName="username" name="username" required email [nzPlaceHolder]="'email'" [nzSize]="'large'" aria-label="enter email address">
@@ -29,7 +29,7 @@
       <button nz-button name="loginBtn" [nzLoading]="(pending | async)" class="login__button" [nzType]="'primary'" 
         [nzSize]="'large'" type="submit" aria-label="Log in">Log in</button>
       Or
-      <a (click)="register()" name="registerlink" aria-label="register now">register now!</a>
+      <a (click)="register()" name="registerlink" aria-label="register now">sign up for free!</a>
     </div>
   </div>
   <button nz-button 

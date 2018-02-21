@@ -33,7 +33,7 @@ export class LoginComponent {
     if (this.form.controls.username.invalid) {
       this.store.dispatch(new authActions.VerificationError({ message: 'Please enter a valid email'}));
     } else {
-      this.store.dispatch(new authActions.VerificationEmail(this.form.value.username));
+      this.store.dispatch(new authActions.VerificationEmail(this.user));
     }
   }
 }

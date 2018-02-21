@@ -1,5 +1,5 @@
 <form class="registration" nz-form [formGroup]="form" (ngSubmit)="submit()" name="registerForm">
-  <h1 class="registration__heading">Register</h1>
+  <h1 class="registration__heading">Sign Up for Free</h1>
   <div nz-form-item>
     <div nz-form-control>
       <nz-input formControlName="username" name="username" [nzPlaceHolder]="'email'" [nzSize]="'large'" aria-label="enter username">
@@ -20,6 +20,9 @@
       <div nz-form-explain *ngIf="form.controls.password.dirty&&form.controls.password.hasError('required')">Please input your Password!</div>
     </div>
   </div>
-  <button nz-button name="registerBtn" [nzLoading]="(pending | async)"  class="login__button" [nzType]="'primary'" [nzSize]="'large'" type="submit" aria-label="register">Register</button>
+  <button nz-button name="registerBtn" [nzLoading]="(pending | async)"  class="registration__button" [nzType]="'primary'" [nzSize]="'large'" type="submit" aria-label="register">Create Account</button>
+  Or
+  <a (click)="goToLogin()" name="gotoLogin" aria-label="go to login">return to login</a>
+
 </form>
 
