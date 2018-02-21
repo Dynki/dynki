@@ -57,7 +57,6 @@ export class AuthEffects {
         .catch((err) => new authActions.AuthError(err))
     }),
     catchError(err => of(new authActions.AuthError(err)))
-
   );
 
   @Effect()
@@ -70,7 +69,18 @@ export class AuthEffects {
         .catch((err) => new authActions.VerificationError({ message: 'Failed to send verification email' }))
     }),
     catchError(err => of(new authActions.AuthError(err)))
+  );
 
+  @Effect()
+  forgotPassword$ = this.actions$.pipe(
+    ofType(authActions.AuthActionTypes.FORGOT_PASSWORD),
+    map((action: authActions.ForgotPassword) => action.payload),
+    exhaustMap((email) => {
+        return this.afAuth.auth.sendPasswordResetEmail(email)
+        .then(() => this._notification.create('success', 'Email sent', 'Please check your email to reset your password'))
+        .catch((err) => new authActions.AuthError({ message: 'Failed to send password reset email' }))
+    }),
+    catchError(err => of(new authActions.AuthError(err)))
   );
 
   @Effect()

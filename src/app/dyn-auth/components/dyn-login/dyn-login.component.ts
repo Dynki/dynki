@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Store, select } from '@ngrx/store';
+import { Store, select, Action } from '@ngrx/store';
 
 import * as fromAuth from '../../store/reducers';
 import * as authActions from '../../store/actions/auth';
@@ -26,14 +26,18 @@ export class LoginComponent {
     this.store.dispatch(new registerActions.Redirect());
   }
   forgot() {
-    this.store.dispatch(new authActions.Login(this.form.value));
+    this.process(new authActions.ForgotPassword(this.form.value.username));
   }
 
   resendEmail() {
+    this.process(new authActions.VerificationEmail(this.user));
+  }
+
+  process(action: Action) {
     if (this.form.controls.username.invalid) {
-      this.store.dispatch(new authActions.VerificationError({ message: 'Please enter a valid email'}));
+      this.store.dispatch(new authActions.AuthError({ message: 'Please enter a valid email'}));
     } else {
-      this.store.dispatch(new authActions.VerificationEmail(this.user));
+      this.store.dispatch(action);
     }
   }
 }

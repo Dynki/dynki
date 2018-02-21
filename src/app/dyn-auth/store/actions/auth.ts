@@ -9,6 +9,7 @@ export enum AuthActionTypes {
   NOT_VERIFIED      = '[Auth] Not Verified',
   LOGIN             = '[Auth] Login Attempt',
   LOGOUT            = '[Auth] Logout',
+  FORGOT_PASSWORD   = '[Auth] Forgot Password',
   AUTH_ERROR        = '[Auth] Error',
   VERIFICATION_ERROR= '[Auth] Verification Error'
 }
@@ -35,6 +36,11 @@ export class NotAuthenticated implements Action {
 
 export class NotVerified implements Action {
   readonly type = AuthActionTypes.NOT_VERIFIED;
+  constructor(public payload?: any) {}
+}
+
+export class ForgotPassword implements Action {
+  readonly type = AuthActionTypes.FORGOT_PASSWORD;
   constructor(public payload?: any) {}
 }
 
@@ -66,5 +72,6 @@ export type AuthActions =
   | VerificationEmail
   | Login
   | Logout
+  | ForgotPassword
   | AuthError
   | VerificationError;
