@@ -11,7 +11,7 @@ import * as registerActions from '../../store/actions/register';
   templateUrl: './dyn-login.component.html'
 })
 export class LoginComponent {
-  form = new FormGroup({ username: new FormControl(''), password: new FormControl('') });
+  form = new FormGroup({ username: new FormControl(''), password: new FormControl(''), persistence: new FormControl(true) });
   pending = this.store.pipe(select(fromAuth.getLoginPagePending));
   user = this.store.pipe(select(fromAuth.getUser));
   verificationError = this.store.pipe(select(fromAuth.getVerificationError));
@@ -19,12 +19,15 @@ export class LoginComponent {
   constructor (private store: Store<fromAuth.State>) { }
 
   submit() {
-    console.log('submit');
-    this.store.dispatch(new authActions.Login(this.form.value));
+    this.store.dispatch(new authActions.Login(
+      {...this.form.value, persistence: (this.form.value.persistence ? 'local' : 'session') }
+    ));
   }
+
   register() {
     this.store.dispatch(new registerActions.Redirect());
   }
+
   forgot() {
     this.process(new authActions.ForgotPassword(this.form.value.username));
   }

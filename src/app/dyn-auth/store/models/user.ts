@@ -1,6 +1,7 @@
 export interface Credentials {
     username: string;
     password: string;
+    persistence: 'local' | 'session' | 'none';
 }
 
 export interface IUser {

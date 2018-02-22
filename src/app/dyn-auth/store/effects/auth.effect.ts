@@ -43,19 +43,21 @@ export class AuthEffects {
   login$ = this.actions$.pipe(
     ofType(authActions.AuthActionTypes.LOGIN),
     map((action: authActions.Login) => action.payload),
-    exhaustMap((creds: Credentials) => {
-        return this.afAuth.auth.signInAndRetrieveDataWithEmailAndPassword(creds.username, creds.password)
-        .then((user) => {
-          return this.afAuth.auth.currentUser.reload().then(() => {
+    exhaustMap((creds: Credentials) => fromPromise(this.afAuth.auth.setPersistence(creds.persistence))
+        .pipe(
+          exhaustMap(() => this.afAuth.auth.signInAndRetrieveDataWithEmailAndPassword(creds.username, creds.password)),
+          exhaustMap(() => this.afAuth.auth.currentUser.reload()),
+          map(() => {
             if (this.afAuth.auth.currentUser.emailVerified) {
-              return new authActions.Authenticated(new User(user.uid, user.displayName));
+              return new authActions.Authenticated(
+                new User(this.afAuth.auth.currentUser.uid, this.afAuth.auth.currentUser.displayName)
+              );
             } else {
               return new authActions.NotVerified();
             }
           })
-        })
-        .catch((err) => new authActions.AuthError(err))
-    }),
+        )
+    ),
     catchError(err => of(new authActions.AuthError(err)))
   );
 
