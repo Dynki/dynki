@@ -1,6 +1,13 @@
-<form [formGroup]="timerForm">
-    <nz-input-group class="timer" [nzSize]="'large'" nzCompact>
-        <nz-input [nzSize]="'large'" formControlName="description" [nzPlaceHolder]="'A description for your log entry'" style="width: 94%;"></nz-input>
-        <button nz-button [nzSize]="'large'" [nzType]="'primary'" (click)="toggle()">{{ timerLabel }}</button>
-    </nz-input-group>
+<form [formGroup]="timerForm" class="timer">
+    <div nz-row>
+        <div nz-col [nzSpan]="18" class="timer__description" >
+            <nz-input [nzSize]="'large'" formControlName="description" [nzPlaceHolder]="'A description for your log entry'"></nz-input>
+        </div>
+        <div nz-col [nzSpan]="3">
+            <div class="timer__counter">00:00:00</div>
+        </div>
+        <div nz-col [nzSpan]="3">
+            <button class="timer__button" nz-button [nzSize]="'large'" [nzType]="'primary'" (click)="toggle()">{{ timerLabel }}</button>
+        </div>
+    </div>
 </form>
