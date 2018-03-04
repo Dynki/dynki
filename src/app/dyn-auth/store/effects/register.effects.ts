@@ -49,7 +49,5 @@ export class RegisterEffects {
     private afAuth: AngularFireAuth,
     private router: Router,
     private _notification: NzNotificationService
-  ) {
-    console.log('RegisterEffects::Constructor');
-  }
+  ) { }
 }

@@ -11,7 +11,8 @@ export enum AuthActionTypes {
   LOGOUT            = '[Auth] Logout',
   FORGOT_PASSWORD   = '[Auth] Forgot Password',
   AUTH_ERROR        = '[Auth] Error',
-  VERIFICATION_ERROR= '[Auth] Verification Error'
+  VERIFICATION_ERROR= '[Auth] Verification Error',
+  SET_PERSISTENCE   = '[Auth] Set Persistence'
 }
 
 export class GetUser implements Action {
@@ -21,6 +22,11 @@ export class GetUser implements Action {
 
 export class Login implements Action {
   readonly type = AuthActionTypes.LOGIN;
+  constructor(public payload: Credentials) {}
+}
+
+export class SetPersistence implements Action {
+  readonly type = AuthActionTypes.SET_PERSISTENCE;
   constructor(public payload: Credentials) {}
 }
 
@@ -74,4 +80,5 @@ export type AuthActions =
   | Logout
   | ForgotPassword
   | AuthError
-  | VerificationError;
+  | VerificationError
+  | SetPersistence;

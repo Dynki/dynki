@@ -19,8 +19,8 @@ export class LoginComponent {
   constructor (private store: Store<fromAuth.State>) { }
 
   submit() {
-    this.store.dispatch(new authActions.Login(
-      {...this.form.value, persistence: (this.form.value.persistence ? 'local' : 'session') }
+    this.store.dispatch(new authActions.SetPersistence(
+      {...this.form.value, persistence: (this.form.value.persistence ? 'local' : 'session')}
     ));
   }
 

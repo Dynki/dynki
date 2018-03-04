@@ -7,14 +7,15 @@ import { Observable } from 'rxjs/observable';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import 'rxjs/add/observable/fromPromise';
 import { of } from 'rxjs/observable/of';
-import { tap, map, exhaustMap, catchError } from 'rxjs/operators';
-import { AngularFireAuth  } from 'angularfire2/auth';
+import { tap, map, exhaustMap, catchError, mergeMap } from 'rxjs/operators';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { NzNotificationService } from 'ng-zorro-antd';
 
 import * as fromAuth from '../reducers/auth';
 import * as authActions from '../actions/auth';
 import { User, Credentials } from '../models/user';
 import { switchMap } from 'rxjs/operator/switchMap';
+import { auth } from 'firebase';
 
 @Injectable()
 export class AuthEffects {
@@ -23,41 +24,49 @@ export class AuthEffects {
     ofType(authActions.AuthActionTypes.GET_USER),
     map((action: authActions.GetUser) => action.payload),
     exhaustMap((payload) => this.afAuth.authState
-        .pipe(
-          map(authData => {
-            if (authData && authData.emailVerified) {
-              const user = new User(authData.uid, authData.displayName);
-              return new authActions.Authenticated(user);
-            } else {
-              return new authActions.NotAuthenticated();
-            }
-          }),
-          catchError(error => {
-            console.log(error);
-            return of(new authActions.AuthError(error))
-          })
-        ))
+      .pipe(
+        map(authData => {
+          if (authData && authData.emailVerified) {
+            const user = new User(authData.uid, authData.displayName);
+            return new authActions.Authenticated(user);
+          } else {
+            return new authActions.NotAuthenticated();
+          }
+        }),
+        catchError(error => {
+          console.log(error);
+          return of(new authActions.AuthError(error))
+        })
+      ))
+  );
+
+  @Effect()
+  setPersistence$ = this.actions$.pipe(
+    ofType(authActions.AuthActionTypes.SET_PERSISTENCE),
+    map((action: authActions.Login) => action.payload),
+    exhaustMap((creds: Credentials) => {
+      return this.afAuth.auth.setPersistence(creds.persistence)
+        .then(() => new authActions.Login(creds))
+    })
   );
 
   @Effect()
   login$ = this.actions$.pipe(
     ofType(authActions.AuthActionTypes.LOGIN),
     map((action: authActions.Login) => action.payload),
-    exhaustMap((creds: Credentials) => fromPromise(this.afAuth.auth.setPersistence(creds.persistence))
-        .pipe(
-          exhaustMap(() => this.afAuth.auth.signInAndRetrieveDataWithEmailAndPassword(creds.username, creds.password)),
-          exhaustMap(() => this.afAuth.auth.currentUser.reload()),
-          map(() => {
+    exhaustMap((creds: Credentials) => {
+      return this.afAuth.auth.signInAndRetrieveDataWithEmailAndPassword(creds.username, creds.password)
+        .then((user) => {
+          return this.afAuth.auth.currentUser.reload().then(() => {
             if (this.afAuth.auth.currentUser.emailVerified) {
-              return new authActions.Authenticated(
-                new User(this.afAuth.auth.currentUser.uid, this.afAuth.auth.currentUser.displayName)
-              );
+              return new authActions.Authenticated(new User(user.uid, user.displayName));
             } else {
               return new authActions.NotVerified();
             }
           })
-        )
-    ),
+        })
+        .catch((err) => new authActions.AuthError(err))
+    }),
     catchError(err => of(new authActions.AuthError(err)))
   );
 
@@ -66,7 +75,7 @@ export class AuthEffects {
     ofType(authActions.AuthActionTypes.VERIFICATION_EMAIL),
     map((action: authActions.VerificationEmail) => action.payload),
     exhaustMap((payload) => {
-        return this.afAuth.auth.currentUser.sendEmailVerification()
+      return this.afAuth.auth.currentUser.sendEmailVerification()
         .then(() => this._notification.create('info', 'Please verify account', 'Please check your email to verify your account'))
         .catch((err) => new authActions.VerificationError({ message: 'Failed to send verification email' }))
     }),
@@ -78,7 +87,7 @@ export class AuthEffects {
     ofType(authActions.AuthActionTypes.FORGOT_PASSWORD),
     map((action: authActions.ForgotPassword) => action.payload),
     exhaustMap((email) => {
-        return this.afAuth.auth.sendPasswordResetEmail(email)
+      return this.afAuth.auth.sendPasswordResetEmail(email)
         .then(() => this._notification.create('success', 'Email sent', 'Please check your email to reset your password'))
         .catch((err) => new authActions.AuthError({ message: 'Failed to send password reset email' }))
     }),
@@ -89,23 +98,9 @@ export class AuthEffects {
   notVerified$ = this.actions$.pipe(
     ofType(authActions.AuthActionTypes.NOT_VERIFIED),
     map((action: authActions.NotVerified) => action.payload),
-    map((e) => new authActions.VerificationError({ message: 'Account not verified - please check your email'})),
+    map((e) => new authActions.VerificationError({ message: 'Account not verified - please check your email' })),
     catchError(err => of(new authActions.AuthError(err)))
   );
-
-  // @Effect()
-  // checkAuthStatus$ = this.actions$.pipe(
-  //   ofType(AuthActionTypes.CheckAuthStatus),
-  //   exhaustMap(() => this.authService
-  //       .awsAuth.checkAuthStatus()
-  //       .pipe(
-  //         map(user => new LoginSuccess({ user: user })),
-  //         catchError(error => {
-  //           console.log(error);
-  //           return of(new LoginRedirect())
-  //         })
-  //       ))
-  // );
 
   @Effect({ dispatch: false })
   loginSuccess$ = this.actions$.pipe(
@@ -132,14 +127,14 @@ export class AuthEffects {
   loginError$ = this.actions$.pipe(
     ofType(authActions.AuthActionTypes.AUTH_ERROR),
     map((action: any) => action.payload),
-    tap((e) => this._notification.create('error', 'Login error',  e.message))
+    tap((e) => this._notification.create('error', 'Login error', e.message))
   );
 
   @Effect({ dispatch: false })
   verificationError$ = this.actions$.pipe(
     ofType(authActions.AuthActionTypes.VERIFICATION_ERROR),
     map((action: any) => action.payload),
-    tap((e) => this._notification.create('error', 'Verification error',  e.message))
+    tap((e) => this._notification.create('error', 'Verification error', e.message))
   );
 
   constructor(
@@ -148,7 +143,5 @@ export class AuthEffects {
     private router: Router,
     private _notification: NzNotificationService,
     private store: Store<fromAuth.State>
-  ) {
-    console.log('AuthEffects::Constructor');
-  }
+  ) { }
 }

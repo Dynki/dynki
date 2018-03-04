@@ -38,9 +38,7 @@ export function reducer(state = initialState, action: AuthActions) {
 
     case AuthActionTypes.VERIFICATION_ERROR:
       const verificationError = {...action.payload};
-      console.log(verificationError);
       const newState = {...state, verificationError: verificationError, loggedIn: false, loading: false};
-      console.log(newState);
       return newState;
 
     case AuthActionTypes.LOGOUT:
