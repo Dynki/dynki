@@ -40,6 +40,7 @@ export class AuthEffects {
       ))
   );
 
+
   @Effect()
   setPersistence$ = this.actions$.pipe(
     ofType(authActions.AuthActionTypes.SET_PERSISTENCE),
