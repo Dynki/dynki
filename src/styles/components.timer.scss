@@ -15,13 +15,14 @@
     &__counter {
         display: flex;
         justify-content: center;
-        font-size: 23px;
+        font-size: 12px;
         border: solid;
         background-color: $primary-color;
         color: #ffffff;
         border-color: #c8c8c8;
         margin-top: 10px;
         height: 40px;
+        padding-top: 10px;
     }
 
     &__button {

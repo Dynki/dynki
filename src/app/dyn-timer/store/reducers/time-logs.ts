@@ -13,7 +13,7 @@ export const initialState: TimeLogState = {
   loading: false
 };
 
-export function reducer(state = initialState, action: fromTimer.TimerActions): TimeLogState {
+export function reducers(state = initialState, action: fromTimer.TimerActions): TimeLogState {
   switch (action.type) {
     default:
       return state;

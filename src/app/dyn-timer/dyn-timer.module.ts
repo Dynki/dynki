@@ -7,6 +7,10 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 import { TimerComponent } from './components';
 import { TimerRoutingModule, TimerService } from './services';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+
+import { reducers } from './store/reducers';
 
 // other imports
 @NgModule({
@@ -18,7 +22,9 @@ import { TimerRoutingModule, TimerService } from './services';
     FlexLayoutModule,
     NgZorroAntdModule,
     TimerRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forFeature('timer', reducers),
+    // EffectsModule.forFeature([AuthEffects, RegisterEffects])
   ],
   exports: [
     TimerComponent,

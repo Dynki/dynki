@@ -1,4 +1,4 @@
-import { createSelector, createFeatureSelector } from '@ngrx/store';
+import { createSelector, createFeatureSelector, ActionReducerMap } from '@ngrx/store';
 import * as fromTimeLogs from './time-logs';
 import * as fromStopWatch from './stop-watch';
 
@@ -7,6 +7,11 @@ export const getTimerState = createFeatureSelector<TimerState>('timer');
 export interface TimerState {
   stopWatch: fromStopWatch.StopWatchState;
   logs: fromTimeLogs.TimeLogState
+}
+
+export const reducers: ActionReducerMap<TimerState> = {
+    stopWatch: fromStopWatch.reducers,
+    logs: fromTimeLogs.reducers
 }
 
 // ----------------------------------------------------------------------------------
@@ -39,7 +44,7 @@ export const getStopWatchRunningState = createSelector(
     fromStopWatch.getStopWatchRunning
 )
 
-export const getStopWatchCurrentLogId = createSelector(
+export const getStopWatchCurrentLog = createSelector(
     getStopWatchState,
-    fromStopWatch.getStopWatchLogId
+    fromStopWatch.getStopWatchLog
 );

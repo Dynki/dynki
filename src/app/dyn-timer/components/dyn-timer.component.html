@@ -4,7 +4,7 @@
             <nz-input [nzSize]="'large'" formControlName="description" [nzPlaceHolder]="'A description for your log entry'"></nz-input>
         </div>
         <div nz-col [nzSpan]="3">
-            <div class="timer__counter">00:00:00</div>
+            <div class="timer__counter">{{ duration }}</div>
         </div>
         <div nz-col [nzSpan]="3">
             <button class="timer__button" nz-button [nzSize]="'large'" [nzType]="'primary'" (click)="toggle()">{{ timerLabel }}</button>
