@@ -12,10 +12,23 @@ import { Store } from '@ngrx/store';
 
 export class ShellComponent implements OnInit {
 
+  _opened = false;
+
   constructor(private store: Store<fromAuth.State>) { }
 
  ngOnInit() {
   this.store.dispatch(new Auth.GetUser());
  }
+
+ private _toggleSidebar() {
+    console.log('click');
+
+    if (this._opened === true) {
+      this._opened = false;
+    } else {
+      this._opened = true;
+    }
+
+  }
 
 }

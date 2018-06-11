@@ -16,6 +16,8 @@ import { authReducers } from './store/reducers';
 import { AuthGuard } from 'app/dyn-auth/services';
 import { AngularFireAuth } from 'angularfire2/auth';
 
+import { MdcTextFieldModule } from '@angular-mdc/web';
+
 export const COMPONENTS = [LoginComponent, SignupComponent];
 
 @NgModule({
@@ -23,6 +25,7 @@ export const COMPONENTS = [LoginComponent, SignupComponent];
     BrowserModule,
     FlexLayoutModule,
     FormsModule,
+    MdcTextFieldModule,
     ReactiveFormsModule,
     NgZorroAntdModule.forRoot()
   ],
@@ -47,6 +50,7 @@ const AUTH_ROUTES: Routes = [
 @NgModule({
   imports: [
     AuthModule,
+    MdcTextFieldModule,
     // NgZorroAntdModule.forRoot(),
     RouterModule.forChild(AUTH_ROUTES),
     StoreModule.forFeature('auth', authReducers),

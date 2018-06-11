@@ -1,16 +1,50 @@
-<nz-layout>
-    <nz-sider class="side-menu__wrapper" nzCollapsible [nzCollapsed]="(isCollapsed | async)" [nzTrigger]="null">
-        <dyn-side-menu></dyn-side-menu>
-    </nz-sider>
-    <nz-layout>
-        <nz-header style="background: #fff; padding:0;">
-            <dyn-toolbar></dyn-toolbar>
-        </nz-header>
-        <nz-content style="margin:0 16px;">
-            <dyn-timer></dyn-timer>
-            <router-outlet></router-outlet>
-        </nz-content>
-        <nz-footer style="text-align: center;">Dynki Limited ©2018</nz-footer>
 
-    </nz-layout>
-</nz-layout>
+<ng-sidebar-container style="height: 100vh; padding:10px;">
+
+	<!-- A sidebar -->
+	<ng-sidebar [(opened)]="_opened" trapFocus="true" autoFocus="true" [mode]="over" position="right">
+        <div nz-row [nzType]="'flex'" [nzJustify]="'start'" [nzAlign]="''" class="height-100">
+            <div nz-col [nzSpan]="4">
+                <div class="sidebar__handle-container height-100" style="background-color: #ececec; margin-top:56px; border-left: solid; border-left-color:#e1e4e5; border-left-width:2px;">
+                    <div class="sidebar__handle">
+                        
+                        <mdc-icon-toggle #demoit [(ngModel)]="isOn" (click)="_toggleSidebar()" primary=true iconOn="timer" iconOff="timer" labelOn="Timers" labelOff="Timers">
+                        </mdc-icon-toggle>
+                        <!-- <div class="sidebar__handle-button">
+                            <i class="material-icons blue" (click)="_toggleSidebar()">timer</i>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div nz-col [nzSpan]="20" class="height-100 sidebar__main-content">
+                <dyn-timer></dyn-timer>
+            </div>
+        </div>
+	</ng-sidebar>
+
+	<!-- Page content -->
+	<div ng-sidebar-content class="side-menu__content">
+        <dyn-toolbar [user]="user$ | async"></dyn-toolbar>
+
+        <nz-layout style="height:100%;">
+            <!-- <nz-sider class="side-menu__wrapper" nzCollapsible [nzCollapsed]="(isCollapsed | async)" [nzTrigger]="null">
+                <dyn-side-menu></dyn-side-menu>
+            </nz-sider> -->
+            <nz-layout style="height:100%;">
+                <!-- <nz-header position="fixed" style="background: #fff; padding:0;">
+                    <dyn-toolbar></dyn-toolbar>
+                </nz-header> -->
+                <nz-content style="padding:10px; padding-top: 67px; padding-right:20px; height:100%; margin-right:29px;">
+        
+                    <router-outlet></router-outlet>
+        
+                </nz-content>
+                <nz-footer style="text-align: center;">Dynki Limited ©2018</nz-footer>
+            </nz-layout>
+        </nz-layout>
+	</div>
+
+</ng-sidebar-container>
+
+
+

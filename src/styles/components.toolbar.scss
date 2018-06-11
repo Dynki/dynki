@@ -1,3 +1,25 @@
 .toolbar {
     margin: 20px 25px 0 5px;
+
+    &__user-profile {
+        background-color: #F8B18B;
+        color: #ffffff;
+        font-family: $font-family;
+        font-size: 18px;
+
+        width: 30px;
+        height: 30px;
+        margin: 10px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        border-radius: 25px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
 }
+

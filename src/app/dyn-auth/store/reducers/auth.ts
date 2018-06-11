@@ -14,7 +14,7 @@ export const initialState: State = {
   loading: false,
   error: undefined,
   verificationError: undefined,
-  user: new User('', 'GUEST')
+  user: new User('', 'GUEST', '')
 };
 
 export function reducer(state = initialState, action: AuthActions) {

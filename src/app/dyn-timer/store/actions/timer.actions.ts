@@ -3,7 +3,9 @@ import { TimeEntry } from '../models/timer';
 
 export enum TimerActionTypes {
   START_TIMER       = '[Timer] Start',
-  STOP_TIMER        = '[Timer] Stop'
+  STOP_TIMER        = '[Timer] Stop',
+  EXPAND            = '[Timer] Expand',
+  CONTRACT          = '[Timer] Contract'
 };
 
 export class StartTimer implements Action {
@@ -16,6 +18,18 @@ export class StopTimer implements Action {
     constructor(public payload?: any) {}
 }
 
+export class Expand implements Action {
+    readonly type = TimerActionTypes.EXPAND;
+    constructor(public payload?: any) {}
+}
+
+export class Contract implements Action {
+    readonly type = TimerActionTypes.CONTRACT;
+    constructor(public payload?: any) {}
+}
+
 export type TimerActions =
     StartTimer
-    | StopTimer;
+    | StopTimer
+    | Expand
+    | Contract;

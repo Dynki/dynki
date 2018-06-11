@@ -1,3 +1,16 @@
+.post-auth {
+    &__logo {
+        color: rgb(0,0,0);
+        opacity: .54!important;
+        font-family: $font-family;
+        padding: 0px;
+    }
+}
+
+// .mdc-top-app-bar {
+//     background-color: #ffffff!important;
+// }
+
 .side-menu__wrapper {
     background: #ffffff!important;
 }
@@ -5,13 +18,22 @@
 .side-menu {
 
     &__brand {
-        background-color: $primary-color;
-        min-height: 65px;
+        background-color: #e1e4e5;
+        min-height: 57px;
     }
     
     &__img {
-        width: 37px;
-        height: 33px;
+
+        height: 49px;
+        background-color: #3095de;
+        width: 48px;
+        height: 48px;
+        display: inline-block;
+  
+        -webkit-mask: url(/assets/img/logo.svg) no-repeat 50% 50%;
+        mask: url(/assets/img/logo.svg) no-repeat 50% 50%;
+        -webkit-mask-size: cover;
+        mask-size: cover;
     }
 
     &__heading {
@@ -22,5 +44,92 @@
         background-color: $primary-color;
         margin: 10px;
     }
+
+    &__content {
+        height: 100%;
+        margin-right: 19px;
+    }
 }
 
+.sidebar {
+
+
+    &__main-content {
+        background-color: #ffffff;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+        padding: 10px!important;
+    }
+
+    &__handle {
+        padding: 2px;
+    }
+
+    &__handle-container {
+        height: 60px;
+        width: 56px;
+        padding: 0;
+        padding-top: 10px;
+        margin: 0;
+        list-style: none;
+        display: flex;
+        align-items: start;
+        justify-content: start;
+        overflow: hidden;
+    }
+
+    // &__handle-button {
+    //     background-color: red;
+    //     border-radius: 25px;
+    // }
+
+    // &__handle-button :hover {
+    //     background-color: #c1dff58f;
+    //     border-radius: 25px;
+    // }
+
+    // &__handle-icon {
+    //     display:block;
+    //     color: #3095de;
+    // }
+}
+
+.material-icons.blue {
+    color: #3095de!important;
+}
+
+.ng-sidebar {
+    height:100%;
+
+
+    &--closed {
+        transform: translateX(100%) translateX(-56px)!important;
+    }
+
+    &--inert {
+        pointer-events: auto!important;
+        touch-action: auto!important;
+    }
+
+    aside {
+        overflow: hidden!important;
+    }
+}
+
+ng-sidebar {
+    aside {
+        overflow: hidden!important;
+    }
+}
+
+
+.height {
+    &-100 {
+        height: 100%;
+    }
+}
+
+.app__navbar {
+    @include mdc-top-app-bar-fill-color(#fff);
+    @include mdc-top-app-bar-fill-color-accessible(#fff);
+    @include mdc-top-app-bar-icon-ink-color(#3095de);
+}

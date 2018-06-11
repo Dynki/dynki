@@ -27,7 +27,7 @@ export class AuthEffects {
       .pipe(
         map(authData => {
           if (authData && authData.emailVerified) {
-            const user = new User(authData.uid, authData.displayName);
+            const user = new User(authData.uid, authData.displayName, authData.email);
             return new authActions.Authenticated(user);
           } else {
             return new authActions.NotAuthenticated();
@@ -60,7 +60,7 @@ export class AuthEffects {
         .then((user) => {
           return this.afAuth.auth.currentUser.reload().then(() => {
             if (this.afAuth.auth.currentUser.emailVerified) {
-              return new authActions.Authenticated(new User(user.uid, user.displayName));
+              return new authActions.Authenticated(new User(user.uid, user.displayName, user.email));
             } else {
               return new authActions.NotVerified();
             }

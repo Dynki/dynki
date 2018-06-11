@@ -1,6 +1,12 @@
 .timer {
     margin-bottom: 20px;
+    margin-top: 10px;
     height: 40px;
+    height: calc(100% - 94px);
+    z-index: 1;
+    width: 100%;
+    min-width: 265px;
+    overflow-x: hidden;
 
     &__description {
 

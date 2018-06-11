@@ -78,15 +78,17 @@ export class TimeLog implements ITimeLog {
         .pipe(
             map(() => {
                 const dur = moment.duration(this.entries.reduce((sum, n) => sum + n.duration, 0));
-                const durationArr = [{ label: 'month', value: dur.months() },
-                    { label: 'day', value: dur.days() },
-                    { label: 'hour', value: dur.hours() },
-                    { label: 'min', value: dur.minutes() },
-                    { label: 'sec', value: dur.seconds() }];
+                const durationArr = [{ label: pluralize('day', dur.days()), value: dur.days() },
+                    { label: 'h', value: dur.hours() },
+                    { label: 'm', value: dur.minutes() },
+                    { label: 's', value: dur.seconds() }];
 
-                return durationArr.filter((n) => n.value > 0)
-                .map(x => x.value + ' ' + pluralize(x.label, x.value) + ' ')
-                .reduce((sum, v) => sum + v, '');
+                return durationArr
+                    .map(x => x.value + ' ' + x.label + ' ')
+                    .reduce((sum, v) => sum + v, '');
+                    //    return durationArr
+                    // .map(x => x.value + ' ' + pluralize(x.label, x.value) + ' ')
+                    // .reduce((sum, v) => sum + v, '');
             })
         );
     }

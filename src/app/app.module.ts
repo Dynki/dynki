@@ -7,6 +7,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
 import { AngularFireModule } from 'angularfire2';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { SidebarModule } from 'ng-sidebar';
 
 import { AppComponent } from './app.component';
 import { ShellModule } from './dyn-shell/dyn-shell.module';
@@ -23,6 +24,7 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     ShellModule,
     FlexLayoutModule,
+    SidebarModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     NgZorroAntdModule.forRoot()
   ],

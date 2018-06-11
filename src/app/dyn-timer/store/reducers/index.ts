@@ -48,3 +48,8 @@ export const getStopWatchCurrentLog = createSelector(
     getStopWatchState,
     fromStopWatch.getStopWatchLog
 );
+
+export const getStopWatchExpandedState = createSelector(
+    getStopWatchState,
+    fromStopWatch.getStopWatchExpanded
+)

@@ -1,8 +1,13 @@
-<div class="toolbar" fxLayout="row" fxLayoutAlign="end center">
-  <i class="anticon trigger icon-button" [class.anticon-menu-fold]="(isCollapsed | async) === false" [class.anticon-menu-unfold]="(isCollapsed | async)" (click)="toggleMenu()"></i>
-  <span fxFlex></span>
-  <button (click)="logout()" nz-button [nzType]="'primary'" class="toolbar__logout">
-    <i class="anticon anticon-logout"></i>
-    <span>Log Off</span>
-  </button>
-</div>
+<mdc-app-bar class="app__navbar" #demoappbar [fixedAdjustElement]="appbarcontent" [short]="true">
+    <mdc-app-bar-row>
+        <mdc-app-bar-section align="start">
+            <mdc-icon mdcAppBarNavIcon>menu</mdc-icon>
+            <img class="side-menu__img">
+            <mdc-app-bar-title class="post-auth__logo">{{app.title}}</mdc-app-bar-title>
+        </mdc-app-bar-section>
+        <mdc-app-bar-section align="end">
+                <label class="toolbar__user-profile">{{displayInitial}}</label>
+                <mdc-icon mdcAppBarActionItem>exit_to_app</mdc-icon>
+        </mdc-app-bar-section>
+    </mdc-app-bar-row>
+</mdc-app-bar>

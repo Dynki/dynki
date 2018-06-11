@@ -24,6 +24,11 @@ export class TimerComponent {
     tap(runVal => this.running = runVal)
   );
 
+  expanded$ = this.store.pipe(
+    tap(val => console.log(val)),
+    select(fromTimer.getStopWatchRunningState),
+  );
+
   log$ = this.store.pipe(
     select(fromTimer.getStopWatchCurrentLog),
     filter(logData => (logData) ? true : false),
@@ -51,6 +56,12 @@ export class TimerComponent {
     });
   }
 
+
+  expand() {
+    console.log('expand');
+    this.store.dispatch(new timerActions.Expand());
+  }
+
   toggle() {
     this.running ? this.stop() : this.start();
   }
@@ -65,4 +76,5 @@ export class TimerComponent {
   stop() {
     this.store.dispatch(new timerActions.StopTimer());
   }
+
 }

@@ -7,13 +7,15 @@ export interface StopWatchState {
   log: TimeLog;
   loaded: boolean;
   loading: boolean;
+  expanded: boolean;
 }
 
 export const initialState: StopWatchState = {
   running: false,
   log: null,
   loaded: false,
-  loading: false
+  loading: false,
+  expanded: false
 };
 
 export function reducers(state = initialState, action: TimerActions): StopWatchState {
@@ -23,10 +25,15 @@ export function reducers(state = initialState, action: TimerActions): StopWatchS
       // log.description = 'test';
       return {...state, running: true, log: log };
     case TimerActionTypes.STOP_TIMER:
-      // const updLog = state.log
-      // updLog.stopped = moment();
+      const updLog = state.log
+      // updLog. = moment();
       return {...state, running: false };
 
+    case TimerActionTypes.EXPAND:
+      return {...state, expanded: true };
+
+    case TimerActionTypes.CONTRACT:
+      return {...state, expanded: false };
     default:
       return state;
   }
@@ -36,3 +43,4 @@ export const getStopWatchRunning = (state: StopWatchState) => state.running;
 export const getStopWatchLog = (state: StopWatchState) => state.log;
 export const getStopWatchLoaded = (state: StopWatchState) => state.loaded;
 export const getStopWatchLoading = (state: StopWatchState) => state.loading;
+export const getStopWatchExpanded = (state: StopWatchState) => state.expanded;

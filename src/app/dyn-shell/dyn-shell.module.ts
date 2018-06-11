@@ -8,6 +8,7 @@ import { HttpModule } from '@angular/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { SidebarModule } from 'ng-sidebar';
 
 import {
   FooterComponent,
@@ -33,6 +34,8 @@ import { authReducers } from '../dyn-auth/store/reducers';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
+import { MdcAppBarModule, MdcIconModule, MdcIconToggleModule } from '@angular-mdc/web';
+
 // other imports
 @NgModule({
   declarations: [
@@ -50,6 +53,7 @@ import { EffectsModule } from '@ngrx/effects';
     StoreModule.forFeature('nav', navReducers),
     EffectsModule.forRoot([]),
     AuthModule.forRoot(),
+    SidebarModule.forRoot(),
     BrowserModule,
     FormsModule,
     HttpModule,
@@ -57,6 +61,9 @@ import { EffectsModule } from '@ngrx/effects';
     FlexLayoutModule,
     ShellRoutingModule,
     ReactiveFormsModule,
+    MdcAppBarModule,
+    MdcIconModule,
+    MdcIconToggleModule,
     NgZorroAntdModule.forRoot(),
   ],
   exports: [

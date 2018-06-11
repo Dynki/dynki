@@ -5,6 +5,7 @@ import { Store, select, Action } from '@ngrx/store';
 import * as fromAuth from '../../store/reducers';
 import * as authActions from '../../store/actions/auth';
 import * as registerActions from '../../store/actions/register';
+import { MdcTextField } from '@angular-mdc/web';
 
 @Component({
   selector: 'dyn-login',

@@ -1,13 +1,16 @@
-<form [formGroup]="form" class="timer">
-    <div nz-row>
-        <div nz-col [nzSpan]="18" class="timer__description" >
-            <nz-input [nzSize]="'large'" formControlName="description" [nzPlaceHolder]="'A description for your log entry'"></nz-input>
+<div nz-col [nzSpan]="24">
+    <form [formGroup]="form" class="timer" ng-class="{ timer--state-expanded: expanded$ | async }">
+        <div nz-row click="expand()">
+            <!-- <!-- <div nz-row class="timer__description" >
+                <nz-input [nzSize]="'large'" formControlName="description" [nzPlaceHolder]="'A description for your log entry'"></nz-input>
+            </div>
+            <div nz-row>
+                <div class="timer__counter">{{ duration }}</div>
+            </div> -->
+            <!-- <div nz-row>
+                <button class="timer__button" nz-button [nzSize]="'large'" [nzType]="'primary'" (click)="toggle()">{{ timerLabel }}</button>
+            </div> -->
         </div>
-        <div nz-col [nzSpan]="3">
-            <div class="timer__counter">{{ duration }}</div>
-        </div>
-        <div nz-col [nzSpan]="3">
-            <button class="timer__button" nz-button [nzSize]="'large'" [nzType]="'primary'" (click)="toggle()">{{ timerLabel }}</button>
-        </div>
-    </div>
-</form>
+    </form>
+</div>
+
