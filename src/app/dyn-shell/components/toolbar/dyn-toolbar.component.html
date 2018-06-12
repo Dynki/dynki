@@ -6,8 +6,16 @@
             <mdc-app-bar-title class="post-auth__logo">{{app.title}}</mdc-app-bar-title>
         </mdc-app-bar-section>
         <mdc-app-bar-section align="end">
-                <label class="toolbar__user-profile">{{displayInitial}}</label>
-                <mdc-icon mdcAppBarActionItem>exit_to_app</mdc-icon>
+            <mdc-menu-anchor #demoanchor>
+                <label class="toolbar__user-profile no-select" (click)="demomenu.open()">{{displayInitial}}</label>
+                <mdc-menu #demomenu (select)="handleMenuSelect($event)" [anchor]="demoanchor" anchorCorner="bottom-start">
+                    <mdc-menu-item id="0">My Profile</mdc-menu-item>
+                    <mdc-menu-divider></mdc-menu-divider>
+                    <mdc-menu-item id="3">Log Out</mdc-menu-item>
+                </mdc-menu>
+            </mdc-menu-anchor>
+            <mdc-icon mdcAppBarActionItem>exit_to_app</mdc-icon>
         </mdc-app-bar-section>
     </mdc-app-bar-row>
+
 </mdc-app-bar>

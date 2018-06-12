@@ -34,7 +34,7 @@ import { authReducers } from '../dyn-auth/store/reducers';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { MdcAppBarModule, MdcIconModule, MdcIconToggleModule } from '@angular-mdc/web';
+import { MdcAppBarModule, MdcIconModule, MdcIconToggleModule, MdcMenuModule } from '@angular-mdc/web';
 
 // other imports
 @NgModule({
@@ -64,6 +64,7 @@ import { MdcAppBarModule, MdcIconModule, MdcIconToggleModule } from '@angular-md
     MdcAppBarModule,
     MdcIconModule,
     MdcIconToggleModule,
+    MdcMenuModule,
     NgZorroAntdModule.forRoot(),
   ],
   exports: [

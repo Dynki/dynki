@@ -1,10 +1,12 @@
-import { Component, Output, Input, OnInit } from '@angular/core';
+import { Component, Output, Input, OnInit, ViewChild } from '@angular/core';
 
 import { Store, select} from '@ngrx/store';
 import { TOGGLE_MENU } from '../../store/reducers/side-menu';
 import * as fromNav from '../../store/reducers';
 import * as Auth from '../../../dyn-auth/store/actions/auth';
 import { IUser } from '../../../dyn-auth/store/models/user';
+
+import { MdcMenu, MdcMenuItem } from '@angular-mdc/web';
 
 @Component({
   selector: 'dyn-toolbar',
@@ -13,6 +15,7 @@ import { IUser } from '../../../dyn-auth/store/models/user';
 
 export class ToolbarComponent implements OnInit {
 
+  @ViewChild('demomenu') demoMenu: MdcMenu;
   @Input() user: IUser;
   displayInitial: string;
 

@@ -2,6 +2,8 @@
     margin: 20px 25px 0 5px;
 
     &__user-profile {
+        @include no-select;
+        
         background-color: #F8B18B;
         color: #ffffff;
         font-family: $font-family;
