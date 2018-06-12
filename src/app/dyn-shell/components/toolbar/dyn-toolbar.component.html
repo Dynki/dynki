@@ -1,7 +1,7 @@
 <mdc-app-bar class="app__navbar" #demoappbar [fixedAdjustElement]="appbarcontent" [short]="true">
     <mdc-app-bar-row>
         <mdc-app-bar-section align="start">
-            <mdc-icon mdcAppBarNavIcon>menu</mdc-icon>
+            <mdc-icon mdcAppBarNavIcon (click)="toggleMenu()">menu</mdc-icon>
             <img class="side-menu__img">
             <mdc-app-bar-title class="post-auth__logo">{{app.title}}</mdc-app-bar-title>
         </mdc-app-bar-section>
@@ -14,7 +14,6 @@
                     <mdc-menu-item id="3">Log Out</mdc-menu-item>
                 </mdc-menu>
             </mdc-menu-anchor>
-            <mdc-icon mdcAppBarActionItem>exit_to_app</mdc-icon>
         </mdc-app-bar-section>
     </mdc-app-bar-row>
 

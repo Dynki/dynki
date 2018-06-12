@@ -27,14 +27,14 @@
         <dyn-toolbar [user]="user$ | async"></dyn-toolbar>
 
         <nz-layout style="height:100%;">
-            <!-- <nz-sider class="side-menu__wrapper" nzCollapsible [nzCollapsed]="(isCollapsed | async)" [nzTrigger]="null">
+            <nz-sider class="side-menu__wrapper" nzCollapsible [nzCollapsed]="(isCollapsed | async)" [nzTrigger]="null">
                 <dyn-side-menu></dyn-side-menu>
-            </nz-sider> -->
+            </nz-sider>
             <nz-layout style="height:100%;">
                 <!-- <nz-header position="fixed" style="background: #fff; padding:0;">
                     <dyn-toolbar></dyn-toolbar>
                 </nz-header> -->
-                <nz-content style="padding:10px; padding-top: 67px; padding-right:20px; height:100%; margin-right:29px;">
+                <nz-content style="padding:10px; padding-top: 67px; padding-right:20px; height:100%;">
         
                     <router-outlet></router-outlet>
         

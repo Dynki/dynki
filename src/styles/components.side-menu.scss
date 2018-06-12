@@ -47,7 +47,6 @@
 
     &__content {
         height: 100%;
-        margin-right: 19px;
     }
 }
 
@@ -102,7 +101,7 @@
 
 
     &--closed {
-        transform: translateX(100%) translateX(-56px)!important;
+        // transform: translateX(100%) translateX(-56px)!important;
     }
 
     &--inert {
