@@ -1,26 +1,56 @@
-<div class="side-menu" fxFlex fxLayout="column">
-    <ul>
-        <li>
-            <span>
-                <mdc-icon fontIcon="list">menu</mdc-icon>
-                <span mdcSubtitle1>Boards</span>
-            </span>
-            <ul>
-                <li mdcSubtitle2>Tom</li>
-                <li mdcSubtitle2>Bill</li>
-                <li mdcSubtitle2>Alex</li>
-            </ul>
+<ul nz-menu [nzMode]="'inline'" style="height: 100%;">
+    <li nz-menu-item>
+      <span title>
+        <i class="anticon anticon-mail"></i>
+        <span>Inbox</span>
+      </span>
+    </li>
+    <button nz-button nz-tooltip nzType="dashed" nzTitle="Add Timer Board" nzPlacement="right" nzShape="circle" style="float: left; left:193px; top: 11px; margin-bottom:-24px; z-index: 1000;"><i class="anticon anticon-plus" ></i></button>
+    <li nz-submenu>
+      <span title>
+        <i class="anticon anticon-dashboard"></i>
+        <span>Timer Boards</span>
+      </span>
+    </li>
+    <button nz-button nz-tooltip nzType="dashed" nzTitle="Add Team" nzPlacement="right" nzShape="circle" style="float: left; left:193px; top: 11px; margin-bottom:-24px; z-index: 1000;"><i class="anticon anticon-plus" ></i></button>
+    <li nz-submenu>
+      <span title>
+        <i class="anticon anticon-appstore"></i>
+        <span>Teams</span>
+      </span>
+      <ul>
+        <li nz-menu-item>Dynki Core</li>
+        <li nz-menu-item>Dynki UI</li>
+        <li nz-submenu>
+          <span title>Testing</span>
+          <ul>
+            <li nz-menu-item>Automated</li>
+            <li nz-menu-item>Manual</li>
+          </ul>
         </li>
-        <li>
-            <span>
-                <mdc-icon fontIcon="list">menu</mdc-icon>
-                <span mdcSubtitle1>Boards</span>
-            </span>
-            <ul>
-                <li mdcSubtitle2>Tom</li>
-                <li mdcSubtitle2>Bill</li>
-                <li mdcSubtitle2>Alex</li>
-            </ul>
-        </li>
-    </ul>
-</div>
+      </ul>
+    </li>
+    <button nz-button nz-tooltip nzType="dashed" nzTitle="Add Project" nzPlacement="right" nzShape="circle" style="float: left; left:193px; top: 11px; margin-bottom:-24px; z-index: 1000;"><i class="anticon anticon-plus" ></i></button>
+    <li nz-submenu>
+      <span title>
+        <i class="anticon anticon-rocket"></i>
+        <span>Projects</span>
+      </span>
+      <ul>
+        <li nz-menu-item>DMS</li>
+        <li nz-menu-item>CDS</li>
+        <li nz-menu-item>FCMSS</li>
+      </ul>
+    </li>
+    <li nz-submenu>
+      <span title>
+        <i class="anticon anticon-tags"></i>
+        <span>Tags</span>
+      </span>
+      <ul>
+        <li nz-menu-item>User Management</li>
+        <li nz-menu-item>Top Bar</li>
+        <li nz-menu-item>Core</li>
+      </ul>
+    </li>
+  </ul>

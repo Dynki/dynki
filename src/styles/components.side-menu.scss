@@ -151,4 +151,33 @@ ng-sidebar {
     @include mdc-top-app-bar-fill-color(#fff);
     @include mdc-top-app-bar-fill-color-accessible(#fff);
     @include mdc-top-app-bar-icon-ink-color(#3095de);
+    border-bottom: 1px solid #d7d7d7;
+}
+
+.sidemenu {
+    position: absolute;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    top: 65px;
+    height: calc(100% - 65px);
+    width: 240px;
+
+    &::-webkit-scrollbar-track
+    {
+        background-color: #ffffff;  
+    }
+
+    &::-webkit-scrollbar
+    {
+	    width: 6px;
+	    background-color: #ffffff;
+    }
+
+    &::-webkit-scrollbar-thumb
+    {
+	    border-radius: 10px;
+	    -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,.3);
+	    background-color: #767676;
+    }
+
 }
