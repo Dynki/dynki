@@ -1,10 +1,8 @@
 import * as moment from 'moment';
-import { Observable } from 'rxjs/Observable';
+import { Observable ,  interval ,  of } from 'rxjs';
 import { switchMap, mapTo, map } from 'rxjs/operators';
-import { interval } from 'rxjs/observable/interval';
 import * as _ from 'lodash';
 import * as pluralize from 'pluralize';
-import { of } from 'rxjs/observable/of';
 
 export class BaseClass {
     user: string;

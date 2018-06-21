@@ -1,37 +1,26 @@
 <div class="side-menu" fxFlex fxLayout="column">
-    <header class="side-menu__brand" fxFlex fxLayout="column" >
-        <figure fxFlex fxLayout="row" fxLayoutAlign="center center">
-            <img class="side-menu__img" src="./assets/img/logo.png">
-            <h1 *ngIf="(isCollapsed | async) === false" class="side-menu__heading">D</h1>
-        </figure>
-    </header>
-    <ul nz-menu [nzMode]="(isCollapsed | async)?'vertical':'inline'">
-        <li nz-submenu>
-            <span title>
-                <i class="anticon anticon-user"></i>
-                <span class="nav-text">User</span>
-            </span>
-            <ul>
-                <li nz-menu-item>Tom</li>
-                <li nz-menu-item>Bill</li>
-                <li nz-menu-item>Alex</li>
-            </ul>
-        </li>
-        <li nz-submenu>
-            <span title>
-                <i class="anticon anticon-team"></i>
-                <span class="nav-text">Team</span>
-            </span>
-            <ul>
-                <li nz-menu-item>Team 1</li>
-                <li nz-menu-item>Team 2</li>
-            </ul>
-        </li>
-        <li nz-menu-item>
+    <ul>
+        <li>
             <span>
-                <i class="anticon anticon-file"></i>
-                <span class="nav-text">File</span>
+                <mdc-icon fontIcon="list">menu</mdc-icon>
+                <span mdcSubtitle1>Boards</span>
             </span>
+            <ul>
+                <li mdcSubtitle2>Tom</li>
+                <li mdcSubtitle2>Bill</li>
+                <li mdcSubtitle2>Alex</li>
+            </ul>
+        </li>
+        <li>
+            <span>
+                <mdc-icon fontIcon="list">menu</mdc-icon>
+                <span mdcSubtitle1>Boards</span>
+            </span>
+            <ul>
+                <li mdcSubtitle2>Tom</li>
+                <li mdcSubtitle2>Bill</li>
+                <li mdcSubtitle2>Alex</li>
+            </ul>
         </li>
     </ul>
 </div>

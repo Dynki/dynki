@@ -1,15 +1,23 @@
+.login-form-forgot {
+    float: right;
+  }
+
+  .login-form-button {
+    width: 100%;
+  }
+
 .login {
     max-width: 400px;
     min-height: 378px;
     background-color: #ffffff;
-    padding: 36px;
+    padding: 36px!important;
     
     &--forgot {
         float: right;
     }
 
     &__button {
-        width: 100%;
+        width: 100%;    
         margin-bottom: 20px;
     }
 
@@ -24,7 +32,7 @@
 .registration {
     width: 400px;
     background-color: #ffffff;
-    padding: 36px;
+    padding: 36px!important;
     
     &__button {
         width: 100%;

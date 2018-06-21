@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs/observable';
-import 'rxjs/add/observable/fromPromise';
-import { of } from 'rxjs/observable/of';
+
+import { of } from 'rxjs';
 import { tap, map, exhaustMap, catchError } from 'rxjs/operators';
 import { NzNotificationService } from 'ng-zorro-antd';
 import { AngularFireAuth  } from 'angularfire2/auth';

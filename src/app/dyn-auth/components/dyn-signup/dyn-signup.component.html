@@ -1,25 +1,21 @@
 <form class="registration" nz-form [formGroup]="form" (ngSubmit)="submit()" name="registerForm">
   <h1 class="registration__heading">Sign Up for Free</h1>
-  <div nz-form-item>
-    <div nz-form-control>
-      <nz-input formControlName="username" name="username" [nzPlaceHolder]="'email'" [nzSize]="'large'" aria-label="enter username">
-        <ng-template #prefix>
-          <i class="anticon anticon-user"></i>
-        </ng-template>
-      </nz-input>
-      <div nz-form-explain *ngIf="form.controls.username.dirty&&form.controls.username.hasError('required')">Please input your email!</div>
-    </div>
-  </div>
-  <div nz-form-item>
-    <div nz-form-control>
-      <nz-input formControlName="password" name="password" [nzType]="'password'" [nzPlaceHolder]="'Password'" [nzSize]="'large'" aria-label="enter password">
-        <ng-template #prefix>
-          <i class="anticon anticon-lock"></i>
-        </ng-template>
-      </nz-input>
-      <div nz-form-explain *ngIf="form.controls.password.dirty&&form.controls.password.hasError('required')">Please input your Password!</div>
-    </div>
-  </div>
+  <nz-form-item>
+    <nz-form-control>
+      <nz-input-group nzPrefixIcon="anticon anticon-user">
+        <input type="text" nz-input formControlName="username" placeholder="Username">
+      </nz-input-group>
+      <nz-form-explain *ngIf="form.get('username').dirty && form.get('username').errors">Please input your username!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <nz-input-group nzPrefixIcon="anticon anticon-lock">
+        <input type="password" nz-input formControlName="password" placeholder="Password">
+      </nz-input-group>
+      <nz-form-explain *ngIf="form.get('password').dirty && form.get('password').errors">Please input your Password!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
   <button nz-button name="registerBtn" [nzLoading]="(pending | async)"  class="registration__button" [nzType]="'primary'" [nzSize]="'large'" type="submit" aria-label="register">Create Account</button>
   Or
   <a (click)="goToLogin()" name="gotoLogin" aria-label="go to login">return to login</a>

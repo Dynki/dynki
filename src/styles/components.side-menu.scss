@@ -1,9 +1,11 @@
 .post-auth {
     &__logo {
-        color: rgb(0,0,0);
-        opacity: .54!important;
-        font-family: $font-family;
+        font-size: 25px;
+        color: black;
+        opacity: 0.54 !important;
+        font-family: "Open Sans", sans-serif;
         padding: 0px;
+        font-weight: bold;
     }
 }
 
@@ -24,10 +26,10 @@
     
     &__img {
 
-        height: 49px;
         background-color: #3095de;
         width: 48px;
         height: 48px;
+        margin-left: 11px;
         display: inline-block;
   
         -webkit-mask: url(/assets/img/logo.svg) no-repeat 50% 50%;
@@ -46,9 +48,27 @@
     }
 
     &__content {
-        height: 100%;
+        display: grid;
+        grid-template-rows: 150px auto 100px;
+        grid-template-columns: minmax(200px, 3fr) 9fr;
+        grid-template-areas: "header header"
+                            "nav    content"
+                            "nav    footer";
+        }
+        dyn-toolbar {
+            grid-area: header;
+        }
+        dyn-side-menu {
+            grid-area: nav;
+        }    
+        router-outlet {
+            grid-area: content;
+        }
+        
+        footer {
+            grid-area: footer;
+        }
     }
-}
 
 .sidebar {
 

@@ -13,12 +13,14 @@ import { AppComponent } from './app.component';
 import { ShellModule } from './dyn-shell/dyn-shell.module';
 import { LambdaUtil } from 'app/shared/aws/labmda.util';
 import { environment } from '../environments/environment';
+import { AppMaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    AppMaterialModule,
     BrowserAnimationsModule,
     BrowserModule,
     HttpClientModule,
@@ -26,7 +28,7 @@ import { environment } from '../environments/environment';
     FlexLayoutModule,
     SidebarModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
-    NgZorroAntdModule.forRoot()
+    NgZorroAntdModule
   ],
   bootstrap: [AppComponent],
   providers: [LambdaUtil]

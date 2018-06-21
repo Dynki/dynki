@@ -126,8 +126,7 @@
     "invoke-injectable": true,
     "callable-types": true,
     "import-blacklist": [
-      true,
-      "rxjs"
+      true
     ],
     "import-spacing": true,
     "interface-over-type-literal": true,

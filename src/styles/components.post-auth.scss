@@ -1,0 +1,25 @@
+.post-auth {
+
+    &__content {
+        overflow: hidden;
+        display: grid;
+        grid-template-rows: 70px 1fr;
+        grid-template-columns: 200px 1fr;
+        min-height: 100vh;
+        margin: 0;
+              
+        dyn-toolbar, footer {
+            grid-column-start: 1;
+            grid-column-end: span 3;
+        }
+        dyn-side-menu {
+            grid-row-start: 2;
+            grid-row-end: 3;
+        }    
+
+        main {
+            grid-column-start: 2;
+        }
+        
+    }
+}

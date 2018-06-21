@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromPromise';
+import { Observable } from 'rxjs';
+
 
 import { TimeEntry } from '../store/models/timer';
 import { LambdaUtil } from 'app/shared/aws/labmda.util';

@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -33,11 +33,11 @@ import { authReducers } from '../dyn-auth/store/reducers';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-
-import { MdcAppBarModule, MdcIconModule, MdcIconToggleModule, MdcMenuModule } from '@angular-mdc/web';
+import { AppMaterialModule } from 'app/material.module';
 
 // other imports
 @NgModule({
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   declarations: [
     PreAuthComponent,
     PostAuthComponent,
@@ -49,6 +49,7 @@ import { MdcAppBarModule, MdcIconModule, MdcIconToggleModule, MdcMenuModule } fr
     ShellComponent
   ],
   imports: [
+    AppMaterialModule,
     StoreModule.forRoot({}),
     StoreModule.forFeature('nav', navReducers),
     EffectsModule.forRoot([]),
@@ -61,10 +62,6 @@ import { MdcAppBarModule, MdcIconModule, MdcIconToggleModule, MdcMenuModule } fr
     FlexLayoutModule,
     ShellRoutingModule,
     ReactiveFormsModule,
-    MdcAppBarModule,
-    MdcIconModule,
-    MdcIconToggleModule,
-    MdcMenuModule,
     NgZorroAntdModule.forRoot(),
   ],
   exports: [

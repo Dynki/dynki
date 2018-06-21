@@ -4,9 +4,8 @@ import { TimeEntry } from '../store/models/timer';
 import { Store, select } from '@ngrx/store';
 import * as fromTimer from '../store/reducers'
 import * as timerActions from '../store/actions/timer.actions';
-import { Observable } from 'rxjs/Observable';
+import { Observable ,  interval } from 'rxjs';
 import { takeWhile, tap, filter, switchMap, mapTo } from 'rxjs/operators';
-import { interval } from 'rxjs/observable/interval';
 
 @Component({
   selector: 'dyn-timer',

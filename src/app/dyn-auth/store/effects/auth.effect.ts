@@ -4,9 +4,7 @@ import { Router } from '@angular/router';
 import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/observable';
-import { fromPromise } from 'rxjs/observable/fromPromise';
-import 'rxjs/add/observable/fromPromise';
-import { of } from 'rxjs/observable/of';
+import { from as fromPromise ,  of } from 'rxjs';
 import { tap, map, exhaustMap, catchError, mergeMap } from 'rxjs/operators';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { NzNotificationService } from 'ng-zorro-antd';
@@ -14,7 +12,7 @@ import { NzNotificationService } from 'ng-zorro-antd';
 import * as fromAuth from '../reducers/auth';
 import * as authActions from '../actions/auth';
 import { User, Credentials } from '../models/user';
-import { switchMap } from 'rxjs/operator/switchMap';
+
 import { auth } from 'firebase';
 
 @Injectable()

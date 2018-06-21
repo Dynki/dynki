@@ -1,6 +1,7 @@
+
+import {from as observableFrom,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromPromise';
+
 
 import { Team, TeamMember } from '../store/models/team';
 import { LambdaUtil } from 'app/shared/aws/labmda.util';
@@ -38,7 +39,7 @@ export class TeamService {
       modifiedDate: Date.now.toString()
     };
 
-    return Observable.fromPromise(this.lambdaUtil.constructLambda('post', 'teams', payload));
+    return observableFrom(this.lambdaUtil.constructLambda('post', 'teams', payload));
   }
 
   public getTeams(): Observable<Team[]> {
@@ -46,7 +47,7 @@ export class TeamService {
       // user: this.auth.getUserId()
     };
 
-    return Observable.fromPromise(this.lambdaUtil.constructLambda('get', 'teams', payload));
+    return observableFrom(this.lambdaUtil.constructLambda('get', 'teams', payload));
   }
 
   public getTeam(teamId: string): Observable<Team> {
@@ -55,13 +56,13 @@ export class TeamService {
       team_id: teamId
     };
 
-    return Observable.fromPromise(this.lambdaUtil.constructLambda('get', `teams/${teamId}`, payload));
+    return observableFrom(this.lambdaUtil.constructLambda('get', `teams/${teamId}`, payload));
   }
 
   public updateTeam(team: Team): Observable<Team> {
     const payload = team;
 
-    return Observable.fromPromise(this.lambdaUtil.constructLambda('put', `teams/${team._id}`, payload));
+    return observableFrom(this.lambdaUtil.constructLambda('put', `teams/${team._id}`, payload));
   }
 
   public deleteTeam(teamId: string): Observable<Team> {
@@ -69,7 +70,7 @@ export class TeamService {
       _id: teamId
     };
 
-    return Observable.fromPromise(this.lambdaUtil.constructLambda('delete', `teams/${teamId}`, payload));
+    return observableFrom(this.lambdaUtil.constructLambda('delete', `teams/${teamId}`, payload));
   }
 
   public addTeamMember(teamId: string, member: TeamMember): Observable<Team> {
@@ -79,12 +80,12 @@ export class TeamService {
       member: member
     };
 
-    return Observable.fromPromise(this.lambdaUtil.constructLambda('post', `teams/${teamId}/members`, payload));
+    return observableFrom(this.lambdaUtil.constructLambda('post', `teams/${teamId}/members`, payload));
   }
 
   public deleteTeamMember(teamId: string, memberId: string): Observable<Team> {
     const payload = {};
 
-    return Observable.fromPromise(this.lambdaUtil.constructLambda('delete', `teams/${teamId}/members/${memberId}`, payload));
+    return observableFrom(this.lambdaUtil.constructLambda('delete', `teams/${teamId}/members/${memberId}`, payload));
   }
 }

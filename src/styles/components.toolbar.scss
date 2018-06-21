@@ -4,7 +4,7 @@
     &__user-profile {
         @include no-select;
         
-        background-color: #F8B18B;
+        background-color: #3095de;
         color: #ffffff;
         font-family: $font-family;
         font-size: 18px;
@@ -12,6 +12,7 @@
         width: 30px;
         height: 30px;
         margin: 10px;
+        margin-right: 17px;
 
         display: flex;
         justify-content: center;
