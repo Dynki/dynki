@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuard } from '../../dyn-auth/services';
 import { TimerComponent } from '../components';
+import { AuthenticatedGuard } from '../../dyn-auth/store/authenticated.guard';
 
 const appRoutes: Routes = [
     {
         path: 'teams',
         component: TimerComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthenticatedGuard],
     }
 ];
 
@@ -20,7 +20,7 @@ const appRoutes: Routes = [
     exports: [
         RouterModule,
     ],
-    providers: [AuthGuard],
+    providers: [AuthenticatedGuard],
 })
 export class TimerRoutingModule { }
 

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import * as fromAuth from '../../dyn-auth/store/reducers';
-import * as Auth from '../../dyn-auth/store/actions/auth';
-import { Store } from '@ngrx/store';
+// import * as fromAuth from '../../dyn-auth/store/reducers';
+import * as Auth from '../../dyn-auth/store/auth.actions';
+import { Store } from '@ngxs/store';
+// import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'dyn-shell',
@@ -14,10 +15,10 @@ export class ShellComponent implements OnInit {
 
   _opened = false;
 
-  constructor(private store: Store<fromAuth.State>) { }
+  constructor(private store: Store) { }
 
  ngOnInit() {
-  this.store.dispatch(new Auth.GetUser());
+  this.store.dispatch(new Auth.CheckSession());
  }
 
  private _toggleSidebar() {

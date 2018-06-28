@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { Store, select } from '@ngrx/store';
 
-import * as fromAuth from '../../store/reducers';
-import * as authActions from '../../store/actions/auth';
-import * as registerActions from '../../store/actions/register';
+import * as authActions from '../../store/auth.actions';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'dyn-signup',
@@ -12,9 +10,9 @@ import * as registerActions from '../../store/actions/register';
 })
 export class SignupComponent implements OnInit {
   form: FormGroup;
-  pending = this.store.pipe(select(fromAuth.getLoginPagePending));
+  // pending = this.store.pipe(select(fromAuth.getLoginPagePending));
 
-  constructor (private store: Store<fromAuth.State>, private fb: FormBuilder) { }
+  constructor (private store: Store, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -24,10 +22,18 @@ export class SignupComponent implements OnInit {
   }
 
   submit() {
-    this.store.dispatch(new registerActions.SignUp(this.form.value));
+    // tslint:disable-next-line:forin
+    for (const i in this.form.controls) {
+      this.form.controls[ i ].markAsDirty();
+      this.form.controls[ i ].updateValueAndValidity();
+    }
+
+    if (this.form.valid) {
+      this.store.dispatch(new authActions.SignUp(this.form.value));
+    }
   }
 
   goToLogin() {
-    this.store.dispatch(new authActions.NotAuthenticated());
+    this.store.dispatch(new authActions.LoginRedirect());
   }
 }

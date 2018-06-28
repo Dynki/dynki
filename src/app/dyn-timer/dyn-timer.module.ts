@@ -7,11 +7,9 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 import { TimerComponent } from './components';
 import { TimerRoutingModule, TimerService } from './services';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
 import { SidebarModule } from 'ng-sidebar';
 
-import { reducers } from './store/reducers';
+// import { reducers } from './store/reducers';
 
 // other imports
 @NgModule({
@@ -24,7 +22,6 @@ import { reducers } from './store/reducers';
     NgZorroAntdModule,
     TimerRoutingModule,
     ReactiveFormsModule,
-    StoreModule.forFeature('timer', reducers),
     SidebarModule.forRoot(),
     // EffectsModule.forFeature([AuthEffects, RegisterEffects])
   ],

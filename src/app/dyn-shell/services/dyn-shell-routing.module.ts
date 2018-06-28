@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuard } from '../../dyn-auth/services';
+import { AuthenticatedGuard } from '../../dyn-auth/store/authenticated.guard';
 
 import { HomeComponent, PostAuthComponent, PreAuthComponent } from '../components';
 import { LoginComponent, SignupComponent } from '../../dyn-auth/components';
@@ -17,7 +17,7 @@ const appRoutes: Routes = [
   },
   {
     path: '', component: PostAuthComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthenticatedGuard],
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent }
@@ -34,7 +34,7 @@ const appRoutes: Routes = [
   exports: [
     RouterModule,
   ],
-  providers: [AuthGuard],
+  providers: [AuthenticatedGuard],
 })
 export class ShellRoutingModule {
 }

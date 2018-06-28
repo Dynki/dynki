@@ -6,13 +6,13 @@ export class BaseClass {
 }
 
 export interface Team extends BaseClass {
-    _id: string;
+    id: string;
     name: string;
     members: Array<TeamMember>;
 }
 
 export interface TeamMember extends BaseClass {
-    _id: string;
+    id: string;
     user_id: string;
     email: string;
     admin: boolean;

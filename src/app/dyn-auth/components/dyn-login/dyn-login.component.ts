@@ -1,24 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { Store, select, Action } from '@ngrx/store';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { Select, Store } from '@ngxs/store';
 
-import * as fromAuth from '../../store/reducers';
-import * as authActions from '../../store/actions/auth';
-import * as registerActions from '../../store/actions/register';
-import { MdcTextField } from '@angular-mdc/web';
+import { AuthState } from '../../store/auth.state';
+import * as authActions from '../../store/auth.actions';
+import { User } from 'app/dyn-auth/store/auth.model';
 
 @Component({
   selector: 'dyn-login',
   templateUrl: './dyn-login.component.html'
 })
 export class LoginComponent implements OnInit {
-  // form = new FormGroup({ username: new FormControl(''), password: new FormControl(''), persistence: new FormControl(true) });
   validateForm: FormGroup;
-  pending = this.store.pipe(select(fromAuth.getLoginPagePending));
-  user = this.store.pipe(select(fromAuth.getUser));
-  verificationError = this.store.pipe(select(fromAuth.getVerificationError));
 
-  constructor(private store: Store<fromAuth.State>, private fb: FormBuilder) { }
+  @Select(AuthState.getPending)
+  public pending$: Observable<boolean>;
+
+  @Select(AuthState.getUser)
+  public user$: Observable<User>
+
+  constructor(private store: Store, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -27,14 +29,23 @@ export class LoginComponent implements OnInit {
       remember: [true]
     });
   }
+
   submit() {
-    this.store.dispatch(new authActions.SetPersistence(
-      { ...this.validateForm.value, persistence: (this.validateForm.value.remember ? 'local' : 'session') }
-    ));
+    // tslint:disable-next-line:forin
+    for (const i in this.validateForm.controls) {
+      this.validateForm.controls[ i ].markAsDirty();
+      this.validateForm.controls[ i ].updateValueAndValidity();
+    }
+
+    if (this.validateForm.valid) {
+      this.store.dispatch(new authActions.SetPersistence(
+        { ...this.validateForm.value, persistence: (this.validateForm.value.remember ? 'local' : 'session') }
+      ));
+    }
   }
 
   register() {
-    this.store.dispatch(new registerActions.Redirect());
+    this.store.dispatch(new authActions.RegisterRedirect);
   }
 
   forgot() {
@@ -42,10 +53,10 @@ export class LoginComponent implements OnInit {
   }
 
   resendEmail() {
-    // this.process(new authActions.VerificationEmail(this.user));
+    this.process(new authActions.VerificationEmail(this.user$));
   }
 
-  process(action: Action) {
+  process(action: any) {
     if (this.validateForm.controls.username.invalid) {
       this.store.dispatch(new authActions.AuthError({ message: 'Please enter a valid email' }));
     } else {

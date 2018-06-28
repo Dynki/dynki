@@ -1,26 +1,23 @@
-import { createSelector, createFeatureSelector } from '@ngrx/store';
+// import { createSelector, createFeatureSelector } from '@ngrx/store';
+// import * as fromSideMenu from './side-menu';
+// import * as fromAuth from '../../../dyn-auth/store/reducers';
+// import * as fromTeams from '../../../dyn-teams/store/reducers';
 
-import * as fromSideMenu from './side-menu';
+// export interface State {
+//   auth: fromAuth.AuthState;
+//   nav: fromSideMenu.State;
+//   teams: fromTeams.State
+// }
 
-export interface NavState {
-  sideMenu: fromSideMenu.State;
-}
+// export const initialState: State = {
+//   auth: undefined,
+//   nav: undefined,
+//   teams: undefined
+// };
 
-export interface State {
-  nav: NavState;
-}
+// export const navReducers = {
+//   sideMenu: fromSideMenu.reducer
+// };
 
-export const navReducers = {
-  sideMenu: fromSideMenu.reducer
-};
-
-export const selectNavState = createFeatureSelector<NavState>('nav');
-
-export const selectNavSideMenuState = createSelector(
-  selectNavState,
-  (state: NavState) => state.sideMenu
-);
-export const getExpanded = createSelector(
-  selectNavSideMenuState,
-  fromSideMenu.getExpandedState
-);
+// export const getNavState = createFeatureSelector<fromSideMenu.State>('nav');
+// export const getAuth = (state: State) => state.auth;

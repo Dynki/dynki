@@ -28,11 +28,8 @@ import { TeamModule } from 'app/dyn-teams/dyn-team.module';
 
 import { TimerModule } from 'app/dyn-timer/dyn-timer.module';
 
-import { navReducers } from './store/reducers';
-import { authReducers } from '../dyn-auth/store/reducers';
-
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
+// import { navReducers } from './store/reducers';
+// import { authReducers } from '../dyn-auth/store/reducers';
 import { AppMaterialModule } from 'app/material.module';
 
 // other imports
@@ -50,9 +47,6 @@ import { AppMaterialModule } from 'app/material.module';
   ],
   imports: [
     AppMaterialModule,
-    StoreModule.forRoot({}),
-    StoreModule.forFeature('nav', navReducers),
-    EffectsModule.forRoot([]),
     AuthModule.forRoot(),
     SidebarModule.forRoot(),
     BrowserModule,

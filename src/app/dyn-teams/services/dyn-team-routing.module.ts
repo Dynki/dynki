@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuard } from '../../dyn-auth/services';
+import { AuthenticatedGuard } from '../../dyn-auth/store/authenticated.guard';
 import { TeamComponent, TeamDetailComponent } from '../../dyn-teams/components';
 
 const appRoutes: Routes = [
     {
         path: 'teams',
         component: TeamComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthenticatedGuard],
         data: { breadcrumb: 'Teams', parents: [] }
     },
     {
         path: 'teams/:id',
-        canActivate: [AuthGuard],
+        canActivate: [AuthenticatedGuard],
         component: TeamDetailComponent,
         data: { breadcrumb: 'selected team', parents: ['teams'] }
       }
@@ -27,7 +27,7 @@ const appRoutes: Routes = [
     exports: [
         RouterModule,
     ],
-    providers: [AuthGuard],
+    providers: [AuthenticatedGuard],
 })
 export class TeamRoutingModule {
 }

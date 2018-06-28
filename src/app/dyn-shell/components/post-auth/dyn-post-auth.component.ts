@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
-import { Store, select } from '@ngrx/store';
-import * as fromNav from '../../store/reducers';
-import * as fromAuth from '../../../dyn-auth/store/reducers';
+import { AuthState } from '../../../dyn-auth/store/auth.state';
+import { User } from '../../../dyn-auth/store/auth.model';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs/observable';
 
 @Component({
     selector: 'dyn-post-auth',
@@ -11,12 +12,13 @@ import * as fromAuth from '../../../dyn-auth/store/reducers';
 
 export class PostAuthComponent {
 
-  isCollapsed = this.navStore.pipe(select(fromNav.getExpanded));
-  user$ = this.authStore.pipe(select(fromAuth.getUser));
+  @Select(AuthState.getUser)
+  public user$: Observable<User>;
+
   _opened = false;
   isOn: false;
 
-  constructor(private navStore: Store<fromNav.State>, private authStore: Store<fromAuth.State>) { }
+  constructor(private authStore: Store) { }
 
   private _toggleSidebar() {
     this._opened = !this._opened;

@@ -50,7 +50,7 @@ export class TeamComponent implements OnInit {
     }
 
     onSelect(row: Team) {
-        this.router.navigate(['/teams', row._id]);
+        this.router.navigate(['/teams', row.id]);
     }
 
     addTeam() {

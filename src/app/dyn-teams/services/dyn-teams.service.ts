@@ -19,7 +19,7 @@ export class TeamService {
   public createTeam(adminId: string, adminEmail: string, teamName: string): Observable<Team> {
 
     const member: TeamMember = {
-      _id: Utils.newGuid(),
+      id: Utils.newGuid(),
       user_id: adminId,
       email: adminEmail,
       admin: true,
@@ -30,7 +30,7 @@ export class TeamService {
     }
 
     const payload: Team = {
-      _id: Utils.newGuid(),
+      id: Utils.newGuid(),
       name: teamName,
       members: [member],
       createdBy: adminId,
@@ -62,7 +62,7 @@ export class TeamService {
   public updateTeam(team: Team): Observable<Team> {
     const payload = team;
 
-    return observableFrom(this.lambdaUtil.constructLambda('put', `teams/${team._id}`, payload));
+    return observableFrom(this.lambdaUtil.constructLambda('put', `teams/${team.id}`, payload));
   }
 
   public deleteTeam(teamId: string): Observable<Team> {

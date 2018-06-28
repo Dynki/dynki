@@ -1,21 +1,19 @@
-  import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 import { LoginComponent, SignupComponent } from './components';
 
-import { AuthEffects, RegisterEffects } from './store/effects';
-import { authReducers } from './store/reducers';
-import { AuthGuard } from 'app/dyn-auth/services';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AppMaterialModule } from '../material.module';
+import { AuthenticatedGuard } from './store/authenticated.guard';
+import { NgxsModule } from '@ngxs/store';
+import { AuthState } from './store/auth.state';
 
 export const COMPONENTS = [LoginComponent, SignupComponent];
 
@@ -27,7 +25,10 @@ export const COMPONENTS = [LoginComponent, SignupComponent];
     AppMaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    NgZorroAntdModule
+    NgZorroAntdModule,
+    NgxsModule.forFeature([
+      AuthState,
+    ]),
   ],
   declarations: COMPONENTS,
   exports: COMPONENTS
@@ -36,7 +37,7 @@ export class AuthModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: AuthRoutingModule,
-      providers: [AuthGuard, AngularFireAuth]
+      providers: [AuthenticatedGuard, AngularFireAuth]
     }
   }
 }
@@ -51,9 +52,7 @@ const AUTH_ROUTES: Routes = [
   imports: [
     AuthModule,
     NgZorroAntdModule,
-    RouterModule.forChild(AUTH_ROUTES),
-    StoreModule.forFeature('auth', authReducers),
-    EffectsModule.forFeature([AuthEffects, RegisterEffects])
+    RouterModule.forChild(AUTH_ROUTES)
   ]
 })
 export class AuthRoutingModule { }

@@ -1,7 +1,6 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
@@ -14,6 +13,8 @@ import { ShellModule } from './dyn-shell/dyn-shell.module';
 import { LambdaUtil } from 'app/shared/aws/labmda.util';
 import { environment } from '../environments/environment';
 import { AppMaterialModule } from './material.module';
+import { NgxsModule } from '@ngxs/store';
+import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 
 @NgModule({
   declarations: [
@@ -28,8 +29,10 @@ import { AppMaterialModule } from './material.module';
     FlexLayoutModule,
     SidebarModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
-    NgZorroAntdModule
-  ],
+    NgZorroAntdModule,
+    NgxsModule.forRoot([]),
+    NgxsRouterPluginModule.forRoot()
+   ],
   bootstrap: [AppComponent],
   providers: [LambdaUtil]
 })

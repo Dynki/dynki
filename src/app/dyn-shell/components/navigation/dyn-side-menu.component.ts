@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
-import { Store, select } from '@ngrx/store';
-import * as fromNav from '../../store/reducers';
+// import { Store, select } from '@ngrx/store';
+// import * as fromNav from '../../store/reducers';
 
 @Component({
   selector: 'dyn-side-menu',
@@ -10,7 +10,7 @@ import * as fromNav from '../../store/reducers';
 
 export class SideMenuComponent {
 
-  isCollapsed = this.store.pipe(select(fromNav.getExpanded));
+  // isCollapsed = this.store.pipe(select(fromNav.getExpanded));
 
-  constructor(private store: Store<fromNav.State>) { }
+  // constructor(private store: Store<fromNav.State>) { }
 }
