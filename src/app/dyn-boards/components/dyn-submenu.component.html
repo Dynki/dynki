@@ -1,0 +1,7 @@
+<ul class="menu__submenu-item" (mouseenter)="buttonVisible=true" (mouseleave)="buttonVisible=false">
+    <button class="menu__submenu-item__button" [hidden]="!subitem.button || !buttonVisible" nz-button nz-tooltip nzType="primary" nzGhost [nzTitle]="subitem.button.title" nzPlacement="right" >
+        {{subitem.button.caption}}
+    </button>
+    <li nz-menu-item style="height:40px;">{{subitem.title}}</li>
+</ul>
+    

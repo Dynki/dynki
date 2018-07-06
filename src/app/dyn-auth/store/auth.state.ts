@@ -6,7 +6,6 @@ import { take, tap } from 'rxjs/operators';
 
 import * as fromAuth from './auth.actions';
 import { AuthStateModel, User } from './auth.model';
-import { from } from 'rxjs';
 
 @State<AuthStateModel>({
     name: 'auth',
@@ -29,6 +28,7 @@ export class AuthState implements NgxsOnInit {
 
     @Selector()
     static getUser(state: AuthStateModel) {
+        console.log('returning user ', state.user);
         return state.user;
     }
 
@@ -88,13 +88,30 @@ export class AuthState implements NgxsOnInit {
     /**
      * Events
      */
+    @Action(fromAuth.LoginSuccess)
+    setUserStateOnSuccess(ctx: StateContext<AuthStateModel>, event: fromAuth.LoginSuccess) {
+        console.log(event);
+        ctx.patchState({
+            user: event.payload
+        });
+    }
+
+    @Action([fromAuth.LoginFailure, fromAuth.LogoutSuccess])
+    setUserStateOnFailure(ctx: StateContext<AuthStateModel>) {
+        ctx.patchState({
+            user: undefined
+        });
+        console.log('setUserStateOnFailure::Dispatching Login Redirect')
+        ctx.dispatch(new fromAuth.LoginRedirect());
+    }
+
     @Action(fromAuth.SetPersistence)
     setPersistence(ctx: StateContext<AuthStateModel>, event: fromAuth.SetPersistence) {
         console.log('setPersistence');
         this.afAuth.auth.setPersistence(event.payload.persistence)
-          .then(() => {
-            ctx.dispatch(new fromAuth.LoginWithEmailAndPassword(event.payload));
-          })
+            .then(() => {
+                ctx.dispatch(new fromAuth.LoginWithEmailAndPassword(event.payload));
+            })
     };
 
     @Action(fromAuth.LoginSuccess)
@@ -129,52 +146,36 @@ export class AuthState implements NgxsOnInit {
         });
     }
 
-    @Action(fromAuth.LoginSuccess)
-    setUserStateOnSuccess(ctx: StateContext<AuthStateModel>, event: fromAuth.LoginSuccess) {
-        console.log(event);
-        ctx.patchState({
-            user: event.payload.user
-        });
-    }
-
-    @Action([fromAuth.LoginFailure, fromAuth.LogoutSuccess])
-    setUserStateOnFailure(ctx: StateContext<AuthStateModel>) {
-        ctx.patchState({
-            user: undefined
-        });
-        console.log('setUserStateOnFailure::Dispatching Login Redirect')
-        ctx.dispatch(new fromAuth.LoginRedirect());
-    }
 
     @Action(fromAuth.SignUp)
     onSignUp(ctx: StateContext<AuthState>, event: fromAuth.SignUp) {
         this.afAuth.auth.createUserAndRetrieveDataWithEmailAndPassword(event.payload.username, event.payload.password)
-        .then(() => ctx.dispatch(new fromAuth.VerificationEmail(this.afAuth.auth.currentUser.reload())))
-        .catch((err) => ctx.dispatch(new fromAuth.RegisterError(err)))
+            .then(() => ctx.dispatch(new fromAuth.VerificationEmail(this.afAuth.auth.currentUser.reload())))
+            .catch((err) => ctx.dispatch(new fromAuth.RegisterError(err)))
     }
 
     @Action(fromAuth.LoginFailure)
     onLoginError(ctx: StateContext<AuthStateModel>, event: fromAuth.LoginFailure) {
-        this._notification.create('error', 'Login Error',  event.payload.message);
+        this._notification.create('error', 'Login Error', event.payload.message);
     }
 
     @Action(fromAuth.RegisterError)
     onRegisterError(ctx: StateContext<AuthState>, event: fromAuth.RegisterError) {
-        this._notification.create('error', 'Registration Error',  event.payload.message);
+        this._notification.create('error', 'Registration Error', event.payload.message);
     }
 
     @Action(fromAuth.VerificationEmail)
     onVerificationEmail(ctx: StateContext<AuthState>) {
-      this.afAuth.auth.currentUser.sendEmailVerification()
-        .then(() => this._notification.create('info', 'Please verify account', 'Please check your email to verify your account'))
-        .catch((err) => ctx.dispatch(new fromAuth.VerificationError({ message: 'Failed to send verification email' })))
+        this.afAuth.auth.currentUser.sendEmailVerification()
+            .then(() => this._notification.create('info', 'Please verify account', 'Please check your email to verify your account'))
+            .catch((err) => ctx.dispatch(new fromAuth.VerificationError({ message: 'Failed to send verification email' })))
     }
 
     @Action(fromAuth.ForgotPassword)
     onForgotPassword(ctx: StateContext<AuthState>, event: fromAuth.ForgotPassword) {
-      this.afAuth.auth.sendPasswordResetEmail(event.payload)
-        .then(() => this._notification.create('success', 'Email sent', 'Please check your email to reset your password'))
-        .catch((err) => ctx.dispatch(new fromAuth.AuthError({ message: 'Failed to send password reset email' })))
+        this.afAuth.auth.sendPasswordResetEmail(event.payload)
+            .then(() => this._notification.create('success', 'Email sent', 'Please check your email to reset your password'))
+            .catch((err) => ctx.dispatch(new fromAuth.AuthError({ message: 'Failed to send password reset email' })))
     }
 
     @Action(fromAuth.NotVerified)

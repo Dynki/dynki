@@ -1,0 +1,14 @@
+<li *ngIf="menuitem.submenu" nz-submenu [nzOpen]="menuitem.expanded">
+    <span title>
+        <i *ngIf="menuitem.icon" [attr.class]="menuitem.icon"></i>
+        <h3>{{menuitem.title}}</h3>
+    </span>
+    <dyn-sub-menu *ngFor="let subitem of menuitem.submenu" [subitem]="subitem"></dyn-sub-menu>
+</li>
+<li *ngIf="!menuitem.submenu" nz-menu-item>
+    <span title>
+        <i *ngIf="menuitem.icon" [attr.class]="menuitem.icon"></i>
+        <span>{{menuitem.title}}</span>
+    </span>
+</li>
+  

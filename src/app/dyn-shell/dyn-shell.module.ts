@@ -31,6 +31,7 @@ import { TimerModule } from 'app/dyn-timer/dyn-timer.module';
 // import { navReducers } from './store/reducers';
 // import { authReducers } from '../dyn-auth/store/reducers';
 import { AppMaterialModule } from 'app/material.module';
+import { BoardModule } from '../dyn-boards/dyn-board.module';
 
 // other imports
 @NgModule({
@@ -49,6 +50,7 @@ import { AppMaterialModule } from 'app/material.module';
     AppMaterialModule,
     AuthModule.forRoot(),
     SidebarModule.forRoot(),
+    BoardModule,
     BrowserModule,
     FormsModule,
     HttpModule,

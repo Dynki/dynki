@@ -5,11 +5,11 @@
         <span>Inbox</span>
       </span>
     </li>
-    <button nz-button nz-tooltip nzType="dashed" nzTitle="Add Timer Board" nzPlacement="right" nzShape="circle" style="float: left; left:193px; top: 11px; margin-bottom:-24px; z-index: 1000;"><i class="anticon anticon-plus" ></i></button>
+    <button (click)="chooseBoard()" nz-button nz-tooltip nzType="dashed" nzTitle="Add Board" nzPlacement="right" nzShape="circle" style="float: left; left:193px; top: 11px; margin-bottom:-24px; z-index: 1000;"><i class="anticon anticon-plus" ></i></button>
     <li nz-submenu>
       <span title>
         <i class="anticon anticon-dashboard"></i>
-        <span>Timer Boards</span>
+        <span>Boards</span>
       </span>
     </li>
     <button nz-button nz-tooltip nzType="dashed" nzTitle="Add Team" nzPlacement="right" nzShape="circle" style="float: left; left:193px; top: 11px; margin-bottom:-24px; z-index: 1000;"><i class="anticon anticon-plus" ></i></button>

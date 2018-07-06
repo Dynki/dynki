@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngxs/store';
 
-// import { Store, select } from '@ngrx/store';
-// import * as fromNav from '../../store/reducers';
+import * as boardActions from '../../../dyn-boards/store/board.actions';
 
 @Component({
   selector: 'dyn-side-menu',
@@ -12,5 +12,10 @@ export class SideMenuComponent {
 
   // isCollapsed = this.store.pipe(select(fromNav.getExpanded));
 
-  // constructor(private store: Store<fromNav.State>) { }
+  constructor(private store: Store) { }
+
+  chooseBoard() {
+    console.log('Dispatch: Choose Board');
+    this.store.dispatch(new boardActions.ChooseBoardType())
+  }
 }
