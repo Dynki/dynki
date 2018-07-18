@@ -15,6 +15,7 @@ import { environment } from '../environments/environment';
 import { AppMaterialModule } from './material.module';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
     FlexLayoutModule,
     SidebarModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     NgZorroAntdModule,
     NgxsModule.forRoot([]),
     NgxsRouterPluginModule.forRoot()

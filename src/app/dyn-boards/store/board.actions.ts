@@ -1,5 +1,3 @@
-import { IBoard } from './board.model';
-
 export enum BoardActionTypes {
   CHOOSE_BOARD_TYPE  = '[Board] Choose Type',
   CREATE_BOARD       = '[Board] Create Board',
@@ -17,10 +15,17 @@ export class ChooseBoardType {
 
 export class CreateBoard {
     static type = BoardActionTypes.CREATE_BOARD;
-    constructor(public payload: IBoard) {}
+    constructor(public payload: string) {}
+}
+
+export class GetAllBoards {
+    static type = BoardActionTypes.GET_ALL_BOARDS
+    constructor() {}
 }
 
 export type BoardActions =
     ChooseBoardType |
-  CreateBoard;
+    CreateBoard |
+    GetAllBoards;
+
 

@@ -1,7 +1,8 @@
+<button *ngIf="menuitem.button" (click)="dispatchBtnAction(menuitem)" nz-button nz-tooltip nzType="dashed" [nzTitle]="menuitem.button.title" nzPlacement="right" nzShape="circle" style="float: left; left:193px; top: 11px; margin-bottom:-24px; z-index: 1000;"><i [attr.class]="menuitem.button.icon"></i></button>
 <li *ngIf="menuitem.submenu" nz-submenu [nzOpen]="menuitem.expanded">
     <span title>
         <i *ngIf="menuitem.icon" [attr.class]="menuitem.icon"></i>
-        <h3>{{menuitem.title}}</h3>
+        <span>{{menuitem.title}}</span>
     </span>
     <dyn-sub-menu *ngFor="let subitem of menuitem.submenu" [subitem]="subitem"></dyn-sub-menu>
 </li>

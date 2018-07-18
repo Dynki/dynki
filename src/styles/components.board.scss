@@ -1,7 +1,7 @@
 .choose-board {
     display: grid;
     grid-template-rows: auto;
-    grid-template-columns: minmax(200px, 3fr) 9fr;
+    grid-template-columns: minmax(180px, 3fr) 9fr;
     grid-template-areas: "menu content";
     overflow: hidden;
     height: calc(100vh - 54px);

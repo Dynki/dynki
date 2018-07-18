@@ -1,17 +1,19 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { DynMenuItem } from './dyn-menu.model';
+import { Component, Input } from '@angular/core';
+import { DynMenuItem } from '../store/menu.model';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'dyn-menu-item',
   templateUrl: './dyn-menu-item.component.html'
 })
-export class DynMenuItemComponent implements OnInit {
+export class DynMenuItemComponent {
     @Input() menuitem: DynMenuItem;
 
-    constructor() {
+    constructor(private store: Store) {
+      console.log('MenuItem::Constructor');
     }
 
-    ngOnInit() {
-      console.log('menuitem:constructor', this.menuitem);
+    dispatchBtnAction(menuitem: DynMenuItem) {
+      this.store.dispatch(menuitem.button.clickAction);
     }
 }

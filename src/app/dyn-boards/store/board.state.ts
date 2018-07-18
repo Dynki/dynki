@@ -4,6 +4,8 @@ import * as boardActions from './board.actions';
 import { BoardStateModel, IBoard } from './board.model';
 import { NzModalService } from 'ng-zorro-antd';
 import { DynChooseBoardTypeComponent } from '../components/dyn-choose-board.component';
+import { BoardService } from '../services/board.service';
+import * as menuActions from './menu.actions';
 
 @State<BoardStateModel>({
     name: 'board',
@@ -21,14 +23,17 @@ export class BoardState {
         return state.boards;
     }
 
-    constructor(private store: Store, private modalService: NzModalService) { }
+    constructor(
+        private store: Store,
+        private modalService: NzModalService,
+        private boardService: BoardService
+    ) { }
 
     /**
      * Commands
      */
     @Action(boardActions.ChooseBoardType)
     chooseBoardType(ctx: StateContext<BoardStateModel>) {
-        console.log('Choose Board Type');
         this.modalService.create({
             nzTitle: 'Choose Template',
             nzContent: DynChooseBoardTypeComponent,
@@ -40,5 +45,23 @@ export class BoardState {
         });
     }
 
+    @Action(boardActions.GetAllBoards)
+    getAllBoards(ctx: StateContext<BoardStateModel>) {
+        this.boardService.getBoards().subscribe(boards => {
+            console.log('Board-state::Boards', boards);
+
+            ctx.patchState({ boards });
+            ctx.dispatch(new menuActions.LoadSubItems('Boards', boards.map(b => ({ title: b.description }))));
+        });
+    }
+
+    /**
+     * Events
+     */
+    @Action(boardActions.CreateBoard)
+    createBoard(ctx: StateContext<BoardStateModel>, event: boardActions.CreateBoard) {
+        this.modalService.closeAll();
+        this.boardService.createBoard('scratch');
+    }
 
 }

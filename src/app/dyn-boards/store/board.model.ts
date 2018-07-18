@@ -1,3 +1,6 @@
+import * as moment from 'moment';
+import { UserInfo } from 'firebase';
+
 export type BoardType = 'Timer' | 'Task' | 'Project'
 
 export class BaseClass {
@@ -21,4 +24,24 @@ export interface IBoardEntity {
 
 export interface BoardStateModel {
     boards: Array<IBoard>;
+}
+
+export class Board implements IBoard {
+    id: string;
+    description: string;
+    type: BoardType;
+    entities: IBoardEntity[];
+    user: string;
+    createdBy: string;
+    createdDate: Date;
+    modifiedBy: string;
+    modifiedDate: Date;
+
+    constructor(type: BoardType, userInfo: UserInfo) {
+        this.createdBy = userInfo.uid;
+        this.createdDate = moment().toDate();
+        this.description = '';
+        this.entities = [];
+        this.type = type;
+    }
 }

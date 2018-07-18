@@ -7,6 +7,8 @@ import { DynMenuComponent } from './components/dyn-menu.component';
 import { DynMenuItemComponent } from './components/dyn-menu-item.component';
 import { DynSubMenuComponent } from './components/dyn-submenu.component';
 import { CommonModule } from '@angular/common';
+import { BoardService } from './services/board.service';
+import { MenuState } from './store/menu.state';
 
 export const COMPONENTS = [
     DynChooseBoardTypeComponent,
@@ -22,11 +24,13 @@ export const COMPONENTS = [
     CommonModule,
     NgxsModule.forFeature([
       BoardState,
+      MenuState
     ]),
     NgZorroAntdModule,
   ],
   declarations: COMPONENTS,
-  exports: COMPONENTS
+  exports: COMPONENTS,
+  providers: [BoardService]
 })
 export class BoardModule {}
 

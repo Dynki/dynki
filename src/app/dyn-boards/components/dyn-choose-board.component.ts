@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DynMenu } from './dyn-menu.model';
+import { DynMenu } from '../store/menu.model';
+import * as boardActions from '../../dyn-boards/store/board.actions';
 
 @Component({
   selector: 'dyn-choose-board',
@@ -22,28 +23,33 @@ export class DynChooseBoardTypeComponent implements OnInit {
           title: 'Start From Scratch',
           button: {
             caption: 'Select',
-            title: 'Use this template'
+            title: 'Use this template',
+            clickAction: new boardActions.CreateBoard('scratch'),
+            icon: undefined
           }
         },
         {
           title: 'Track Time',
           button: {
             caption: 'Select',
-            title: 'Use this template'
+            title: 'Use this template',
+            icon: undefined
           }
         },
         {
           title: 'Team Tasks',
           button: {
             caption: 'Select',
-            title: 'Use this template'
+            title: 'Use this template',
+            icon: undefined
           }
         },
         {
           title: 'Project Planning',
           button: {
             caption: 'Select',
-            title: 'Use this template'
+            title: 'Use this template',
+            icon: undefined
           }
         }]
       },
@@ -54,7 +60,8 @@ export class DynChooseBoardTypeComponent implements OnInit {
           title: 'Sprint Planning',
           button: {
             caption: 'Select',
-            title: 'Use this template'
+            title: 'Use this template',
+            icon: undefined
           }
         }]
       },
@@ -65,7 +72,8 @@ export class DynChooseBoardTypeComponent implements OnInit {
           title: 'Project Planning',
           button: {
             caption: 'Select',
-            title: 'Use this template'
+            title: 'Use this template',
+            icon: undefined
           }
         }]
       }]

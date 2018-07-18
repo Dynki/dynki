@@ -15,6 +15,11 @@ export interface DynMenuButton {
     caption: string;
     title: string;
     type?: string;
-    clickAction?: string;
+    icon: string;
+    clickAction?: any;
+}
+
+export interface MenuStateModel {
+    menus: Array<DynMenu>;
 }
 

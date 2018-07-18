@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { DynMenuItem } from './dyn-menu.model';
+import { DynMenuItem } from '../store/menu.model';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'dyn-sub-menu',
@@ -9,8 +10,11 @@ export class DynSubMenuComponent {
     @Input() subitem: DynMenuItem;
     buttonVisible: false;
 
-    constructor() {
+    constructor(private store: Store) {
       console.log('submenu::constructor', this.subitem);
+    }
 
+    itemClick(action: any) {
+      this.store.dispatch(action);
     }
 }

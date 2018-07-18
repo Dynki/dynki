@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DynMenu } from './dyn-menu.model';
+import { DynMenu } from '../store/menu.model';
 
 @Component({
   selector: 'dyn-menu',
@@ -10,6 +10,7 @@ export class DynMenuComponent implements OnInit {
 
     constructor() {
       console.log('menu::constructor');
+      console.log('menu::', this.menu);
     }
 
     ngOnInit() {
