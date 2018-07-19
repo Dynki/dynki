@@ -9,6 +9,11 @@ import { Store } from '@ngxs/store';
 export class DynMenuItemComponent {
     @Input() menuitem: DynMenuItem;
 
+    folderitem = {
+      title: 'New Folder',
+      icon: 'anticon anticon-folder-open'
+    }
+
     constructor(private store: Store) {
       console.log('MenuItem::Constructor');
     }

@@ -9,6 +9,7 @@ export interface DynMenuItem {
     button?: DynMenuButton;
     expanded?: boolean;
     submenu?: Array<DynMenuItem>
+    folders?: boolean;
 }
 
 export interface DynMenuButton {

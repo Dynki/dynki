@@ -39,7 +39,8 @@ export class SideMenuComponent implements OnInit {
         title: 'Inbox',
         icon: 'anticon anticon-mail',
         expanded: false,
-        button: undefined
+        button: undefined,
+        folders: false
       },
       {
         title: 'Boards',
@@ -51,6 +52,7 @@ export class SideMenuComponent implements OnInit {
           icon: 'anticon anticon-plus',
           clickAction: new boardActions.ChooseBoardType()
         },
+        folders: true,
         submenu: []
         //   {
         //   title: 'New Folder',
@@ -66,7 +68,8 @@ export class SideMenuComponent implements OnInit {
           caption: '',
           icon: 'anticon anticon-plus',
         },
-        submenu: undefined
+        submenu: undefined,
+        folders: true
       },
       {
         title: 'Projects',
@@ -77,7 +80,8 @@ export class SideMenuComponent implements OnInit {
           caption: '',
           icon: 'anticon anticon-plus',
         },
-        submenu: undefined
+        submenu: undefined,
+        folders: true
       },
       {
         title: 'tags',
@@ -88,7 +92,8 @@ export class SideMenuComponent implements OnInit {
           caption: '',
           icon: 'anticon anticon-plus',
         },
-        submenu: undefined
+        submenu: undefined,
+        folders: true
       }
 
     ]

@@ -48,7 +48,6 @@ export class BoardState {
     @Action(boardActions.GetAllBoards)
     getAllBoards(ctx: StateContext<BoardStateModel>) {
         this.boardService.getBoards().subscribe(boards => {
-            console.log('Board-state::Boards', boards);
 
             ctx.patchState({ boards });
             ctx.dispatch(new menuActions.LoadSubItems('Boards', boards.map(b => ({ title: b.description }))));

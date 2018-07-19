@@ -19,6 +19,7 @@ export class DynChooseBoardTypeComponent implements OnInit {
       items: [{
         title: 'Classic Templates',
         expanded: true,
+        folders: false,
         submenu: [{
           title: 'Start From Scratch',
           button: {
@@ -26,7 +27,8 @@ export class DynChooseBoardTypeComponent implements OnInit {
             title: 'Use this template',
             clickAction: new boardActions.CreateBoard('scratch'),
             icon: undefined
-          }
+          },
+          folders: false
         },
         {
           title: 'Track Time',
@@ -56,6 +58,7 @@ export class DynChooseBoardTypeComponent implements OnInit {
       {
         title: 'Software Development',
         expanded: false,
+        folders: false,
         submenu: [{
           title: 'Sprint Planning',
           button: {
@@ -68,6 +71,7 @@ export class DynChooseBoardTypeComponent implements OnInit {
       {
         title: 'Project Management',
         expanded: false,
+        folders: false,
         submenu: [{
           title: 'Project Planning',
           button: {
