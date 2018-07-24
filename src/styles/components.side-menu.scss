@@ -160,7 +160,8 @@ ng-sidebar {
     overflow-x: hidden;
     top: 65px;
     height: calc(100% - 65px);
-    width: 240px;
+    width: 260px;
+    padding-right: 0px;    
 
     &::-webkit-scrollbar-track
     {
