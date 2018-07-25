@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthenticatedGuard } from '../../dyn-auth/store/authenticated.guard';
-import { TeamComponent, TeamDetailComponent } from '../../dyn-teams/components';
+import { TeamComponent, TeamDetailComponent } from '../components';
 
 const appRoutes: Routes = [
     {

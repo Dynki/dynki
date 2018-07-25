@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DynMenu } from '../store/menu.model';
-import * as boardActions from '../../dyn-boards/store/board.actions';
+import { DynMenu } from '../../dyn-shell/store/menu.model';
+import * as boardActions from '../store/board.actions';
 
 @Component({
   selector: 'dyn-choose-board',

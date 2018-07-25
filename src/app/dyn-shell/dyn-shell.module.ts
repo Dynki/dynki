@@ -1,9 +1,10 @@
-import { Component, ViewChild, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { NgxsModule } from '@ngxs/store';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
@@ -11,45 +12,58 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { SidebarModule } from 'ng-sidebar';
 
 import {
+  MenuComponent,
+  MenuItemComponent,
+  SubMenuComponent,
   FooterComponent,
   HomeComponent,
   PostAuthComponent,
   PreAuthComponent,
   ShellComponent,
   SideMenuComponent,
-  ToolbarComponent,
+  ToolbarComponent
 } from './components';
 
 import { ShellRoutingModule } from './services';
 import { TruncatePipe } from './pipes';
 
 import { AuthModule } from '../dyn-auth/dyn-auth.module';
-import { TeamModule } from 'app/dyn-teams/dyn-team.module';
+import { TeamModule } from '../dyn-teams/dyn-team.module';
+import { TimerModule } from '../dyn-timer/dyn-timer.module';
 
-import { TimerModule } from 'app/dyn-timer/dyn-timer.module';
-
-// import { navReducers } from './store/reducers';
-// import { authReducers } from '../dyn-auth/store/reducers';
-import { AppMaterialModule } from 'app/material.module';
+import { AppMaterialModule } from '../material.module';
 import { BoardModule } from '../dyn-boards/dyn-board.module';
+import { MenuState } from './store/menu.state';
+import { MenuService } from './services/dyn-menu.service';
+import { MenuBuilder } from './services/dyn-menu.builder';
+
+const components = [
+    MenuComponent,
+    MenuItemComponent,
+    SubMenuComponent,
+    FooterComponent,
+    HomeComponent,
+    PostAuthComponent,
+    PreAuthComponent,
+    ShellComponent,
+    SideMenuComponent,
+    ToolbarComponent
+  ];
 
 // other imports
 @NgModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   declarations: [
-    PreAuthComponent,
-    PostAuthComponent,
-    FooterComponent,
-    SideMenuComponent,
-    ToolbarComponent,
-    HomeComponent,
+    components,
     TruncatePipe,
-    ShellComponent
   ],
   imports: [
     AppMaterialModule,
     AuthModule.forRoot(),
     SidebarModule.forRoot(),
+    NgxsModule.forFeature([
+      MenuState
+    ]),
     BoardModule,
     BrowserModule,
     FormsModule,
@@ -61,18 +75,15 @@ import { BoardModule } from '../dyn-boards/dyn-board.module';
     NgZorroAntdModule.forRoot(),
   ],
   exports: [
-    ToolbarComponent,
-    HomeComponent,
-    PreAuthComponent,
-    PostAuthComponent,
-    FooterComponent,
-    SideMenuComponent,
+    components,
     TeamModule,
     AuthModule,
-    TruncatePipe,
-    ShellComponent
+    TruncatePipe
   ],
-  providers: []
+  providers: [
+    MenuService,
+    MenuBuilder
+  ]
 })
 export class ShellModule {
 }

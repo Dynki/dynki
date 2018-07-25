@@ -1,0 +1,19 @@
+<ul class="menu__submenu-item" (mouseenter)="buttonVisible=true" (mouseleave)="buttonVisible=false">
+    <button 
+        *ngIf="subitem.button" 
+        [hidden]="!subitem.button || !buttonVisible" 
+        (click)="itemBtnClick(subitem.button.clickAction)" 
+        class="menu__submenu-item__button" 
+        nz-button 
+        nz-tooltip 
+        nzType="primary" 
+        nzGhost 
+        [nzTitle]="subitem.button.title" 
+        nzPlacement="right" >
+        {{subitem.button.caption}}
+    </button>
+    <li nz-menu-item style="height:40px;" (click)="itemClick(subitem.clickAction)">
+        <i *ngIf="subitem.icon" [attr.class]="subitem.icon"></i>
+        <span>{{subitem.title}}</span>
+    </li>
+</ul>

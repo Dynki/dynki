@@ -3,8 +3,8 @@ import { Observable } from 'rxjs';
 
 
 import { TimeEntry } from '../store/models/timer';
-import { LambdaUtil } from 'app/shared/aws/labmda.util';
-import { Utils } from 'app/shared/utils';
+import { LambdaUtil } from '../../shared/aws/labmda.util';
+import { Utils } from '../../shared/utils';
 
 declare var AWS;
 

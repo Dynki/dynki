@@ -5,7 +5,7 @@ import { BoardStateModel, IBoard } from './board.model';
 import { NzModalService } from 'ng-zorro-antd';
 import { DynChooseBoardTypeComponent } from '../components/dyn-choose-board.component';
 import { BoardService } from '../services/board.service';
-import * as menuActions from './menu.actions';
+import * as menuActions from '../../dyn-shell/store/menu.actions';
 
 @State<BoardStateModel>({
     name: 'board',

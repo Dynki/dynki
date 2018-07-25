@@ -7,11 +7,12 @@ import 'hammerjs';
 import { AngularFireModule } from 'angularfire2';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { SidebarModule } from 'ng-sidebar';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 
 import { AppComponent } from './app.component';
 import { ShellModule } from './dyn-shell/dyn-shell.module';
-import { LambdaUtil } from 'app/shared/aws/labmda.util';
-import { environment } from '../environments/environment';
+import { LambdaUtil } from './shared/aws/labmda.util';
+import { environment } from 'environments/environment';
 import { AppMaterialModule } from './material.module';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
@@ -33,7 +34,8 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     AngularFirestoreModule,
     NgZorroAntdModule,
     NgxsModule.forRoot([]),
-    NgxsRouterPluginModule.forRoot()
+    NgxsRouterPluginModule.forRoot(),
+    NgxsReduxDevtoolsPluginModule.forRoot()
    ],
   bootstrap: [AppComponent],
   providers: [LambdaUtil]

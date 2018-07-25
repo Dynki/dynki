@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Store, Select } from '@ngxs/store';
+import { Store, Select, ofActionSuccessful, Actions, ofActionDispatched } from '@ngxs/store';
 
 import * as boardActions from '../../../dyn-boards/store/board.actions';
-import { DynMenu, DynMenuItem, MenuStateModel } from '../../../dyn-boards/store/menu.model';
+import { DynMenu, DynMenuItem } from '../../store/menu.model';
 import { BoardState } from '../../../dyn-boards/store/board.state';
 import { Observable } from 'rxjs/observable';
-import { IBoard, BoardStateModel } from '../../../dyn-boards/store/board.model';
-import { map } from 'rxjs/operators';
-import { MenuState } from '../../../dyn-boards/store/menu.state';
-import * as menuActions from '../../../dyn-boards/store/menu.actions';
+import { BoardStateModel } from '../../../dyn-boards/store/board.model';
+import { switchMap } from 'rxjs/operators';
+import { MenuState } from '../../store/menu.state';
+import * as menuActions from '../../store/menu.actions';
 
 @Component({
   selector: 'dyn-side-menu',
@@ -27,8 +27,15 @@ export class SideMenuComponent implements OnInit {
 
   public menu: DynMenu;
 
-  constructor(private store: Store) {
+  constructor(private store: Store, private action$: Actions) {
     this.menu$.subscribe(m => console.log(m));
+    this.action$.pipe(
+      ofActionDispatched(menuActions.LoadItems),
+    ).subscribe(() => this.store.dispatch(new boardActions.GetAllBoards()));
+
+    this.action$.pipe(
+      ofActionSuccessful(boardActions.GetAllBoards),
+    ).subscribe(() => this.store.dispatch(new menuActions.LoadFolders()));
   }
 
   ngOnInit() {
@@ -95,12 +102,10 @@ export class SideMenuComponent implements OnInit {
         submenu: undefined,
         folders: true
       }
-
     ]
     }
 
     this.store.dispatch(new menuActions.LoadItems(this.menu));
-    this.store.dispatch(new boardActions.GetAllBoards());
   }
 
   chooseBoard() {

@@ -5,7 +5,7 @@ import { Select, Store } from '@ngxs/store';
 
 import { AuthState } from '../../store/auth.state';
 import * as authActions from '../../store/auth.actions';
-import { User } from 'app/dyn-auth/store/auth.model';
+import { User } from '../../store/auth.model';
 
 @Component({
   selector: 'dyn-login',

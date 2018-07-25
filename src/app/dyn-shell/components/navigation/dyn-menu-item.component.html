@@ -1,0 +1,27 @@
+<button 
+    *ngIf="menuitem.button" 
+    nz-button 
+    nz-tooltip
+    nzType="dashed"
+    [nzTitle]="menuitem.button.title"
+    nzPlacement="right"
+    nzShape="circle" 
+    (click)="dispatchBtnAction(menuitem)"    
+    class="menu__item__button">
+        <i [attr.class]="menuitem.button.icon"></i>
+</button>
+<li *ngIf="menuitem.submenu" nz-submenu [nzOpen]="menuitem.expanded" class="menu__item">
+    <span title>
+        <i *ngIf="menuitem.icon" [attr.class]="menuitem.icon"></i>
+        <span>{{menuitem.title}}</span>
+    </span>
+    <dyn-sub-menu *ngFor="let subitem of menuitem.submenu" [subitem]="subitem"></dyn-sub-menu>
+    <dyn-sub-menu *ngIf="menuitem.folders" [subitem]="folderitem"></dyn-sub-menu>
+</li>
+<li *ngIf="!menuitem.submenu" nz-menu-item>
+    <span title>
+        <i *ngIf="menuitem.icon" [attr.class]="menuitem.icon"></i>
+        <span>{{menuitem.title}}</span>
+    </span>
+</li>
+  

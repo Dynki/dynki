@@ -3,19 +3,10 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { NgxsModule } from '@ngxs/store';
 import { BoardState } from './store/board.state';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
-import { DynMenuComponent } from './components/dyn-menu.component';
-import { DynMenuItemComponent } from './components/dyn-menu-item.component';
-import { DynSubMenuComponent } from './components/dyn-submenu.component';
 import { CommonModule } from '@angular/common';
 import { BoardService } from './services/board.service';
-import { MenuState } from './store/menu.state';
 
-export const COMPONENTS = [
-    DynChooseBoardTypeComponent,
-    DynMenuComponent,
-    DynMenuItemComponent,
-    DynSubMenuComponent
-];
+export const COMPONENTS = [DynChooseBoardTypeComponent];
 
 @NgModule({
   entryComponents: [DynChooseBoardTypeComponent],
@@ -23,8 +14,7 @@ export const COMPONENTS = [
   imports: [
     CommonModule,
     NgxsModule.forFeature([
-      BoardState,
-      MenuState
+      BoardState
     ]),
     NgZorroAntdModule,
   ],
