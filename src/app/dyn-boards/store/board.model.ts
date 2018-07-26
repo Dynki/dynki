@@ -37,10 +37,10 @@ export class Board implements IBoard {
     modifiedBy: string;
     modifiedDate: Date;
 
-    constructor(type: BoardType, userInfo: UserInfo) {
+    constructor(type: BoardType, description: string, userInfo: UserInfo) {
         this.createdBy = userInfo.uid;
         this.createdDate = moment().toDate();
-        this.description = '';
+        this.description = description;
         this.entities = [];
         this.type = type;
     }

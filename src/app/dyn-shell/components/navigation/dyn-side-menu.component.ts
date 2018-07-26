@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Store, Select, ofActionSuccessful, Actions, ofActionDispatched } from '@ngxs/store';
 
 import * as boardActions from '../../../dyn-boards/store/board.actions';
-import { DynMenu, DynMenuItem } from '../../store/menu.model';
+import { DynMenu, DynMenuItem } from '../../../dyn-base/store/menu.model';
 import { BoardState } from '../../../dyn-boards/store/board.state';
 import { Observable } from 'rxjs/observable';
 import { BoardStateModel } from '../../../dyn-boards/store/board.model';
-import { switchMap } from 'rxjs/operators';
-import { MenuState } from '../../store/menu.state';
-import * as menuActions from '../../store/menu.actions';
+import { MenuState } from '../../../dyn-base/store/menu.state';
+import * as menuActions from '../../../dyn-base/store/menu.actions';
 
 @Component({
   selector: 'dyn-side-menu',
@@ -17,11 +16,6 @@ import * as menuActions from '../../store/menu.actions';
 
 export class SideMenuComponent implements OnInit {
 
-  @Select(BoardState)
-  public boards$: Observable<BoardStateModel>;
-  public boards: Array<DynMenuItem>;
-
-  // isCollapsed = this.store.pipe(select(fromNav.getExpanded));
   @Select(MenuState.getMenu('Main menu'))
   public menu$: Observable<DynMenu>;
 
@@ -35,6 +29,10 @@ export class SideMenuComponent implements OnInit {
 
     this.action$.pipe(
       ofActionSuccessful(boardActions.GetAllBoards),
+    ).subscribe(() => this.store.dispatch(new menuActions.LoadFolders()));
+
+    this.action$.pipe(
+      ofActionSuccessful(boardActions.CreateBoard),
     ).subscribe(() => this.store.dispatch(new menuActions.LoadFolders()));
   }
 

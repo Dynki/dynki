@@ -15,12 +15,12 @@ export class BoardService {
   constructor(private db: AngularFirestore, private afAuth: AngularFireAuth) {
       this.afAuth.authState.subscribe(u => {
           this.userInfo = u
-          this.collectionName = this.userInfo.uid + '-boards';
+          this.collectionName = 'boards::' + this.userInfo.uid;
         });
    }
 
   createBoard(type: string) {
-    const data = JSON.parse(JSON.stringify(new Board('Task', this.userInfo)));
+    const data = JSON.parse(JSON.stringify(new Board('Task', type, this.userInfo)));
     this.db.collection(this.collectionName).add(data);
   }
 

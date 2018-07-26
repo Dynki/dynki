@@ -5,6 +5,7 @@ import { BoardState } from './store/board.state';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { CommonModule } from '@angular/common';
 import { BoardService } from './services/board.service';
+import { BaseModule } from '../dyn-base/dyn-base.module';
 
 export const COMPONENTS = [DynChooseBoardTypeComponent];
 
@@ -12,6 +13,7 @@ export const COMPONENTS = [DynChooseBoardTypeComponent];
   entryComponents: [DynChooseBoardTypeComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [
+    BaseModule,
     CommonModule,
     NgxsModule.forFeature([
       BoardState

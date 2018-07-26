@@ -39,7 +39,10 @@ export class MenuState {
 
     @Action(menuActions.LoadItems)
     loadItems(ctx: StateContext<MenuStateModel>, event: menuActions.LoadItems) {
-        ctx.patchState({ menus: [event.payload] })
+        const currentMenus = ctx.getState().menus;
+        const updatedMenus = [...currentMenus.filter(m => m.title !== event.payload.title), event.payload]
+        console.log('UpodatedMenus::', updatedMenus);
+        ctx.patchState({ menus: updatedMenus })
     }
 
     @Action(menuActions.LoadSubItems)
@@ -54,7 +57,6 @@ export class MenuState {
                 });
             return m;
         });
-        console.log('Menu::State::menus::', menus);
         ctx.patchState({ menus });
     }
 
@@ -71,12 +73,10 @@ export class MenuState {
                         if (i.submenu) {
                             i.submenu = [...i.submenu.filter(s => !s.isFolder), ...folders];
                         }
-                        console.log('Menu::State::folders::', i.submenu)
                         return i;
                     });
                 return m;
             });
-            console.log('Patched menu::', menus);
             ctx.patchState({ menus });
         });
 

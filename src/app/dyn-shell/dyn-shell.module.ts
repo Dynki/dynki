@@ -12,9 +12,6 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { SidebarModule } from 'ng-sidebar';
 
 import {
-  MenuComponent,
-  MenuItemComponent,
-  SubMenuComponent,
   FooterComponent,
   HomeComponent,
   PostAuthComponent,
@@ -33,14 +30,10 @@ import { TimerModule } from '../dyn-timer/dyn-timer.module';
 
 import { AppMaterialModule } from '../material.module';
 import { BoardModule } from '../dyn-boards/dyn-board.module';
-import { MenuState } from './store/menu.state';
-import { MenuService } from './services/dyn-menu.service';
-import { MenuBuilder } from './services/dyn-menu.builder';
+import { MenuState } from '../dyn-base/store/menu.state';
+import { BaseModule } from '../dyn-base/dyn-base.module';
 
-const components = [
-    MenuComponent,
-    MenuItemComponent,
-    SubMenuComponent,
+export const components = [
     FooterComponent,
     HomeComponent,
     PostAuthComponent,
@@ -54,7 +47,7 @@ const components = [
 @NgModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   declarations: [
-    components,
+    ...components,
     TruncatePipe,
   ],
   imports: [
@@ -64,6 +57,7 @@ const components = [
     NgxsModule.forFeature([
       MenuState
     ]),
+    BaseModule,
     BoardModule,
     BrowserModule,
     FormsModule,
@@ -75,15 +69,14 @@ const components = [
     NgZorroAntdModule.forRoot(),
   ],
   exports: [
-    components,
+    ...components,
+    BaseModule,
+    BoardModule,
     TeamModule,
     AuthModule,
     TruncatePipe
   ],
-  providers: [
-    MenuService,
-    MenuBuilder
-  ]
+  providers: []
 })
 export class ShellModule {
 }

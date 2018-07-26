@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
-import * as menuActions from '../../store/menu.actions';
+import * as menuActions from '../store/menu.actions';
 
-import { DynMenuItem } from '../../store/menu.model';
+import { DynMenuItem } from '../store/menu.model';
 
 @Component({
   selector: 'dyn-menu-item',

@@ -20,7 +20,7 @@ export class MenuService {
     ) {
       this.afAuth.authState.subscribe(u => {
           this.userInfo = u
-          this.collectionName = this.userInfo.uid + '-menu-folders';
+          this.collectionName = 'menu-folders::' + this.userInfo.uid ;
         });
    }
 

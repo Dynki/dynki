@@ -5,7 +5,7 @@ import { BoardStateModel, IBoard } from './board.model';
 import { NzModalService } from 'ng-zorro-antd';
 import { DynChooseBoardTypeComponent } from '../components/dyn-choose-board.component';
 import { BoardService } from '../services/board.service';
-import * as menuActions from '../../dyn-shell/store/menu.actions';
+import * as menuActions from '../../dyn-base/store/menu.actions';
 
 @State<BoardStateModel>({
     name: 'board',
@@ -60,7 +60,7 @@ export class BoardState {
     @Action(boardActions.CreateBoard)
     createBoard(ctx: StateContext<BoardStateModel>, event: boardActions.CreateBoard) {
         this.modalService.closeAll();
-        this.boardService.createBoard('scratch');
+        this.boardService.createBoard(event.payload + ' 1');
     }
 
 }

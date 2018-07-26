@@ -1,5 +1,5 @@
 import { DynMenuButton, DynMenuItem, MenuItem } from '../store/menu.model';
-import { Injectable } from '../../../../node_modules/@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class MenuBuilder {

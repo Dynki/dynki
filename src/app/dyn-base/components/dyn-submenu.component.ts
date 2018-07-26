@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngxs/store';
 
-import { DynMenuItem } from '../../store/menu.model';
+import { DynMenuItem } from '../store/menu.model';
 
 @Component({
   selector: 'dyn-sub-menu',

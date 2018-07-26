@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { DynMenu } from '../../dyn-shell/store/menu.model';
+import { Observable } from 'rxjs';
+
+import { DynMenu } from '../../dyn-base/store/menu.model';
+import { MenuState } from '../../dyn-base/store/menu.state';
 import * as boardActions from '../store/board.actions';
+import { Select, Store } from '@ngxs/store';
+import * as menuActions from '../../dyn-base/store/menu.actions';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'dyn-choose-board',
@@ -8,14 +14,19 @@ import * as boardActions from '../store/board.actions';
 })
 export class DynChooseBoardTypeComponent implements OnInit {
 
-  menu: DynMenu;
+  @Select(MenuState.getMenu('Choose-Template'))
+  public menu$: Observable<DynMenu>;
+  public menu: DynMenu;
 
-  constructor() {
-  }
+  constructor(private store: Store) {}
 
   ngOnInit() {
+    this.menu$.pipe(
+      take(1)
+    ).subscribe(m => console.log('Menu!!!:::', m));
+
     this.menu = {
-      title: 'Choose Template',
+      title: 'Choose-Template',
       items: [{
         title: 'Classic Templates',
         expanded: true,
@@ -25,7 +36,7 @@ export class DynChooseBoardTypeComponent implements OnInit {
           button: {
             caption: 'Select',
             title: 'Use this template',
-            clickAction: new boardActions.CreateBoard('scratch'),
+            clickAction: new boardActions.CreateBoard('Scratch'),
             icon: undefined
           },
           folders: false
@@ -82,5 +93,7 @@ export class DynChooseBoardTypeComponent implements OnInit {
         }]
       }]
     }
+    this.store.dispatch(new menuActions.LoadItems(this.menu));
   }
+
 }
