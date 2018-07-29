@@ -6,6 +6,7 @@ export interface DynMenu {
 }
 
 export interface DynMenuItem {
+    id?: string;
     title: string;
     icon?: string;
     button?: DynMenuButton;

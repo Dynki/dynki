@@ -1,0 +1,9 @@
+<ul class="menu__folder-item" (mouseenter)="buttonVisible=true" (mouseleave)="buttonVisible=false">
+    <li nz-menu-item style="height:40px;">
+        <i *ngIf="folderItem.icon" [attr.class]="folderItem.icon"></i>
+        <span [hidden]="editState">{{folderItem.title}}</span>
+        <input [hidden]="!editState" nz-input class="menu__folder-item__input" (blur)="editFolder(folderItem)" [(ngModel)]="folderItem.title">
+    </li>
+    <i (click)="editState=true" [hidden]="!buttonVisible || editState" class="anticon anticon-edit menu__folder-item__edit"></i>
+    <i nz-popconfirm nzTitle="Are you sure delete this folder?" [nzCancelText]="Cancel" [nzOkText]="Confirm" (nzOnConfirm)="deleteFolder(folderItem)" [hidden]="!buttonVisible || editState" class="anticon anticon-delete menu__folder-item__delete"></i>
+</ul>

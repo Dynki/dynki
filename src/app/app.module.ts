@@ -9,6 +9,13 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { SidebarModule } from 'ng-sidebar';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+registerLocaleData(en);
+
+/** config ng-zorro-antd i18n **/
+import { NZ_I18N, en_US } from 'ng-zorro-antd';
+
 import { AppComponent } from './app.component';
 import { ShellModule } from './dyn-shell/dyn-shell.module';
 import { LambdaUtil } from './shared/aws/labmda.util';
@@ -38,7 +45,10 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     NgxsReduxDevtoolsPluginModule.forRoot()
    ],
   bootstrap: [AppComponent],
-  providers: [LambdaUtil]
+  providers: [
+    LambdaUtil,
+    { provide: NZ_I18N, useValue: en_US }
+  ]
 })
 export class AppModule {
 }

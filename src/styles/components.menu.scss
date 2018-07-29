@@ -35,6 +35,23 @@
         }
     }
 
+    &__folder-item {
+        position: relative;
+        &__input {
+            width: 93%!important;
+        }
+        &__edit {
+            position: absolute;
+            top: 14px;
+            right: 30px;
+        }
+        &__delete {
+            position: absolute;
+            top: 14px;
+            right: 10px;
+        }
+    }
+
     &__submenu-item {
 
         position: relative!important;

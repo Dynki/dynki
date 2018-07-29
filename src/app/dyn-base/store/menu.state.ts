@@ -37,6 +37,16 @@ export class MenuState {
         this.menuService.createMenuFolder(event.itemName);
     }
 
+    @Action(menuActions.UpdateFolder)
+    updateFolder(ctx: StateContext<MenuStateModel>, event: menuActions.UpdateFolder) {
+        this.menuService.updateFolder(event.folderItem);
+    }
+
+    @Action(menuActions.DeleteFolder)
+    deleteFolder(ctx: StateContext<MenuStateModel>, event: menuActions.DeleteFolder) {
+        this.menuService.deleteFolder(event.folderItem.id);
+    }
+
     @Action(menuActions.LoadItems)
     loadItems(ctx: StateContext<MenuStateModel>, event: menuActions.LoadItems) {
         const currentMenus = ctx.getState().menus;
@@ -64,7 +74,7 @@ export class MenuState {
     loadFolders(ctx: StateContext<MenuStateModel>) {
         const menus = ctx.getState().menus;
         this.menuService.getFolders().subscribe(folders => {
-
+            console.log('Folders::', folders);
             /**
              * Have to loop through each menu's items and attach the folders that belong to that menu
              */

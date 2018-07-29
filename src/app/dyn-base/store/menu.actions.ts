@@ -4,7 +4,9 @@ export enum MenuActionTypes {
     LOAD_ITEMS      = '[Menu] Load Items',
     LOAD_SUB_ITEMS  = '[Menu] Load Sub Items',
     NEW_MENU_FOLDER = '[Menu] New Folder',
-    LOAD_FOLDERS    = '[Menu] Load Folders'
+    LOAD_FOLDERS    = '[Menu] Load Folders',
+    UPDATE_FOLDER   = '[Menu] Update Folder',
+    DELETE_FOLDER   = '[Menu] Delete Folder'
 };
 
 export class LoadItems {
@@ -27,8 +29,20 @@ export class LoadFolders {
     constructor() { }
 }
 
+export class UpdateFolder {
+    static type = MenuActionTypes.UPDATE_FOLDER
+    constructor(public folderItem: DynMenuItem) { }
+}
+
+export class DeleteFolder {
+    static type = MenuActionTypes.DELETE_FOLDER
+    constructor(public folderItem: DynMenuItem) { }
+}
+
 export type MenuActions =
     LoadItems       |
     LoadSubItems    |
     NewMenuFolder   |
-    LoadFolders;
+    LoadFolders     |
+    UpdateFolder    |
+    DeleteFolder;

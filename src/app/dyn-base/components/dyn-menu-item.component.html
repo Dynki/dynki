@@ -15,7 +15,10 @@
         <i *ngIf="menuitem.icon" [attr.class]="menuitem.icon"></i>
         <span>{{menuitem.title}}</span>
     </span>
-    <dyn-sub-menu *ngFor="let subitem of menuitem.submenu" [subitem]="subitem"></dyn-sub-menu>
+    <div *ngFor="let subitem of menuitem.submenu">
+        <dyn-sub-menu *ngIf="!subitem.isFolder" [subitem]="subitem"></dyn-sub-menu>
+        <dyn-folder-item *ngIf="subitem.isFolder" [folderItem]="subitem"></dyn-folder-item>
+    </div>
     <dyn-sub-menu *ngIf="menuitem.folders" [subitem]="folderitem"></dyn-sub-menu>
 </li>
 <li *ngIf="!menuitem.submenu" nz-menu-item>
