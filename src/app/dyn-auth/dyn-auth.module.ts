@@ -10,7 +10,6 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { LoginComponent, SignupComponent } from './components';
 
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AppMaterialModule } from '../material.module';
 import { AuthenticatedGuard } from './store/authenticated.guard';
 import { NgxsModule } from '@ngxs/store';
 import { AuthState } from './store/auth.state';
@@ -22,7 +21,6 @@ export const COMPONENTS = [LoginComponent, SignupComponent];
   imports: [
     BrowserModule,
     FlexLayoutModule,
-    AppMaterialModule,
     FormsModule,
     ReactiveFormsModule,
     NgZorroAntdModule,

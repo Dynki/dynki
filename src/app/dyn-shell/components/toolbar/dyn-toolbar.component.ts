@@ -1,7 +1,5 @@
-import { Component, Output, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 
-// import { TOGGLE_MENU } from '../../store/reducers/side-menu';
-// import * as fromNav from '../../store/reducers';
 import * as Auth from '../../../dyn-auth/store/auth.actions';
 import { User } from '../../../dyn-auth/store/auth.model';
 
@@ -22,7 +20,6 @@ export class ToolbarComponent implements OnInit {
   app = {
     title: 'Dynki'
   }
-  // isCollapsed = this.store.pipe(select(fromNav.getExpanded));
 
   constructor(private store: Store) { }
 

@@ -1,14 +1,14 @@
-import { DynkiPage } from './app.po';
+import { LoginPage } from './app.po';
 
-describe('gimly App', function() {
-  let page: DynkiPage;
+describe('Dynki App', function() {
+  let page: LoginPage;
 
   beforeEach(() => {
-    page = new DynkiPage();
+    page = new LoginPage();
   });
 
-  it('should display message saying app works', () => {
+  it('should display a heading of log in', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
+    expect(page.getHeadingText()).toEqual('Log In');
   });
 });

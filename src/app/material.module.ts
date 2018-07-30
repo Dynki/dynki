@@ -27,8 +27,10 @@ import {
   MdcTypographyModule,
   MdcAppBarModule,
 } from '@angular-mdc/web';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 @NgModule({
+  imports: [OverlayModule],
   exports: [
     MdcAppBarModule,
     MdcButtonModule,
