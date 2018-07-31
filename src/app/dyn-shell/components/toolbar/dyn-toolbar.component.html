@@ -7,7 +7,7 @@
         </mdc-app-bar-section>
         <mdc-app-bar-section align="end">
             <mdc-menu-anchor #demoanchor>
-                <label class="toolbar__user-profile no-select" (click)="demomenu.open()">{{displayInitial}}</label>
+                <label id="userprofile-icon" class="toolbar__user-profile no-select" (click)="demomenu.open()">{{displayInitial}}</label>
                 <mdc-menu #demomenu (select)="handleMenuSelect($event)" [anchor]="demoanchor" anchorCorner="bottom-start">
                     <mdc-menu-item id="0">My Profile</mdc-menu-item>
                     <mdc-menu-divider></mdc-menu-divider>

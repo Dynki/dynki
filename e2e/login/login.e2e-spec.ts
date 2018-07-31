@@ -47,15 +47,27 @@ describe('Dynki::Login', function() {
     });
   });
 
-  // it('should should stay on login screen if wrong credentials entered', () => {
-  //   page.navigateTo();
-  //   page.setUserName(wrongCredentials.username);
-  //   page.setPassword(wrongCredentials.password);
-  //   page.login().click().then(() => {
-  //     browser.waitForAngular();
-  //     browser.sleep(3000);
-  //     expect(page.getHeadingText()).toEqual('Log In');
-  //   });
-  // });
+  it('should should stay on login screen if wrong credentials entered', () => {
+    page.navigateTo();
+    page.setUserName(credentials.username);
+    page.setPassword(credentials.password);
+    page.login().click().then(() => {
+      browser.waitForAngularEnabled(true);
+      browser.sleep(3000);
+      homePage.userProfileIcon.click().then(() => {
+        homePage.logout.click().then(() => {
+          browser.waitForAngularEnabled(true);
+          browser.sleep(3000);
+          page.setUserName(wrongCredentials.username);
+          page.setPassword(wrongCredentials.password);
+          page.login().click().then(() => {
+            browser.waitForAngular();
+            browser.sleep(3000);
+            expect(page.getHeadingText()).toEqual('Log In');
+          });
+        });
+      });
+    });
+  });
 
 });

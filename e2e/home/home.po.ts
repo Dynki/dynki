@@ -6,6 +6,14 @@ export class HomePage {
     return element(by.id('homeHeading'));
   }
 
+  get userProfileIcon() {
+    return element(by.id('userprofile-icon'));
+  }
+
+  get logout() {
+    return element(by.id('3'));
+  }
+
   navigateTo() {
     return browser.get('/home');
   }
@@ -13,5 +21,6 @@ export class HomePage {
   getHeadingText() {
     return element(by.id('homeHeading')).getText();
   }
+
 
 }
