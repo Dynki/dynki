@@ -3,7 +3,7 @@
   <nz-form-item>
     <nz-form-control>
       <nz-input-group nzPrefixIcon="anticon anticon-user">
-        <input type="text" nz-input formControlName="username" nzRequired placeholder="Username">
+        <input type="text" nz-input formControlName="username" nzRequired placeholder="Username" id="username">
       </nz-input-group>
       <nz-form-explain *ngIf="validateForm.get('username').dirty && validateForm.get('username').errors">Please input your username!</nz-form-explain>
     </nz-form-control>
@@ -11,7 +11,7 @@
   <nz-form-item>
     <nz-form-control>
       <nz-input-group nzPrefixIcon="anticon anticon-lock">
-        <input type="password" nz-input formControlName="password" placeholder="Password" required>
+        <input type="password" nz-input formControlName="password" placeholder="Password" id="password" required>
       </nz-input-group>
       <nz-form-explain *ngIf="validateForm.get('password').dirty && validateForm.get('password').errors">Please input your Password!</nz-form-explain>
     </nz-form-control>
@@ -23,7 +23,7 @@
       </label>
       <a class="login-form-forgot" class="login-form-forgot" (click)="forgot()">Forgot password</a>
       <button nz-button name="loginBtn" [nzLoading]="(pending$ | async)" class="login__button" [nzType]="'primary'" 
-        [nzSize]="'large'" type="submit" aria-label="Log in">Log in</button>
+        [nzSize]="'large'" type="submit" aria-label="Log in" id="loginBtn">Log in</button>
       Or
       <a (click)="register()">register now!</a>
     </nz-form-control>

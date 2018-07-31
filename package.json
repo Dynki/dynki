@@ -2,14 +2,19 @@
   "name": "dynki-log",
   "version": "0.0.0",
   "license": "MIT",
-  "angular-cli": {},
+  "angular-cli": {
+    "environments": {
+      "dev": "environments/environment.ts",
+      "test": "environments/environment.e2e.ts"
+    }
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e -e e2e"
   },
   "private": true,
   "dependencies": {

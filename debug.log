@@ -8,3 +8,7 @@
 [0228/192239:ERROR:node_debugger.cc(86)] Cannot start debugger server
 [0306/142857:ERROR:tcp_listen_socket.cc(76)] Could not bind socket to 127.0.0.1:6004
 [0306/142857:ERROR:node_debugger.cc(86)] Cannot start debugger server
+[0731/080040.279:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0731/080040.280:ERROR:exception_snapshot_win.cc(88)] thread ID 2540 not found in process
+[0731/082526.949:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0731/082526.950:ERROR:exception_snapshot_win.cc(88)] thread ID 18220 not found in process

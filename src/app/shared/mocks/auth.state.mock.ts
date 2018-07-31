@@ -4,7 +4,7 @@ import { Navigate } from '@ngxs/router-plugin';
 import { take, tap } from 'rxjs/operators';
 import { AuthStateModel } from '../../dyn-auth/store/auth.model';
 import * as fromAuth from '../../dyn-auth/store/auth.actions';
-import { Observable, of } from '../../../../node_modules/rxjs';
+import { Observable, of } from 'rxjs';
 
 @State<AuthStateModel>({
     name: 'auth',

@@ -57,7 +57,7 @@ export class AuthState implements NgxsOnInit {
                 ctx.patchState({ initialized: true });
                 if (user) {
                     console.log(`CheckSession: ${user.email} is logged in`);
-                    ctx.dispatch(new fromAuth.LoginSuccess(user));
+                    ctx.dispatch(new fromAuth.CheckSuccess(user));
                     return;
                 }
                 console.log('CheckSession: no user found');
@@ -92,9 +92,18 @@ export class AuthState implements NgxsOnInit {
     setUserStateOnSuccess(ctx: StateContext<AuthStateModel>, event: fromAuth.LoginSuccess) {
         console.log(event);
         ctx.patchState({
+            user: event.payload.user
+        });
+    }
+
+    @Action(fromAuth.CheckSuccess)
+    setUserStateOnCheckSuccess(ctx: StateContext<AuthStateModel>, event: fromAuth.LoginSuccess) {
+        console.log(event);
+        ctx.patchState({
             user: event.payload
         });
     }
+
 
     @Action([fromAuth.LoginFailure, fromAuth.LogoutSuccess])
     setUserStateOnFailure(ctx: StateContext<AuthStateModel>) {
@@ -117,6 +126,12 @@ export class AuthState implements NgxsOnInit {
     @Action(fromAuth.LoginSuccess)
     onLoginSuccess(ctx: StateContext<AuthStateModel>) {
         console.log('onLoginSuccess, navigating to /');
+        ctx.dispatch(new Navigate(['/']));
+    }
+
+    @Action(fromAuth.CheckSuccess)
+    onCheckSuccess(ctx: StateContext<AuthStateModel>) {
+        console.log('onCheckSuccess, navigating to /');
         ctx.dispatch(new Navigate(['/']));
     }
 

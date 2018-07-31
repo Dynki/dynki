@@ -4,9 +4,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { LoginComponent } from './dyn-login.component';
 import { MockAuthState } from '../../../shared/mocks/auth.state.mock';
-import { NgxsModule } from '../../../../../node_modules/@ngxs/store';
+import { NgxsModule } from '@ngxs/store';
 
-import { NgZorroAntdModule } from '../../../../../node_modules/ng-zorro-antd';
+import { NgZorroAntdModule } from 'ng-zorro-antd';
 describe('LoginComponent', () => {
 
   let instance: LoginComponent;

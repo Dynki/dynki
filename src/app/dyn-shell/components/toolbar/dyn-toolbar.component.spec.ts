@@ -8,9 +8,9 @@ import { NgxsModule } from '@ngxs/store';
 
 import { ToolbarComponent } from './dyn-toolbar.component';
 import { MockAuthState } from '../../../shared/mocks/auth.state.mock';
-import { MdcAppBarModule } from '../../../../../node_modules/@angular-mdc/web';
+import { MdcAppBarModule } from '@angular-mdc/web';
 import { OverlayModule, OVERLAY_PROVIDERS } from '@angular/cdk/overlay';
-import { NgZorroAntdModule } from '../../../../../node_modules/ng-zorro-antd';
+import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 describe('ToolbarComponent', () => {
   beforeEach(() => {

@@ -2,6 +2,7 @@ import { Credentials } from './auth.model';
 
 export enum AuthActionTypes {
   CHECK_SESSION     = '[Auth] Check Session',
+  CHECK_SUCCESS     = '[Auth] Check Success',
   LOGIN             = '[Auth] Login Attempt',
   LOGIN_SUCCESS     = '[Auth] Login Success',
   LOGIN_FAILURE     = '[Auth] Login Failure',
@@ -21,6 +22,11 @@ export enum AuthActionTypes {
 
 export class CheckSession {
   static type = AuthActionTypes.CHECK_SESSION;
+  constructor(public payload?: any) {}
+}
+
+export class CheckSuccess {
+  static type = AuthActionTypes.CHECK_SUCCESS;
   constructor(public payload?: any) {}
 }
 
