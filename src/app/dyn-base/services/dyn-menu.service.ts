@@ -30,7 +30,8 @@ export class MenuService {
     const folder = this.mb
     .setTitle('Folder 1')
     .setIsFolder(true)
-    .setIsFolderOf(itemName)
+    .setFoldersAllowed(true)
+    .setParent(itemName)
     .setIcon('anticon anticon-folder-open')
     .build();
 

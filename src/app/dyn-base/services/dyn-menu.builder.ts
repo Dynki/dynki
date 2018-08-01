@@ -6,12 +6,12 @@ export class MenuBuilder {
     private _title: string;
     private _icon: string;
     private _button: DynMenuButton;
-    private _expanded: boolean;
-    private _submenu: Array<DynMenuItem>
-    private _folders: boolean;
+    private _items: Array<DynMenuItem>
     private _isFolder: boolean;
-    private _isFolderOf: string;
+    private _parent: string;
     private _clickAction: any;
+    private _isSelected: boolean;
+    private _foldersAllowed: boolean;
 
     constructor() {}
 
@@ -36,25 +36,18 @@ export class MenuBuilder {
         this._button = value;
         return this;
     }
-    get expanded() {
-        return this._expanded;
-    }
-    setExpanded(value: boolean): this {
-        this._expanded = value;
-        return this;
-    }
-    get submenu() {
-        return this._submenu;
+    get items() {
+        return this._items;
     }
     setSubmenu(value: DynMenuItem[]): this {
-        this._submenu = value;
+        this._items = value;
         return this;
     }
-    get folders() {
-        return this._folders;
+    get isSelected() {
+        return this._isSelected;
     }
-    setFolders(value: boolean): this {
-        this._folders = value;
+    setSelected(value: boolean): this {
+        this._isSelected = value;
         return this;
     }
     get isFolder() {
@@ -64,11 +57,18 @@ export class MenuBuilder {
         this._isFolder = value;
         return this;
     }
-    get isFolderOf() {
-        return this._isFolderOf;
+    get foldersAllowed() {
+        return this._foldersAllowed;
     }
-    setIsFolderOf(value: string): this {
-        this._isFolderOf = value;
+    setFoldersAllowed(value: boolean): this {
+        this._foldersAllowed = value;
+        return this;
+    }
+    get parent() {
+        return this._parent;
+    }
+    setParent(value: string): this {
+        this._parent = value;
         return this;
     }
     get clickAction() {

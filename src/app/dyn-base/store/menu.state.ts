@@ -61,7 +61,7 @@ export class MenuState {
         menus.map(m => {
                 m.items.map(i => {
                     if (i.title === event.title) {
-                        i.submenu = event.items;
+                        i.items = event.items;
                     }
                     return i;
                 });
@@ -80,8 +80,8 @@ export class MenuState {
              */
             menus.map(m => {
                     m.items.map(i => {
-                        if (i.submenu) {
-                            i.submenu = [...i.submenu.filter(s => !s.isFolder), ...folders];
+                        if (i.items) {
+                            i.items = [...i.items.filter(s => !s.isFolder), ...folders];
                         }
                         return i;
                     });

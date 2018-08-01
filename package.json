@@ -43,7 +43,7 @@
     "moment": "^2.21.0",
     "ng-sidebar": "^7.0.1",
     "ng-zorro-antd": "^1.2.0",
-    "ngx-drag-drop": "^2.0.0-rc.1",
+    "ng2-dragula": "^2.0.2",
     "pluralize": "^7.0.0",
     "rxjs": "^6.2.1",
     "rxjs-compat": "^6.2.1",

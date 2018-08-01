@@ -10,18 +10,18 @@
     class="menu__item__button">
         <i [attr.class]="menuitem.button.icon"></i>
 </button>
-<li *ngIf="menuitem.submenu" nz-submenu [nzOpen]="menuitem.expanded" class="menu__item">
+<li *ngIf="menuitem.items" nz-submenu [nzOpen]="menuitem.isSelected" class="menu__item" >
     <span title>
         <i *ngIf="menuitem.icon" [attr.class]="menuitem.icon"></i>
         <span>{{menuitem.title}}</span>
     </span>
-    <div *ngFor="let subitem of menuitem.submenu">
+    <div *ngFor="let subitem of menuitem.items" [dragula]="menuitem.title">
         <dyn-sub-menu *ngIf="!subitem.isFolder" [subitem]="subitem"></dyn-sub-menu>
         <dyn-folder-item *ngIf="subitem.isFolder" [folderItem]="subitem"></dyn-folder-item>
     </div>
-    <dyn-sub-menu *ngIf="menuitem.folders" [subitem]="folderitem"></dyn-sub-menu>
+    <dyn-sub-menu *ngIf="menuitem.foldersAllowed" [subitem]="folderitem"></dyn-sub-menu>
 </li>
-<li *ngIf="!menuitem.submenu" nz-menu-item>
+<li *ngIf="!menuitem.items" nz-menu-item>
     <span title>
         <i *ngIf="menuitem.icon" [attr.class]="menuitem.icon"></i>
         <span>{{menuitem.title}}</span>

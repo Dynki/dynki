@@ -42,63 +42,44 @@ export class SideMenuComponent implements OnInit {
       title: 'Main menu',
       items: [{
         title: 'Inbox',
-        icon: 'anticon anticon-mail',
-        expanded: false,
-        button: undefined,
-        folders: false
+        icon: 'anticon anticon-mail'
       },
       {
         title: 'Boards',
         icon: 'anticon anticon-dashboard',
-        expanded: false,
         button: {
           title: 'New Board',
           caption: '',
           icon: 'anticon anticon-plus',
           clickAction: new boardActions.ChooseBoardType()
         },
-        folders: true,
-        submenu: []
-        //   {
-        //   title: 'New Folder',
-        //   icon: 'anticon anticon-folder-open'
-        // }]
       },
       {
         title: 'Teams',
         icon: 'anticon anticon-appstore',
-        expanded: false,
         button: {
           title: '',
           caption: '',
           icon: 'anticon anticon-plus',
-        },
-        submenu: undefined,
-        folders: true
+        }
       },
       {
         title: 'Projects',
         icon: 'anticon anticon-rocket',
-        expanded: false,
         button: {
           title: '',
           caption: '',
           icon: 'anticon anticon-plus',
-        },
-        submenu: undefined,
-        folders: true
+        }
       },
       {
         title: 'tags',
         icon: 'anticon anticon-tags',
-        expanded: false,
         button: {
           title: '',
           caption: '',
           icon: 'anticon anticon-plus',
-        },
-        submenu: undefined,
-        folders: true
+        }
       }
     ]
     }

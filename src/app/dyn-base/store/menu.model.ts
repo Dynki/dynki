@@ -7,38 +7,38 @@ export interface DynMenu {
 
 export interface DynMenuItem {
     id?: string;
+    parent?: string;
     title: string;
     icon?: string;
     button?: DynMenuButton;
-    expanded?: boolean;
-    submenu?: Array<DynMenuItem>
-    folders?: boolean;
+    items?: Array<DynMenuItem>
     isFolder?: boolean;
-    isFolderOf?: string;
+    isSelected?: boolean;
+    foldersAllowed?: boolean;
     clickAction?: any;
 }
 
 export class MenuItem implements DynMenuItem {
+    parent: string;
     title: string;
     icon: string;
     button: DynMenuButton;
-    expanded: boolean;
-    submenu: Array<DynMenuItem>
-    folders: boolean;
+    items: Array<DynMenuItem>
     isFolder: boolean;
+    isSelected: boolean;
+    foldersAllowed: boolean;
     clickAction: any;
-    isFolderOf: string;
 
     constructor(builder: MenuBuilder) {
+        this.parent = builder.parent;
         this.title = builder.title;
         this.icon = builder.icon;
         this.button = builder.button;
-        this.expanded = builder.expanded;
-        this.submenu = builder.submenu;
-        this.folders = builder.folders;
+        this.items = builder.items;
         this.isFolder = builder.isFolder;
+        this.isSelected = builder.isSelected;
         this.clickAction = builder.clickAction;
-        this.isFolderOf = builder.isFolderOf;
+        this.foldersAllowed = builder.foldersAllowed;
     }
 }
 
