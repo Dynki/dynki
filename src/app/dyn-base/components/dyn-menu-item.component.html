@@ -16,7 +16,7 @@
         <span>{{menuitem.title}}</span>
     </span>
     <div *ngFor="let subitem of menuitem.items" [dragula]="menuitem.title">
-        <dyn-sub-menu *ngIf="!subitem.isFolder" [subitem]="subitem"></dyn-sub-menu>
+        <dyn-sub-menu *ngIf="!subitem.isFolder" [subitem]="subitem" [parentName]="menuitem.title"></dyn-sub-menu>
         <dyn-folder-item *ngIf="subitem.isFolder" [folderItem]="subitem"></dyn-folder-item>
     </div>
     <dyn-sub-menu *ngIf="menuitem.foldersAllowed" [subitem]="folderitem"></dyn-sub-menu>

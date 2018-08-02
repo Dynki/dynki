@@ -25,6 +25,10 @@
     &__item {
         outline: none;
 
+        &--dashed {
+            outline: dashed;
+        }
+
         &__button {
             float: left; 
             left:200px; 

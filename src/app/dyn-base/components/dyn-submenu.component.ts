@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { Store } from '@ngxs/store';
 
 import { DynMenuItem } from '../store/menu.model';
+import { DragulaService } from '../../../../node_modules/ng2-dragula';
+import { Subscription } from '../../../../node_modules/rxjs';
 
 @Component({
   selector: 'dyn-sub-menu',
@@ -9,9 +11,22 @@ import { DynMenuItem } from '../store/menu.model';
 })
 export class SubMenuComponent {
     @Input() subitem: DynMenuItem;
+    @Input() parentName: string;
     buttonVisible: false;
+    subs = new Subscription();
 
-    constructor(private store: Store) { }
+    constructor(private store: Store, private dragulaService: DragulaService) {
+      this.subs.add(dragulaService.drag(this.parentName)
+        .subscribe(({ el }) => {
+          this.addClass(el, 'menu__item--dashed');
+        })
+      );
+      this.subs.add(dragulaService.drop(this.parentName)
+        .subscribe(({ el }) => {
+          this.removeClass(el, 'menu__item--dashed');
+        })
+      );
+    }
 
     itemBtnClick(action: any) {
       this.store.dispatch(action);
@@ -22,4 +37,17 @@ export class SubMenuComponent {
         this.store.dispatch(action);
       }
     }
+
+    private addClass(el: Element, name: string) {
+      if (!el.classList.contains(name)) {
+        el.classList.add(name);
+      }
+    }
+
+    private removeClass(el: Element, name: string) {
+      if (el.classList.contains(name)) {
+        el.classList.remove(name);
+      }
+    }
+
 }
