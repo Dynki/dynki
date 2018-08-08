@@ -6,8 +6,21 @@ export enum MenuActionTypes {
     NEW_MENU_FOLDER = '[Menu] New Folder',
     LOAD_FOLDERS    = '[Menu] Load Folders',
     UPDATE_FOLDER   = '[Menu] Update Folder',
-    DELETE_FOLDER   = '[Menu] Delete Folder'
+    DELETE_FOLDER   = '[Menu] Delete Folder',
+    LOAD_MENU       = '[Menu] Load Menu',
+    UPDATE_MENU     = '[Menu] Update Menu'
 };
+
+export class LoadMenu {
+    static type = MenuActionTypes.LOAD_MENU;
+    constructor(public title: string) { }
+}
+
+export class UpdateMenu {
+    static type = MenuActionTypes.UPDATE_MENU;
+    constructor(public payload: DynMenu) { }
+}
+
 
 export class LoadItems {
     static type = MenuActionTypes.LOAD_ITEMS;
