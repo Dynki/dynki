@@ -1,24 +1,26 @@
 import { MenuBuilder } from '../services/dyn-menu.builder';
 
 export interface DynMenu {
+    id: string;
     title: string;
     items: Array<DynMenuItem>;
 }
 
 export interface DynMenuItem {
-    id?: string;
-    parent?: string;
+    id: string;
+    parent: string;
     title: string;
-    icon?: string;
-    button?: DynMenuButton;
-    items?: Array<DynMenuItem>
-    isFolder?: boolean;
-    isSelected?: boolean;
-    foldersAllowed?: boolean;
-    clickAction?: any;
+    icon: string;
+    button: DynMenuButton;
+    items: Array<DynMenuItem>
+    isFolder: boolean;
+    isSelected: boolean;
+    foldersAllowed: boolean;
+    clickAction: any;
 }
 
 export class MenuItem implements DynMenuItem {
+    id: string;
     parent: string;
     title: string;
     icon: string;
@@ -45,7 +47,7 @@ export class MenuItem implements DynMenuItem {
 export interface DynMenuButton {
     caption: string;
     title: string;
-    type?: string;
+    type: string;
     icon: string;
     clickAction?: any;
 }
@@ -53,4 +55,3 @@ export interface DynMenuButton {
 export interface MenuStateModel {
     menus: Array<DynMenu>;
 }
-

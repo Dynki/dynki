@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreDocument, DocumentReference } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { UserInfo } from 'firebase';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { MenuBuilder } from './dyn-menu.builder';
-import { DynMenuItem } from '../store/menu.model';
+import { DynMenuItem, DynMenu } from '../store/menu.model';
 
 @Injectable()
 export class MenuService {
 
   private userInfo: UserInfo;
   private collectionName: string;
+  private menuCollection: string;
 
   constructor(
       private db: AngularFirestore,
@@ -22,8 +23,42 @@ export class MenuService {
       this.afAuth.authState.subscribe(u => {
           this.userInfo = u
           this.collectionName = 'menu-folders::' + this.userInfo.uid ;
+          this.menuCollection = 'menus::' + this.userInfo.uid ;
         });
    }
+
+  getMenus(): Observable<DynMenu[]> {
+    return this.db.collection<DynMenu>(this.menuCollection).snapshotChanges()
+    .pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data() as DynMenu;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
+  }
+
+  getMenu(menuId: string): Observable<DynMenu> {
+    return this.db.collection<DynMenu>(this.menuCollection).doc(menuId).snapshotChanges()
+    .pipe(
+      map(action => {
+        if (action.payload.exists === false) {
+          return null;
+        } else {
+          const data = action.payload.data() as DynMenu;
+          const id = action.payload.id;
+          return { id, ...data };
+        }
+      })
+    )
+  }
+
+  saveMenu(menu: DynMenu): Promise<DocumentReference> {
+    const data = JSON.parse(JSON.stringify(menu));
+    return this.db.collection(this.menuCollection).add(data);
+  }
 
   createMenuFolder(itemName: string) {
 
