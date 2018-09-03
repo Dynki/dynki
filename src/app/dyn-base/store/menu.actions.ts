@@ -29,7 +29,7 @@ export class LoadItems {
 
 export class LoadSubItems {
     static type = MenuActionTypes.LOAD_SUB_ITEMS;
-    constructor(public title: string, public items: DynMenuItem[]) { }
+    constructor(public title: string, public items: any[]) { }
 }
 
 export class NewMenuFolder {

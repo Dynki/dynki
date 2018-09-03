@@ -17,6 +17,13 @@ export class MenuItemComponent implements OnInit {
 
     ngOnInit() {
       this.folderitem = {
+        id: null,
+        parent: null,
+        button: null,
+        items: null,
+        isFolder: true,
+        isSelected: false,
+        foldersAllowed: true,
         title: 'New Folder',
         icon: 'anticon anticon-folder-add',
         clickAction: new menuActions.NewMenuFolder(this.menuitem.title)

@@ -8,6 +8,7 @@ import { Observable } from 'rxjs/observable';
 import { BoardStateModel } from '../../../dyn-boards/store/board.model';
 import { MenuState } from '../../../dyn-base/store/menu.state';
 import * as menuActions from '../../../dyn-base/store/menu.actions';
+import { MenuBuilder } from '../../../dyn-base/services/dyn-menu.builder';
 
 @Component({
   selector: 'dyn-side-menu',
@@ -21,7 +22,7 @@ export class SideMenuComponent implements OnInit {
 
   public menu: DynMenu;
 
-  constructor(private store: Store, private action$: Actions) {
+  constructor(private store: Store, private action$: Actions, public mb: MenuBuilder) {
     this.menu$.subscribe(m => console.log(m));
     this.action$.pipe(
       ofActionDispatched(menuActions.LoadItems),
@@ -38,52 +39,32 @@ export class SideMenuComponent implements OnInit {
 
   ngOnInit() {
 
+    
+    const newBoardBtn = {
+      title: 'New Board',
+      caption: '',
+      icon: 'anticon anticon-plus',
+      clickAction: new boardActions.ChooseBoardType()
+    };
+
+    const blankAddBtn = {
+      title: '',
+      caption: '',
+      icon: 'anticon anticon-plus',
+    };
+
+    const items: DynMenuItem[] = [
+      this.mb.setTitle('Inbox').setIcon('anticon anticon-mail').build(),
+      this.mb.setTitle('Boards').setIcon('anticon anticon-dashboard').setButton(newBoardBtn).build(),
+      this.mb.setTitle('Teams').setIcon('anticon anticon-appstore').setButton(blankAddBtn).build(),
+      this.mb.setTitle('Projects').setIcon('anticon anticon-rocket').setButton(blankAddBtn).build(),
+      this.mb.setTitle('Tags').setIcon('anticon anticon-tags').setButton(blankAddBtn).build()
+    ]
+
     this.menu = {
       title: 'Main menu',
-      items: [{
-        title: 'Inbox',
-        icon: 'anticon anticon-mail'
-      },
-      {
-        title: 'Boards',
-        icon: 'anticon anticon-dashboard',
-        button: {
-          title: 'New Board',
-          caption: '',
-          icon: 'anticon anticon-plus',
-          clickAction: new boardActions.ChooseBoardType()
-        },
-      },
-      {
-        title: 'Teams',
-        icon: 'anticon anticon-appstore',
-        button: {
-          title: '',
-          caption: '',
-          icon: 'anticon anticon-plus',
-        }
-      },
-      {
-        title: 'Projects',
-        icon: 'anticon anticon-rocket',
-        button: {
-          title: '',
-          caption: '',
-          icon: 'anticon anticon-plus',
-        }
-      },
-      {
-        title: 'tags',
-        icon: 'anticon anticon-tags',
-        button: {
-          title: '',
-          caption: '',
-          icon: 'anticon anticon-plus',
-        }
-      }
-    ]
+      items: items
     }
-
     this.store.dispatch(new menuActions.LoadItems(this.menu));
   }
 

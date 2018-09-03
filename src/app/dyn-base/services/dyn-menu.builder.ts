@@ -13,7 +13,9 @@ export class MenuBuilder {
     private _isSelected: boolean;
     private _foldersAllowed: boolean;
 
-    constructor() {}
+    constructor() {
+        this.reset();
+    }
 
     get title() {
         return this._title;
@@ -79,8 +81,21 @@ export class MenuBuilder {
         return this;
     }
 
-    build(): MenuItem {
-        return new MenuItem(this);
+    reset() {
+        this._title = null;
+        this._icon = null;
+        this._button = null;
+        this._items = null
+        this._isFolder = false;
+        this._parent = null;
+        this._clickAction = null;
+        this._isSelected = false;
+        this._foldersAllowed = false;
     }
+
+    build(): MenuItem {
+        const item = new MenuItem(this);
+        this.reset();
+        return item;
 }
 

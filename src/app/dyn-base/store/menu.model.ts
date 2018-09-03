@@ -1,7 +1,7 @@
 import { MenuBuilder } from '../services/dyn-menu.builder';
 
 export interface DynMenu {
-    id: string;
+    id?: string;
     title: string;
     items: Array<DynMenuItem>;
 }
@@ -20,16 +20,16 @@ export interface DynMenuItem {
 }
 
 export class MenuItem implements DynMenuItem {
-    id: string;
-    parent: string;
-    title: string;
-    icon: string;
-    button: DynMenuButton;
-    items: Array<DynMenuItem>
-    isFolder: boolean;
-    isSelected: boolean;
-    foldersAllowed: boolean;
-    clickAction: any;
+    id = null;
+    parent = null;
+    title = null;
+    icon = null;
+    button = null;
+    items = null;
+    isFolder = false;
+    isSelected = false;
+    foldersAllowed = false;
+    clickAction = null;
 
     constructor(builder: MenuBuilder) {
         this.parent = builder.parent;
@@ -45,10 +45,10 @@ export class MenuItem implements DynMenuItem {
 }
 
 export interface DynMenuButton {
-    caption: string;
-    title: string;
-    type: string;
-    icon: string;
+    caption?: string;
+    title?: string;
+    type?: string;
+    icon?: string;
     clickAction?: any;
 }
 
