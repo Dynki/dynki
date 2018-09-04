@@ -1,16 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { AuthState } from '../../../dyn-auth/store/auth.state';
 import { User } from '../../../dyn-auth/store/auth.model';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs/observable';
 
+import * as menuActions from '../../../dyn-base/store/menu.actions';
+
 @Component({
     selector: 'dyn-post-auth',
     templateUrl: './dyn-post-auth.component.html',
 })
 
-export class PostAuthComponent {
+export class PostAuthComponent implements OnInit {
 
   @Select(AuthState.getUser)
   public user$: Observable<User>;
@@ -18,9 +20,9 @@ export class PostAuthComponent {
   _opened = false;
   isOn: false;
 
-  constructor(private authStore: Store) { }
+  constructor(private store: Store) { }
 
-  private _toggleSidebar() {
-    this._opened = !this._opened;
+  ngOnInit() {
+    this.store.dispatch(new menuActions.InitMenus());
   }
 }

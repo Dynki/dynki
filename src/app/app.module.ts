@@ -40,7 +40,6 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     NgZorroAntdModule,
-    NgxsModule.forRoot([]),
     NgxsRouterPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot()
    ],

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-// import * as fromAuth from '../../dyn-auth/store/reducers';
 import * as Auth from '../../dyn-auth/store/auth.actions';
-import { Store } from '@ngxs/store';
-// import { Store } from '@ngrx/store';
+import * as boardActions from '../../dyn-boards/store/board.actions';
+import * as menuActions from '../../dyn-base/store/menu.actions';
+
+import { Store, Actions, ofActionSuccessful } from '@ngxs/store';
 
 @Component({
   selector: 'dyn-shell',
@@ -13,23 +14,19 @@ import { Store } from '@ngxs/store';
 
 export class ShellComponent implements OnInit {
 
-  _opened = false;
+  constructor(private store: Store, private action$: Actions) {}
 
-  constructor(private store: Store) { }
+  ngOnInit() {
+    this.store.dispatch(new Auth.CheckSession());
 
- ngOnInit() {
-  this.store.dispatch(new Auth.CheckSession());
- }
+    this.action$.pipe(ofActionSuccessful(menuActions.InitMenus))
+      .subscribe(() => this.store.dispatch(new boardActions.GetAllBoards()));
 
- private _toggleSidebar() {
-    console.log('click');
+    this.action$.pipe(ofActionSuccessful(boardActions.GetAllBoards))
+      .subscribe(() => this.store.dispatch(new menuActions.LoadFolders('Main menu')));
 
-    if (this._opened === true) {
-      this._opened = false;
-    } else {
-      this._opened = true;
+    this.action$.pipe(ofActionSuccessful(boardActions.CreateBoard))
+      .subscribe(() => this.store.dispatch(new menuActions.LoadFolders('Main menu')));  
     }
-
-  }
-
 }
+

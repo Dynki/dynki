@@ -32,6 +32,8 @@ import { AppMaterialModule } from '../material.module';
 import { BoardModule } from '../dyn-boards/dyn-board.module';
 import { MenuState } from '../dyn-base/store/menu.state';
 import { BaseModule } from '../dyn-base/dyn-base.module';
+import { BoardState } from '../dyn-boards/store/board.state';
+import { ShellState } from './store/shell.state';
 
 export const components = [
     FooterComponent,
@@ -54,8 +56,10 @@ export const components = [
     AppMaterialModule,
     AuthModule.forRoot(),
     SidebarModule.forRoot(),
-    NgxsModule.forFeature([
-      MenuState
+    NgxsModule.forRoot([
+      ShellState,
+      MenuState,
+      BoardState
     ]),
     BaseModule,
     BoardModule,

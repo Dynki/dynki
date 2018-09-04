@@ -51,6 +51,7 @@ export class AuthState implements NgxsOnInit {
      */
     @Action(fromAuth.CheckSession)
     checkSession(ctx: StateContext<AuthStateModel>) {
+        console.log('Auth::State::checkSession');
         return this.afAuth.authState.pipe(
             take(1),
             tap((user: User) => {

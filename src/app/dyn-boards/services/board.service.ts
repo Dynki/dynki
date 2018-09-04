@@ -25,10 +25,12 @@ export class BoardService {
   }
 
   getBoards(): Observable<IBoard[]> {
+    console.log('Board::Service::getBoards');
     return this.db.collection<IBoard>(this.collectionName).valueChanges();
   }
 
   getBoard(boardId: string): Observable<IBoard[]> {
+    console.log('Board::Service::getBoard');
     return this.db.collection<IBoard>(this.collectionName, ref => ref.where('id', '==', boardId)).valueChanges();
   }
 }

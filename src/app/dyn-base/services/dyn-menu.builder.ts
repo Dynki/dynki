@@ -97,5 +97,5 @@ export class MenuBuilder {
         const item = new MenuItem(this);
         this.reset();
         return item;
+    }
 }
-

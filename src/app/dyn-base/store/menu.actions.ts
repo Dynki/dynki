@@ -1,6 +1,7 @@
 import { DynMenu, DynMenuItem } from './menu.model';
 
 export enum MenuActionTypes {
+    INIT_MENUS      = '[Menu] Init',
     LOAD_ITEMS      = '[Menu] Load Items',
     LOAD_SUB_ITEMS  = '[Menu] Load Sub Items',
     NEW_MENU_FOLDER = '[Menu] New Folder',
@@ -10,6 +11,11 @@ export enum MenuActionTypes {
     LOAD_MENU       = '[Menu] Load Menu',
     UPDATE_MENU     = '[Menu] Update Menu'
 };
+
+export class InitMenus {
+    static type = MenuActionTypes.INIT_MENUS;
+    constructor() { }
+}
 
 export class LoadMenu {
     static type = MenuActionTypes.LOAD_MENU;
@@ -39,7 +45,7 @@ export class NewMenuFolder {
 
 export class LoadFolders {
     static type = MenuActionTypes.LOAD_FOLDERS
-    constructor() { }
+    constructor(public title: string) { }
 }
 
 export class UpdateFolder {
@@ -53,6 +59,7 @@ export class DeleteFolder {
 }
 
 export type MenuActions =
+    InitMenus       |
     LoadItems       |
     LoadSubItems    |
     NewMenuFolder   |

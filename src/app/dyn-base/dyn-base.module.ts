@@ -23,9 +23,6 @@ export const COMPONENTS = [FolderItemComponent, MenuComponent, MenuItemComponent
     CommonModule,
     FormsModule,
     DragulaModule.forRoot(),
-    NgxsModule.forFeature([
-      MenuState
-    ]),
     NgZorroAntdModule,
   ],
   declarations: [...COMPONENTS],

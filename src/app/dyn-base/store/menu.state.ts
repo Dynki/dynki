@@ -27,11 +27,16 @@ export class MenuState {
     constructor(
         private menuService: MenuService,
         private menuBuilder: MenuBuilder
-    ) { }
+    ) {}
 
     /**
      * Commands
      */
+    @Action(menuActions.InitMenus)
+    initMenus(ctx: StateContext<MenuStateModel>) {
+        this.menuService.initialiseMenus();
+    }
+
     @Action(menuActions.NewMenuFolder)
     newMenuFolder(ctx: StateContext<MenuStateModel>, event: menuActions.NewMenuFolder) {
         this.menuService.createMenuFolder(event.itemName);
@@ -51,13 +56,14 @@ export class MenuState {
     loadItems(ctx: StateContext<MenuStateModel>, event: menuActions.LoadItems) {
         const currentMenus = ctx.getState().menus;
         const updatedMenus = [...currentMenus.filter(m => m.title !== event.payload.title), event.payload]
-        console.log('UpodatedMenus::', updatedMenus);
-        ctx.patchState({ menus: updatedMenus })
+        console.log('UpdatedMenus::', updatedMenus);
+        ctx.patchState({ menus: updatedMenus });
     }
 
     @Action(menuActions.LoadSubItems)
     loadSubItems(ctx: StateContext<MenuStateModel>, event: menuActions.LoadSubItems) {
         const menus = ctx.getState().menus;
+        console.log('Menus::', menus);
         menus.map(m => {
                 m.items.map(i => {
                     if (i.title === event.title) {
@@ -71,14 +77,16 @@ export class MenuState {
     }
 
     @Action(menuActions.LoadFolders)
-    loadFolders(ctx: StateContext<MenuStateModel>) {
+    loadFolders(ctx: StateContext<MenuStateModel>, event: menuActions.LoadFolders) {
         const menus = ctx.getState().menus;
         this.menuService.getFolders().subscribe(folders => {
             console.log('Folders::', folders);
             /**
              * Have to loop through each menu's items and attach the folders that belong to that menu
              */
-            menus.map(m => {
+            menus
+            .filter(m => m.title === event.title)
+            .map(m => {
                     m.items.map(i => {
                         if (i.items) {
                             i.items = [...i.items.filter(s => !s.isFolder), ...folders];
@@ -89,8 +97,6 @@ export class MenuState {
             });
             ctx.patchState({ menus });
         });
-
-
     }
 
     /**

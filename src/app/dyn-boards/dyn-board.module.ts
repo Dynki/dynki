@@ -15,9 +15,6 @@ export const COMPONENTS = [DynChooseBoardTypeComponent];
   imports: [
     BaseModule,
     CommonModule,
-    NgxsModule.forFeature([
-      BoardState
-    ]),
     NgZorroAntdModule,
   ],
   declarations: COMPONENTS,
