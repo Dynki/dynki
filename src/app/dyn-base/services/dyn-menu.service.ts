@@ -40,7 +40,7 @@ export class MenuService {
       map(actions => {
         return actions.map(a => {
           const data = a.payload.doc.data() as DynMenu;
-          const id = a.payload.doc.id;
+          const id = a.payload.doc.data().id;
           return { id, ...data };
         });
       })

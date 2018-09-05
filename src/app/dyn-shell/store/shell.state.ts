@@ -1,4 +1,4 @@
-import { State } from '../../../../node_modules/@ngxs/store';
+import { State } from '@ngxs/store';
 import { ShellStateModel } from './shell.model';
 import { MenuState } from '../../dyn-base/store/menu.state';
 import { BoardState } from '../../dyn-boards/store/board.state';

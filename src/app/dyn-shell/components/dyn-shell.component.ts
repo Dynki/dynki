@@ -26,7 +26,7 @@ export class ShellComponent implements OnInit {
       .subscribe(() => this.store.dispatch(new menuActions.LoadFolders('Main menu')));
 
     this.action$.pipe(ofActionSuccessful(boardActions.CreateBoard))
-      .subscribe(() => this.store.dispatch(new menuActions.LoadFolders('Main menu')));  
+      .subscribe(() => this.store.dispatch(new menuActions.LoadFolders('Main menu')));
     }
 }
 

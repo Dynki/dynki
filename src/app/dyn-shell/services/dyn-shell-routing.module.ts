@@ -5,6 +5,7 @@ import { AuthenticatedGuard } from '../../dyn-auth/store/authenticated.guard';
 
 import { HomeComponent, PostAuthComponent, PreAuthComponent } from '../components';
 import { LoginComponent, SignupComponent } from '../../dyn-auth/components';
+import { DynBoardComponent } from '../../dyn-boards/components/dyn-board.component';
 
 const appRoutes: Routes = [
   {
@@ -20,7 +21,8 @@ const appRoutes: Routes = [
     canActivate: [AuthenticatedGuard],
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'home', component: HomeComponent }
+      { path: 'home', component: HomeComponent },
+      { path: 'board/:boardId', component: DynBoardComponent}
     ]
   }
 
