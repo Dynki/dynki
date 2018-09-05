@@ -6,8 +6,9 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { CommonModule } from '@angular/common';
 import { BoardService } from './services/board.service';
 import { BaseModule } from '../dyn-base/dyn-base.module';
+import { DynBoardComponent } from './components/dyn-board.component';
 
-export const COMPONENTS = [DynChooseBoardTypeComponent];
+export const COMPONENTS = [DynChooseBoardTypeComponent, DynBoardComponent];
 
 @NgModule({
   entryComponents: [DynChooseBoardTypeComponent],

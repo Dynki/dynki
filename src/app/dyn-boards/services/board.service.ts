@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { UserInfo } from 'firebase';
 
 import { Board, IBoard } from '../store/board.model';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class BoardService {
@@ -26,11 +27,20 @@ export class BoardService {
 
   getBoards(): Observable<IBoard[]> {
     console.log('Board::Service::getBoards');
-    return this.db.collection<IBoard>(this.collectionName).valueChanges();
+    return this.db.collection<IBoard>(this.collectionName).snapshotChanges()
+    .pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data() as Board;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    )
   }
 
-  getBoard(boardId: string): Observable<IBoard[]> {
+  getBoard(boardId: string): AngularFirestoreDocument<IBoard> {
     console.log('Board::Service::getBoard');
-    return this.db.collection<IBoard>(this.collectionName, ref => ref.where('id', '==', boardId)).valueChanges();
+    return this.db.collection<IBoard>(this.collectionName).doc(boardId);
   }
 }

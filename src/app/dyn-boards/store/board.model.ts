@@ -24,6 +24,7 @@ export interface IBoardEntity {
 
 export interface BoardStateModel {
     boards: Array<IBoard>;
+    currentBoard: IBoard;
 }
 
 export class Board implements IBoard {

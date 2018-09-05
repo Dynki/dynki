@@ -6,11 +6,13 @@ import { NzModalService } from 'ng-zorro-antd';
 import { DynChooseBoardTypeComponent } from '../components/dyn-choose-board.component';
 import { BoardService } from '../services/board.service';
 import * as menuActions from '../../dyn-base/store/menu.actions';
+import { MenuBuilder } from '../../dyn-base/services/dyn-menu.builder';
 
 @State<BoardStateModel>({
     name: 'board',
     defaults: {
-        boards: []
+        boards: [],
+        currentBoard: undefined
     }
 })
 export class BoardState {
@@ -26,7 +28,8 @@ export class BoardState {
     constructor(
         private store: Store,
         private modalService: NzModalService,
-        private boardService: BoardService
+        private boardService: BoardService,
+        private mb: MenuBuilder
     ) { }
 
     /**
@@ -50,9 +53,24 @@ export class BoardState {
         this.boardService.getBoards().subscribe(boards => {
             console.log('Board::State::getAllBoards::Subscribe');
 
-            ctx.patchState({ boards });
-            ctx.dispatch(new menuActions.LoadSubItems('Boards', boards.map(b => ({ title: b.description }))));
+            ctx.patchState({ boards: boards });
+            ctx.dispatch(new menuActions.LoadSubItems('Boards',
+                boards.map(b => {
+                    return this.mb.setTitle(b.description)
+                        .setClickAction(new boardActions.GetBoard(b.id))
+                        .build();
+            })));
+
             ctx.dispatch(new menuActions.LoadFolders('Main menu'))
+        });
+    }
+
+    @Action(boardActions.GetBoard)
+    getBoard(ctx: StateContext<BoardStateModel>, event: boardActions.GetBoard) {
+        this.boardService.getBoard(event.boardId).valueChanges().subscribe(currentBoard => {
+            console.log('Board::State::getAllBoards::Subscribe');
+
+            ctx.patchState({ currentBoard: currentBoard });
         });
     }
 

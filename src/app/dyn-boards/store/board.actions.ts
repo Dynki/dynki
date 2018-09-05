@@ -23,6 +23,11 @@ export class GetAllBoards {
     constructor() {}
 }
 
+export class GetBoard {
+    static type = BoardActionTypes.GET_BOARD
+    constructor(public boardId: string) {}
+}
+
 export type BoardActions =
     ChooseBoardType |
     CreateBoard |
