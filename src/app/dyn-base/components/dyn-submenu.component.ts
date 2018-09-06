@@ -2,8 +2,8 @@ import { Component, Input } from '@angular/core';
 import { Store } from '@ngxs/store';
 
 import { DynMenuItem } from '../store/menu.model';
-import { DragulaService } from '../../../../node_modules/ng2-dragula';
-import { Subscription } from '../../../../node_modules/rxjs';
+import { DragulaService } from 'ng2-dragula';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'dyn-sub-menu',

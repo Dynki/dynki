@@ -2,16 +2,17 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { DynMenu } from '../../dyn-base/store/menu.model';
-import { MenuState } from '../../dyn-base/store/menu.state';
+import { BoardState } from '../../dyn-boards/store/board.state';
 import { Select } from '@ngxs/store';
 
 @Component({
-  selector: 'dyn-choose-board',
-  templateUrl: './dyn-choose-board.component.html'
+  selector: 'dyn-board',
+  templateUrl: './dyn-board.component.html'
 })
 export class DynBoardComponent {
 
-  public menu$: Observable<DynMenu>;
+  @Select(BoardState.getCurrentBoard)
+  public board$: Observable<DynMenu>;
 
   constructor() { }
 }

@@ -7,6 +7,7 @@ import { DynChooseBoardTypeComponent } from '../components/dyn-choose-board.comp
 import { BoardService } from '../services/board.service';
 import * as menuActions from '../../dyn-base/store/menu.actions';
 import { MenuBuilder } from '../../dyn-base/services/dyn-menu.builder';
+import { Navigate } from '@ngxs/router-plugin';
 
 @State<BoardStateModel>({
     name: 'board',
@@ -23,6 +24,11 @@ export class BoardState {
     @Selector()
     static getBoards(state: BoardStateModel): IBoard[] {
         return state.boards;
+    }
+
+    @Selector()
+    static getCurrentBoard(state: BoardStateModel): IBoard {
+        return state.currentBoard;
     }
 
     constructor(
@@ -57,7 +63,7 @@ export class BoardState {
             ctx.dispatch(new menuActions.LoadSubItems('Boards',
                 boards.map(b => {
                     return this.mb.setTitle(b.description)
-                        .setClickAction(new boardActions.GetBoard(b.id))
+                        .setClickAction(new boardActions.ViewBoard(b.id))
                         .build();
             })));
 
@@ -72,6 +78,11 @@ export class BoardState {
 
             ctx.patchState({ currentBoard: currentBoard });
         });
+    }
+
+    @Action(boardActions.GetBoard)
+    viewBoard(ctx: StateContext<BoardStateModel>, event: boardActions.GetBoard) {
+        ctx.dispatch(new Navigate(['/board/' + event.boardId ]));
     }
 
     /**

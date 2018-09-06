@@ -5,7 +5,8 @@ export enum BoardActionTypes {
   DELETE_BOARD       = '[Board] Delete Board',
   GET_BOARD          = '[Board] Get Board',
   GET_ALL_BOARDS     = '[Board] Get All Boards',
-  GET_BOARD_TYPES    = '[Board] Get Board Types'
+  GET_BOARD_TYPES    = '[Board] Get Board Types',
+  VIEW_BOARD         = '[Board] View Board'
 };
 
 export class ChooseBoardType {
@@ -28,9 +29,16 @@ export class GetBoard {
     constructor(public boardId: string) {}
 }
 
+export class ViewBoard {
+    static type = BoardActionTypes.GET_BOARD
+    constructor(public boardId: string) {}
+}
+
 export type BoardActions =
     ChooseBoardType |
-    CreateBoard |
-    GetAllBoards;
+    CreateBoard     |
+    GetAllBoards    |
+    GetBoard        |
+    ViewBoard;
 
 

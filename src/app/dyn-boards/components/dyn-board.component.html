@@ -1,1 +1,3 @@
-<h1>Board</h1>
+<div *ngIf="board$ | async as board">
+    <dyn-board-detail [board]="board"></dyn-board-detail>
+</div>

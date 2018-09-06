@@ -1,6 +1,6 @@
 import { LoginPage } from './login.po';
 import { HomePage } from '../home/home.po';
-import { protractor, browser } from '../../node_modules/protractor';
+import { protractor, browser } from 'protractor';
 
 describe('Dynki::Login', function() {
   let page: LoginPage;
