@@ -21,9 +21,9 @@ import { ShellModule } from './dyn-shell/dyn-shell.module';
 import { LambdaUtil } from './shared/aws/labmda.util';
 import { environment } from 'environments/environment';
 import { AppMaterialModule } from './material.module';
-import { NgxsModule } from '@ngxs/store';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 
 @NgModule({
   declarations: [
@@ -41,7 +41,8 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     AngularFirestoreModule,
     NgZorroAntdModule,
     NgxsRouterPluginModule.forRoot(),
-    NgxsReduxDevtoolsPluginModule.forRoot()
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    NgxsFormPluginModule.forRoot()
    ],
   bootstrap: [AppComponent],
   providers: [

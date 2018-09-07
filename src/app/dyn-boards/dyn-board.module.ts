@@ -6,7 +6,9 @@ import { BoardService } from './services/board.service';
 import { BaseModule } from '../dyn-base/dyn-base.module';
 import { DynBoardComponent } from './components/dyn-board.component';
 import { DynBoardDetailComponent } from './components/dyn-board-detail.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxsFormPluginModule } from '@ngxs/form-plugin';
+​
 export const COMPONENTS = [DynChooseBoardTypeComponent, DynBoardComponent, DynBoardDetailComponent];
 
 @NgModule({
@@ -15,7 +17,10 @@ export const COMPONENTS = [DynChooseBoardTypeComponent, DynBoardComponent, DynBo
   imports: [
     BaseModule,
     CommonModule,
-    NgZorroAntdModule
+    NgZorroAntdModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgxsFormPluginModule
   ],
   declarations: COMPONENTS,
   exports: COMPONENTS,

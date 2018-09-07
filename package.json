@@ -33,6 +33,7 @@
     "@angular/router": "^6.0.5",
     "@material/textfield": "^0.35.1",
     "@ngxs/devtools-plugin": "^3.2.0",
+    "@ngxs/form-plugin": "^3.2.0",
     "@ngxs/router-plugin": "^3.1.4",
     "@ngxs/store": "^3.2.0",
     "@types/pluralize": "0.0.28",

@@ -13,7 +13,13 @@ import { Navigate } from '@ngxs/router-plugin';
     name: 'board',
     defaults: {
         boards: [],
-        currentBoard: undefined
+        currentBoard: undefined,
+        boardForm: {
+            model: undefined,
+            dirty: false,
+            status: '',
+            errors: {}
+        }
     }
 })
 export class BoardState {
@@ -73,10 +79,14 @@ export class BoardState {
 
     @Action(boardActions.GetBoard)
     getBoard(ctx: StateContext<BoardStateModel>, event: boardActions.GetBoard) {
+        const state = ctx.getState();
         this.boardService.getBoard(event.boardId).valueChanges().subscribe(currentBoard => {
             console.log('Board::State::getAllBoards::Subscribe');
 
-            ctx.patchState({ currentBoard: currentBoard });
+            ctx.patchState({ currentBoard: currentBoard, boardForm: {
+                ...state.boardForm,
+                model: currentBoard
+            }});
         });
     }
 

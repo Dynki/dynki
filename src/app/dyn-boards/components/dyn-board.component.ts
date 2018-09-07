@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { DynMenu } from '../../dyn-base/store/menu.model';
 import { BoardState } from '../../dyn-boards/store/board.state';
 import { Select } from '@ngxs/store';
+import { Board } from '../store/board.model';
 
 @Component({
   selector: 'dyn-board',
@@ -12,7 +12,7 @@ import { Select } from '@ngxs/store';
 export class DynBoardComponent {
 
   @Select(BoardState.getCurrentBoard)
-  public board$: Observable<DynMenu>;
+  public board$: Observable<Board>;
 
   constructor() { }
 }

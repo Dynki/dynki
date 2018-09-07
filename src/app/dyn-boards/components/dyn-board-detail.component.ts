@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'dyn-board-detail',
@@ -8,5 +9,9 @@ export class DynBoardDetailComponent {
 
     @Input() board;
 
-    constructor() { }
+    boardForm = this.formBuilder.group({
+      description: ''
+    })
+
+    constructor(private formBuilder: FormBuilder) { }
 }

@@ -1,1 +1,4 @@
 <div>{{ board.description }}</div>
+<form [formGroup]="boardForm" ngxsForm="boards.boardForm">
+    <input type="text" formControlName="descripton"/>
+</form>

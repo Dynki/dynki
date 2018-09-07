@@ -25,6 +25,12 @@ export interface IBoardEntity {
 export interface BoardStateModel {
     boards: Array<IBoard>;
     currentBoard: IBoard;
+    boardForm: {
+        model: any;
+        dirty: boolean;
+        status: string;
+        errors: Object;
+    }
 }
 
 export class Board implements IBoard {
