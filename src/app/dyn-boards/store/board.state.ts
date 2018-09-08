@@ -37,6 +37,11 @@ export class BoardState {
         return state.currentBoard;
     }
 
+    @Selector()
+    static boardForm(state: BoardStateModel) {
+        return state.boardForm;
+    }
+
     constructor(
         private store: Store,
         private modalService: NzModalService,
