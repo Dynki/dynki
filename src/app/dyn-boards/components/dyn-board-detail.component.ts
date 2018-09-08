@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Board } from '../store/board.model';
 
 @Component({
   selector: 'dyn-board-detail',
@@ -7,11 +8,14 @@ import { FormBuilder } from '@angular/forms';
 })
 export class DynBoardDetailComponent {
 
-    @Input() board;
+    @Input() board: Board;
 
     boardForm = this.formBuilder.group({
       description: ''
-    })
+    });
 
-    constructor(private formBuilder: FormBuilder) { }
+    constructor(private formBuilder: FormBuilder) {
+      this.boardForm = new FormGroup(this.boardForm.controls, { updateOn: 'blur' });
+      this.boardForm.valueChanges.subscribe(e => console.log(e));
+    }
 }
