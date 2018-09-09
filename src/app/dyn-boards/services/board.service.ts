@@ -30,7 +30,7 @@ export class BoardService {
     return this.db.collection<IBoard>(this.collectionName).snapshotChanges()
     .pipe(
       map(actions => {
-        return actions.map(a => {
+        return actions.map((a: any) => {
           const data = a.payload.doc.data() as Board;
           const id = a.payload.doc.id;
           return { id, ...data };
@@ -39,8 +39,22 @@ export class BoardService {
     )
   }
 
-  getBoard(boardId: string): AngularFirestoreDocument<IBoard> {
+  getBoard(boardId: string): Observable<IBoard> {
     console.log('Board::Service::getBoard');
-    return this.db.collection<IBoard>(this.collectionName).doc(boardId);
+    return this.db.collection<IBoard>(this.collectionName).doc(boardId).snapshotChanges()
+    .pipe(
+      map(b => {
+        console.log('Board::Service::getBoard::b', b);
+        const data = b.payload.data() as Board;
+        const id = b.payload.id;
+
+        return { id, ...data };
+      })
+    );
   }
+
+  updateBoard(board: Board) {
+    this.db.collection(this.collectionName).doc(board.id).set(board);
+  }
+
 }

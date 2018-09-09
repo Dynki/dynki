@@ -1,3 +1,5 @@
+import { Board } from './board.model';
+
 export enum BoardActionTypes {
   CHOOSE_BOARD_TYPE  = '[Board] Choose Type',
   CREATE_BOARD       = '[Board] Create Board',
@@ -34,11 +36,17 @@ export class ViewBoard {
     constructor(public boardId: string) {}
 }
 
+export class UpdateBoard {
+    static type = BoardActionTypes.UPDATE_BOARD
+    constructor(public board: Board) {}
+}
+
 export type BoardActions =
     ChooseBoardType |
     CreateBoard     |
     GetAllBoards    |
     GetBoard        |
-    ViewBoard;
+    ViewBoard       |
+    UpdateBoard;
 
 

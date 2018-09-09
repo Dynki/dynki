@@ -52,6 +52,12 @@ export class BoardState {
     /**
      * Commands
      */
+
+    @Action(boardActions.UpdateBoard)
+    updateFolder(ctx: StateContext<BoardStateModel>, event: boardActions.UpdateBoard) {
+        this.boardService.updateBoard(event.board);
+    }
+
     @Action(boardActions.ChooseBoardType)
     chooseBoardType(ctx: StateContext<BoardStateModel>) {
         this.modalService.create({
@@ -85,7 +91,7 @@ export class BoardState {
     @Action(boardActions.GetBoard)
     getBoard(ctx: StateContext<BoardStateModel>, event: boardActions.GetBoard) {
         const state = ctx.getState();
-        this.boardService.getBoard(event.boardId).valueChanges().subscribe(currentBoard => {
+        this.boardService.getBoard(event.boardId).subscribe(currentBoard => {
             console.log('Board::State::getAllBoards::Subscribe');
 
             ctx.patchState({ currentBoard: currentBoard, boardForm: {
@@ -95,8 +101,8 @@ export class BoardState {
         });
     }
 
-    @Action(boardActions.GetBoard)
-    viewBoard(ctx: StateContext<BoardStateModel>, event: boardActions.GetBoard) {
+    @Action(boardActions.ViewBoard)
+    viewBoard(ctx: StateContext<BoardStateModel>, event: boardActions.ViewBoard) {
         ctx.dispatch(new Navigate(['/board/' + event.boardId ]));
     }
 
