@@ -1,4 +1,3 @@
-<div>{{ board.description }}</div>
 <form [formGroup]="boardForm" ngxsForm="app.board.boardForm">
-    <input type="text" formControlName="description"/>
+    <input nz-input placeholder="Description" nzSize="large" type="text" formControlName="description"/>
 </form>
