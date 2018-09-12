@@ -1,11 +1,12 @@
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { User } from 'firebase/auth';
 import { NzNotificationService } from 'ng-zorro-antd';
 import { Action, Selector, State, StateContext, Store, NgxsOnInit } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
 import { take, tap } from 'rxjs/operators';
 
 import * as fromAuth from './auth.actions';
-import { AuthStateModel, User } from './auth.model';
+import { AuthStateModel } from './auth.model';
 
 @State<AuthStateModel>({
     name: 'auth',
@@ -37,7 +38,12 @@ export class AuthState implements NgxsOnInit {
         return state.pending;
     }
 
-    constructor(private store: Store, private afAuth: AngularFireAuth, private _notification: NzNotificationService) { }
+    constructor (
+        private store: Store,
+        private afAuth: AngularFireAuth,
+        private _notification: NzNotificationService,
+    ) {
+    }
 
     /**
      * Dispatch CheckSession on start
@@ -71,6 +77,7 @@ export class AuthState implements NgxsOnInit {
         console.log('LoginWithEmailAndPassword');
         this.afAuth.auth.signInWithEmailAndPassword(action.payload.username, action.payload.password).then(
             (user: User) => {
+            // (user: UserInfo) => {
                 ctx.dispatch(new fromAuth.LoginSuccess(user));
             })
             .catch(error => {
@@ -165,7 +172,7 @@ export class AuthState implements NgxsOnInit {
 
     @Action(fromAuth.SignUp)
     onSignUp(ctx: StateContext<AuthState>, event: fromAuth.SignUp) {
-        this.afAuth.auth.createUserAndRetrieveDataWithEmailAndPassword(event.payload.username, event.payload.password)
+        this.afAuth.auth.createUserWithEmailAndPassword(event.payload.username, event.payload.password)
             .then(() => ctx.dispatch(new fromAuth.VerificationEmail(this.afAuth.auth.currentUser.reload())))
             .catch((err) => ctx.dispatch(new fromAuth.RegisterError(err)))
     }

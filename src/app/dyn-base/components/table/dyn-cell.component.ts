@@ -7,7 +7,7 @@ import { Component, Input, ChangeDetectorRef, ChangeDetectionStrategy } from '@a
     <span [innerHtml]="value"><span>
     `
 })
-export class DynRowComponent {
+export class DynCellComponent {
 
     @Input() set row(row: any) {
         this._row = row;

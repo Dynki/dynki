@@ -9,7 +9,7 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 import { LoginComponent, SignupComponent } from './components';
 
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthenticatedGuard } from './store/authenticated.guard';
 import { NgxsModule } from '@ngxs/store';
 import { AuthState } from './store/auth.state';

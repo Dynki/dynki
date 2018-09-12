@@ -13,9 +13,10 @@ export class DynBoardDetailComponent implements OnInit {
   @Input() board: Board;
 
   boardForm: FormGroup;
+  rows = [{ description: 'some row' }];
+  columns = [{ model: 'description' }];
 
-  constructor(private formBuilder: FormBuilder, private store: Store) {
-  }
+  constructor(private formBuilder: FormBuilder, private store: Store) {}
 
   ngOnInit() {
     this.boardForm = this.formBuilder.group(this.board);

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument, DocumentReference } from 'angularfire2/firestore';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFirestore, AngularFirestoreDocument, DocumentReference } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { UserInfo } from 'firebase';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';

@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
-import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule } from '@angular/fire';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { SidebarModule } from 'ng-sidebar';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
@@ -22,7 +22,7 @@ import { LambdaUtil } from './shared/aws/labmda.util';
 import { environment } from 'environments/environment';
 import { AppMaterialModule } from './material.module';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 
 @NgModule({

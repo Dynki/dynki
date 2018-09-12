@@ -14,8 +14,23 @@ import { MenuService } from './services/dyn-menu.service';
 import { MenuState } from './store/menu.state';
 import { MenuBuilder } from './services/dyn-menu.builder';
 import { DragulaModule } from 'ng2-dragula';
+import { DynTableContainerComponent } from './components/table/dyn-container..component';
+import { DynHeaderComponent } from './components/table/dyn-header.component';
+import { DynRowComponent } from './components/table/dyn-row.component';
+import { DynTableComponent } from './components/table/dyn-table.component';
+import { DynCellComponent } from './components/table/dyn-cell.component';
 
-export const COMPONENTS = [FolderItemComponent, MenuComponent, MenuItemComponent, SubMenuComponent];
+export const COMPONENTS = [
+  FolderItemComponent,
+  MenuComponent,
+  MenuItemComponent,
+  SubMenuComponent,
+  DynTableContainerComponent,
+  DynHeaderComponent,
+  DynRowComponent,
+  DynTableComponent,
+  DynCellComponent
+]
 
 @NgModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
