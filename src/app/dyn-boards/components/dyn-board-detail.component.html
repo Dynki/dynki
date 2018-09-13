@@ -1,4 +1,5 @@
 <form [formGroup]="boardForm" ngxsForm="app.board.boardForm">
-    <input nz-input placeholder="Description" nzSize="large" type="text" formControlName="description"/>
+    <input class="text--no-border" nz-input placeholder="Description" nzSize="large" type="text" formControlName="description"/>
 </form>
-<dyn-table [rows]="rows" [columns]="columns"></dyn-table>
+<dyn-table-container [row$]="row$" [columns]="columns"></dyn-table-container>
+<!-- <dyn-table [rows]="rows" [columns]="columns"></dyn-table> -->

@@ -1,3 +1,15 @@
+.text {
+    &--no-border {
+        border: none!important;
+        font-size: 30px!important;
+        padding: 0px!important;
+
+        &:hover {
+            border: dashed!important;
+        }
+    }
+}
+
 .choose-board {
     display: grid;
     grid-template-rows: auto;

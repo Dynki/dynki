@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Board } from '../store/board.model';
 import * as boardActions from '../../dyn-boards/store/board.actions';
 import { Store } from '@ngxs/store';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'dyn-board-detail',
@@ -13,8 +14,10 @@ export class DynBoardDetailComponent implements OnInit {
   @Input() board: Board;
 
   boardForm: FormGroup;
-  rows = [{ description: 'some row' }];
-  columns = [{ model: 'description', class: 'text' }];
+  row$ = of([
+    { description: 'Create text edit control', status: 'Pending' },
+    { description: 'add header to columns', status: 'Complete' }]);
+  columns = [{ model: 'description', class: 'text' }, { model: 'status', class: 'text' }];
 
   constructor(private formBuilder: FormBuilder, private store: Store) {}
 
