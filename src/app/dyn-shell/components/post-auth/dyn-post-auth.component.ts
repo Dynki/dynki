@@ -17,9 +17,6 @@ export class PostAuthComponent implements OnInit {
   @Select(AuthState.getUser)
   public user$: Observable<User>;
 
-  _opened = false;
-  isOn: false;
-
   constructor(private store: Store) { }
 
   ngOnInit() {

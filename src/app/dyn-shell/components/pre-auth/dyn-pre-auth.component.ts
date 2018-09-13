@@ -4,9 +4,7 @@ import { Component } from '@angular/core';
     selector: 'dyn-pre-auth',
     templateUrl: './dyn-pre-auth.component.html'
 })
-
 export class PreAuthComponent {
 
-    constructor() {
-    }
+    constructor() {}
 }

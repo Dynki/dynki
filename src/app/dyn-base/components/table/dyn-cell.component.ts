@@ -1,13 +1,15 @@
-import { Component, Input, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'dyn-cell',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <span [innerHtml]="value"><span>
+    <div #cell [innerHtml]="value"><div>
     `
 })
 export class DynCellComponent {
+
+    @ViewChild('cell') cellRef: ElementRef;
 
     @Input() set row(row: any) {
         this._row = row;
@@ -21,6 +23,7 @@ export class DynCellComponent {
     @Input() set column(col: any) {
         this._column = col;
         this.checkCellValue();
+        this.setCellClass(this._column.class);
     };
 
     get column(): any {
@@ -48,5 +51,10 @@ export class DynCellComponent {
 
     valueGetter(row: any, model: any) {
         return row[model];
+    }
+
+    setCellClass(className: string) {
+        const cssClass = 'table__row__cell--' + className
+        this.cellRef.nativeElement.className = cssClass;
     }
 }

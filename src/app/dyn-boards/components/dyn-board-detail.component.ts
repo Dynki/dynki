@@ -14,7 +14,7 @@ export class DynBoardDetailComponent implements OnInit {
 
   boardForm: FormGroup;
   rows = [{ description: 'some row' }];
-  columns = [{ model: 'description' }];
+  columns = [{ model: 'description', class: 'text' }];
 
   constructor(private formBuilder: FormBuilder, private store: Store) {}
 
