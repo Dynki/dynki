@@ -1,14 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'dyn-new-row',
   template: `
-    <div></div>
+    <div class="table__row__new">+ Create new row</div>
     `
 })
 export class DynNewRowComponent {
-
-    @Input() rows: any;
 
     constructor() { }
 }

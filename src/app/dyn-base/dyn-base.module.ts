@@ -19,6 +19,7 @@ import { DynHeaderComponent } from './components/table/dyn-header.component';
 import { DynRowComponent } from './components/table/dyn-row.component';
 import { DynTableComponent } from './components/table/dyn-table.component';
 import { DynCellComponent } from './components/table/dyn-cell.component';
+import { DynNewRowComponent } from './components/table/dyn-new-row.component';
 
 export const COMPONENTS = [
   FolderItemComponent,
@@ -29,7 +30,8 @@ export const COMPONENTS = [
   DynHeaderComponent,
   DynRowComponent,
   DynTableComponent,
-  DynCellComponent
+  DynCellComponent,
+  DynNewRowComponent
 ]
 
 @NgModule({

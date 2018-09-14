@@ -5,8 +5,9 @@ import { Component, Input, OnInit } from '@angular/core';
   template: `
     <div>Table</div>
     <dyn-header [columns]="columns"></dyn-header>
-    <dyn-row *ngFor="let row of rows; index as i; first as isFirst" [row]="row" [columns]="columns"><dyn-row>
-    <dyn-footer><dyn-footer>
+    <dyn-row *ngFor="let row of rows; index as i; first as isFirst" [row]="row" [columns]="columns"></dyn-row>
+    <dyn-new-row></dyn-new-row>
+    <dyn-footer></dyn-footer>
     `
 })
 export class DynTableComponent implements OnInit {
