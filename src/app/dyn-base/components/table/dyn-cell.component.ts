@@ -4,7 +4,9 @@ import { Component, Input, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild
   selector: 'dyn-cell',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div #cell [innerHtml]="value"><div>
+    <div class="table__row__cell__container">
+        <input [(ngModel)]="value" #cell [innerHtml]="value">
+    </div>
     `
 })
 export class DynCellComponent {

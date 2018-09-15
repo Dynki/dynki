@@ -5,8 +5,23 @@
         padding: 0px!important;
 
         &:hover {
+            outline-width: 0px;
             border: dashed!important;
+            border-width: 1px!important;
+            cursor: pointer!important;
         }
+
+        &:focus {
+            outline-width: 0px!important;
+            border: dashed!important;
+            border-width: 1px!important;
+        }
+
+
+    }
+
+    &--no-border {
+        font-size: 10px!important;
     }
 }
 
@@ -43,5 +58,11 @@
     .ant-modal-content {
         height: 100%!important;
         border-radius: 0px;
+    }
+}
+
+.board {
+    &__detail {
+        margin-top: 40px;
     }
 }
