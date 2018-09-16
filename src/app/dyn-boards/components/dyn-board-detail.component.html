@@ -1,5 +1,5 @@
-<form [formGroup]="boardForm" ngxsForm="app.board.boardForm">
-    <input class="text--no-border" nz-input placeholder="Board Title" nzSize="large" type="text" formControlName="title">
+<form class="board__form" [formGroup]="boardForm" ngxsForm="app.board.boardForm">
+    <input class="text__large--no-border board__form__description" nz-input placeholder="Board Title" nzSize="large" type="text" formControlName="title">
     <input class="text--no-border" nz-input placeholder="Add board description" nzSize="small" type="text" formControlName="description">
 </form>
 <div class="board__detail">

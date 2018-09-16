@@ -21,7 +21,7 @@ export class BoardService {
    }
 
   createBoard(type: string) {
-    const data = JSON.parse(JSON.stringify(new Board('Task', type, this.userInfo)));
+    const data = JSON.parse(JSON.stringify(new Board('Task', type, '', this.userInfo)));
     this.db.collection(this.collectionName).add(data);
   }
 

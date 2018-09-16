@@ -13,6 +13,7 @@ export class BaseClass {
 
 export interface IBoard extends BaseClass {
     id: string;
+    title: string;
     description: string;
     type: BoardType;
     entities: Array<IBoardEntity>;
@@ -35,6 +36,7 @@ export interface BoardStateModel {
 
 export class Board implements IBoard {
     id: string;
+    title: string;
     description: string;
     type: BoardType;
     entities: IBoardEntity[];
@@ -44,10 +46,11 @@ export class Board implements IBoard {
     modifiedBy: string;
     modifiedDate: Date;
 
-    constructor(type: BoardType, description: string, userInfo: UserInfo) {
+    constructor(type: BoardType, title: string, description: string, userInfo: UserInfo) {
         this.createdBy = userInfo.uid;
         this.createdDate = moment().toDate();
         this.description = description;
+        this.title = title;
         this.entities = [];
         this.type = type;
     }

@@ -1,7 +1,8 @@
-.text {
+
+.text, .text__large {
     &--no-border {
         border: none!important;
-        font-size: 30px!important;
+        border-radius: 1px!important;
         padding: 0px!important;
 
         &:hover {
@@ -16,13 +17,12 @@
             border: dashed!important;
             border-width: 1px!important;
         }
-
-
     }
 
-    &--no-border {
-        font-size: 10px!important;
-    }
+}
+
+.text__large--no-border {
+    font-size: 30px!important;
 }
 
 .choose-board {
@@ -64,5 +64,14 @@
 .board {
     &__detail {
         margin-top: 40px;
+    }
+
+    &__form {
+        padding: 10px;
+
+        &__description {
+            margin-top: 5px;
+            margin-left: 2px;
+        }
     }
 }

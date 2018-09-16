@@ -79,7 +79,7 @@ export class BoardState {
             ctx.patchState({ boards: boards });
             ctx.dispatch(new menuActions.LoadSubItems('Boards',
                 boards.map(b => {
-                    return this.mb.setTitle(b.description)
+                    return this.mb.setTitle(b.title)
                         .setClickAction(new boardActions.ViewBoard(b.id))
                         .build();
             })));
