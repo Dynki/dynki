@@ -9,19 +9,27 @@
         width: 100%;
 
         &__new {
-            height: 40px;
             align-items: center;
             text-align: left;
-            border: none;
-            border: solid;
-            border-width: 1px;
-            border-color: #70809033;
-            margin-top: 1px;
-            margin-right: 1px;
-            padding: 5px;
-            padding-top: 7px;
-            padding-left: 17px;
             width: 100%;
+
+            input {
+                margin-right: 1px!important;
+                padding-left: 17px!important;
+                margin-top: 1px!important;
+                height: 40px!important;
+                border: none!important;
+                border: solid!important;
+                border-width: 1px!important;
+                border-color: #70809033!important;
+                border-radius: 1px!important;
+
+                &:focus {
+                    outline-width: 0px!important;
+                    box-shadow: none!important;
+                    border-color: #3095DE!important;
+                }        
+            }
         }
 
         dyn-cell {

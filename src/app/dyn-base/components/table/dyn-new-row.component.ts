@@ -1,12 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Store } from '@ngxs/store';
+import * as boardActions from '../../../dyn-boards/store/board.actions';
 
 @Component({
   selector: 'dyn-new-row',
   template: `
-    <div class="table__row__new">+ Create new row</div>
+    <div class="table__row__new">
+        <input nz-input placeholder="+ Create new row" [(ngModel)]="newValue" (blur)="createNewRow()">
+    </div>
     `
 })
 export class DynNewRowComponent {
 
-    constructor() { }
+    newValue: string;
+
+    constructor(private store: Store) { }
+
+    createNewRow() {
+        this.store.dispatch(new boardActions.NewEntity(this.newValue));
+        this.newValue = '';
+    }
 }

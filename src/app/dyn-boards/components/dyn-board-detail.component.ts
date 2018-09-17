@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Board } from '../store/board.model';
+import { Board, IBoardEntity } from '../store/board.model';
 import * as boardActions from '../../dyn-boards/store/board.actions';
-import { Store } from '@ngxs/store';
-import { of } from 'rxjs';
+import { Store, Select } from '@ngxs/store';
+import { of, Observable } from 'rxjs';
+import { BoardState } from '../store/board.state';
 
 @Component({
   selector: 'dyn-board-detail',
@@ -13,11 +14,11 @@ export class DynBoardDetailComponent implements OnInit {
 
   @Input() board: Board;
 
+  @Select(BoardState.getCurrentBoardEntities)
+  public row$: Observable<IBoardEntity[]>;
+
   boardForm: FormGroup;
-  row$ = of([
-    { description: 'Create text edit control', status: 'Pending' },
-    { description: 'add header to columns', status: 'Complete' }]);
-  columns = [{ model: 'description', class: 'text' }, { model: 'status', class: 'text' }];
+  columns = [{ model: 'description', class: 'text' }];
 
   constructor(private formBuilder: FormBuilder, private store: Store) {}
 

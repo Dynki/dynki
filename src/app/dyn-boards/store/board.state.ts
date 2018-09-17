@@ -1,7 +1,7 @@
-import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
+import { Action, Selector, State, StateContext, Store, Actions } from '@ngxs/store';
 
 import * as boardActions from './board.actions';
-import { BoardStateModel, IBoard } from './board.model';
+import { BoardStateModel, IBoard, IBoardEntity } from './board.model';
 import { NzModalService } from 'ng-zorro-antd';
 import { DynChooseBoardTypeComponent } from '../components/dyn-choose-board.component';
 import { BoardService } from '../services/board.service';
@@ -35,6 +35,11 @@ export class BoardState {
     @Selector()
     static getCurrentBoard(state: BoardStateModel): IBoard {
         return state.currentBoard;
+    }
+
+    @Selector()
+    static getCurrentBoardEntities(state: BoardStateModel): IBoardEntity[] {
+        return state.currentBoard.entities;
     }
 
     @Selector()
@@ -104,6 +109,14 @@ export class BoardState {
     @Action(boardActions.ViewBoard)
     viewBoard(ctx: StateContext<BoardStateModel>, event: boardActions.ViewBoard) {
         ctx.dispatch(new Navigate(['/board/' + event.boardId ]));
+    }
+
+    @Action(boardActions.NewEntity)
+    newBoard(ctx: StateContext<BoardStateModel>, event: boardActions.NewEntity) {
+        const currentBoard = ctx.getState().currentBoard;
+        currentBoard.entities.push({ description: event.description });
+
+        this.boardService.updateBoard(currentBoard);
     }
 
     /**
