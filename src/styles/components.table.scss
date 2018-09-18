@@ -8,6 +8,19 @@
         margin-bottom: 2px;
         width: 100%;
 
+        &__delete__icon {
+            padding: 10px;
+            background-color: #EFF1F3;
+            margin: 0px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+
+            &:hover {
+                color: #3095DE;
+            }
+        }
+
         &__new {
             align-items: center;
             text-align: left;

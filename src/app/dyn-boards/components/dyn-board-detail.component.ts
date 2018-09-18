@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Board, IBoardEntity } from '../store/board.model';
 import * as boardActions from '../../dyn-boards/store/board.actions';
@@ -29,5 +29,10 @@ export class DynBoardDetailComponent implements OnInit {
       console.log(board);
       this.store.dispatch(new boardActions.UpdateBoard(board))
     });
+  }
+
+  commitChange(event: KeyboardEvent) {
+    // this.boardForm.setValue(this.boardForm.value);
+    // window.focus();
   }
 }

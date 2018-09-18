@@ -1,6 +1,16 @@
 <form class="board__form" [formGroup]="boardForm" ngxsForm="app.board.boardForm">
-    <input class="text__large--no-border board__form__description" nz-input placeholder="Board Title" nzSize="large" type="text" formControlName="title">
-    <input class="text--no-border" nz-input placeholder="Add board description" nzSize="small" type="text" formControlName="description">
+    <input 
+        (keydown.enter)="commitChange($event)"
+        class="text__large--no-border board__form__description" 
+        nz-input placeholder="Board Title" 
+        nzSize="large" type="text" 
+        formControlName="title">
+    <input 
+        class="text--no-border" 
+        nz-input placeholder="Add board description" 
+        nzSize="small" 
+        type="text" 
+        formControlName="description">
 </form>
 <div class="board__detail">
     <dyn-table-container [row$]="row$" [columns]="columns"></dyn-table-container>
