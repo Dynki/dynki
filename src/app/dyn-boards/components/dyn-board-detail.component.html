@@ -1,6 +1,7 @@
-<form class="board__form" [formGroup]="boardForm" ngxsForm="app.board.boardForm">
+<form class="board__form" [formGroup]="boardForm" ngxsForm="app.board.boardForm" (ngSubmit)="onSubmit(boardForm)">
     <input 
-        (keydown.enter)="commitChange($event)"
+        (blur)="commitChange()"
+        (keyup.enter)="commitChange()"
         class="text__large--no-border board__form__description" 
         nz-input placeholder="Board Title" 
         nzSize="large" type="text" 
@@ -11,6 +12,7 @@
         nzSize="small" 
         type="text" 
         formControlName="description">
+    <button #formsubmit type="submit" hidden="true"></button>
 </form>
 <div class="board__detail">
     <dyn-table-container [row$]="row$" [columns]="columns"></dyn-table-container>
