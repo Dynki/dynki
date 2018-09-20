@@ -13,7 +13,6 @@ import { BoardState } from '../store/board.state';
 export class DynBoardDetailComponent implements OnInit {
 
   @ViewChild('formsubmit') formsubmit: ElementRef;
-
   @Input() board: Board;
 
   @Select(BoardState.getCurrentBoardEntities)
@@ -29,7 +28,6 @@ export class DynBoardDetailComponent implements OnInit {
     this.boardForm = this.formBuilder.group(this.board);
     this.boardForm = new FormGroup(this.boardForm.controls, { updateOn: 'submit' });
     this.boardForm.valueChanges.subscribe(board => {
-      console.log(board);
       this.store.dispatch(new boardActions.UpdateBoard(board))
     });
 

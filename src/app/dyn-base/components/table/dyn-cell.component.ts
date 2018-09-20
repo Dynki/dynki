@@ -1,17 +1,19 @@
 import { Component, Input, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'dyn-cell',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div class="table__row__cell__container">
-        <input [(ngModel)]="value" #cell [innerHtml]="value">
-    </div>
+    <form class="table__row__cell__container">
+        <input (blur)="disaptchAction(event.target.value)" [(ngModel)]="value" #cell [innerHtml]="value">
+    </form>
     `
 })
 export class DynCellComponent {
 
     @ViewChild('cell') cellRef: ElementRef;
+    @Input() action: any;
 
     @Input() set row(row: any) {
         this._row = row;
@@ -36,7 +38,6 @@ export class DynCellComponent {
     private _column: any;
     value: any;
 
-    constructor(private cd: ChangeDetectorRef) { }
 
     checkCellValue() {
         let value = '';
@@ -59,4 +60,13 @@ export class DynCellComponent {
         const cssClass = 'table__row__cell--' + className
         this.cellRef.nativeElement.className = cssClass;
     }
+
+    dispatchAction(value) {
+        this.store.dispatch(this.action);
+    }
+
+    constructor(
+        private cd: ChangeDetectorRef,
+        private store: Store
+    ) { }
 }
