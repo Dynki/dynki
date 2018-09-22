@@ -22,9 +22,12 @@ export class DynBoardDetailComponent implements OnInit {
   boardForm: FormGroup;
   columns = [{ model: 'description', class: 'text' }];
 
+  rowAction: any;
+
   constructor(private formBuilder: FormBuilder, private store: Store) {}
 
   ngOnInit() {
+    this.rowAction = new boardActions.UpdateBoard(this.board);
     this.boardForm = this.formBuilder.group(this.board);
     this.boardForm = new FormGroup(this.boardForm.controls, { updateOn: 'submit' });
     this.boardForm.valueChanges.subscribe(board => {

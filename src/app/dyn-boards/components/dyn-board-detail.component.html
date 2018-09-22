@@ -16,5 +16,5 @@
     <button #formsubmit type="submit" hidden="true"></button>
 </form>
 <div class="board__detail">
-    <dyn-table-container [row$]="row$" [columns]="columns"></dyn-table-container>
+    <dyn-table-container [action]="rowAction" [row$]="row$" [columns]="columns"></dyn-table-container>
 </div>
