@@ -20,6 +20,7 @@ export interface IBoard extends BaseClass {
 }
 
 export interface IBoardEntity {
+    id: string;
     [id: string]: any;
 }
 

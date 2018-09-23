@@ -114,8 +114,17 @@ export class BoardState {
     @Action(boardActions.NewEntity)
     newBoard(ctx: StateContext<BoardStateModel>, event: boardActions.NewEntity) {
         const currentBoard = ctx.getState().currentBoard;
-        currentBoard.entities.push({ description: event.description });
+        const id = currentBoard.entities.length.toString();
+        currentBoard.entities.push({ id, description: event.description });
 
+        this.boardService.updateBoard(currentBoard);
+    }
+
+    @Action(boardActions.UpdateEntity)
+    updateEntity(ctx: StateContext<BoardStateModel>, event: boardActions.UpdateEntity) {
+        const currentBoard = ctx.getState().currentBoard;
+        const entityIndex = currentBoard.entities.findIndex(e => e.id === event.entity.id);
+        currentBoard.entities[entityIndex] = event.entity;
         this.boardService.updateBoard(currentBoard);
     }
 

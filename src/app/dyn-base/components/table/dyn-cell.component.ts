@@ -1,5 +1,6 @@
 import { Component, Input, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
 import { Store } from '@ngxs/store';
+import * as boardActions from '../../../dyn-boards/store/board.actions';
 
 @Component({
   selector: 'dyn-cell',
@@ -61,8 +62,9 @@ export class DynCellComponent {
         this.cellRef.nativeElement.className = cssClass;
     }
 
-    dispatchAction(value) {
-        this.store.dispatch(this.action);
+    dispatchAction() {
+        const updatedRow = {...this.row, ...{ [this.column.model]: this.value } };
+        this.store.dispatch(new boardActions.UpdateEntity(updatedRow));
     }
 
     constructor(

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'dyn-table',
@@ -10,7 +10,7 @@ import { Component, Input, OnInit } from '@angular/core';
     <dyn-footer></dyn-footer>
     `
 })
-export class DynTableComponent implements OnInit {
+export class DynTableComponent implements OnInit, AfterViewInit {
 
     @Input() rows: any;
     @Input() columns: any;
@@ -21,5 +21,9 @@ export class DynTableComponent implements OnInit {
     ngOnInit() {
         console.log('Table::rows', this.rows);
         console.log('Table::columns', this.columns);
+    }
+
+    ngAfterViewInit() {
+        console.log('Table::Action::', this.action);
     }
 }

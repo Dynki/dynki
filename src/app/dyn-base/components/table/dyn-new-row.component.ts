@@ -12,12 +12,14 @@ import * as boardActions from '../../../dyn-boards/store/board.actions';
 })
 export class DynNewRowComponent {
 
-    newValue: string;
+    newValue = '';
 
     constructor(private store: Store) { }
 
     createNewRow() {
-        this.store.dispatch(new boardActions.NewEntity(this.newValue));
-        this.newValue = '';
+        if (this.newValue !== '') {
+            this.store.dispatch(new boardActions.NewEntity(this.newValue));
+            this.newValue = '';
+        }
     }
 }
