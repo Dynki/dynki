@@ -128,6 +128,13 @@ export class BoardState {
         this.boardService.updateBoard(currentBoard);
     }
 
+    @Action(boardActions.RemoveEntity)
+    removeEntity(ctx: StateContext<BoardStateModel>, event: boardActions.RemoveEntity) {
+        const currentBoard = ctx.getState().currentBoard;
+        currentBoard.entities = currentBoard.entities.filter(e => e.id !== event.entity.id);
+        this.boardService.updateBoard(currentBoard);
+    }
+
     /**
      * Events
      */
