@@ -17,6 +17,13 @@ export interface IBoard extends BaseClass {
     description: string;
     type: BoardType;
     entities: Array<IBoardEntity>;
+    columns: Array<IBoardColumn>;
+}
+
+export class IBoardColumn {
+    title: string;
+    class: 'text';
+    model: string;
 }
 
 export interface IBoardEntity {
@@ -41,6 +48,7 @@ export class Board implements IBoard {
     description: string;
     type: BoardType;
     entities: IBoardEntity[];
+    columns: IBoardColumn[];
     user: string;
     createdBy: string;
     createdDate: Date;
@@ -53,6 +61,7 @@ export class Board implements IBoard {
         this.description = description;
         this.title = title;
         this.entities = [];
+        this.columns = [{ title: 'Description', model: 'description', class: 'text' }];
         this.type = type;
     }
 }

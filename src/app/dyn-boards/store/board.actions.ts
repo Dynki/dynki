@@ -1,4 +1,4 @@
-import { Board, IBoard, IBoardEntity } from './board.model';
+import { Board, IBoard, IBoardEntity, IBoardColumn } from './board.model';
 
 export enum BoardActionTypes {
   CHOOSE_BOARD_TYPE  = '[Board] Choose Type',
@@ -11,8 +11,14 @@ export enum BoardActionTypes {
   VIEW_BOARD         = '[Board] View Board',
   NEW_ENTITY         = '[Board] New Entity',
   UPDATE_ENTITY      = '[Board] Update Entity',
-  REMOVE_ENTITY      = '[Board] Remove Entity'
+  REMOVE_ENTITY      = '[Board] Remove Entity',
+  UPDATE_COLUMN      = '[Board] Update Column'
 };
+
+export class UpdateColumn {
+    static type = BoardActionTypes.UPDATE_COLUMN;
+    constructor(public column: IBoardColumn) { }
+}
 
 export class NewEntity {
     static type = BoardActionTypes.NEW_ENTITY;
@@ -60,6 +66,7 @@ export class UpdateBoard {
 }
 
 export type BoardActions =
+    UpdateColumn    |
     ChooseBoardType |
     CreateBoard     |
     GetAllBoards    |

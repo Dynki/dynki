@@ -3,9 +3,13 @@ import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
 @Component({
   selector: 'dyn-table',
   template: `
-    <div>Table</div>
     <dyn-header [columns]="columns"></dyn-header>
-    <dyn-row *ngFor="let row of rows; index as i; first as isFirst" [row]="row" [columns]="columns" [action]="action"></dyn-row>
+    <dyn-row *ngFor="let row of rows; index as i; first as isFirst"
+        [firstRow]="isFirst"
+        [row]="row"
+        [columns]="columns"
+        [action]="action">
+    </dyn-row>
     <dyn-new-row></dyn-new-row>
     <dyn-footer></dyn-footer>
     `

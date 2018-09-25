@@ -2,11 +2,15 @@
     padding: 10px;
 
     &__row {
-        border-left: solid;
-        border-left-color: #3095DE;
-        border-left-width: 8px;
+        // border-left: solid;
+        // border-left-color: #3095DE;
+        // border-left-width: 8px;
         margin-bottom: 2px;
         width: 100%;
+
+        &__container {
+            width: 100%;
+        }
 
         &__delete__icon {
             padding: 10px;
@@ -64,6 +68,12 @@
             height: 40px;
         }
 
+        &__cell__container__first {
+            border-left: solid;
+            border-left-color: #3095DE;
+            border-left-width: 8px;
+        }
+
         &__cell--text {
             
             &:focus {
@@ -92,8 +102,9 @@
 
         align-items: center;
         display: flex;
-        height: 40px;
+        // height: 40px;
         justify-content: center;
+        align-items: flex-end;
         text-align: left;
         width: 100%;
     }

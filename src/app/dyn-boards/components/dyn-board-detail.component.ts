@@ -15,12 +15,15 @@ export class DynBoardDetailComponent implements OnInit {
   @ViewChild('formsubmit') formsubmit: ElementRef;
   @Input() board: Board;
 
+  @Select(BoardState.getCurrentBoard)
+  public board$: Observable<Board>;
+
   @Select(BoardState.getCurrentBoardEntities)
   public row$: Observable<IBoardEntity[]>;
 
   form: Form;
   boardForm: FormGroup;
-  columns = [{ model: 'description', class: 'text' }];
+  columns;
 
   constructor(private formBuilder: FormBuilder, private store: Store) {}
 

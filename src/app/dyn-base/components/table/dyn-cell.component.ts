@@ -6,7 +6,7 @@ import * as boardActions from '../../../dyn-boards/store/board.actions';
   selector: 'dyn-cell',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div class="table__row__cell__container">
+    <div class="table__row__cell__container" [ngClass]="{ table__row__cell__container__first: firstCol }">
         <input (blur)="dispatchAction(event)" [(ngModel)]="value" #cell [innerHtml]="value">
     </div>
     `
@@ -15,6 +15,7 @@ export class DynCellComponent {
 
     @ViewChild('cell') cellRef: ElementRef;
     @Input() action: any;
+    @Input() firstCol: boolean;
 
     @Input() set row(row: any) {
         this._row = row;

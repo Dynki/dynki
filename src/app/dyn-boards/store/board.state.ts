@@ -135,6 +135,14 @@ export class BoardState {
         this.boardService.updateBoard(currentBoard);
     }
 
+    @Action(boardActions.UpdateColumn)
+    updateColumn(ctx: StateContext<BoardStateModel>, event: boardActions.UpdateColumn) {
+        const currentBoard = ctx.getState().currentBoard;
+        const colIndex = currentBoard.columns.findIndex(c => c.model === event.column.model);
+        currentBoard.columns[colIndex] = event.column;
+        this.boardService.updateBoard(currentBoard);
+    }
+
     /**
      * Events
      */

@@ -16,5 +16,5 @@
     <button #formsubmit type="submit" hidden="true"></button>
 </form>
 <div class="board__detail">
-    <dyn-table-container [action]="rowAction" [row$]="row$" [columns]="columns"></dyn-table-container>
+    <dyn-table-container *ngIf="board$ | async as board" [action]="rowAction" [row$]="row$" [columns]="board.columns"></dyn-table-container>
 </div>
