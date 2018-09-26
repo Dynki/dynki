@@ -20,6 +20,8 @@
         main {
             padding: 10px;
             grid-column-start: 2;
+            height: calc(100vh - 40px);
+            overflow: scroll;
         }
         
     }
