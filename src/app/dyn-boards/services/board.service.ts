@@ -21,6 +21,7 @@ export class BoardService {
    }
 
   createBoard(type: string) {
+    console.log('Board::Service::CreateBoard');
     const data = JSON.parse(JSON.stringify(new Board('Task', type, '', this.userInfo)));
     this.db.collection(this.collectionName).add(data);
   }
@@ -55,6 +56,10 @@ export class BoardService {
 
   updateBoard(board: Board) {
     this.db.collection(this.collectionName).doc(board.id).set(board);
+  }
+
+  removeBoard(board: Board) {
+    this.db.collection(this.collectionName).doc(board.id).delete();
   }
 
 }

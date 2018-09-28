@@ -1,20 +1,32 @@
-<form class="board__form" [formGroup]="boardForm" ngxsForm="app.board.boardForm" (ngSubmit)="onSubmit(boardForm)">
-    <input 
-        (blur)="commitChange()"
-        (keyup.enter)="commitChange()"
-        class="text__large--no-border board__form__description" 
-        nz-input placeholder="Board Title" 
-        nzSize="large" type="text" 
-        formControlName="title">
-    <input 
-        (blur)="commitChange()"
-        class="text--no-border" 
-        nz-input placeholder="Add board description" 
-        nzSize="small" 
-        type="text" 
-        formControlName="description">
-    <button #formsubmit type="submit" hidden="true"></button>
-</form>
-<div class="board__detail">
+<section class="board__header">
+    <form class="board__form" [formGroup]="boardForm" ngxsForm="app.board.boardForm" (ngSubmit)="onSubmit(boardForm)">
+        <input 
+            (blur)="commitChange()"
+            (keyup.enter)="commitChange()"
+            class="text__large--no-border board__form__description" 
+            nz-input placeholder="Board Title" 
+            nzSize="large" type="text" 
+            formControlName="title">
+        <input 
+            (blur)="commitChange()"
+            class="text--no-border" 
+            nz-input placeholder="Add board description" 
+            nzSize="small" 
+            type="text" 
+            formControlName="description">
+        <button #formsubmit type="submit" hidden="true"></button>
+    </form>
+    <mdc-menu-anchor class="board__menu" #boardanchor>
+        <button nz-button nzType="default" nzSize="large" nzShape="circle" (click)="boardmenu.open()">
+            <i class="anticon anticon-bars" ></i>
+        </button>
+        <mdc-menu #boardmenu [anchor]="boardanchor" anchorCorner="bottom-start">
+            <mdc-menu-item 
+            nz-popconfirm
+            nzTitle="Are you sure delete this board?" (nzOnConfirm)="deleteBoard(board)">Delete Board</mdc-menu-item>
+        </mdc-menu>
+    </mdc-menu-anchor>
+</section>
+<section class="board__detail">
     <dyn-table-container *ngIf="board$ | async as board" [action]="rowAction" [row$]="row$" [columns]="board.columns"></dyn-table-container>
-</div>
+</section>

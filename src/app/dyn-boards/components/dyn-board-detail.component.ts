@@ -42,4 +42,8 @@ export class DynBoardDetailComponent implements OnInit {
   onSubmit(board) {
     this.formsubmit.nativeElement.click();
   }
+
+  deleteBoard(board: Board) {
+    this.store.dispatch(new boardActions.RemoveBoard(board));
+  }
 }

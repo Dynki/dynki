@@ -8,6 +8,7 @@ import { DynBoardComponent } from './components/dyn-board.component';
 import { DynBoardDetailComponent } from './components/dyn-board-detail.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
+import { AppMaterialModule } from '../material.module';
 ​
 export const COMPONENTS = [DynChooseBoardTypeComponent, DynBoardComponent, DynBoardDetailComponent];
 
@@ -20,7 +21,8 @@ export const COMPONENTS = [DynChooseBoardTypeComponent, DynBoardComponent, DynBo
     NgZorroAntdModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxsFormPluginModule
+    NgxsFormPluginModule,
+    AppMaterialModule
   ],
   declarations: COMPONENTS,
   exports: COMPONENTS,

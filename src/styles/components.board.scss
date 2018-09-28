@@ -61,8 +61,28 @@
 }
 
 .board {
+
+    &__header {
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-columns: 20fr 1fr;
+        grid-template-areas: "content menu";
+    }
+
     &__detail {
         margin-top: 40px;
+        grid-area: "content"
+    }
+
+    &__menu {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        grid-area: "menu";
+        padding-right: 10px;
+
+        &__icon {
+        }
     }
 
     &__form {

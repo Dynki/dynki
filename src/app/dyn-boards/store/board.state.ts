@@ -152,4 +152,10 @@ export class BoardState {
         this.boardService.createBoard(event.payload + ' 1');
     }
 
+    @Action(boardActions.RemoveBoard)
+    removeBoard(ctx: StateContext<BoardStateModel>, event: boardActions.RemoveBoard) {
+        console.log('Board::State::RemoveBoard', event.board);
+        this.boardService.removeBoard(event.board);
+    }
+
 }

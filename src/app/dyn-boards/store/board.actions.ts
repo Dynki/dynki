@@ -4,7 +4,7 @@ export enum BoardActionTypes {
   CHOOSE_BOARD_TYPE  = '[Board] Choose Type',
   CREATE_BOARD       = '[Board] Create Board',
   UPDATE_BOARD       = '[Board] Update Board',
-  DELETE_BOARD       = '[Board] Delete Board',
+  REMOVE_BOARD       = '[Board] Remove Board',
   GET_BOARD          = '[Board] Get Board',
   GET_ALL_BOARDS     = '[Board] Get All Boards',
   GET_BOARD_TYPES    = '[Board] Get Board Types',
@@ -65,10 +65,16 @@ export class UpdateBoard {
     constructor(public board: Board) {}
 }
 
+export class RemoveBoard {
+    static type = BoardActionTypes.REMOVE_BOARD;
+    constructor(public board: Board) {}
+}
+
 export type BoardActions =
     UpdateColumn    |
     ChooseBoardType |
     CreateBoard     |
+    RemoveBoard     |
     GetAllBoards    |
     GetBoard        |
     ViewBoard       |
