@@ -41,25 +41,31 @@ export class BoardService {
   }
 
   getBoard(boardId: string): Observable<IBoard> {
-    console.log('Board::Service::getBoard');
+    console.log('Board::Service::getBoard ', boardId);
     return this.db.collection<IBoard>(this.collectionName).doc(boardId).snapshotChanges()
     .pipe(
       map(b => {
-        console.log('Board::Service::getBoard::b', b);
-        const data = b.payload.data() as Board;
-        const id = b.payload.id;
+        if (b.payload.exists) {
+          console.log('Board::Service::getBoard::b', b);
+          const data = b.payload.data() as Board;
+          const id = b.payload.id;
 
-        return { id, ...data };
+          return { id, ...data };
+        } else {
+          return undefined;
+        }
       })
     );
   }
 
   updateBoard(board: Board) {
+    console.log('Board::Service::UpdateBoard');
     this.db.collection(this.collectionName).doc(board.id).set(board);
   }
 
   removeBoard(board: Board) {
-    this.db.collection(this.collectionName).doc(board.id).delete();
+    this.db.collection(this.collectionName).doc(board.id).delete()
+    .catch(err => console.log('Board::Service::RemoveBoard::Error', err));
   }
 
 }
