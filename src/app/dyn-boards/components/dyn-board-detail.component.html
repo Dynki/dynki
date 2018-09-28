@@ -16,16 +16,16 @@
             formControlName="description">
         <button #formsubmit type="submit" hidden="true"></button>
     </form>
-    <mdc-menu-anchor class="board__menu" #boardanchor>
-        <button nz-button nzType="default" nzSize="large" nzShape="circle" (click)="boardmenu.open()">
+    <nz-dropdown class="board__menu" [nzPlacement]="'bottomRight'">
+        <button nz-dropdown nz-button nzType="default" nzSize="large" nzShape="circle">
             <i class="anticon anticon-bars" ></i>
         </button>
-        <mdc-menu #boardmenu [anchor]="boardanchor" anchorCorner="bottom-start">
-            <mdc-menu-item 
-            nz-popconfirm
-            nzTitle="Are you sure delete this board?" (nzOnConfirm)="deleteBoard(board)">Delete Board</mdc-menu-item>
-        </mdc-menu>
-    </mdc-menu-anchor>
+        <ul nz-menu>
+            <li nz-menu-item>
+                <a nz-popconfirm nzTitle="Are you sure delete this board?" (nzOnConfirm)="deleteBoard(board)">Delete Board</a>
+            </li>
+        </ul>
+    </nz-dropdown>
 </section>
 <section class="board__detail">
     <dyn-table-container *ngIf="board$ | async as board" [action]="rowAction" [row$]="row$" [columns]="board.columns"></dyn-table-container>

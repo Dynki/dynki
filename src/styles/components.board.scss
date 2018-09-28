@@ -75,14 +75,12 @@
     }
 
     &__menu {
-        display: flex;
+        display: flex!important;
         align-items: center;
         justify-content: flex-end;
-        grid-area: "menu";
+        grid-area: "menu"!important;
         padding-right: 10px;
 
-        &__icon {
-        }
     }
 
     &__form {
