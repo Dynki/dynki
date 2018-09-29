@@ -22,7 +22,8 @@
         </button>
         <ul nz-menu>
             <li nz-menu-item>
-                <a nz-popconfirm nzTitle="Are you sure delete this board?" (nzOnConfirm)="deleteBoard(board)">Delete Board</a>
+                <a nz-popconfirm [nzPlacement]="'bottomRight'" 
+                nzTitle="Are you sure delete this board?" (nzOnConfirm)="deleteBoard(board)">Delete Board</a>
             </li>
         </ul>
     </nz-dropdown>
