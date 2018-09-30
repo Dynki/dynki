@@ -7,9 +7,7 @@ import * as boardActions from '../../../dyn-boards/store/board.actions'
     template: `
     <div class="table__row">
         <div class="table__row__container" *ngFor="let column of columns; first as isFirst">
-            <input *ngIf="firstRow" [(ngModel)]="column.title" (blur)="updateColumn(column)" class="text--no-border" type="text">
-            <dyn-cell [column]="column" [firstCol]="isFirst" [row]="row" [action]="action">
-            </dyn-cell>
+            <dyn-cell [column]="column" [firstCol]="isFirst" [row]="row" [action]="action"></dyn-cell>
         </div>
         <i class="anticon anticon-delete table__row__delete__icon"
             nz-popconfirm
@@ -30,9 +28,5 @@ export class DynRowComponent {
     deleteRow(row: any) {
         console.log('Row::Delete');
         this.store.dispatch(new boardActions.RemoveEntity(row));
-    }
-
-    updateColumn(col: any) {
-        this.store.dispatch(new boardActions.UpdateColumn(col));
     }
 }
