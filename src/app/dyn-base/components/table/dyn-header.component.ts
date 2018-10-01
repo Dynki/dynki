@@ -7,8 +7,9 @@ import { Store } from '@ngxs/store';
   template: `
     <div class="table__header" *ngFor="let column of columns; first as isFirst">
         <input [(ngModel)]="column.title" (blur)="updateColumn(column)" class="table__header__input text--no-border" type="text">
-        <nz-dropdown class="table__header__menu" [nzPlacement]="'bottomRight'" [nzClickHide]="false">
-            <i nz-dropdown class="table__header__menu__icon anticon anticon-plus-circle"></i>
+        <nz-dropdown [nzTrigger]="'click'" class="table__header__menu" [nzPlacement]="'bottomRight'" [nzClickHide]="false">
+            <i nz-dropdown nz-tooltip [nzPlacement]="'left'"
+                [nzTitle]="'Add Column'" class="table__header__menu__icon anticon anticon-plus-circle"></i>
             <ul nz-menu>
                 <li nz-menu-item class="table__header__menu__item">
                     <i class="anticon anticon-form"></i>
