@@ -2,16 +2,18 @@
     &--no-border {
         border: none!important;
         border-radius: 1px!important;
-        padding: 0px!important;
+        padding: 4px!important;
 
         &:hover {
             outline-width: 0px;
             border: dashed!important;
             border-width: 1px!important;
             cursor: pointer!important;
+            padding: 3px!important;
         }
 
         &:focus {
+            padding: 3px!important;
             outline-width: 0px!important;
             border: dashed!important;
             border-width: 1px!important;
