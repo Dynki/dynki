@@ -12,8 +12,14 @@ export enum BoardActionTypes {
   NEW_ENTITY         = '[Board] New Entity',
   UPDATE_ENTITY      = '[Board] Update Entity',
   REMOVE_ENTITY      = '[Board] Remove Entity',
+  ADD_COULMN         = '[Board] Add Colunn',
   UPDATE_COLUMN      = '[Board] Update Column'
 };
+
+export class AddColumn {
+    static type = BoardActionTypes.ADD_COULMN;
+    constructor(public type: string) { }
+}
 
 export class UpdateColumn {
     static type = BoardActionTypes.UPDATE_COLUMN;
@@ -71,6 +77,7 @@ export class RemoveBoard {
 }
 
 export type BoardActions =
+    AddColumn       |
     UpdateColumn    |
     ChooseBoardType |
     CreateBoard     |

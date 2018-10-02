@@ -22,7 +22,7 @@ export interface IBoard extends BaseClass {
 
 export class IBoardColumn {
     title: string;
-    class: 'text';
+    class: string;
     model: string;
 }
 

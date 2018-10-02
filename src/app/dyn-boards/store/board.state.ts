@@ -143,6 +143,18 @@ export class BoardState {
         this.boardService.updateBoard(currentBoard);
     }
 
+    @Action(boardActions.AddColumn)
+    addColumn(ctx: StateContext<BoardStateModel>, event: boardActions.AddColumn) {
+        const currentBoard = ctx.getState().currentBoard;
+
+        currentBoard.columns.push({
+                title: 'Column' + currentBoard.columns.length,
+                class: event.type,
+                model: 'column' + currentBoard.columns.length
+            });
+        this.boardService.updateBoard(currentBoard);
+    }
+
     /**
      * Events
      */

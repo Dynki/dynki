@@ -8,8 +8,17 @@
         grid-template-areas: "headercols headermenu";
         margin-bottom: 10px;
 
-        &__input {
+        &__columns {
             grid-area: headercols;
+            display: flex;
+            flex-direction: row;
+            align-content: center;
+            justify-content: flex-start;
+            width: 100%;
+    
+            input {
+                width: 100%;
+            }
         }
 
         &__menu {
@@ -135,7 +144,7 @@
 
         align-items: center;
         display: flex;
-        // height: 40px;
+        height: 40px;
         justify-content: center;
         align-items: flex-end;
         text-align: left;
