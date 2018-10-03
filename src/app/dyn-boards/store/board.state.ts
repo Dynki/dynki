@@ -148,7 +148,7 @@ export class BoardState {
         const currentBoard = ctx.getState().currentBoard;
 
         currentBoard.columns.push({
-                title: 'Column' + currentBoard.columns.length,
+                title: event.type,
                 class: event.type,
                 model: 'column' + currentBoard.columns.length
             });
