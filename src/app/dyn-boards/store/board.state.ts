@@ -155,6 +155,14 @@ export class BoardState {
         this.boardService.updateBoard(currentBoard);
     }
 
+    @Action(boardActions.RemoveColumn)
+    removeColumn(ctx: StateContext<BoardStateModel>, event: boardActions.RemoveColumn) {
+        const currentBoard = ctx.getState().currentBoard;
+
+        currentBoard.columns = currentBoard.columns.filter(c => c.model !== event.column.model);
+        this.boardService.updateBoard(currentBoard);
+    }
+
     /**
      * Events
      */

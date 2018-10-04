@@ -9,7 +9,8 @@ import { Store } from '@ngxs/store';
         <div class="table__header__columns">
             <div *ngFor="let column of columns; first as isFirst" class="table__header__columns__container">
                 <div class="table__column">
-                    <nz-dropdown [nzTrigger]="'hover'" class="table__column__menu" [nzPlacement]="'bottomCenter'" [nzClickHide]="false">
+                    <nz-dropdown *ngIf="!isFirst"
+                        [nzTrigger]="'hover'" class="table__column__menu" [nzPlacement]="'bottomCenter'" [nzClickHide]="false">
                         <button nz-dropdown nz-button nzType="default" [nzSize]="'small'" nzShape="circle">
                             <i class="anticon anticon-down"></i>
                         </button>
