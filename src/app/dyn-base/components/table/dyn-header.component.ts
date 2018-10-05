@@ -3,9 +3,9 @@ import * as boardActions from '../../../dyn-boards/store/board.actions';
 import { Store } from '@ngxs/store';
 
 @Component({
-  selector: 'dyn-header',
+  selector: 'dyn-header, [dyn-header]',
   template: `
-    <div class="table__header">
+    <section class="table__header">
         <div class="table__header__columns">
             <div *ngFor="let column of columns; first as isFirst" class="table__header__columns__container">
                 <div class="table__column">
@@ -22,15 +22,14 @@ import { Store } from '@ngxs/store';
                         </ul>
                     </nz-dropdown>
                 </div>
-                <input
-                [(ngModel)]="column.title" (blur)="updateColumn(column)" class="table__header__input text--no-border" type="text">
+                <input [(ngModel)]="column.title" (blur)="updateColumn(column)" class="table__header__input text--no-border" type="text">
             </div>
         </div>
         <div class="table__header__menu__container">
-            <nz-dropdown [nzTrigger]="'click'"
-            class="table__header__menu__container__dropdown" [nzPlacement]="'bottomRight'" [nzClickHide]="false">
-                <i nz-dropdown nz-tooltip [nzPlacement]="'left'"
-                    [nzTitle]="'Add Column'" class="table__header__menu__container__dropdown__icon anticon anticon-plus-circle"></i>
+            <nz-dropdown [nzTrigger]="'click'" class="table__header__menu__container__dropdown"
+            [nzPlacement]="'bottomRight'" [nzClickHide]="false">
+                <i nz-dropdown nz-tooltip [nzPlacement]="'left'" [nzTitle]="'Add Column'"
+                class="table__header__menu__container__dropdown__icon anticon anticon-plus-circle"></i>
                 <ul nz-menu>
                     <li nz-menu-item class="table__header__menu__container__dropdown__item" (click)="addColumn('text')">
                         <i class="anticon anticon-form"></i>
@@ -39,7 +38,7 @@ import { Store } from '@ngxs/store';
                 </ul>
             </nz-dropdown>
         </div>
-    </div>
+    </section>
 `
 })
 export class DynHeaderComponent {
