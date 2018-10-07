@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngxs/store';
-import * as boardActions from '../../../dyn-boards/store/board.actions'
+import * as boardActions from '../../../../dyn-boards/store/board.actions'
 
 @Component({
     selector: 'dyn-row, [dyn-row]',
@@ -17,11 +17,14 @@ import * as boardActions from '../../../dyn-boards/store/board.actions'
                 </ul>
             </nz-dropdown>
         </div>
-        <div class="table__row__handle"></div>
-        <div class="table__row__container" *ngFor="let column of columns; first as isFirst">
-            <dyn-cell [column]="column" [firstCol]="isFirst" [row]="row" [action]="action"></dyn-cell>
+        <div class="row__content">
+            <div dyn-cell class="row__content__column" *ngFor="let column of columns; first as isFirst"
+                [column]="column" [firstCol]="isFirst" [row]="row" [action]="action"></div>
         </div>
-        <span class="table__row__delete__icon"></span>
+        <section class="row__terminator">
+            <div class="row__terminator__body"></div>
+            <div class="row__terminator__border"></div>
+        </section>
     </div>
     `
 })

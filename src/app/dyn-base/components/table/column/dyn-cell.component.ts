@@ -1,9 +1,9 @@
 import { Component, Input, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
 import { Store } from '@ngxs/store';
-import * as boardActions from '../../../dyn-boards/store/board.actions';
+import * as boardActions from '../../../../dyn-boards/store/board.actions';
 
 @Component({
-  selector: 'dyn-cell',
+  selector: 'dyn-cell, [dyn-cell]',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="table__row__cell__container" [ngClass]="{ table__row__cell__container__first: firstCol }">

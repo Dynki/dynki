@@ -15,11 +15,11 @@ import { MenuState } from './store/menu.state';
 import { MenuBuilder } from './services/dyn-menu.builder';
 import { DragulaModule } from 'ng2-dragula';
 import { DynTableContainerComponent } from './components/table/dyn-container..component';
-import { DynHeaderComponent } from './components/table/dyn-header.component';
-import { DynRowComponent } from './components/table/dyn-row.component';
+import { DynHeaderComponent } from './components/table/header/dyn-header.component';
+import { DynRowComponent } from './components/table/row/dyn-row.component';
 import { DynTableComponent } from './components/table/dyn-table.component';
-import { DynCellComponent } from './components/table/dyn-cell.component';
-import { DynNewRowComponent } from './components/table/dyn-new-row.component';
+import { DynCellComponent } from './components/table/column/dyn-cell.component';
+import { DynNewRowComponent } from './components/table/row/dyn-new-row.component';
 
 export const COMPONENTS = [
   FolderItemComponent,

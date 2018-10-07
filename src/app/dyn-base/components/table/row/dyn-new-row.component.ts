@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngxs/store';
-import * as boardActions from '../../../dyn-boards/store/board.actions';
+import * as boardActions from '../../../../dyn-boards/store/board.actions';
 
 @Component({
   selector: 'dyn-new-row, [dyn-new-row]',

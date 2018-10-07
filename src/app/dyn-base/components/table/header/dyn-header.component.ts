@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import * as boardActions from '../../../dyn-boards/store/board.actions';
+import * as boardActions from '../../../../dyn-boards/store/board.actions';
 import { Store } from '@ngxs/store';
 
 @Component({
@@ -8,20 +8,6 @@ import { Store } from '@ngxs/store';
     <section class="table__header">
         <div class="table__header__columns">
             <div *ngFor="let column of columns; first as isFirst" class="table__header__columns__container">
-                <div class="table__column">
-                    <nz-dropdown *ngIf="!isFirst"
-                        [nzTrigger]="'hover'" class="table__column__menu" [nzPlacement]="'bottomCenter'" [nzClickHide]="false">
-                        <button nz-dropdown nz-button nzType="default" [nzSize]="'small'" nzShape="circle">
-                            <i class="anticon anticon-down"></i>
-                        </button>
-                        <ul nz-menu>
-                            <li nz-menu-item class="table__column__menu__item" (click)="removeColumn(column)">
-                                <i class="anticon anticon-delete table__column__menu__item__icon"></i>
-                                <span> Remove Column</span>
-                            </li>
-                        </ul>
-                    </nz-dropdown>
-                </div>
                 <input [(ngModel)]="column.title" (blur)="updateColumn(column)" class="table__header__input text--no-border" type="text">
             </div>
         </div>
