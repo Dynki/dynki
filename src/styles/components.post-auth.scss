@@ -1,5 +1,10 @@
 .post-auth {
 
+    &__logo {
+        font-family: "Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",Helvetica,Arial,sans-serif!important;
+        font-weight: 400!important;
+    }
+
     &__content {
         overflow: hidden;
         display: grid;
@@ -24,7 +29,20 @@
             height: calc(100vh - 65px);
             overflow: hidden;
             overflow-y: scroll;
+
+            @supports (-ms-accelerator:true) {
+                /* IE Edge 12+ CSS styles go here */ 
+                height: 100vh!important;
+            }
+
+            @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+                /* IE10+ CSS styles go here */
+                padding-top: 65px;
+                height: 100vh!important;
+           }
         }
+
+
         
     }
 }

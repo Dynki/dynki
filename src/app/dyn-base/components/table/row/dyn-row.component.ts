@@ -18,8 +18,9 @@ import * as boardActions from '../../../../dyn-boards/store/board.actions'
             </nz-dropdown>
         </div>
         <div class="row__content">
-            <div dyn-cell class="row__content__column" *ngFor="let column of columns; first as isFirst"
-                [column]="column" [firstCol]="isFirst" [row]="row" [action]="action"></div>
+            <div dyn-cell *ngFor="let column of columns; first as isFirst"
+                [column]="column" [firstCol]="isFirst" [row]="row" [action]="action"
+                [ngClass]="{'row__content__column': !isFirst , 'row__content__column--first': isFirst}"></div>
         </div>
         <section class="row__terminator">
             <div class="row__terminator__body"></div>

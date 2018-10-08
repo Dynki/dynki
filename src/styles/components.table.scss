@@ -67,7 +67,27 @@ $mariner: #2b82c1;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                width: 100%;
+                width: 150px;
+                flex-grow: 0;
+
+                input {
+                    width: 100%;
+                }
+
+                &:hover { 
+
+                    nz-dropdown {
+                        display: inline-block!important;
+                    }
+                }
+            }
+
+            &__container--first {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                flex-grow: 1;
 
                 input {
                     width: 100%;
@@ -108,21 +128,23 @@ $mariner: #2b82c1;
     .row {
 
         &__content {
-            // display: table;
+            display: flex;
             width: 100%;
 
             &::before {
                 
                 content: '';
-                // display: block;     
-                height: 100%;
-                width: 8px;
+                width: 7px;
+                height: 40px;
                 background-color: $mariner;
             }
     
             &__column {
-                display: table-cell;     
-                width: 100%;
+                flex-grow: 0;
+            }
+
+            &__column--first {
+                flex-grow: 1;
             }
 
         }

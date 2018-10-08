@@ -7,7 +7,8 @@ import { Store } from '@ngxs/store';
   template: `
     <section class="table__header">
         <div class="table__header__columns">
-            <div *ngFor="let column of columns; first as isFirst" class="table__header__columns__container">
+            <div *ngFor="let column of columns; first as isFirst"
+                [ngClass]="{'table__header__columns__container': !isFirst , 'table__header__columns__container--first': isFirst}">
                 <input [(ngModel)]="column.title" (blur)="updateColumn(column)" class="table__header__input text--no-border" type="text">
             </div>
         </div>
