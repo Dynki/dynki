@@ -12,7 +12,7 @@ import { Navigate } from '@ngxs/router-plugin';
 @State<BoardStateModel>({
     name: 'board',
     defaults: {
-        boards: [],
+        boards: undefined,
         currentBoard: undefined,
         boardForm: {
             model: undefined,
@@ -29,7 +29,7 @@ export class BoardState {
      */
     @Selector()
     static getBoards(state: BoardStateModel): IBoard[] {
-        return state.boards;
+        return state.boards.boards;
     }
 
     @Selector()
@@ -78,12 +78,12 @@ export class BoardState {
 
     @Action(boardActions.GetAllBoards)
     getAllBoards(ctx: StateContext<BoardStateModel>) {
-        this.boardService.getBoards().subscribe(boards => {
+        this.boardService.getBoards().subscribe(app => {
             console.log('Board::State::getAllBoards::Subscribe');
 
-            ctx.patchState({ boards: boards });
+            ctx.patchState({ boards: app[0] });
             ctx.dispatch(new menuActions.LoadSubItems('Boards',
-                boards.map(b => {
+                app[0].boards.map(b => {
                     return this.mb.setTitle(b.title)
                         .setClickAction(new boardActions.ViewBoard(b.id))
                         .build();
@@ -165,7 +165,11 @@ export class BoardState {
 
     @Action(boardActions.UpdateTitle)
     updateTitle(ctx: StateContext<BoardStateModel>, event: boardActions.UpdateTitle) {
-        this.boardService.updateBoardTitle(event.board);
+        const appBoards = ctx.getState().boards;
+        const updatedBoard = appBoards.boards.find(b => b.id === event.board.id);
+        updatedBoard.title = event.board.title;
+        appBoards.boards = [...appBoards.boards, updatedBoard];
+        this.boardService.updateBoardTitle(appBoards);
     }
 
     /**

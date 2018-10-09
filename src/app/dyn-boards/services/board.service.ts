@@ -3,7 +3,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { AngularFireAuth } from '@angular/fire/auth';
 import { UserInfo } from 'firebase';
 
-import { Board, IBoard } from '../store/board.model';
+import { Board, IBoard, IBoards } from '../store/board.model';
 import { Observable } from 'rxjs';
 import { map, flatMap } from 'rxjs/operators';
 
@@ -28,14 +28,15 @@ export class BoardService {
     this.db.collection(this.collectionName).add(data);
   }
 
-  getBoards(): Observable<IBoard[]> {
+  getBoards(): Observable<IBoards[]> {
     console.log('Board::Service::getBoards');
     return this.db.collection<IBoard>(this.collectionAppName).snapshotChanges()
     .pipe(
-      flatMap(actions => {
+      map(actions => {
         return actions.map((a: any) => {
-          const data = a.payload.doc.data().boards.map(b => ({ 'id': b.id, 'title': b.name }));
-          return data;
+          const data = a.payload.doc.data();
+          const id = a.payload.id;
+          return { id, ...data };
         })
       })
     )
@@ -59,9 +60,9 @@ export class BoardService {
     );
   }
 
-  updateBoardTitle(board: Board) {
+  updateBoardTitle(boards: IBoards) {
     console.log('Board::Service::UpdateBoardTitle');
-    this.db.collection(this.collectionAppName).doc(board.id).set({ id: board.id, name: board.title });
+    this.db.collection(this.collectionAppName).doc(boards.id).set({ boards: boards.boards });
   }
 
   updateBoard(board: Board) {

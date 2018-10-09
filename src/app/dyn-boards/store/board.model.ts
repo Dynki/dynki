@@ -11,6 +11,11 @@ export class BaseClass {
     modifiedDate: Date;
 }
 
+export class IBoards {
+    id: string;
+    boards: Array<IBoard>;
+}
+
 export interface IBoard extends BaseClass {
     id: string;
     title: string;
@@ -32,7 +37,7 @@ export interface IBoardEntity {
 }
 
 export interface BoardStateModel {
-    boards: Array<IBoard>;
+    boards: IBoards;
     currentBoard: IBoard;
     boardForm: {
         model: any;
