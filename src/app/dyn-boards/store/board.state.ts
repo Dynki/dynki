@@ -163,6 +163,11 @@ export class BoardState {
         this.boardService.updateBoard(currentBoard);
     }
 
+    @Action(boardActions.UpdateTitle)
+    updateTitle(ctx: StateContext<BoardStateModel>, event: boardActions.UpdateTitle) {
+        this.boardService.updateBoardTitle(event.board);
+    }
+
     /**
      * Events
      */
@@ -177,5 +182,6 @@ export class BoardState {
         console.log('Board::State::RemoveBoard', event.board);
         this.boardService.removeBoard(event.board);
     }
+
 
 }

@@ -5,17 +5,19 @@ import { UserInfo } from 'firebase';
 
 import { Board, IBoard } from '../store/board.model';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, flatMap } from 'rxjs/operators';
 
 @Injectable()
 export class BoardService {
 
   private userInfo: UserInfo;
   private collectionName: string;
+  private collectionAppName: string;
 
   constructor(private db: AngularFirestore, private afAuth: AngularFireAuth) {
       this.afAuth.authState.subscribe(u => {
           this.userInfo = u
+          this.collectionAppName = 'app::' + this.userInfo.uid;
           this.collectionName = 'boards::' + this.userInfo.uid;
         });
    }
@@ -28,14 +30,13 @@ export class BoardService {
 
   getBoards(): Observable<IBoard[]> {
     console.log('Board::Service::getBoards');
-    return this.db.collection<IBoard>(this.collectionName).snapshotChanges()
+    return this.db.collection<IBoard>(this.collectionAppName).snapshotChanges()
     .pipe(
-      map(actions => {
+      flatMap(actions => {
         return actions.map((a: any) => {
-          const data = a.payload.doc.data() as Board;
-          const id = a.payload.doc.id;
-          return { id, ...data };
-        });
+          const data = a.payload.doc.data().boards.map(b => ({ 'id': b.id, 'title': b.name }));
+          return data;
+        })
       })
     )
   }
@@ -56,6 +57,11 @@ export class BoardService {
         }
       })
     );
+  }
+
+  updateBoardTitle(board: Board) {
+    console.log('Board::Service::UpdateBoardTitle');
+    this.db.collection(this.collectionAppName).doc(board.id).set({ id: board.id, name: board.title });
   }
 
   updateBoard(board: Board) {
