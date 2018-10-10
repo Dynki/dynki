@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument, DocumentReference } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { UserInfo } from 'firebase';
 
 import { Board, IBoard, IBoards } from '../store/board.model';
-import { Observable } from 'rxjs';
+import { Observable, of, from } from 'rxjs';
 import { map, flatMap } from 'rxjs/operators';
 
 @Injectable()
@@ -22,10 +22,10 @@ export class BoardService {
         });
    }
 
-  createBoard(type: string) {
+  createBoard(type: string): Promise<DocumentReference> {
     console.log('Board::Service::CreateBoard');
     const data = JSON.parse(JSON.stringify(new Board('Task', type, '', this.userInfo)));
-    this.db.collection(this.collectionName).add(data);
+    return this.db.collection(this.collectionName).add(data);
   }
 
   getBoards(): Observable<IBoards[]> {

@@ -59,8 +59,9 @@ export class BoardState {
      */
 
     @Action(boardActions.UpdateBoard)
-    updateFolder(ctx: StateContext<BoardStateModel>, event: boardActions.UpdateBoard) {
+    updateBoard(ctx: StateContext<BoardStateModel>, event: boardActions.UpdateBoard) {
         this.boardService.updateBoard(event.board);
+        ctx.dispatch(new boardActions.UpdateTitle(event.board));
     }
 
     @Action(boardActions.ChooseBoardType)
@@ -82,12 +83,15 @@ export class BoardState {
             console.log('Board::State::getAllBoards::Subscribe');
 
             ctx.patchState({ boards: app[0] });
-            ctx.dispatch(new menuActions.LoadSubItems('Boards',
-                app[0].boards.map(b => {
-                    return this.mb.setTitle(b.title)
-                        .setClickAction(new boardActions.ViewBoard(b.id))
-                        .build();
-            })));
+
+            if (app[0] && app[0].boards) {
+                ctx.dispatch(new menuActions.LoadSubItems('Boards',
+                    app[0].boards.map(b => {
+                        return this.mb.setTitle(b.title)
+                            .setClickAction(new boardActions.ViewBoard(b.id))
+                            .build();
+                })));
+            }
 
             ctx.dispatch(new menuActions.LoadFolders('Main menu'))
         });
@@ -112,12 +116,13 @@ export class BoardState {
     }
 
     @Action(boardActions.NewEntity)
-    newBoard(ctx: StateContext<BoardStateModel>, event: boardActions.NewEntity) {
+    newEntity(ctx: StateContext<BoardStateModel>, event: boardActions.NewEntity) {
         const currentBoard = ctx.getState().currentBoard;
         const id = currentBoard.entities.length.toString();
         currentBoard.entities.push({ id, description: event.description });
 
         this.boardService.updateBoard(currentBoard);
+        ctx.dispatch(new boardActions.UpdateTitle(currentBoard));
     }
 
     @Action(boardActions.UpdateEntity)
@@ -165,10 +170,15 @@ export class BoardState {
 
     @Action(boardActions.UpdateTitle)
     updateTitle(ctx: StateContext<BoardStateModel>, event: boardActions.UpdateTitle) {
-        const appBoards = ctx.getState().boards;
-        const updatedBoard = appBoards.boards.find(b => b.id === event.board.id);
-        updatedBoard.title = event.board.title;
-        appBoards.boards = [...appBoards.boards, updatedBoard];
+        let appBoards = ctx.getState().boards;
+        let updatedBoard;
+        if (appBoards) {
+            updatedBoard = appBoards.boards.find(b => b.id === event.board.id);
+            appBoards.boards = [...appBoards.boards, updatedBoard];
+        } else {
+            updatedBoard = { id: event.board.id, title: event.board.title };
+            appBoards = { id: undefined, boards: [updatedBoard] };
+        }
         this.boardService.updateBoardTitle(appBoards);
     }
 
@@ -178,7 +188,9 @@ export class BoardState {
     @Action(boardActions.CreateBoard)
     createBoard(ctx: StateContext<BoardStateModel>, event: boardActions.CreateBoard) {
         this.modalService.closeAll();
-        this.boardService.createBoard(event.payload + ' 1');
+        this.boardService.createBoard(event.payload + ' 1').then(docRef => {
+            this.boardService.getBoard(docRef.id).subscribe(doc => ctx.dispatch(new boardActions.UpdateTitle(doc)));
+        });
     }
 
     @Action(boardActions.RemoveBoard)
@@ -186,6 +198,4 @@ export class BoardState {
         console.log('Board::State::RemoveBoard', event.board);
         this.boardService.removeBoard(event.board);
     }
-
-
 }
