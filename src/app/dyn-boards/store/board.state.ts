@@ -172,12 +172,13 @@ export class BoardState {
     updateTitle(ctx: StateContext<BoardStateModel>, event: boardActions.UpdateTitle) {
         let appBoards = ctx.getState().boards;
         let updatedBoard;
+
         if (appBoards) {
-            updatedBoard = appBoards.boards.find(b => b.id === event.board.id);
-            appBoards.boards = [...appBoards.boards, updatedBoard];
+            const idx = appBoards.boards.findIndex(b => b.id === event.board.id);
+            appBoards.boards[idx].title = event.board.title;
         } else {
             updatedBoard = { id: event.board.id, title: event.board.title };
-            appBoards = { id: undefined, boards: [updatedBoard] };
+            appBoards = { boards: [updatedBoard] };
         }
         this.boardService.updateBoardTitle(appBoards);
     }

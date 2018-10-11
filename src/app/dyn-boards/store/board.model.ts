@@ -12,7 +12,7 @@ export class BaseClass {
 }
 
 export class IBoards {
-    id: string;
+    id?: string;
     boards: Array<IBoard>;
 }
 

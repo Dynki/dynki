@@ -62,7 +62,14 @@ export class BoardService {
 
   updateBoardTitle(boards: IBoards) {
     console.log('Board::Service::UpdateBoardTitle');
-    this.db.collection(this.collectionAppName).doc(boards.id).set({ boards: boards.boards });
+    this.db.collection(this.collectionAppName).doc('appboards').get().subscribe(b => {
+      if (!b.exists) {
+        boards.id = 'appboards';
+        this.db.collection(this.collectionAppName).doc('appboards').set(boards);
+      } else {
+        this.db.collection(this.collectionAppName).doc('appboards').set({ boards: boards.boards });
+      }
+    })
   }
 
   updateBoard(board: Board) {

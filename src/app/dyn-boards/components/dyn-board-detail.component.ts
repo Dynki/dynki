@@ -31,10 +31,9 @@ export class DynBoardDetailComponent implements OnInit {
     this.boardForm = this.formBuilder.group(this.board);
     this.boardForm = new FormGroup(this.boardForm.controls, { updateOn: 'submit' });
     this.boardForm.valueChanges.subscribe(board => {
-      if (this.boardForm.controls['title'].dirty) {
-        this.store.dispatch(new boardActions.UpdateTitle(board));
+      if (this.boardForm.dirty) {
+        this.store.dispatch(new boardActions.UpdateBoard(board))
       }
-      this.store.dispatch(new boardActions.UpdateBoard(board))
     });
   }
 
