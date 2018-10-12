@@ -78,8 +78,18 @@ export class BoardService {
   }
 
   removeBoard(board: Board) {
-    this.db.collection(this.collectionName).doc(board.id).delete()
+    this.db.collection(this.collectionName).doc(board.id).delete().then(() => {
+      this.removeBoardTitle(board);
+    })
     .catch(err => console.log('Board::Service::RemoveBoard::Error', err));
+  }
+
+  removeBoardTitle(board: Board) {
+    this.db.collection(this.collectionAppName).doc('appboards').snapshotChanges().subscribe(b => {
+        const existingBoards = b.payload.data() as IBoards;
+        const updatedBoards = existingBoards.boards.filter(f => f.id !== board.id);
+        this.db.collection(this.collectionAppName).doc('appboards').set({ boards: updatedBoards });
+    })
   }
 
 }

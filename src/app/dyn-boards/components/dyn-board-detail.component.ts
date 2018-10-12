@@ -33,6 +33,7 @@ export class DynBoardDetailComponent implements OnInit {
     this.boardForm.valueChanges.subscribe(board => {
       if (this.boardForm.dirty) {
         this.store.dispatch(new boardActions.UpdateBoard(board))
+        this.boardForm.markAsPristine();
       }
     });
   }
