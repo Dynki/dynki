@@ -16,7 +16,13 @@ export enum BoardActionTypes {
   REMOVE_COLUMN      = '[Board] Remove Column',
   UPDATE_COLUMN      = '[Board] Update Column',
   UPDATE_TITLE       = '[Board] Update Title',
+  UPDATE_BOARDS      = '[Board] Update Boards'
 };
+
+export class UpdateBoards {
+    static type = BoardActionTypes.UPDATE_TITLE;
+    constructor(public boards: any[]) {}
+}
 
 export class UpdateTitle {
     static type = BoardActionTypes.UPDATE_TITLE;
@@ -98,6 +104,7 @@ export type BoardActions =
     GetAllBoards    |
     GetBoard        |
     ViewBoard       |
-    UpdateBoard;
+    UpdateBoard     |
+    UpdateBoards;
 
 

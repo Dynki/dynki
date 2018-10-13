@@ -77,6 +77,11 @@ export class BoardService {
     this.db.collection(this.collectionName).doc(board.id).set(board);
   }
 
+  updateBoards(boards: Board[]) {
+    console.log('Board::Service::UpdateBoardTitle');
+    this.db.collection(this.collectionAppName).doc('appboards').set({ boards });
+  }
+
   removeBoard(board: Board) {
     this.db.collection(this.collectionName).doc(board.id).delete().then(() => {
       this.removeBoardTitle(board);

@@ -15,9 +15,11 @@
         <i *ngIf="menuitem.icon" [attr.class]="menuitem.icon"></i>
         <span>{{menuitem.title}}</span>
     </span>
-    <div *ngFor="let subitem of menuitem.items" [dragula]="menuitem.title">
-        <dyn-sub-menu *ngIf="!subitem.isFolder" [subitem]="subitem" [parentName]="menuitem.title"></dyn-sub-menu>
-        <dyn-folder-item *ngIf="subitem.isFolder" [folderItem]="subitem"></dyn-folder-item>
+    <div class="menu__item__subitems" dynSortable [data]="menuitem.items" (stop)="updateMenu($event)">
+        <ng-container *ngFor="let subitem of menuitem.items">
+            <dyn-sub-menu *ngIf="!subitem.isFolder" [subitem]="subitem" [parentName]="menuitem.title"></dyn-sub-menu>
+            <dyn-folder-item *ngIf="subitem.isFolder" [folderItem]="subitem"></dyn-folder-item>
+        </ng-container>
     </div>
     <dyn-sub-menu *ngIf="menuitem.foldersAllowed" [subitem]="folderitem"></dyn-sub-menu>
 </li>

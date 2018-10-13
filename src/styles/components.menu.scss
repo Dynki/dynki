@@ -1,3 +1,20 @@
+
+.draggable-source--is-dragging {
+    ul {
+        transform: scale(0.8);
+        background: lightgray;
+    }
+}
+
+.draggable-mirror {
+    ul {
+        background: #ababab82;
+        width: 150px;
+        transform: rotate(-5deg);
+        display: block;
+    }
+}
+
 .menu {
 
     overflow-y: scroll;
@@ -36,6 +53,10 @@
             margin-bottom:-24px;
             z-index: 1000;
 
+        }
+
+        &__subitems {
+            outline: none;
         }
     }
 

@@ -15,17 +15,7 @@ export class SubMenuComponent {
     buttonVisible: false;
     subs = new Subscription();
 
-    constructor(private store: Store, private dragulaService: DragulaService) {
-      this.subs.add(dragulaService.drag(this.parentName)
-        .subscribe(({ el }) => {
-          this.addClass(el, 'menu__item--dashed');
-        })
-      );
-      this.subs.add(dragulaService.drop(this.parentName)
-        .subscribe(({ el }) => {
-          this.removeClass(el, 'menu__item--dashed');
-        })
-      );
+    constructor(private store: Store) {
     }
 
     itemBtnClick(action: any) {

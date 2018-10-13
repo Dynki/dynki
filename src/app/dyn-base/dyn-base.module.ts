@@ -20,6 +20,7 @@ import { DynRowComponent } from './components/table/row/dyn-row.component';
 import { DynTableComponent } from './components/table/dyn-table.component';
 import { DynCellComponent } from './components/table/column/dyn-cell.component';
 import { DynNewRowComponent } from './components/table/row/dyn-new-row.component';
+import { SortableDirective } from './directives/dyn-sortable.directive';
 
 export const COMPONENTS = [
   FolderItemComponent,
@@ -42,7 +43,7 @@ export const COMPONENTS = [
     DragulaModule.forRoot(),
     NgZorroAntdModule,
   ],
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS, SortableDirective],
   exports: COMPONENTS,
   providers: [MenuService, MenuBuilder]
 })

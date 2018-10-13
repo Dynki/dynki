@@ -2,7 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import * as menuActions from '../store/menu.actions';
 
-import { DynMenuItem } from '../store/menu.model';
+import { DynMenuItem, MenuItem } from '../store/menu.model';
+import * as boardActions from '../../dyn-boards/store/board.actions';
 
 @Component({
   selector: 'dyn-menu-item',
@@ -32,5 +33,9 @@ export class MenuItemComponent implements OnInit {
 
     dispatchBtnAction(menuitem: DynMenuItem) {
       this.store.dispatch(menuitem.button.clickAction);
+    }
+
+    updateMenu(items: MenuItem[]) {
+      this.store.dispatch(new boardActions.UpdateBoards(items.map(i => ({ id: i.clickAction.boardId, title: i.title }))));
     }
 }

@@ -185,6 +185,11 @@ export class BoardState {
         }
     }
 
+    @Action(boardActions.UpdateBoards)
+    updateBoards(ctx: StateContext<BoardStateModel>, event: boardActions.UpdateBoards) {
+        this.boardService.updateBoards(event.boards);
+    }
+
     /**
      * Events
      */
