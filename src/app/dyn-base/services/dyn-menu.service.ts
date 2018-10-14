@@ -125,7 +125,7 @@ export class MenuService {
 
     const items: DynMenuItem[] = [
       this.mb.setTitle('Inbox').setIcon('anticon anticon-mail').build(),
-      this.mb.setTitle('Boards').setIcon('anticon anticon-dashboard').setButton(newBoardBtn).build(),
+      this.mb.setTitle('Boards').setIcon('anticon anticon-dashboard').setButton(newBoardBtn).setFoldersAllowed(true).build(),
       this.mb.setTitle('Teams').setIcon('anticon anticon-appstore').setButton(blankAddBtn).build(),
       this.mb.setTitle('Projects').setIcon('anticon anticon-rocket').setButton(blankAddBtn).build(),
       this.mb.setTitle('Tags').setIcon('anticon anticon-tags').setButton(blankAddBtn).build()

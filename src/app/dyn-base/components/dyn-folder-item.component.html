@@ -1,4 +1,4 @@
-<ul class="menu__folder-item" (mouseenter)="buttonVisible=true" (mouseleave)="buttonVisible=false">
+<ul class="menu__folder-item dragcontainer" (mouseenter)="buttonVisible=true" (mouseleave)="buttonVisible=false">
     <li nz-menu-item style="height:40px;">
         <i *ngIf="folderItem.icon" [attr.class]="folderItem.icon"></i>
         <span [hidden]="editState">{{folderItem.title}}</span>

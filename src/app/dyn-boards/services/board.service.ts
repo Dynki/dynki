@@ -72,6 +72,21 @@ export class BoardService {
     })
   }
 
+  AddBoardFolder(boards: IBoards) {
+    console.log('Board::Service::UpdateBoardTitle');
+    const newFolder = { id: null, title: 'New Folder' } as Board;
+    newFolder.isFolder = true;
+    boards.boards.push(newFolder);
+
+    this.db.collection(this.collectionAppName).doc('appboards').get().subscribe(b => {
+      if (!b.exists) {
+        this.db.collection(this.collectionAppName).doc('appboards').set(boards);
+      } else {
+        this.db.collection(this.collectionAppName).doc('appboards').set({ boards: boards.boards });
+      }
+    })
+  }
+
   updateBoard(board: Board) {
     console.log('Board::Service::UpdateBoard');
     this.db.collection(this.collectionName).doc(board.id).set(board);

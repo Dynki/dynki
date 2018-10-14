@@ -16,8 +16,14 @@ export enum BoardActionTypes {
   REMOVE_COLUMN      = '[Board] Remove Column',
   UPDATE_COLUMN      = '[Board] Update Column',
   UPDATE_TITLE       = '[Board] Update Title',
-  UPDATE_BOARDS      = '[Board] Update Boards'
+  UPDATE_BOARDS      = '[Board] Update Boards',
+  ADD_FOLDER         = '[Board] Add Folder'
 };
+
+export class AddFolder {
+    static type = BoardActionTypes.ADD_FOLDER;
+    constructor() {}
+}
 
 export class UpdateBoards {
     static type = BoardActionTypes.UPDATE_TITLE;
@@ -105,6 +111,7 @@ export type BoardActions =
     GetBoard        |
     ViewBoard       |
     UpdateBoard     |
-    UpdateBoards;
+    UpdateBoards    |
+    AddFolder;
 
 

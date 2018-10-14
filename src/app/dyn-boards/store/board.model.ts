@@ -19,6 +19,7 @@ export class IBoards {
 export interface IBoard extends BaseClass {
     id: string;
     title: string;
+    isFolder?: boolean;
     description: string;
     type: BoardType;
     entities: Array<IBoardEntity>;
@@ -55,6 +56,7 @@ export class Board implements IBoard {
     entities: IBoardEntity[];
     columns: IBoardColumn[];
     user: string;
+    isFolder?: boolean;
     createdBy: string;
     createdDate: Date;
     modifiedBy: string;
@@ -65,6 +67,7 @@ export class Board implements IBoard {
         this.createdDate = moment().toDate();
         this.description = description;
         this.title = title;
+        this.isFolder = false;
         this.entities = [];
         this.columns = [{ title: 'Description', model: 'description', class: 'text' }];
         this.type = type;

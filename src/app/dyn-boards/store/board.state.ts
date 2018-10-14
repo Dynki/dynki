@@ -88,12 +88,14 @@ export class BoardState {
                 ctx.dispatch(new menuActions.LoadSubItems('Boards',
                     app[0].boards.map(b => {
                         return this.mb.setTitle(b.title)
+                            .setIsFolder(b.isFolder)
+                            .setFoldersAllowed(b.isFolder)
                             .setClickAction(new boardActions.ViewBoard(b.id))
                             .build();
-                })));
+                    })));
             }
 
-            ctx.dispatch(new menuActions.LoadFolders('Main menu'))
+            // ctx.dispatch(new menuActions.LoadFolders('Main menu'))
         });
     }
 
@@ -103,16 +105,18 @@ export class BoardState {
         this.boardService.getBoard(event.boardId).subscribe(currentBoard => {
             console.log('Board::State::getAllBoards::Subscribe');
 
-            ctx.patchState({ currentBoard: currentBoard, boardForm: {
-                ...state.boardForm,
-                model: currentBoard
-            }});
+            ctx.patchState({
+                currentBoard: currentBoard, boardForm: {
+                    ...state.boardForm,
+                    model: currentBoard
+                }
+            });
         });
     }
 
     @Action(boardActions.ViewBoard)
     viewBoard(ctx: StateContext<BoardStateModel>, event: boardActions.ViewBoard) {
-        ctx.dispatch(new Navigate(['/board/' + event.boardId ]));
+        ctx.dispatch(new Navigate(['/board/' + event.boardId]));
     }
 
     @Action(boardActions.NewEntity)
@@ -153,10 +157,10 @@ export class BoardState {
         const currentBoard = ctx.getState().currentBoard;
 
         currentBoard.columns.push({
-                title: event.type,
-                class: event.type,
-                model: 'column' + currentBoard.columns.length
-            });
+            title: event.type,
+            class: event.type,
+            model: 'column' + currentBoard.columns.length
+        });
         this.boardService.updateBoard(currentBoard);
     }
 
@@ -173,7 +177,7 @@ export class BoardState {
         if (event.board) {
             let appBoards = ctx.getState().boards;
             let updatedBoard;
-    
+
             if (appBoards && appBoards.boards.length > 0) {
                 const idx = appBoards.boards.findIndex(b => b.id === event.board.id);
                 appBoards.boards[idx].title = event.board.title;
@@ -199,6 +203,11 @@ export class BoardState {
         this.boardService.createBoard(event.payload + ' 1').then(docRef => {
             this.boardService.getBoard(docRef.id).subscribe(doc => ctx.dispatch(new boardActions.UpdateTitle(doc)));
         });
+    }
+
+    @Action(boardActions.AddFolder)
+    addFolder(ctx: StateContext<BoardStateModel>) {
+        this.boardService.AddBoardFolder(ctx.getState().boards);
     }
 
     @Action(boardActions.RemoveBoard)

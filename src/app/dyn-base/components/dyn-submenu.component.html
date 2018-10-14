@@ -1,4 +1,4 @@
-<ul class="menu__submenu-item" (mouseenter)="buttonVisible=true" (mouseleave)="buttonVisible=false">
+<ul class="menu__submenu-item dragcontainer" (mouseenter)="buttonVisible=true" (mouseleave)="buttonVisible=false">
     <button 
         *ngIf="subitem.button" 
         [hidden]="!subitem.button || !buttonVisible" 

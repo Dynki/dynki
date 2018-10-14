@@ -27,9 +27,9 @@ export class MenuItemComponent implements OnInit {
         foldersAllowed: true,
         title: 'New Folder',
         icon: 'anticon anticon-folder-add',
-        clickAction: new menuActions.NewMenuFolder(this.menuitem.title)
+        clickAction: new boardActions.AddFolder()
       }
-   }
+    }
 
     dispatchBtnAction(menuitem: DynMenuItem) {
       this.store.dispatch(menuitem.button.clickAction);

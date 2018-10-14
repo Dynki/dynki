@@ -16,6 +16,9 @@ export class SortableDirective implements AfterViewInit {
     @Input()
     data: any[];
 
+    @Input()
+    selector: string;
+
     @Output()
     stop = new EventEmitter();
 
@@ -25,7 +28,7 @@ export class SortableDirective implements AfterViewInit {
 
     ngAfterViewInit() {
         this.sortable = new Sortable(this.el.nativeElement, {
-            draggable: 'dyn-sub-menu'
+            draggable: this.selector
         });
 
         this.sortable.on('sortable:stop', e => this.handleStop(e));

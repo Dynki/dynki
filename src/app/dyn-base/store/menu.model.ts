@@ -7,7 +7,7 @@ export interface DynMenu {
 }
 
 export interface DynMenuItem {
-    id: string;
+    id?: string;
     parent: string;
     title: string;
     icon: string;
@@ -20,7 +20,7 @@ export interface DynMenuItem {
 }
 
 export class MenuItem implements DynMenuItem {
-    id = null;
+    id? = null;
     parent = null;
     title = null;
     icon = null;

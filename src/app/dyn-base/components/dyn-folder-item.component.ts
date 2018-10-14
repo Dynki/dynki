@@ -18,11 +18,11 @@ export class FolderItemComponent implements OnInit {
     }
 
     editFolder(folder: DynMenuItem) {
-        this.store.dispatch(new menuActions.UpdateFolder(folder));
+        // this.store.dispatch(new menuActions.UpdateFolder(folder));
         this.editState = false;
     }
 
     deleteFolder(folder: DynMenuItem) {
-        this.store.dispatch(new menuActions.DeleteFolder(folder));
+        // this.store.dispatch(new menuActions.DeleteFolder(folder));
     }
 }
