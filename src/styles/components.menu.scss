@@ -15,6 +15,10 @@
     }
 }
 
+dyn-sub-menu {
+    outline: none;
+}
+
 .menu {
 
     overflow-y: scroll;
@@ -80,6 +84,19 @@
     &__submenu-item {
 
         position: relative!important;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        outline: none;
+
+        li {
+            outline: none!important;
+        }
+
+        li:hover {
+            padding-left: 35px!important;
+        }
 
         &__button {
             float: right;
@@ -88,5 +105,37 @@
             z-index: 1000;
             position: absolute!important;
         }
+
+        .draghandle {
+            cursor: pointer;
+            transform: rotate(-45deg);
+            max-height: 40px;
+        }
     }
+}
+
+.menu-item-mirror {
+    transform: rotate(-5deg);
+    display: block;
+    
+    ul {
+        background: #ababab82;
+        width: 200px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        transform: rotate(-5deg);
+    }
+
+    .draghandle {
+        height: 10px!important;
+    }
+
+    // display: flex;
+    // flex-direction: row;
+    // justify-content: center;
+    // align-items: center;
+    // background-color: #ababab82;
+    // transform: rotate(-25deg);
 }

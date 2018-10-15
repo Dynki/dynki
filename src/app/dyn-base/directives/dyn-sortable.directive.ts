@@ -28,7 +28,9 @@ export class SortableDirective implements AfterViewInit {
 
     ngAfterViewInit() {
         this.sortable = new Sortable(this.el.nativeElement, {
-            draggable: this.selector
+            draggable: this.selector,
+            handle: '.draghandle',
+            classes: { mirror: 'menu-item-mirror' }
         });
 
         this.sortable.on('sortable:stop', e => this.handleStop(e));
