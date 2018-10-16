@@ -9,6 +9,11 @@ $mariner: #2b82c1;
     width: 100%;
     outline: none;
 
+
+    &__rc {
+        outline: none;
+    }
+
     &__column {
         width: 100%;
         height: 30px;
@@ -315,5 +320,9 @@ $mariner: #2b82c1;
 }
 
 dyn-row {
+    outline: none;
+}
+
+dyn-table {
     outline: none;
 }

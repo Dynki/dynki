@@ -7,7 +7,7 @@ import { Store } from '@ngxs/store';
   template: `
     <table class="table">
         <tr dyn-header [columns]="columns"></tr>
-        <div dynSortable [selector]="'dyn-row'" [data]="rows" (stop)="updateRows($event)">
+        <div class="table__rc" dynSortable [selector]="'dyn-row'" [data]="rows" (stop)="updateRows($event)">
             <dyn-row *ngFor="let row of rows; index as i; first as isFirst"
             [firstRow]="isFirst"
             [row]="row"
