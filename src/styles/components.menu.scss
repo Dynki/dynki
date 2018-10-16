@@ -4,6 +4,27 @@
         transform: scale(0.8);
         background: lightgray;
     }
+
+    .table__row {
+        transform: scale(0.8);
+        background: lightgray;
+
+        &__cell__container {
+            background-color: #e6f7ff;
+        }
+
+        &__cell--text {
+            background-color: #e6f7ff;
+        }
+
+        &__menu {
+            background-color: #fff;
+        }
+
+        .row__terminator__body {
+            background-color: #e6f7ff;
+        }
+    }
 }
 
 .draggable-mirror {
@@ -128,14 +149,11 @@ dyn-sub-menu {
         transform: rotate(-5deg);
     }
 
-    .draghandle {
-        height: 10px!important;
+    .table__row {
+        transform: rotate(-2deg);
     }
+}
 
-    // display: flex;
-    // flex-direction: row;
-    // justify-content: center;
-    // align-items: center;
-    // background-color: #ababab82;
-    // transform: rotate(-25deg);
+.draghandle {
+    cursor: pointer;
 }

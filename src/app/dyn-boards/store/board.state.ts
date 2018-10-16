@@ -137,6 +137,13 @@ export class BoardState {
         this.boardService.updateBoard(currentBoard);
     }
 
+    @Action(boardActions.UpdateEntities)
+    updateEntities(ctx: StateContext<BoardStateModel>, event: boardActions.UpdateEntities) {
+        const currentBoard = ctx.getState().currentBoard;
+        currentBoard.entities = event.payload;
+        this.boardService.updateBoard(currentBoard);
+    }
+
     @Action(boardActions.RemoveEntity)
     removeEntity(ctx: StateContext<BoardStateModel>, event: boardActions.RemoveEntity) {
         const currentBoard = ctx.getState().currentBoard;

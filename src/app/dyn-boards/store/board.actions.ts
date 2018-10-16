@@ -11,6 +11,7 @@ export enum BoardActionTypes {
   VIEW_BOARD         = '[Board] View Board',
   NEW_ENTITY         = '[Board] New Entity',
   UPDATE_ENTITY      = '[Board] Update Entity',
+  UPDATE_ENTITIES    = '[Board] Update Entities',
   REMOVE_ENTITY      = '[Board] Remove Entity',
   ADD_COULMN         = '[Board] Add Colunn',
   REMOVE_COLUMN      = '[Board] Remove Column',
@@ -65,6 +66,11 @@ export class UpdateEntity {
     constructor(public entity: IBoardEntity) {}
 }
 
+export class UpdateEntities {
+    static type = BoardActionTypes.UPDATE_ENTITIES;
+    constructor(public payload: IBoardEntity[]) {}
+}
+
 export class ChooseBoardType {
     static type = BoardActionTypes.CHOOSE_BOARD_TYPE;
     constructor() {}
@@ -102,6 +108,7 @@ export class RemoveBoard {
 
 export type BoardActions =
     UpdateTitle     |
+    UpdateEntities  |
     AddColumn       |
     UpdateColumn    |
     ChooseBoardType |
