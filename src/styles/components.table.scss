@@ -21,8 +21,8 @@ $mariner: #2b82c1;
         align-content: center;
         justify-content: center;
 
-        &__menu {
-            display: none!important;
+        nz-dropdown {
+            // display: none!important;
 
             &__icon {
                 font-size: 21px!important;
@@ -68,13 +68,50 @@ $mariner: #2b82c1;
             justify-content: flex-start;
             width: 100%;
 
+            nz-dropdown {
+                display: none!important;
+    
+                &__icon {
+                    font-size: 21px!important;
+                    cursor: pointer;
+                }
+    
+                &:focus {
+                    display: inline-block!important;
+                }
+    
+                &__item {
+                    &__icon {
+                        font-size: 15px;
+                        padding-right: 10px;
+                    }
+                }
+            }
+    
+            &:hover { 
+    
+                nz-dropdown {
+                    display: inline-block!important;
+                }
+            }
+
             &__container {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 width: 150px;
+                min-height: 52px;
                 flex-grow: 0;
+
+                i {
+                    color: #c8e5f3;
+                    cursor: pointer;
+                }
+
+                i:hover {
+                    color: #2b82c1;
+                }
 
                 input {
                     width: 100%;
@@ -94,6 +131,7 @@ $mariner: #2b82c1;
                 justify-content: center;
                 align-items: center;
                 flex-grow: 1;
+                min-height: 52px;
 
                 input {
                     width: 100%;
@@ -101,10 +139,10 @@ $mariner: #2b82c1;
             }
         }
 
-
-
         &__menu__container {
 
+    
+    
             display: flex!important;
             flex-direction: column;
             align-content: center;

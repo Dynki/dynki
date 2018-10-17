@@ -9,6 +9,10 @@ import { Store } from '@ngxs/store';
         <div class="table__header__columns">
             <div *ngFor="let column of columns; first as isFirst"
                 [ngClass]="{'table__header__columns__container': !isFirst , 'table__header__columns__container--first': isFirst}">
+                <i *ngIf="!isFirst"
+                    class="anticon anticon-close-square-o"
+                    nz-popconfirm nzTitle="Are you sure delete this column?" (nzOnConfirm)="removeColumn(column)">
+                </i>
                 <input [(ngModel)]="column.title" (blur)="updateColumn(column)" class="table__header__input text--no-border" type="text">
             </div>
         </div>
