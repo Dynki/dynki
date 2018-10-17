@@ -95,7 +95,9 @@ export class BoardState {
                     })));
             }
 
-            // ctx.dispatch(new menuActions.LoadFolders('Main menu'))
+            if (app[0].boards.length > 0) {
+                ctx.dispatch(new boardActions.GetBoard(app[0].boards[0].id));
+            }
         });
     }
 
