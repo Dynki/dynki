@@ -1,3 +1,17 @@
 .home {
     height: 100%;
+    padding: 18px;
+
+    &__title {
+        height: 30px;
+        width: 200px;
+        background-color: #f2f2f2;
+    }
+
+    &__description {
+        margin-top: 5px;
+        height: 20px;
+        width: 100%;
+        background-color: #f2f2f2;
+    }
 }
