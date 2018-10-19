@@ -129,12 +129,11 @@ $mariner: #2b82c1;
             &__container--first {
                 display: flex;
                 flex-direction: column;
-                justify-content: center;
+                justify-content: flex-end;
                 align-items: center;
                 flex-grow: 1;
                 min-height: 52px;
-                padding-top: 15px;
-
+                
                 input {
                     width: 100%;
                 }
