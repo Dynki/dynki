@@ -21,6 +21,7 @@ import { DynTableComponent } from './components/table/dyn-table.component';
 import { DynCellComponent } from './components/table/column/dyn-cell.component';
 import { DynNewRowComponent } from './components/table/row/dyn-new-row.component';
 import { SortableDirective } from './directives/dyn-sortable.directive';
+import { BaseService } from './services/base.service';
 
 export const COMPONENTS = [
   FolderItemComponent,
@@ -45,7 +46,7 @@ export const COMPONENTS = [
   ],
   declarations: [...COMPONENTS, SortableDirective],
   exports: COMPONENTS,
-  providers: [MenuService, MenuBuilder]
+  providers: [BaseService, MenuService, MenuBuilder]
 })
 export class BaseModule {}
 

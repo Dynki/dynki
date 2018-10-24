@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument, DocumentReference } from '@angular/fire/firestore';
+import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { UserInfo } from 'firebase';
 
 import { Board, IBoard, IBoards } from '../store/board.model';
-import { Observable, of, from } from 'rxjs';
-import { map, flatMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class BoardService {

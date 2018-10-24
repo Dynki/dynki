@@ -6,6 +6,7 @@ import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs/observable';
 
 import * as menuActions from '../../../dyn-base/store/menu.actions';
+import * as baseActions from '../../../dyn-base/store/base.actions';
 
 @Component({
     selector: 'dyn-post-auth',
@@ -20,6 +21,7 @@ export class PostAuthComponent implements OnInit {
   constructor(private store: Store) { }
 
   ngOnInit() {
+    this.store.dispatch(new baseActions.GetUserDomain());
     this.store.dispatch(new menuActions.InitMenus());
   }
 }

@@ -24,6 +24,7 @@ import { AppMaterialModule } from './material.module';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
+import { AngularFireFunctionsModule } from '@angular/fire/functions';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { NgxsFormPluginModule } from '@ngxs/form-plugin';
     SidebarModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    AngularFireFunctionsModule,
     NgZorroAntdModule,
     NgxsRouterPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),
