@@ -28,12 +28,12 @@ export class BaseState {
      */
     @Action(baseActions.GetUserDomain)
     getUserDomain(ctx: StateContext<BaseStateModel>) {
-        this.baseService.getUserDomain().then(domainId => {
-            console.log('DomainId::', domainId);
-            ctx.patchState({ domainId })
+        this.baseService.getUserDomain().subscribe(domain => {
+            console.log('DomainId::', domain.id);
+            ctx.patchState({ domainId: domain.id })
+            //ctx.dispatch(new baseActions.DomainLoaded());
         });
     }
-
 
     /**
      * Events

@@ -24,7 +24,7 @@ import { AppMaterialModule } from './material.module';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
-import { AngularFireFunctionsModule } from '@angular/fire/functions';
+import { AngularFireFunctionsModule, FunctionsRegionToken } from '@angular/fire/functions';
 
 @NgModule({
   declarations: [
@@ -49,6 +49,7 @@ import { AngularFireFunctionsModule } from '@angular/fire/functions';
   bootstrap: [AppComponent],
   providers: [
     LambdaUtil,
+    { provide: FunctionsRegionToken, useValue: 'us-central1' },
     { provide: NZ_I18N, useValue: en_US }
   ]
 })

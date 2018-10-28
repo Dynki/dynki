@@ -1,27 +1,21 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFireFunctions } from '@angular/fire/functions';
-import * as firebase from 'firebase/app';
+import { flatMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class BaseService {
 
-    private domainCollectionName = 'user-domains';
-
     constructor(
-        private db: AngularFirestore,
         private afAuth: AngularFireAuth,
-        private fns: AngularFireFunctions
+        private httpClient: HttpClient
     ) { }
 
-    async getUserDomain(): Promise<any> {
-        try {
-            const callable = firebase.functions().httpsCallable('getUserDomain');
-            const returnVal = await callable({ uid: this.afAuth.idToken });
-            return returnVal;
-        } catch (error) {
-            return error;
-        }
+    getUserDomain(): Observable<any> {
+        const url = 'https://us-central1-dynki-c5141.cloudfunctions.net/domains';
+        return this.afAuth.idToken.pipe(
+            flatMap(token => this.httpClient.get(url, { headers: { token, uid: this.afAuth.auth.currentUser.uid } }))
+        )
    }
 }

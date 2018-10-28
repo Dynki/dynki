@@ -42,7 +42,7 @@ export const COMPONENTS = [
     CommonModule,
     FormsModule,
     DragulaModule.forRoot(),
-    NgZorroAntdModule,
+    NgZorroAntdModule
   ],
   declarations: [...COMPONENTS, SortableDirective],
   exports: COMPONENTS,

@@ -6,6 +6,8 @@ import { UserInfo } from 'firebase';
 import { Board, IBoard, IBoards } from '../store/board.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Store, Select } from '@ngxs/store';
+import { BaseState } from 'app/dyn-base/store/base.state';
 
 @Injectable()
 export class BoardService {
@@ -14,12 +16,23 @@ export class BoardService {
   private collectionName: string;
   private collectionAppName: string;
 
-  constructor(private db: AngularFirestore, private afAuth: AngularFireAuth) {
-      this.afAuth.authState.subscribe(u => {
-          this.userInfo = u
-          this.collectionAppName = 'app::' + this.userInfo.uid;
-          this.collectionName = 'boards::' + this.userInfo.uid;
-        });
+  @Select(BaseState.domainId)
+  private domainId$: Observable<string>;
+  private domainId = undefined;
+
+  constructor(private db: AngularFirestore, private afAuth: AngularFireAuth, private store: Store) {
+      this.domainId$.subscribe(id => {
+        console.log('Board::Service::DomainId::', this.domainId);
+        this.domainId = id
+        this.collectionAppName = 'app::' + this.domainId;
+        this.collectionName = 'boards::' + this.domainId;
+      });
+
+      // this.afAuth.authState.subscribe(u => {
+      //     this.userInfo = u
+      //     this.collectionAppName = 'app::' + this.userInfo.uid;
+      //     this.collectionName = 'boards::' + this.userInfo.uid;
+      //   });
    }
 
   createBoard(type: string): Promise<DocumentReference> {
@@ -29,7 +42,7 @@ export class BoardService {
   }
 
   getBoards(): Observable<IBoards[]> {
-    console.log('Board::Service::getBoards');
+    console.log('Board::Service::getBoards::', this.collectionAppName);
     return this.db.collection<IBoard>(this.collectionAppName).snapshotChanges()
     .pipe(
       map(actions => {
