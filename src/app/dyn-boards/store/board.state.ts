@@ -92,12 +92,14 @@ export class BoardState {
                             .setFoldersAllowed(b.isFolder)
                             .setClickAction(new boardActions.ViewBoard(b.id))
                             .build();
-                    })));
+
+                })));
+
+                if (app[0].boards.length > 0) {
+                    ctx.dispatch(new boardActions.GetBoard(app[0].boards[0].id));
+                }
             }
 
-            if (app[0].boards.length > 0) {
-                ctx.dispatch(new boardActions.GetBoard(app[0].boards[0].id));
-            }
         });
     }
 
@@ -189,7 +191,9 @@ export class BoardState {
 
             if (appBoards && appBoards.boards.length > 0) {
                 const idx = appBoards.boards.findIndex(b => b.id === event.board.id);
-                appBoards.boards[idx].title = event.board.title;
+                if (idx > -1) {
+                    appBoards.boards[idx].title = event.board.title;
+                }
             } else {
                 updatedBoard = { id: event.board.id, title: event.board.title };
                 appBoards = { boards: [updatedBoard] };

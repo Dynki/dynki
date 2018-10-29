@@ -20,12 +20,20 @@ export class PostAuthComponent implements OnInit {
   @Select(AuthState.getUser)
   public user$: Observable<User>;
 
+  @Select(BaseState.domainId)
+  public domainId$: Observable<string>;
+
   constructor(private store: Store, private action$: Actions) { }
 
   ngOnInit() {
     this.store.dispatch(new baseActions.GetUserDomain());
 
+    // this.store.dispatch(new menuActions.InitMenus());
+
     this.action$.pipe(ofActionDispatched(baseActions.DomainLoaded))
-    .subscribe(() => this.store.dispatch(new menuActions.InitMenus()));
+    .subscribe(() => {
+      console.log('Domain Loaded Fired');
+      this.store.dispatch(new menuActions.InitMenus())
+    });
   }
 }

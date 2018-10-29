@@ -2,7 +2,7 @@
 <!-- Page content -->
 <div class="post-auth__content">
     <dyn-toolbar [user]="user$ | async"></dyn-toolbar>
-    <dyn-side-menu class="sidemenu"></dyn-side-menu>
+    <dyn-side-menu *ngIf="domainId$ | async as domainId" class="sidemenu"></dyn-side-menu>
     <main>
         <router-outlet></router-outlet>
     </main>

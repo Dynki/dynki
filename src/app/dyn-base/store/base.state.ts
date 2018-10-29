@@ -31,7 +31,7 @@ export class BaseState {
         this.baseService.getUserDomain().subscribe(domain => {
             console.log('DomainId::', domain.id);
             ctx.patchState({ domainId: domain.id })
-            //ctx.dispatch(new baseActions.DomainLoaded());
+            ctx.dispatch(new baseActions.DomainLoaded());
         });
     }
 

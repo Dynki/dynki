@@ -6,8 +6,9 @@ import { UserInfo } from 'firebase';
 import { Board, IBoard, IBoards } from '../store/board.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Store, Select } from '@ngxs/store';
+import { Store, Select, Actions, ofActionDispatched } from '@ngxs/store';
 import { BaseState } from 'app/dyn-base/store/base.state';
+import * as baseActions from '../../dyn-base/store/base.actions';
 
 @Injectable()
 export class BoardService {
@@ -20,19 +21,18 @@ export class BoardService {
   private domainId$: Observable<string>;
   private domainId = undefined;
 
-  constructor(private db: AngularFirestore, private afAuth: AngularFireAuth, private store: Store) {
-      this.domainId$.subscribe(id => {
+  constructor(private db: AngularFirestore, private action$: Actions, private store: Store, private afAuth: AngularFireAuth) {
+    this.action$.pipe(ofActionDispatched(baseActions.DomainLoaded))
+      .subscribe(() => {
+        this.domainId = this.store.selectSnapshot(BaseState.domainId);
         console.log('Board::Service::DomainId::', this.domainId);
-        this.domainId = id
         this.collectionAppName = 'app::' + this.domainId;
         this.collectionName = 'boards::' + this.domainId;
       });
 
-      // this.afAuth.authState.subscribe(u => {
-      //     this.userInfo = u
-      //     this.collectionAppName = 'app::' + this.userInfo.uid;
-      //     this.collectionName = 'boards::' + this.userInfo.uid;
-      //   });
+      this.afAuth.authState.subscribe(u => {
+          this.userInfo = u
+        });
    }
 
   createBoard(type: string): Promise<DocumentReference> {
@@ -48,7 +48,7 @@ export class BoardService {
       map(actions => {
         return actions.map((a: any) => {
           const data = a.payload.doc.data();
-          const id = a.payload.id;
+          const id = a.payload.doc.id;
           return { id, ...data };
         })
       })
