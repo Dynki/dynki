@@ -8,6 +8,7 @@ import { BoardService } from '../services/board.service';
 import * as menuActions from '../../dyn-base/store/menu.actions';
 import { MenuBuilder } from '../../dyn-base/services/dyn-menu.builder';
 import { Navigate } from '@ngxs/router-plugin';
+import { take, tap } from 'rxjs/operators';
 
 @State<BoardStateModel>({
     name: 'board',
@@ -79,7 +80,9 @@ export class BoardState {
 
     @Action(boardActions.GetAllBoards)
     getAllBoards(ctx: StateContext<BoardStateModel>) {
-        this.boardService.getBoards().subscribe(app => {
+        this.boardService.getBoards().pipe(
+            take(1),
+            tap(app => {
             console.log('Board::State::getAllBoards::Subscribe');
 
             ctx.patchState({ boards: app[0] });
@@ -100,22 +103,26 @@ export class BoardState {
                 }
             }
 
-        });
+            })
+        );
     }
 
     @Action(boardActions.GetBoard)
     getBoard(ctx: StateContext<BoardStateModel>, event: boardActions.GetBoard) {
         const state = ctx.getState();
-        this.boardService.getBoard(event.boardId).subscribe(currentBoard => {
-            console.log('Board::State::getAllBoards::Subscribe');
+        this.boardService.getBoard(event.boardId).pipe(
+            take(1),
+            tap(currentBoard => {
+                console.log('Board::State::getAllBoards::Subscribe');
 
-            ctx.patchState({
-                currentBoard: currentBoard, boardForm: {
-                    ...state.boardForm,
-                    model: currentBoard
-                }
-            });
-        });
+                ctx.patchState({
+                    currentBoard: currentBoard, boardForm: {
+                        ...state.boardForm,
+                        model: currentBoard
+                    }
+                });
+            })
+        );
     }
 
     @Action(boardActions.ViewBoard)
@@ -183,22 +190,30 @@ export class BoardState {
         this.boardService.updateBoard(currentBoard);
     }
 
+    @Action(boardActions.CreateBoard)
+    createBoard(ctx: StateContext<BoardStateModel>, event: boardActions.CreateBoard) {
+        this.modalService.closeAll();
+        this.boardService.createBoard(event.payload + ' 1').then(docRef => {
+            this.boardService.getBoard(docRef.id)
+            .pipe(
+                take(1),
+                tap(doc => ctx.dispatch(new boardActions.AttachBoard(doc)))
+            ).subscribe();
+        });
+    }
+
+    @Action(boardActions.AttachBoard)
+    AttachBoard(ctx: StateContext<BoardStateModel>, event: boardActions.AttachBoard) {
+        this.boardService.attachBoard(event.board).pipe(
+            take(1),
+            tap(boards => ctx.patchState({ boards, currentBoard: event.board }))
+        ).subscribe();
+    }
+
     @Action(boardActions.UpdateTitle)
     updateTitle(ctx: StateContext<BoardStateModel>, event: boardActions.UpdateTitle) {
         if (event.board) {
-            let appBoards = ctx.getState().boards;
-            let updatedBoard;
-
-            if (appBoards && appBoards.boards.length > 0) {
-                const idx = appBoards.boards.findIndex(b => b.id === event.board.id);
-                if (idx > -1) {
-                    appBoards.boards[idx].title = event.board.title;
-                }
-            } else {
-                updatedBoard = { id: event.board.id, title: event.board.title };
-                appBoards = { boards: [updatedBoard] };
-            }
-            this.boardService.updateBoardTitle(appBoards);
+            this.boardService.updateBoardTitle(event.board);
         }
     }
 
@@ -210,14 +225,6 @@ export class BoardState {
     /**
      * Events
      */
-    @Action(boardActions.CreateBoard)
-    createBoard(ctx: StateContext<BoardStateModel>, event: boardActions.CreateBoard) {
-        this.modalService.closeAll();
-        this.boardService.createBoard(event.payload + ' 1').then(docRef => {
-            this.boardService.getBoard(docRef.id).subscribe(doc => ctx.dispatch(new boardActions.UpdateTitle(doc)));
-        });
-    }
-
     @Action(boardActions.AddFolder)
     addFolder(ctx: StateContext<BoardStateModel>) {
         this.boardService.AddBoardFolder(ctx.getState().boards);

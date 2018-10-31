@@ -3,6 +3,7 @@ import { Board, IBoard, IBoardEntity, IBoardColumn } from './board.model';
 export enum BoardActionTypes {
   CHOOSE_BOARD_TYPE  = '[Board] Choose Type',
   CREATE_BOARD       = '[Board] Create Board',
+  ATTACH_BOARD       = '[Board] Attach Board',
   UPDATE_BOARD       = '[Board] Update Board',
   REMOVE_BOARD       = '[Board] Remove Board',
   GET_BOARD          = '[Board] Get Board',
@@ -18,7 +19,8 @@ export enum BoardActionTypes {
   UPDATE_COLUMN      = '[Board] Update Column',
   UPDATE_TITLE       = '[Board] Update Title',
   UPDATE_BOARDS      = '[Board] Update Boards',
-  ADD_FOLDER         = '[Board] Add Folder'
+  ADD_FOLDER         = '[Board] Add Folder',
+  SET_CURRENT_BOARD  = '[Board] Set Current Board'
 };
 
 export class AddFolder {
@@ -27,12 +29,22 @@ export class AddFolder {
 }
 
 export class UpdateBoards {
-    static type = BoardActionTypes.UPDATE_TITLE;
+    static type = BoardActionTypes.UPDATE_BOARDS;
     constructor(public boards: any[]) {}
 }
 
 export class UpdateTitle {
     static type = BoardActionTypes.UPDATE_TITLE;
+    constructor(public board: Board) {}
+}
+
+export class AttachBoard {
+    static type = BoardActionTypes.ATTACH_BOARD;
+    constructor(public board: Board) {}
+}
+
+export class SetCurrentBoard {
+    static type = BoardActionTypes.SET_CURRENT_BOARD;
     constructor(public board: Board) {}
 }
 
@@ -113,6 +125,8 @@ export type BoardActions =
     UpdateColumn    |
     ChooseBoardType |
     CreateBoard     |
+    AttachBoard     |
+    SetCurrentBoard |
     RemoveBoard     |
     GetAllBoards    |
     GetBoard        |

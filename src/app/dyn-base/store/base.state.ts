@@ -3,6 +3,7 @@ import { Action, Selector, State, StateContext, createSelector } from '@ngxs/sto
 import * as baseActions from './base.actions';
 import { BaseStateModel } from './base.model';
 import { BaseService } from '../services/base.service';
+import { take, tap } from 'rxjs/operators';
 
 @State<BaseStateModel>({
     name: 'base',
@@ -28,11 +29,13 @@ export class BaseState {
      */
     @Action(baseActions.GetUserDomain)
     getUserDomain(ctx: StateContext<BaseStateModel>) {
-        this.baseService.getUserDomain().subscribe(domain => {
-            console.log('DomainId::', domain.id);
-            ctx.patchState({ domainId: domain.id })
-            ctx.dispatch(new baseActions.DomainLoaded());
-        });
+        this.baseService.getUserDomain().pipe(
+            tap(domain => {
+                console.log('DomainId::', domain.id);
+                ctx.patchState({ domainId: domain.id })
+                ctx.dispatch(new baseActions.DomainLoaded());
+            })
+        );
     }
 
     /**

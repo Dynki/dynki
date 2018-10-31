@@ -5,7 +5,7 @@ import { UserInfo } from 'firebase';
 
 import { Board, IBoard, IBoards } from '../store/board.model';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { Store, Select, Actions, ofActionDispatched } from '@ngxs/store';
 import { BaseState } from 'app/dyn-base/store/base.state';
 import * as baseActions from '../../dyn-base/store/base.actions';
@@ -73,16 +73,40 @@ export class BoardService {
     );
   }
 
-  updateBoardTitle(boards: IBoards) {
+  updateBoardTitle(board: IBoard) {
     console.log('Board::Service::UpdateBoardTitle');
-    this.db.collection(this.collectionAppName).doc('appboards').get().subscribe(b => {
-      if (!b.exists) {
-        boards.id = 'appboards';
-        this.db.collection(this.collectionAppName).doc('appboards').set(boards);
-      } else {
-        this.db.collection(this.collectionAppName).doc('appboards').set({ boards: boards.boards });
-      }
-    })
+    return this.db.collection(this.collectionAppName).doc('appboards').get().pipe(
+      switchMap(b => {
+        const boards = (b.data() as IBoards).boards;
+        const boardIndex = boards.findIndex(f => f.id === board.id);
+
+        if (boardIndex > -1) {
+          boards[boardIndex].title = board.title;
+        }
+
+        return this.db.collection(this.collectionAppName).doc('appboards').set({ boards: boards })
+      })
+    ).subscribe(() => {});
+  }
+
+  attachBoard(board: IBoard) {
+    console.log('Board::Service::AttachBoard');
+    return this.db.collection(this.collectionAppName).doc('appboards').get()
+    .pipe(
+      switchMap(b => {
+        let boards;
+        if (!b.exists) {
+          boards = { id: 'appboards', boards: [board] };
+          return this.db.collection(this.collectionAppName).doc('appboards').set(boards);
+        } else {
+          boards = b.data().boards;
+          boards.push(board);
+          return this.db.collection(this.collectionAppName).doc('appboards').set({ boards: boards });
+        }
+      }),
+      switchMap(() => this.db.collection(this.collectionAppName).doc('appboards').get()),
+      map(boards => boards.data().boards)
+    )
   }
 
   AddBoardFolder(boards: IBoards) {
