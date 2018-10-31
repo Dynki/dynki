@@ -104,6 +104,10 @@ dyn-sub-menu {
 
     &__submenu-item {
 
+        span {
+            width: 10px!important;
+        }
+
         position: relative!important;
         display: flex;
         flex-direction: row;
@@ -111,8 +115,28 @@ dyn-sub-menu {
         align-items: center;
         outline: none;
 
+        &:hover {
+            li {
+                // padding-left: 32px!important;
+                outline: none!important;
+                // transition: padding-left .3s linear;
+                // -moz-transition: padding-left .3s linear;
+                // -o-transition: padding-left  .3s linear;
+                // -webkit-transition: padding-left  .3s linear;
+            }
+
+            li:hover {
+                // padding-left: 32px!important;
+            }
+        }
+
         li {
+            padding-left: 42px!important;
             outline: none!important;
+            // transition: padding-left .3s linear;
+            // -moz-transition: padding-left .3s linear;
+            // -o-transition: padding-left  .3s linear;
+            // -webkit-transition: padding-left  .3s linear;
         }
 
         li:hover {
@@ -131,7 +155,7 @@ dyn-sub-menu {
             cursor: pointer;
             transform: rotate(-45deg);
             max-height: 40px;
-        }
+       }
     }
 }
 

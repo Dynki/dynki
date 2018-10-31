@@ -1,5 +1,6 @@
 <ul class="menu__submenu-item dragcontainer" (mouseenter)="buttonVisible=true" (mouseleave)="buttonVisible=false">
     <i [hidden]="!buttonVisible" class="draghandle anticon anticon-arrows-alt"></i>
+    <span [hidden]="buttonVisible" class="spacer"></span>
     <button 
         *ngIf="subitem.button" 
         [hidden]="!subitem.button || !buttonVisible" 
