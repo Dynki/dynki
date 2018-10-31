@@ -5,10 +5,11 @@ import { UserInfo } from 'firebase';
 
 import { Board, IBoard, IBoards } from '../store/board.model';
 import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, take } from 'rxjs/operators';
 import { Store, Select, Actions, ofActionDispatched } from '@ngxs/store';
 import { BaseState } from 'app/dyn-base/store/base.state';
 import * as baseActions from '../../dyn-base/store/base.actions';
+import * as boardActions from '../store/board.actions';
 
 @Injectable()
 export class BoardService {
@@ -45,6 +46,7 @@ export class BoardService {
     console.log('Board::Service::getBoards::', this.collectionAppName);
     return this.db.collection<IBoard>(this.collectionAppName).snapshotChanges()
     .pipe(
+      take(1),
       map(actions => {
         return actions.map((a: any) => {
           const data = a.payload.doc.data();
@@ -59,6 +61,7 @@ export class BoardService {
     console.log('Board::Service::getBoard ', boardId);
     return this.db.collection<IBoard>(this.collectionName).doc(boardId).snapshotChanges()
     .pipe(
+      take(1),
       map(b => {
         if (b.payload.exists) {
           console.log('Board::Service::getBoard::b', b);
@@ -76,6 +79,7 @@ export class BoardService {
   updateBoardTitle(board: IBoard) {
     console.log('Board::Service::UpdateBoardTitle');
     return this.db.collection(this.collectionAppName).doc('appboards').get().pipe(
+      take(1),
       switchMap(b => {
         const boards = (b.data() as IBoards).boards;
         const boardIndex = boards.findIndex(f => f.id === board.id);
@@ -86,13 +90,14 @@ export class BoardService {
 
         return this.db.collection(this.collectionAppName).doc('appboards').set({ boards: boards })
       })
-    ).subscribe(() => {});
+    );
   }
 
   attachBoard(board: IBoard) {
     console.log('Board::Service::AttachBoard');
     return this.db.collection(this.collectionAppName).doc('appboards').get()
     .pipe(
+      take(1),
       switchMap(b => {
         let boards;
         if (!b.exists) {
@@ -105,8 +110,8 @@ export class BoardService {
         }
       }),
       switchMap(() => this.db.collection(this.collectionAppName).doc('appboards').get()),
-      map(boards => boards.data().boards)
-    )
+      map(boards => boards.data())
+    );
   }
 
   AddBoardFolder(boards: IBoards) {
@@ -115,7 +120,10 @@ export class BoardService {
     newFolder.isFolder = true;
     boards.boards.push(newFolder);
 
-    this.db.collection(this.collectionAppName).doc('appboards').get().subscribe(b => {
+    this.db.collection(this.collectionAppName).doc('appboards').get().pipe(
+      take(1)
+    )
+    .subscribe(b => {
       if (!b.exists) {
         this.db.collection(this.collectionAppName).doc('appboards').set(boards);
       } else {
@@ -142,9 +150,15 @@ export class BoardService {
   }
 
   removeBoardTitle(board: Board) {
-    this.db.collection(this.collectionAppName).doc('appboards').snapshotChanges().subscribe(b => {
+    this.db.collection(this.collectionAppName).doc('appboards').snapshotChanges().pipe(
+        take(1)
+    )
+    .subscribe(b => {
         const existingBoards = b.payload.data() as IBoards;
         const updatedBoards = existingBoards.boards.filter(f => f.id !== board.id);
+        existingBoards.boards = updatedBoards;
+        this.store.dispatch(new boardActions.RefreshBoards(existingBoards));
+        this.store.dispatch(new boardActions.SetCurrentBoard(existingBoards.boards[0]));
         this.db.collection(this.collectionAppName).doc('appboards').set({ boards: updatedBoards });
     })
   }

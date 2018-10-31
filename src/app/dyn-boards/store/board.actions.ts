@@ -1,4 +1,4 @@
-import { Board, IBoard, IBoardEntity, IBoardColumn } from './board.model';
+import { Board, IBoard, IBoardEntity, IBoardColumn, IBoards } from './board.model';
 
 export enum BoardActionTypes {
   CHOOSE_BOARD_TYPE  = '[Board] Choose Type',
@@ -20,8 +20,14 @@ export enum BoardActionTypes {
   UPDATE_TITLE       = '[Board] Update Title',
   UPDATE_BOARDS      = '[Board] Update Boards',
   ADD_FOLDER         = '[Board] Add Folder',
-  SET_CURRENT_BOARD  = '[Board] Set Current Board'
+  SET_CURRENT_BOARD  = '[Board] Set Current Board',
+  REFRESH_BOARDS     = '[Board] Refresh Boards'
 };
+
+export class RefreshBoards {
+    static type = BoardActionTypes.REFRESH_BOARDS;
+    constructor(public boards?: IBoards) {}
+}
 
 export class AddFolder {
     static type = BoardActionTypes.ADD_FOLDER;
@@ -133,6 +139,7 @@ export type BoardActions =
     ViewBoard       |
     UpdateBoard     |
     UpdateBoards    |
+    RefreshBoards   |
     AddFolder;
 
 

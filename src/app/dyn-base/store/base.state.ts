@@ -35,7 +35,7 @@ export class BaseState {
                 ctx.patchState({ domainId: domain.id })
                 ctx.dispatch(new baseActions.DomainLoaded());
             })
-        );
+        ).subscribe();
     }
 
     /**

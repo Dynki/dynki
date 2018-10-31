@@ -1,7 +1,7 @@
 import { Action, Selector, State, StateContext, Store, Actions } from '@ngxs/store';
 
 import * as boardActions from './board.actions';
-import { BoardStateModel, IBoard, IBoardEntity } from './board.model';
+import { BoardStateModel, IBoard, IBoardEntity, IBoards } from './board.model';
 import { NzModalService } from 'ng-zorro-antd';
 import { DynChooseBoardTypeComponent } from '../components/dyn-choose-board.component';
 import { BoardService } from '../services/board.service';
@@ -59,6 +59,12 @@ export class BoardState {
      * Commands
      */
 
+    @Action(boardActions.SetCurrentBoard)
+    setCurrentBoard(ctx: StateContext<BoardStateModel>, event: boardActions.UpdateBoard) {
+        ctx.patchState({ currentBoard: event.board });
+        ctx.dispatch(new boardActions.ViewBoard(event.board.id));
+    }    
+
     @Action(boardActions.UpdateBoard)
     updateBoard(ctx: StateContext<BoardStateModel>, event: boardActions.UpdateBoard) {
         this.boardService.updateBoard(event.board);
@@ -104,7 +110,32 @@ export class BoardState {
             }
 
             })
-        );
+        ).subscribe();
+    }
+
+    @Action(boardActions.RefreshBoards)
+    refreshBoards(ctx: StateContext<BoardStateModel>, event: boardActions.RefreshBoards) {
+        console.log('Board::State::RefreshBoards');
+
+        let boards;
+        if (event.boards) {
+            ctx.patchState({ boards: event.boards });
+            boards = event.boards.boards;
+        } else {
+            boards = ctx.getState().boards.boards;
+        }
+
+        if (boards) {
+            ctx.dispatch(new menuActions.LoadSubItems('Boards',
+            boards.map(b => {
+                return this.mb.setTitle(b.title)
+                    .setIsFolder(b.isFolder)
+                    .setFoldersAllowed(b.isFolder)
+                    .setClickAction(new boardActions.ViewBoard(b.id))
+                    .build();
+
+            })));
+        }
     }
 
     @Action(boardActions.GetBoard)
@@ -122,7 +153,7 @@ export class BoardState {
                     }
                 });
             })
-        );
+        ).subscribe();
     }
 
     @Action(boardActions.ViewBoard)
@@ -206,14 +237,30 @@ export class BoardState {
     AttachBoard(ctx: StateContext<BoardStateModel>, event: boardActions.AttachBoard) {
         this.boardService.attachBoard(event.board).pipe(
             take(1),
-            tap(boards => ctx.patchState({ boards, currentBoard: event.board }))
+            tap((boards: IBoards) => ctx.dispatch(new boardActions.RefreshBoards(boards)))
         ).subscribe();
     }
+
 
     @Action(boardActions.UpdateTitle)
     updateTitle(ctx: StateContext<BoardStateModel>, event: boardActions.UpdateTitle) {
         if (event.board) {
-            this.boardService.updateBoardTitle(event.board);
+
+            const boards = ctx.getState().boards;
+
+            if (boards) {
+                const boardIdx = boards.boards.findIndex(b => b.id === event.board.id);
+
+                if (boardIdx !== -1) {
+                    boards.boards[boardIdx].title = event.board.title;
+                    ctx.patchState({ boards });
+                    ctx.dispatch(new boardActions.RefreshBoards());
+                }
+            }
+
+            this.boardService.updateBoardTitle(event.board).pipe(
+                take(1)
+            ).subscribe();
         }
     }
 
@@ -234,5 +281,6 @@ export class BoardState {
     removeBoard(ctx: StateContext<BoardStateModel>, event: boardActions.RemoveBoard) {
         console.log('Board::State::RemoveBoard', event.board);
         this.boardService.removeBoard(event.board);
+        ctx.dispatch(new boardActions.RefreshBoards());
     }
 }
