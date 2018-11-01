@@ -1,11 +1,24 @@
 
 <!-- Page content -->
-<div class="post-auth__content">
+<div class="post-auth__content" *ngIf="domainId$ | async as domainId">
     <dyn-toolbar [user]="user$ | async"></dyn-toolbar>
     <dyn-side-menu *ngIf="domainId$ | async as domainId" class="sidemenu"></dyn-side-menu>
     <main>
         <router-outlet></router-outlet>
     </main>
+</div>
+<div *ngIf="!domainLoaded">
+    <div class="post-auth__loader">
+        <div class="title">
+            <h1>Dynki</h1>
+        </div>
+        <div class="spinner">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+        </div>
+        <h1 class="ml2">Loading Funky Goodness</h1>
+    </div>
+           
 </div>
 
 

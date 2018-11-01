@@ -18,7 +18,7 @@ $green: #0ca959;
 $light-green: lighten($green, 5%);
 
 // Fonts
-$font-family: 'Open Sans', sans-serif;
+$font-family: 'Raleway', 'Open Sans', sans-serif!important;
 
 // Logo
 $logo-font-size: 30px;
@@ -27,3 +27,7 @@ $logo-font-size: 30px;
 $logo-font-size-large: 44px;
 
 $strapbox-background-color: rgba(0, 0, 0, 0.45);
+
+body {
+    font-family: 'Raleway', sans-serif!important;
+}
