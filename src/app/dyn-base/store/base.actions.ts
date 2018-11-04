@@ -1,10 +1,16 @@
 export enum BaseActionTypes {
     GET_USER_DOMAIN = '[Base] Get user domain',
-    DOMAIN_LOADED = '[Base] Domain loaded'
+    DOMAIN_LOADED   = '[Base] Domain loaded',
+    NO_DOMAIN       = '[Base] No user domain'
 };
 
 export class GetUserDomain {
     static type = BaseActionTypes.GET_USER_DOMAIN;
+    constructor() { }
+}
+
+export class NoUserDomain {
+    static type = BaseActionTypes.NO_DOMAIN;
     constructor() { }
 }
 

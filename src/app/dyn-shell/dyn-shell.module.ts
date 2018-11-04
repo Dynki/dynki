@@ -35,6 +35,10 @@ import { BaseModule } from '../dyn-base/dyn-base.module';
 import { BoardState } from '../dyn-boards/store/board.state';
 import { ShellState } from './store/shell.state';
 import { BaseState } from 'app/dyn-base/store/base.state';
+import { DomainChoiceComponent } from './components/domain-registration/dyn-domain-choice.component';
+import { NewDomainComponent } from './components/domain-registration/dyn-new-domain.component';
+import { JoinDomainComponent } from './components/domain-registration/dyn-join-domain.component';
+import { DomainRegistrationComponent } from './components/domain-registration/dyn-domain-reg.component';
 
 export const components = [
     FooterComponent,
@@ -43,7 +47,11 @@ export const components = [
     PreAuthComponent,
     ShellComponent,
     SideMenuComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    DomainChoiceComponent,
+    NewDomainComponent,
+    JoinDomainComponent,
+    DomainRegistrationComponent
   ];
 
 // other imports

@@ -1,0 +1,48 @@
+.domain__choice {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    grid-template-areas: "section pic";
+    height: 100vh;
+    width: 100vw;
+
+    .section {
+        grid-area: section;
+
+        display: grid;
+        grid-template-rows: 3fr 2fr;
+
+        .domain__container {
+            display: flex;
+            flex-direction: row;
+
+            .brand {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                padding: 10px;  
+
+                h1 {
+                    font-size: 34px;
+                    color: #8a8a8a;
+                }
+            }
+        }
+
+        &__img {
+
+            width: 55px;
+            height: 53px;
+            margin-left: 11px;
+            display: inline-block;
+            background-image: url(/assets/img/logo-blue-sm.png), none;
+            background-size: 55px 47px;
+        }
+    
+    }
+
+    .pic {
+        grid-area: pic;
+        background-image: url(/assets/img/domain-choice.jpg), none;
+        background-size: 100% 100%;
+    }
+}
