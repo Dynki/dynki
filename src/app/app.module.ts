@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
 import { AngularFireModule } from '@angular/fire';
-import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { SidebarModule } from 'ng-sidebar';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 
@@ -25,6 +24,15 @@ import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { AngularFireFunctionsModule, FunctionsRegionToken } from '@angular/fire/functions';
+import { NgZorroAntdModule, NZ_ICON_DEFAULT_TWOTONE_COLOR, NZ_ICONS } from 'ng-zorro-antd';
+import { IconDefinition } from '@ant-design/icons-angular';
+import * as AllIcons from '@ant-design/icons-angular/icons';
+
+const antDesignIcons = AllIcons as {
+  [key: string]: IconDefinition;
+};
+const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesignIcons[key])
+
 
 @NgModule({
   declarations: [
@@ -50,7 +58,9 @@ import { AngularFireFunctionsModule, FunctionsRegionToken } from '@angular/fire/
   providers: [
     LambdaUtil,
     { provide: FunctionsRegionToken, useValue: 'us-central1' },
-    { provide: NZ_I18N, useValue: en_US }
+    { provide: NZ_I18N, useValue: en_US },
+    { provide: NZ_ICON_DEFAULT_TWOTONE_COLOR, useValue: '#00ff00' }, // If not provided, Ant Design's official blue would be used
+    { provide: NZ_ICONS, useValue: icons }
   ]
 })
 export class AppModule {
