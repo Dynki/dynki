@@ -11,9 +11,13 @@ import { Component } from '@angular/core';
 
         <section class="section">
             <div class="main__form">
-                <div class="new">Create new domain</div>
+                <button class="domain__btn" nz-button [nzSize]="'Large'" nzType="dashed">
+                Create New Domain<i nz-icon type="plus-circle" theme="outline"></i>
+                </button>
                 <div class="or">Or</div>
-                <div class="join">Join existing domain</div>
+                <button class="domain__btn" nz-button [nzSize]="'Large'" nzType="dashed">
+                Join Existing Domain<i nz-icon type="enter" theme="outline"></i>
+                </button>
             </div>
             <div class="main__pic"></div>
         </section>

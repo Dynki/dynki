@@ -10,8 +10,8 @@
         height: 100vh;
         width: 100vw;
         content: "";
-        background-image: url(/assets/img/boots.jpg), none;
-        opacity: 0.4;
+        background-image: url(/assets/img/chilling.jpg), none;
+        opacity: 0.8;
         background-size:     cover;
         background-repeat:   no-repeat;
         background-position: center center;  
@@ -21,9 +21,19 @@
         right: 0;
         position: absolute;
         z-index: -1;   
+
+        -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH";
     }
 
     .brand {
+        position: absolute;
+        left: 15px;
+        top: 15px;
         grid-area: header;
         display: flex;
         flex-direction: row;
@@ -55,8 +65,8 @@
                 background-color: #fff;
                 height: 100%;
                 width: 100%;
-                border-top-left-radius: 5px;
-                border-bottom-left-radius: 5px;
+                // border-top-left-radius: 5px;
+                // border-bottom-left-radius: 5px;
 
                 display: flex;
                 flex-direction: column;
@@ -64,8 +74,50 @@
                 align-content: center;
                 align-items: center;
 
+                .domain__btn {
+                    height: 73px;
+                    font-size: 35px;
+
+                    span {
+                        padding-right: 30px;
+                    }
+                }
+
+
+
                 .new {
-                    font-size: 34px;
+                    padding-top: 20px;
+                    padding-bottom: 20px;
+                    border-top: solid;
+                    border-bottom: solid;
+                    border-top-width: 2px;
+                    border-bottom-width: 2px;
+
+                    border-top-color: black;
+                    border-bottom-color: black;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-content: center;
+                    align-items: center;
+
+                    .icon {
+                        font-size: 31px;
+                        padding-left: 40px!important;
+                    }
+
+                    .text {
+                        font-size: 34px;
+                        color: $primary-color;
+                    }
+
+                }
+
+                .new:hover {
+
+                    .icon {
+                        color: aqua;
+                    }
                 }
 
                 .or {
@@ -76,12 +128,36 @@
 
                 .join {
                     font-size: 34px;
+                    padding-top: 20px;
+                    padding-bottom: 20px;
+                    border-top: solid;
+                    border-bottom: solid;
+                    border-top-width: 2px;
+                    border-bottom-width: 2px;
+
+                    border-top-color: black;
+                    border-bottom-color: black;
+
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-content: center;
+                    align-items: center;
+
+                    .icon {
+                        font-size: 31px;
+                        padding-left: 40px!important;
+                    }
+
+                    .text {
+                        font-size: 34px;
+                    }
                 }
             }
 
             &__pic {
                 grid-area: pic;
-                background-image: url(/assets/img/office.jpg), none;
+                background-image: url(/assets/img/dog.jpg), none;
                 background-size:     cover;
                 background-repeat:   no-repeat;
                 background-position: center center;  
@@ -92,20 +168,18 @@
 
         .domain__container {
             display: flex;
-            flex-direction: row;
-
-
-            
+            flex-direction: row;          
         }
 
         &__img {
 
             width: 55px;
-            height: 53px;
+            height: 42px;
             margin-left: 11px;
             display: inline-block;
-            background-image: url(/assets/img/logo-blue-sm.png), none;
-            background-size: 55px 47px;
+            background-image: url(/assets/img/logo-blue.png), none;
+            background-size: 53px 42px;
+
         }
     
     }
