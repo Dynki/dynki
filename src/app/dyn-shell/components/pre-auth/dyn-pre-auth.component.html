@@ -1,5 +1,5 @@
 <div fxFlex fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
-    <section fxFlex fxLayout="column" class="pre-auth">
+    <section fxFlex fxLayout="column" class="pre-auth" [@bgImgTrigger]='state'>
         <header fxLayout="row">
             <figure class="pre-auth__brand" layout="row" layout-align="center center">
                 <img class="pre-auth__img"src="./assets/img/logo.png"/>Dynki
@@ -16,7 +16,7 @@
             </section>
         </main>
     </section>
-    <aside fxLayout="row" fxLayoutAlign="center center">
+    <aside fxLayout="row" fxLayoutAlign="center center" [@bgImgTrigger]='state'>
         <router-outlet></router-outlet>
     </aside>
 </div>

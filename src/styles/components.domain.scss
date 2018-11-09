@@ -10,7 +10,7 @@
         height: 100vh;
         width: 100vw;
         content: "";
-        background-image: url(/assets/img/chilling.jpg), none;
+        background-image: url(/assets/img/chilling-min.jpg), none;
         opacity: 0.8;
         background-size:     cover;
         background-repeat:   no-repeat;
@@ -63,6 +63,17 @@
             align-items: center;
             
             &__form {
+
+                .icon {
+                    font-size: 80px;
+                    margin-bottom: 70px
+                }
+
+                h1 {
+                    font-size: 35px;
+                    color: rgba(0,0,0,.65);
+                }
+
                 -webkit-box-shadow: 10px 10px 197px -20px rgba(0,0,0,0.93);
                 -moz-box-shadow: 10px 10px 197px -20px rgba(0,0,0,0.93);
                 box-shadow: 10px 10px 197px -20px rgba(0,0,0,0.93);

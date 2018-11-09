@@ -1,6 +1,6 @@
 
 <!-- Page content -->
-<div class="post-auth__content" *ngIf="domainId$ | async as domainId">
+<div class="post-auth__content" *ngIf="domainLoaded">
     <dyn-toolbar [user]="user$ | async"></dyn-toolbar>
     <dyn-side-menu *ngIf="domainId$ | async as domainId" class="sidemenu"></dyn-side-menu>
     <main>
@@ -8,24 +8,22 @@
     </main>
 </div>
 <div *ngIf="!domainLoaded">
-    <div class="domain__choice">
+    <div class="domain__choice" [@bgImgTrigger]='state'>
 
-        <section class="section">
-            <div class="domain__container">
-                <div class="brand">
-                    <div class="section__img"></div>
-                    <h1>Dynki</h1>
-                </div>
+        <div class="domain__container">
+            <div class="brand">
+                <div class="section__img"></div>
+                <h1>Dynki</h1>
             </div>
-            <div class="main">
-                <div class="spinner">
-                    <div class="double-bounce1"></div>
-                    <div class="double-bounce2"></div>
-                </div>
-                <h1 class="ml2">Loading Funky Goodness</h1>
+        </div>
+        <section class="section" [@bgImgTrigger]='state'>
+            <div class="main__form">
+                <i nz-icon type="loading" theme="outline" [spin]="true" class="icon"></i>
+                <h1>Loading Funky Goodness</h1>
             </div>
-            <div class="pic"></div>
+            <div class="main__pic"></div>
         </section>
+        <div class="pic"></div>
     </div>
         <!-- <div class="post-auth__loader">
         <div class="title">
