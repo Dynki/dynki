@@ -7,7 +7,12 @@
   }
 
 .login {
-    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+
     min-height: 378px;
     background-color: #ffffff;
     padding: 36px!important;
@@ -24,16 +29,46 @@
     &__heading {
         color: $primary-color;
         font-family: $font-family;
-        font-size: 34px;
+        font-size: 37px;
         margin-bottom: 20px;
+    }
+
+    &__textbox {
+        width: 100%;
+    }
+
+    nz-form-item {
+        width: 100%;
     }
 }
 
+dyn-signup {
+    width:89%;
+}
+
 .registration {
-    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+
+    width: 100%;
     background-color: #ffffff;
     padding: 36px!important;
-    
+
+    nz-form-item {
+        width: 100%;
+    }
+
+    .buttons {
+        width:100%;
+
+        button {
+            margin-bottom: 10px;
+        }
+    }
+
     &__button {
         width: 100%;
         margin-bottom: 20px;

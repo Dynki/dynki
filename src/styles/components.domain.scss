@@ -64,13 +64,25 @@
             
             &__form {
 
+                .domain_form {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-content: center;
+                    align-items: center;
+                }
+
+                dyn-sign-up {
+                    width:100%;
+                }
+
                 .icon {
                     font-size: 80px;
                     margin-bottom: 70px
                 }
 
-                h1 {
-                    font-size: 35px;
+                .text {
+                    font-size: 25px;
                     color: rgba(0,0,0,.65);
                 }
 
@@ -94,10 +106,12 @@
                 .domain__btn {
                     height: 73px;
                     font-size: 35px;
+                    width: 100%;
 
                     span {
                         padding-right: 30px;
                     }
+
                 }
 
 
@@ -138,8 +152,8 @@
                 }
 
                 .or {
-                    margin-top: 50px;
-                    margin-bottom: 50px;
+                    margin-top: 30px;
+                    margin-bottom: 30px;
                     font-size: 20px;
                 }
 

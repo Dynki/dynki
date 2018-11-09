@@ -1,4 +1,4 @@
-<section class="board__header">
+ <section class="board__header">
     <form class="board__form" [formGroup]="boardForm" ngxsForm="app.board.boardForm" (ngSubmit)="onSubmit(boardForm)">
         <input 
             (blur)="commitChange()"
@@ -9,7 +9,7 @@
             formControlName="title">
         <input 
             (blur)="commitChange()"
-            class="text--no-border" 
+            class="text--no-border description" 
             nz-input placeholder="Add board description" 
             nzSize="small" 
             type="text" 

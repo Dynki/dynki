@@ -23,13 +23,16 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 
         <section class="section">
             <div class="main__form">
-                <button class="domain__btn" nz-button [nzSize]="'Large'" nzType="dashed" [@bgImgTrigger]='state'>
-                Create New Domain<i nz-icon type="plus-circle" theme="outline"></i>
-                </button>
-                <div class="or" [@bgImgTrigger]='state'>Or</div>
-                <button class="domain__btn" nz-button [nzSize]="'Large'" nzType="dashed" [@bgImgTrigger]='state'>
-                Join Existing Domain<i nz-icon type="enter" theme="outline"></i>
-                </button>
+                <div class="domain_form">
+                    <h1 class="registration__heading">Choose</h1>
+                    <button class="domain__btn" nz-button [nzSize]="'Large'" nzType="dashed" [@bgImgTrigger]='state'>
+                    Create New Domain<i nz-icon type="plus-circle" theme="outline"></i>
+                    </button>
+                    <div class="or" [@bgImgTrigger]='state'>Or</div>
+                    <button class="domain__btn" nz-button [nzSize]="'Large'" nzType="dashed" [@bgImgTrigger]='state'>
+                    Join Existing Domain<i nz-icon type="team" theme="outline"></i>
+                    </button>
+                </div>
             </div>
             <div class="main__pic"></div>
         </section>

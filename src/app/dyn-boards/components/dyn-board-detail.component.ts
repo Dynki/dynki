@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Form } from '@angular/forms';
 import { Board, IBoardEntity } from '../store/board.model';
 import * as boardActions from '../../dyn-boards/store/board.actions';
 import { Store, Select } from '@ngxs/store';
-import { of, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { BoardState } from '../store/board.state';
 
 @Component({

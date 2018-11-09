@@ -1,4 +1,19 @@
-<div fxFlex fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+<div class="domain__choice">
+    <div class="brand">
+        <div class="section__img"></div>
+        <h1>Dynki</h1>
+    </div>
+
+    <section class="section">
+        <div class="main__form">
+                <router-outlet ></router-outlet>
+            </div>
+        <div class="main__pic"></div>
+    </section>
+</div>
+
+
+<!-- <div fxFlex fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
     <section fxFlex fxLayout="column" class="pre-auth" [@bgImgTrigger]='state'>
         <header fxLayout="row">
             <figure class="pre-auth__brand" layout="row" layout-align="center center">
@@ -19,4 +34,4 @@
     <aside fxLayout="row" fxLayoutAlign="center center" [@bgImgTrigger]='state'>
         <router-outlet></router-outlet>
     </aside>
-</div>
+</div> -->

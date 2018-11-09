@@ -12,7 +12,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
             state('maximum', style({
                 opacity: '1'
             })),
-            transition('none => maximum', animate('200ms 1.5s'))
+            transition('none => maximum', animate('200ms 0.5s'))
         ])
     ]
 })
