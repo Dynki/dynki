@@ -113,22 +113,22 @@ export class MenuService {
     const newBoardBtn = {
       title: 'New Board',
       caption: '',
-      icon: 'anticon anticon-plus',
+      icon: 'plus',
       clickAction: new boardActions.ChooseBoardType()
     };
 
     const blankAddBtn = {
       title: '',
       caption: '',
-      icon: 'anticon anticon-plus',
+      icon: 'plus',
     };
 
     const items: DynMenuItem[] = [
-      this.mb.setTitle('Inbox').setIcon('anticon anticon-mail').build(),
-      this.mb.setTitle('Boards').setIcon('anticon anticon-dashboard').setButton(newBoardBtn).setFoldersAllowed(true).build(),
-      this.mb.setTitle('Teams').setIcon('anticon anticon-appstore').setButton(blankAddBtn).build(),
-      this.mb.setTitle('Projects').setIcon('anticon anticon-rocket').setButton(blankAddBtn).build(),
-      this.mb.setTitle('Tags').setIcon('anticon anticon-tags').setButton(blankAddBtn).build()
+      this.mb.setTitle('Inbox').setIcon('mail').build(),
+      this.mb.setTitle('Boards').setIcon('dashboard').setButton(newBoardBtn).setFoldersAllowed(true).build(),
+      this.mb.setTitle('Teams').setIcon('appstore').setButton(blankAddBtn).build(),
+      this.mb.setTitle('Projects').setIcon('rocket').setButton(blankAddBtn).build(),
+      this.mb.setTitle('Tags').setIcon('tags').setButton(blankAddBtn).build()
     ]
 
     const menu = {

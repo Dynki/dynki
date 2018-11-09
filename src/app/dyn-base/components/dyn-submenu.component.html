@@ -15,7 +15,7 @@
         {{subitem.button.caption}}
     </button>
     <li nz-menu-item style="height:40px;" (click)="itemClick(subitem.clickAction)">
-        <i *ngIf="subitem.icon" [attr.class]="subitem.icon"></i>
+        <i *ngIf="subitem.icon" nz-icon [type]="subitem.icon" theme="outline"></i>
         <span>{{subitem.title}}</span>
     </li>
 </ul>

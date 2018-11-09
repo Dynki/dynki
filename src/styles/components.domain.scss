@@ -55,6 +55,12 @@
         grid-template-areas: "blank cont pic";
         
         .main {
+
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-content: center;
+            align-items: center;
             
             &__form {
                 -webkit-box-shadow: 10px 10px 197px -20px rgba(0,0,0,0.93);

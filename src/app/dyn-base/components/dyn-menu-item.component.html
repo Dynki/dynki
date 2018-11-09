@@ -8,11 +8,12 @@
     nzShape="circle" 
     (click)="dispatchBtnAction(menuitem)"    
     class="menu__item__button">
-        <i [attr.class]="menuitem.button.icon"></i>
+    <i *ngIf="menuitem.button.icon" nz-icon [type]="menuitem.button.icon" theme="outline"></i>
 </button>
 <li *ngIf="menuitem.items" nz-submenu [nzOpen]="menuitem.isSelected" class="menu__item" >
     <span title>
-        <i *ngIf="menuitem.icon" [attr.class]="menuitem.icon"></i>
+        <!-- <i *ngIf="menuitem.icon" [attr.class]="menuitem.icon"></i> -->
+        <i *ngIf="menuitem.icon" nz-icon [type]="menuitem.icon" theme="outline"></i>
         <span>{{menuitem.title}}</span>
     </span>
     <div class="menu__item__subitems" dynSortable [selector]="'dyn-sub-menu'" [data]="menuitem.items" (stop)="updateMenu($event)">
@@ -25,7 +26,7 @@
 </li>
 <li *ngIf="!menuitem.items" nz-menu-item>
     <span title>
-        <i *ngIf="menuitem.icon" [attr.class]="menuitem.icon"></i>
+        <i *ngIf="menuitem.icon" nz-icon [type]="menuitem.icon" theme="outline"></i>
         <span>{{menuitem.title}}</span>
     </span>
 </li>
