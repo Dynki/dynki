@@ -36,16 +36,21 @@ export class BaseState {
         subscribe(domain => {
             if (domain) {
                 console.log('DomainId::', domain.id);
-                ctx.patchState({ domainId: domain.id })
+                // ctx.patchState({ domainId: domain.id });
+                ctx.patchState({ domainId: '2uTHG3kNk4ckCX0M49U4' });
                 ctx.dispatch(new baseActions.DomainLoaded());
             } else {
                 console.log('Domain Id::Undefined');
-                ctx.dispatch(new baseActions.NoUserDomain());
+                // ctx.dispatch(new baseActions.NoUserDomain());
+                ctx.patchState({ domainId: '2uTHG3kNk4ckCX0M49U4' });
+                ctx.dispatch(new baseActions.DomainLoaded());
             }
         },
         (error) => {
             console.log('Domain Id::Error::', error);
-            ctx.dispatch(new baseActions.NoUserDomain());
+            // ctx.dispatch(new baseActions.NoUserDomain());
+            ctx.patchState({ domainId: '2uTHG3kNk4ckCX0M49U4' });
+            ctx.dispatch(new baseActions.DomainLoaded());
         });
     }
 

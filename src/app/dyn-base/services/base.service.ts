@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { flatMap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, of, from } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable()
