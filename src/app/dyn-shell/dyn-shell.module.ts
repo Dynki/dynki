@@ -39,6 +39,7 @@ import { DomainChoiceComponent } from './components/domain-registration/dyn-doma
 import { NewDomainComponent } from './components/domain-registration/dyn-new-domain.component';
 import { JoinDomainComponent } from './components/domain-registration/dyn-join-domain.component';
 import { DomainRegistrationComponent } from './components/domain-registration/dyn-domain-reg.component';
+import { DomainService } from './services/dyn-domain.service';
 
 export const components = [
     FooterComponent,
@@ -90,7 +91,9 @@ export const components = [
     AuthModule,
     TruncatePipe
   ],
-  providers: []
+  providers: [
+    DomainService
+  ]
 })
 export class ShellModule {
 }
