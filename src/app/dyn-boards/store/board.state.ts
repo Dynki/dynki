@@ -63,7 +63,7 @@ export class BoardState {
     setCurrentBoard(ctx: StateContext<BoardStateModel>, event: boardActions.UpdateBoard) {
         ctx.patchState({ currentBoard: event.board });
         ctx.dispatch(new boardActions.ViewBoard(event.board.id));
-    }    
+    }
 
     @Action(boardActions.UpdateBoard)
     updateBoard(ctx: StateContext<BoardStateModel>, event: boardActions.UpdateBoard) {

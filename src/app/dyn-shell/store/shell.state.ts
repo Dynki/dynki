@@ -3,7 +3,9 @@ import { ShellStateModel } from './shell.model';
 import { MenuState } from '../../dyn-base/store/menu.state';
 import { BoardState } from '../../dyn-boards/store/board.state';
 import * as shellActions from './shell.actions';
+import * as baseActions from '../../dyn-base/store/base.actions';
 import { DomainService } from '../services/dyn-domain.service';
+import { Navigate } from '@ngxs/router-plugin';
 
 @State<ShellStateModel>({
     name: 'app',
@@ -12,6 +14,7 @@ import { DomainService } from '../services/dyn-domain.service';
         menus: undefined,
         boards: undefined,
         domain: {
+            pending: false,
             validationStatus: undefined,
             checkingDomainName: false,
             domainChecked: false,
@@ -44,6 +47,18 @@ export class ShellState {
     constructor(
         private domainService: DomainService
     ) {}
+
+    @Action(shellActions.CreateDomain)
+    createDomain(ctx: StateContext<ShellStateModel>, event: shellActions.CreateDomain) {
+        let domain = ctx.getState().domain;
+        domain = {...domain, pending: true};
+        ctx.patchState({ domain })
+        this.domainService.createDomain(event.name).subscribe(() => {
+            domain = {...domain, pending: false};
+            ctx.patchState({ domain })
+            ctx.dispatch(new Navigate(['/']));
+        });
+    }
 
     @Action(shellActions.CheckDomainName)
     checkDomainName(ctx: StateContext<ShellStateModel>, event: shellActions.CheckDomainName) {

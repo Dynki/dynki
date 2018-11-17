@@ -8,8 +8,8 @@ import { debounceTime } from 'rxjs/operators';
 import { runInThisContext } from 'vm';
 
 @Component({
-    selector: 'dyn-new-domain',
-    template: `
+  selector: 'dyn-new-domain',
+  template: `
     <form *ngIf="domain$ | async as domain" class="new_domain__form"
       nz-form [formGroup]="domainForm" (ngSubmit)="submit()" name="domainForm">
       <h1 class="registration__heading">Name your domain</h1>
@@ -31,7 +31,9 @@ import { runInThisContext } from 'vm';
           <nz-form-explain
             *ngIf="domainForm.get('domain').dirty && domainForm.get('domain').hasError('pattern')">Sorry no wacky characters allowed!
           </nz-form-explain>
-          <nz-form-explain *ngIf="domain.domainChecked && domain.domainExists">Aww domain name already exists!</nz-form-explain>
+          <nz-form-explain
+            *ngIf="domain.domainChecked && domain.domainExists && domainForm.valid">Aww domain name already exists!
+          </nz-form-explain>
           <nz-form-explain *ngIf="domain.domainChecked && !domain.domainExists && domainForm.valid">Domain name is good!</nz-form-explain>
         </nz-form-control>
       </nz-form-item>
@@ -39,7 +41,7 @@ import { runInThisContext } from 'vm';
         <nz-form-control>
           <button
             [disabled]="tmpDisableBtn || !domain.domainChecked || domain.domainExists"
-            class="domain__btn" nz-button [nzSize]="'Large'" nzType="dashed" [nzLoading]="(pending$ | async)" type="submit">
+            class="domain__btn" nz-button [nzSize]="'Large'" nzType="dashed" [nzLoading]="domain.pending" type="submit">
               Create Domain<i nz-icon type="arrow-right" theme="outline"></i>
           </button>
         </nz-form-control>
@@ -63,9 +65,9 @@ export class NewDomainComponent implements OnInit {
   ngOnInit() {
     this.domainForm = this.fb.group({
       domain: [null, [Validators.required,
-        Validators.maxLength(50),
-        Validators.minLength(4),
-        Validators.pattern('^[0-9a-zA-Z \b]+$')]]
+      Validators.maxLength(50),
+      Validators.minLength(4),
+      Validators.pattern('^[0-9a-zA-Z \b]+$')]]
     });
 
     this.subject.pipe(
@@ -76,8 +78,12 @@ export class NewDomainComponent implements OnInit {
     });
   }
 
+  submit() {
+    this.store.dispatch(new shellActions.CreateDomain(this.domainForm.value.domain));
+  }
+
   checkDomain(domainNameValue) {
-      this.tmpDisableBtn = true;
-      this.subject.next(domainNameValue);
+    this.tmpDisableBtn = true;
+    this.subject.next(domainNameValue);
   }
 }

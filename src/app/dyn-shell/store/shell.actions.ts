@@ -1,7 +1,19 @@
 export enum ShellActionTypes {
-    CHECK_DOMAIN_NAME = '[Shell] Check Domain Name',
-    DOMAIN_NAME_EXISTS = '[Shell] Domain Name Exists',
-    DOMAIN_NAME_UNIQUE = '[Shell] Domain Name Unique'
+    CHECK_DOMAIN_NAME   = '[Shell] Check Domain Name',
+    DOMAIN_NAME_EXISTS  = '[Shell] Domain Name Exists',
+    DOMAIN_NAME_UNIQUE  = '[Shell] Domain Name Unique',
+    CREATE_DOMAIN       = '[Shell] Create Domain',
+    DOMAIN_CREATED      = '[Shell] Domain Created'
+}
+
+export class CreateDomain {
+    static type = ShellActionTypes.CREATE_DOMAIN;
+    constructor(public name: string) { }
+}
+
+export class DomainCreated {
+    static type = ShellActionTypes.DOMAIN_CREATED;
+    constructor(public domainId: string) { }
 }
 
 export class CheckDomainName {
@@ -20,6 +32,7 @@ export class DomainNameUnique {
 }
 
 export type DomainActions =
+    CreateDomain     |
     DomainNameExists |
     DomainNameUnique |
     CheckDomainName;

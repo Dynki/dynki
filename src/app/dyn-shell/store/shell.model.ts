@@ -5,6 +5,7 @@ export class ShellStateModel {
     menus: DynMenu[];
     boards: Board[];
     domain: {
+        pending: boolean;
         checkingDomainName: boolean;
         domainChecked: boolean;
         domainExists: boolean;
