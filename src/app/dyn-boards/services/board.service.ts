@@ -15,8 +15,6 @@ import * as boardActions from '../store/board.actions';
 export class BoardService {
 
   private userInfo: UserInfo;
-  private collectionName: string;
-  private collectionAppName: string;
 
   @Select(BaseState.domainId)
   private domainId$: Observable<string>;
@@ -26,9 +24,6 @@ export class BoardService {
     this.action$.pipe(ofActionDispatched(baseActions.DomainLoaded))
       .subscribe(() => {
         this.domainId = this.store.selectSnapshot(BaseState.domainId);
-        console.log('Board::Service::DomainId::', this.domainId);
-        this.collectionAppName = 'app::' + this.domainId;
-        this.collectionName = 'boards::' + this.domainId;
       });
 
       this.afAuth.authState.subscribe(u => {
@@ -39,12 +34,12 @@ export class BoardService {
   createBoard(type: string): Promise<DocumentReference> {
     console.log('Board::Service::CreateBoard');
     const data = JSON.parse(JSON.stringify(new Board('Task', type, '', this.userInfo)));
-    return this.db.collection(this.collectionName).add(data);
+    return this.db.collection('domains').doc(this.domainId).collection('boards').add(data);
   }
 
   getBoards(): Observable<IBoards[]> {
-    console.log('Board::Service::getBoards::', this.collectionAppName);
-    return this.db.collection<IBoard>(this.collectionAppName).snapshotChanges()
+    console.log('Board::Service::getBoards');
+    return this.db.collection('domains').doc(this.domainId).collection('boardsInDomain').snapshotChanges()
     .pipe(
       take(1),
       map(actions => {
@@ -59,7 +54,8 @@ export class BoardService {
 
   getBoard(boardId: string): Observable<IBoard> {
     console.log('Board::Service::getBoard ', boardId);
-    return this.db.collection<IBoard>(this.collectionName).doc(boardId).snapshotChanges()
+    // return this.db.collection<IBoard>(this.collectionName).doc(boardId).snapshotChanges()
+    return this.db.collection('domains').doc(this.domainId).collection('boards').doc(boardId).snapshotChanges()
     .pipe(
       take(1),
       map(b => {
@@ -78,7 +74,8 @@ export class BoardService {
 
   updateBoardTitle(board: IBoard) {
     console.log('Board::Service::UpdateBoardTitle');
-    return this.db.collection(this.collectionAppName).doc('appboards').get().pipe(
+    // return this.db.collection(this.collectionAppName).doc('appboards').get().pipe(
+    return this.db.collection('domains').doc(this.domainId).collection('boardsInDomain').doc('appBoards').get().pipe(
       take(1),
       switchMap(b => {
         const boards = (b.data() as IBoards).boards;
@@ -88,28 +85,33 @@ export class BoardService {
           boards[boardIndex].title = board.title;
         }
 
-        return this.db.collection(this.collectionAppName).doc('appboards').set({ boards: boards })
+        // return this.db.collection(this.collectionAppName).doc('appboards').set({ boards: boards })
+        return this.db.collection('domains').doc(this.domainId).collection('boardsInDomain').doc('appBoards').set({ boards: boards })
       })
     );
   }
 
   attachBoard(board: IBoard) {
     console.log('Board::Service::AttachBoard');
-    return this.db.collection(this.collectionAppName).doc('appboards').get()
+    // return this.db.collection(this.collectionAppName).doc('appboards').get()
+    return this.db.collection('domains').doc(this.domainId).collection('boardsInDomain').doc('appBoards').get()
     .pipe(
       take(1),
       switchMap(b => {
         let boards;
         if (!b.exists) {
           boards = { id: 'appboards', boards: [board] };
-          return this.db.collection(this.collectionAppName).doc('appboards').set(boards);
+          // return this.db.collection(this.collectionAppName).doc('appboards').set(boards);
+          return this.db.collection('domains').doc(this.domainId).collection('boardsInDomain').doc('appBoards').set(boards);
         } else {
           boards = b.data().boards;
           boards.push(board);
-          return this.db.collection(this.collectionAppName).doc('appboards').set({ boards: boards });
+          // return this.db.collection(this.collectionAppName).doc('appboards').set({ boards: boards });
+          return this.db.collection('domains').doc(this.domainId).collection('boardsInDomain').doc('appBoards').set({ boards: boards });
         }
       }),
-      switchMap(() => this.db.collection(this.collectionAppName).doc('appboards').get()),
+      // switchMap(() => this.db.collection(this.collectionAppName).doc('appboards').get()),
+      switchMap(() => this.db.collection('domains').doc(this.domainId).collection('boardsInDomain').doc('appBoards').get()),
       map(boards => boards.data())
     );
   }
@@ -120,37 +122,43 @@ export class BoardService {
     newFolder.isFolder = true;
     boards.boards.push(newFolder);
 
-    this.db.collection(this.collectionAppName).doc('appboards').get().pipe(
+    // this.db.collection(this.collectionAppName).doc('appboards').get().pipe(
+    this.db.collection('domains').doc(this.domainId).collection('boardsInDomain').doc('appBoards').get().pipe(
       take(1)
     )
     .subscribe(b => {
       if (!b.exists) {
-        this.db.collection(this.collectionAppName).doc('appboards').set(boards);
+        // this.db.collection(this.collectionAppName).doc('appboards').set(boards);
+        this.db.collection('domains').doc(this.domainId).collection('boardsInDomain').doc('appBoards').set(boards);
       } else {
-        this.db.collection(this.collectionAppName).doc('appboards').set({ boards: boards.boards });
+        this.db.collection('domains').doc(this.domainId).collection('boardsInDomain').doc('appBoards').set({ boards: boards.boards });
       }
     })
   }
 
   updateBoard(board: Board) {
     console.log('Board::Service::UpdateBoard');
-    this.db.collection(this.collectionName).doc(board.id).set(board);
+    this.db.collection('domains').doc(this.domainId).collection('boards').doc(board.id).set(board);
   }
 
   updateBoards(boards: Board[]) {
     console.log('Board::Service::UpdateBoardTitle');
-    this.db.collection(this.collectionAppName).doc('appboards').set({ boards });
+    this.db.collection('domains').doc(this.domainId).collection('boardsInDomain').doc('appBoards').set({ boards });
   }
 
   removeBoard(board: Board) {
-    this.db.collection(this.collectionName).doc(board.id).delete().then(() => {
+    this.db.collection('domains').doc(this.domainId).collection('boards').doc(board.id).delete().then(() => {
       this.removeBoardTitle(board);
     })
     .catch(err => console.log('Board::Service::RemoveBoard::Error', err));
+    // this.db.collection(this.collectionName).doc(board.id).delete().then(() => {
+    //   this.removeBoardTitle(board);
+    // })
+    // .catch(err => console.log('Board::Service::RemoveBoard::Error', err));
   }
 
   removeBoardTitle(board: Board) {
-    this.db.collection(this.collectionAppName).doc('appboards').snapshotChanges().pipe(
+    this.db.collection('domains').doc(this.domainId).collection('boardsInDomain').doc('appBoards').snapshotChanges().pipe(
         take(1)
     )
     .subscribe(b => {
@@ -159,8 +167,19 @@ export class BoardService {
         existingBoards.boards = updatedBoards;
         this.store.dispatch(new boardActions.RefreshBoards(existingBoards));
         this.store.dispatch(new boardActions.SetCurrentBoard(existingBoards.boards[0]));
-        this.db.collection(this.collectionAppName).doc('appboards').set({ boards: updatedBoards });
+        this.db.collection('domains').doc(this.domainId).collection('boardsInDomain').doc('appBoards').set({ boards: updatedBoards });
     })
+  //   this.db.collection(this.collectionAppName).doc('appboards').snapshotChanges().pipe(
+  //     take(1)
+  //   )
+  //   .subscribe(b => {
+  //     const existingBoards = b.payload.data() as IBoards;
+  //     const updatedBoards = existingBoards.boards.filter(f => f.id !== board.id);
+  //     existingBoards.boards = updatedBoards;
+  //     this.store.dispatch(new boardActions.RefreshBoards(existingBoards));
+  //     this.store.dispatch(new boardActions.SetCurrentBoard(existingBoards.boards[0]));
+  //     this.db.collection(this.collectionAppName).doc('appboards').set({ boards: updatedBoards });
+  // })
   }
 
 }

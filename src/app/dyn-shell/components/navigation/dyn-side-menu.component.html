@@ -1,1 +1,9 @@
+<nz-breadcrumb *ngIf="domainName$ | async as domainName" class="side-menu__bc" nzTitle="This is your domain name" nzPlacement="right" nz-tooltip>
+    <nz-breadcrumb-item>
+        <i nz-icon type="home"></i>
+    </nz-breadcrumb-item>
+    <nz-breadcrumb-item>
+        <span>{{domainName}}</span>
+    </nz-breadcrumb-item>
+</nz-breadcrumb>
 <dyn-menu [menu]="menu$ | async"></dyn-menu>

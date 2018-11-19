@@ -5,7 +5,6 @@ import { Observable, Subject } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import * as shellActions from '../../store/shell.actions';
 import { debounceTime } from 'rxjs/operators';
-import { runInThisContext } from 'vm';
 
 @Component({
   selector: 'dyn-new-domain',

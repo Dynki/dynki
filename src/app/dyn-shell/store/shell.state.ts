@@ -3,9 +3,9 @@ import { ShellStateModel } from './shell.model';
 import { MenuState } from '../../dyn-base/store/menu.state';
 import { BoardState } from '../../dyn-boards/store/board.state';
 import * as shellActions from './shell.actions';
-import * as baseActions from '../../dyn-base/store/base.actions';
 import { DomainService } from '../services/dyn-domain.service';
 import { Navigate } from '@ngxs/router-plugin';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @State<ShellStateModel>({
     name: 'app',
@@ -45,7 +45,8 @@ export class ShellState {
     }
 
     constructor(
-        private domainService: DomainService
+        private domainService: DomainService,
+        private afAuth: AngularFireAuth
     ) {}
 
     @Action(shellActions.CreateDomain)
@@ -54,9 +55,11 @@ export class ShellState {
         domain = {...domain, pending: true};
         ctx.patchState({ domain })
         this.domainService.createDomain(event.name).subscribe(() => {
-            domain = {...domain, pending: false};
-            ctx.patchState({ domain })
-            ctx.dispatch(new Navigate(['/']));
+            this.afAuth.auth.currentUser.getIdToken(true).then(() => {
+                domain = {...domain, pending: false};
+                ctx.patchState({ domain })
+                ctx.dispatch(new Navigate(['/']));
+            });
         });
     }
 

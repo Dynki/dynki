@@ -5,6 +5,7 @@ import * as boardActions from '../../../dyn-boards/store/board.actions';
 import { DynMenu } from '../../../dyn-base/store/menu.model';
 import { Observable } from 'rxjs/observable';
 import { MenuState } from '../../../dyn-base/store/menu.state';
+import { BaseState } from 'app/dyn-base/store/base.state';
 
 @Component({
   selector: 'dyn-side-menu',
@@ -12,6 +13,9 @@ import { MenuState } from '../../../dyn-base/store/menu.state';
 })
 
 export class SideMenuComponent {
+
+  @Select(BaseState.domainName)
+  public domainName$: Observable<string>;
 
   @Select(MenuState.getMenu('Main menu'))
   public menu$: Observable<DynMenu>;

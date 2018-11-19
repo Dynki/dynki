@@ -22,11 +22,11 @@ export class ShellComponent implements OnInit {
     this.action$.pipe(ofActionSuccessful(menuActions.InitMenus))
       .subscribe(() => this.store.dispatch(new boardActions.GetAllBoards()));
 
-    this.action$.pipe(ofActionSuccessful(boardActions.GetAllBoards))
-      .subscribe(() => this.store.dispatch(new menuActions.LoadFolders('Main menu')));
+    // this.action$.pipe(ofActionSuccessful(boardActions.GetAllBoards))
+    //   .subscribe(() => this.store.dispatch(new menuActions.LoadFolders('Main menu')));
 
-    this.action$.pipe(ofActionSuccessful(boardActions.CreateBoard))
-      .subscribe(() => this.store.dispatch(new menuActions.LoadFolders('Main menu')));
+    // this.action$.pipe(ofActionSuccessful(boardActions.CreateBoard))
+    //   .subscribe(() => this.store.dispatch(new menuActions.LoadFolders('Main menu')));
   }
 }
 

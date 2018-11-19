@@ -9,7 +9,8 @@ import { Navigate } from '@ngxs/router-plugin';
 @State<BaseStateModel>({
     name: 'base',
     defaults: {
-        domainId: undefined
+        domainId: undefined,
+        domainName: ''
     }
 })
 export class BaseState {
@@ -19,6 +20,10 @@ export class BaseState {
      */
     @Selector() static domainId(state: BaseStateModel): string {
         return state.domainId;
+    }
+
+    @Selector() static domainName(state: BaseStateModel): string {
+        return state.domainName;
     }
 
     constructor(
@@ -36,7 +41,7 @@ export class BaseState {
         subscribe(domain => {
             if (domain) {
                 console.log('DomainId::', domain.id);
-                ctx.patchState({ domainId: domain.id });
+                ctx.patchState({ domainId: domain.id, domainName: domain.display_name });
                 ctx.dispatch(new baseActions.DomainLoaded());
             } else {
                 console.log('Domain Id::Undefined');

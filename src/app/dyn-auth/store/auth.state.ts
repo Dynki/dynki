@@ -131,6 +131,11 @@ export class AuthState implements NgxsOnInit {
             })
     };
 
+    @Action(fromAuth.RefreshToken)
+    refreshToken(ctx: StateContext<AuthStateModel>) {
+        this.afAuth.auth.currentUser.getIdToken(true)
+    };
+
     @Action(fromAuth.LoginSuccess)
     onLoginSuccess(ctx: StateContext<AuthStateModel>) {
         console.log('onLoginSuccess, navigating to /');

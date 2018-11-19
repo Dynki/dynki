@@ -19,11 +19,21 @@
     background: #ffffff!important;
 }
 
+.side-menu__bc {
+    padding: 10px!important;
+    border-right: 1px solid #e8e8e8;
+}
+
 .side-menu {
 
     &__brand {
         background-color: #e1e4e5;
         min-height: 57px;
+    }
+
+    &__bc {
+        padding: 10px;
+        border-right: 1px solid #e8e8e8;
     }
     
     &__img {

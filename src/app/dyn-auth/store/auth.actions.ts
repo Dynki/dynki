@@ -17,7 +17,13 @@ export enum AuthActionTypes {
   SET_PERSISTENCE   = '[Auth] Set Persistence',
   SIGN_UP           = '[Auth] Sign Up',
   REGISTER_REDIRECT = '[Auth] Register Redirect',
-  REGISTER_ERROR    = '[Auth] Register Error'
+  REGISTER_ERROR    = '[Auth] Register Error',
+  REFRESH_TOKEN     = '[Auth] Refresh Token'
+}
+
+export class RefreshToken {
+  static type = AuthActionTypes.REFRESH_TOKEN;
+  constructor() {}
 }
 
 export class CheckSession {
@@ -108,6 +114,7 @@ export class RegisterRedirect {
 
 export type AuthActions =
   CheckSession
+  | RefreshToken
   | LoginSuccess
   | LoginFailure
   | LoginWithEmailAndPassword
