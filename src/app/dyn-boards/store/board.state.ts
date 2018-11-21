@@ -86,31 +86,7 @@ export class BoardState {
 
     @Action(boardActions.GetAllBoards)
     getAllBoards(ctx: StateContext<BoardStateModel>) {
-        this.boardService.getBoards().pipe(
-            take(1),
-            tap(app => {
-            console.log('Board::State::getAllBoards::Subscribe');
-
-            ctx.patchState({ boards: app[0] });
-
-            if (app[0] && app[0].boards) {
-                ctx.dispatch(new menuActions.LoadSubItems('Boards',
-                    app[0].boards.map(b => {
-                        return this.mb.setTitle(b.title)
-                            .setIsFolder(b.isFolder)
-                            .setFoldersAllowed(b.isFolder)
-                            .setClickAction(new boardActions.ViewBoard(b.id))
-                            .build();
-
-                })));
-
-                if (app[0].boards.length > 0) {
-                    ctx.dispatch(new boardActions.GetBoard(app[0].boards[0].id));
-                }
-            }
-
-            })
-        ).subscribe();
+        this.boardService.getBoards();
     }
 
     @Action(boardActions.RefreshBoards)
@@ -141,19 +117,19 @@ export class BoardState {
     @Action(boardActions.GetBoard)
     getBoard(ctx: StateContext<BoardStateModel>, event: boardActions.GetBoard) {
         const state = ctx.getState();
-        this.boardService.getBoard(event.boardId).pipe(
-            take(1),
-            tap(currentBoard => {
-                console.log('Board::State::getAllBoards::Subscribe');
+        this.boardService.getBoard(event.boardId);
+    }
 
-                ctx.patchState({
-                    currentBoard: currentBoard, boardForm: {
-                        ...state.boardForm,
-                        model: currentBoard
-                    }
-                });
-            })
-        ).subscribe();
+
+    @Action(boardActions.DisplayBoard)
+    displayBoard(ctx: StateContext<BoardStateModel>, event: boardActions.DisplayBoard) {
+        const state = ctx.getState();
+        ctx.patchState({
+            currentBoard: event.board, boardForm: {
+                ...state.boardForm,
+                model: event.board
+            }
+        });
     }
 
     @Action(boardActions.ViewBoard)
@@ -222,15 +198,12 @@ export class BoardState {
     }
 
     @Action(boardActions.CreateBoard)
-    createBoard(ctx: StateContext<BoardStateModel>, event: boardActions.CreateBoard) {
+    async createBoard(ctx: StateContext<BoardStateModel>, event: boardActions.CreateBoard) {
         this.modalService.closeAll();
-        this.boardService.createBoard(event.payload + ' 1').then(docRef => {
-            this.boardService.getBoard(docRef.id)
-            .pipe(
-                take(1),
-                tap(doc => ctx.dispatch(new boardActions.AttachBoard(doc)))
-            ).subscribe();
-        });
+        const newBoard = await this.boardService.createBoard(event.payload + ' 1')
+        const boards = await this.boardService.attachBoard(newBoard).toPromise();
+        ctx.dispatch(new boardActions.RefreshBoards(boards));
+        ctx.dispatch(new boardActions.ViewBoard(newBoard.id));
     }
 
     @Action(boardActions.AttachBoard)

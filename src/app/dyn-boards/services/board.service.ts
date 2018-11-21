@@ -31,50 +31,47 @@ export class BoardService {
         });
    }
 
-  createBoard(type: string): Promise<DocumentReference> {
+  async createBoard(type: string): Promise<Board> {
     console.log('Board::Service::CreateBoard');
-    const data = JSON.parse(JSON.stringify(new Board('Task', type, '', this.userInfo)));
-    return this.db.collection('domains').doc(this.domainId).collection('boards').add(data);
+      const data = JSON.parse(JSON.stringify(new Board('Task', type, '', this.userInfo)));
+      const docRef = await this.db.collection('domains').doc(this.domainId).collection('boards').add(data);
+      const newDoc = await this.db.collection('domains').doc(this.domainId).collection('boards').doc(docRef.id).get().toPromise();
+
+      return Promise.resolve({ id: newDoc.id, ...newDoc.data() } as Board);
   }
 
-  getBoards(): Observable<IBoards[]> {
+  getBoards() {
     console.log('Board::Service::getBoards');
-    return this.db.collection('domains').doc(this.domainId).collection('boardsInDomain').snapshotChanges()
+    return this.db.collection('domains').doc(this.domainId).collection('boardsInDomain').doc('appBoards').snapshotChanges()
     .pipe(
-      take(1),
-      map(actions => {
-        return actions.map((a: any) => {
-          const data = a.payload.doc.data();
-          const id = a.payload.doc.id;
-          return { id, ...data };
-        })
+      map(a => {
+        const data = a.payload.data();
+        const id = a.payload.id;
+        return { id, ...data } as IBoards;
       })
-    )
+    ).subscribe((boards: IBoards) => {
+      this.store.dispatch(new boardActions.RefreshBoards(boards));
+    })
   }
 
-  getBoard(boardId: string): Observable<IBoard> {
+  getBoard(boardId: string) {
     console.log('Board::Service::getBoard ', boardId);
-    // return this.db.collection<IBoard>(this.collectionName).doc(boardId).snapshotChanges()
     return this.db.collection('domains').doc(this.domainId).collection('boards').doc(boardId).snapshotChanges()
-    .pipe(
-      take(1),
-      map(b => {
+    .subscribe(b => {
         if (b.payload.exists) {
           console.log('Board::Service::getBoard::b', b);
           const data = b.payload.data() as Board;
           const id = b.payload.id;
 
-          return { id, ...data };
+          this.store.dispatch(new boardActions.DisplayBoard({ id, ...data }));
         } else {
           return undefined;
         }
-      })
-    );
+      });
   }
 
   updateBoardTitle(board: IBoard) {
     console.log('Board::Service::UpdateBoardTitle');
-    // return this.db.collection(this.collectionAppName).doc('appboards').get().pipe(
     return this.db.collection('domains').doc(this.domainId).collection('boardsInDomain').doc('appBoards').get().pipe(
       take(1),
       switchMap(b => {
@@ -85,7 +82,6 @@ export class BoardService {
           boards[boardIndex].title = board.title;
         }
 
-        // return this.db.collection(this.collectionAppName).doc('appboards').set({ boards: boards })
         return this.db.collection('domains').doc(this.domainId).collection('boardsInDomain').doc('appBoards').set({ boards: boards })
       })
     );
@@ -93,7 +89,6 @@ export class BoardService {
 
   attachBoard(board: IBoard) {
     console.log('Board::Service::AttachBoard');
-    // return this.db.collection(this.collectionAppName).doc('appboards').get()
     return this.db.collection('domains').doc(this.domainId).collection('boardsInDomain').doc('appBoards').get()
     .pipe(
       take(1),
@@ -101,18 +96,15 @@ export class BoardService {
         let boards;
         if (!b.exists) {
           boards = { id: 'appboards', boards: [board] };
-          // return this.db.collection(this.collectionAppName).doc('appboards').set(boards);
           return this.db.collection('domains').doc(this.domainId).collection('boardsInDomain').doc('appBoards').set(boards);
         } else {
           boards = b.data().boards;
           boards.push(board);
-          // return this.db.collection(this.collectionAppName).doc('appboards').set({ boards: boards });
           return this.db.collection('domains').doc(this.domainId).collection('boardsInDomain').doc('appBoards').set({ boards: boards });
         }
       }),
-      // switchMap(() => this.db.collection(this.collectionAppName).doc('appboards').get()),
       switchMap(() => this.db.collection('domains').doc(this.domainId).collection('boardsInDomain').doc('appBoards').get()),
-      map(boards => boards.data())
+      map(boards => boards.data() as IBoards)
     );
   }
 
@@ -121,14 +113,11 @@ export class BoardService {
     const newFolder = { id: null, title: 'New Folder' } as Board;
     newFolder.isFolder = true;
     boards.boards.push(newFolder);
-
-    // this.db.collection(this.collectionAppName).doc('appboards').get().pipe(
     this.db.collection('domains').doc(this.domainId).collection('boardsInDomain').doc('appBoards').get().pipe(
       take(1)
     )
     .subscribe(b => {
       if (!b.exists) {
-        // this.db.collection(this.collectionAppName).doc('appboards').set(boards);
         this.db.collection('domains').doc(this.domainId).collection('boardsInDomain').doc('appBoards').set(boards);
       } else {
         this.db.collection('domains').doc(this.domainId).collection('boardsInDomain').doc('appBoards').set({ boards: boards.boards });
@@ -151,10 +140,6 @@ export class BoardService {
       this.removeBoardTitle(board);
     })
     .catch(err => console.log('Board::Service::RemoveBoard::Error', err));
-    // this.db.collection(this.collectionName).doc(board.id).delete().then(() => {
-    //   this.removeBoardTitle(board);
-    // })
-    // .catch(err => console.log('Board::Service::RemoveBoard::Error', err));
   }
 
   removeBoardTitle(board: Board) {
@@ -169,17 +154,6 @@ export class BoardService {
         this.store.dispatch(new boardActions.SetCurrentBoard(existingBoards.boards[0]));
         this.db.collection('domains').doc(this.domainId).collection('boardsInDomain').doc('appBoards').set({ boards: updatedBoards });
     })
-  //   this.db.collection(this.collectionAppName).doc('appboards').snapshotChanges().pipe(
-  //     take(1)
-  //   )
-  //   .subscribe(b => {
-  //     const existingBoards = b.payload.data() as IBoards;
-  //     const updatedBoards = existingBoards.boards.filter(f => f.id !== board.id);
-  //     existingBoards.boards = updatedBoards;
-  //     this.store.dispatch(new boardActions.RefreshBoards(existingBoards));
-  //     this.store.dispatch(new boardActions.SetCurrentBoard(existingBoards.boards[0]));
-  //     this.db.collection(this.collectionAppName).doc('appboards').set({ boards: updatedBoards });
-  // })
   }
 
 }

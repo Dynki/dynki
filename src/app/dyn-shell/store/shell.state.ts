@@ -16,6 +16,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
         domain: {
             pending: false,
             validationStatus: undefined,
+            joinDomainStatus: undefined,
             checkingDomainName: false,
             domainChecked: false,
             domainExists: false
@@ -68,7 +69,14 @@ export class ShellState {
         let domain = ctx.getState().domain;
         const re = RegExp('^[0-9a-zA-Z \b]+$')
         if (event.name.length >= 4 && event.name.length <= 50 && re.test(event.name)) {
-            domain = {...domain, checkingDomainName: true, domainChecked: false, validationStatus: 'validating'};
+            domain = {
+                ...domain,
+                checkingDomainName: true,
+                domainChecked: false,
+                validationStatus: 'validating',
+                joinDomainStatus: 'validating'
+            };
+
             ctx.patchState({ domain });
             this.domainService.checkUserDomain(event.name).subscribe(() => {
                 ctx.dispatch(new shellActions.DomainNameUnique());
@@ -76,7 +84,13 @@ export class ShellState {
                 ctx.dispatch(new shellActions.DomainNameExists());
             });
         } else {
-            domain = {...domain, checkingDomainName: false, domainChecked: false, validationStatus: 'warning'};
+            domain = {
+                ...domain,
+                checkingDomainName: false,
+                domainChecked: false,
+                validationStatus: 'warning',
+                joinDomainStatus: 'warning'
+            };
             ctx.patchState({ domain });
         }
     }
@@ -85,7 +99,14 @@ export class ShellState {
     domainNameExists(ctx: StateContext<ShellStateModel>, event: shellActions.DomainNameExists) {
         console.log('ShellState::DomainNameExists');
         let domain = ctx.getState().domain;
-        domain = {...domain, checkingDomainName: false, domainChecked: true, domainExists: true, validationStatus: 'error'};
+        domain = {
+            ...domain,
+            checkingDomainName: false,
+            domainChecked: true,
+            domainExists: true,
+            validationStatus: 'error',
+            joinDomainStatus: 'success'
+        };
         ctx.patchState({ domain });
     }
 
@@ -93,7 +114,14 @@ export class ShellState {
     domainNameUnique(ctx: StateContext<ShellStateModel>, event: shellActions.DomainNameUnique) {
         console.log('ShellState::DomainNameUnique');
         let domain = ctx.getState().domain;
-        domain = {...domain, checkingDomainName: false, domainChecked: true, domainExists: false, validationStatus: 'success'};
+        domain = {
+            ...domain,
+            checkingDomainName: false,
+            domainChecked: true,
+            domainExists: false,
+            validationStatus: 'success',
+            joinDomainStatus: 'error'
+        };
         ctx.patchState({ domain });
     }
 }

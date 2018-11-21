@@ -56,7 +56,7 @@ export class BaseState {
 
     @Action(baseActions.NoUserDomain)
     noUserDomain(ctx: StateContext<BaseStateModel>) {
-        ctx.dispatch(new Navigate(['/domain-registration/choice']))
+        ctx.dispatch(new Navigate(['/domain-registration/new']))
     }
     /**
      * Events

@@ -22,10 +22,6 @@ import { Navigate } from '@ngxs/router-plugin';
         <button (click)="newDomain()" class="domain__btn" nz-button [nzSize]="'Large'" nzType="dashed" >
             Create New Domain<i nz-icon type="plus-circle" theme="outline"></i>
         </button>
-        <div class="or">Or</div>
-        <button (click)="joinDomain()" class="domain__btn" nz-button [nzSize]="'Large'" nzType="dashed">
-            Join Existing Domain<i nz-icon type="team" theme="outline"></i>
-        </button>
     </div>`
 })
 export class DomainChoiceComponent implements AfterViewInit {
@@ -39,9 +35,5 @@ export class DomainChoiceComponent implements AfterViewInit {
 
     newDomain() {
         this.store.dispatch(new Navigate(['/domain-registration/new']));
-    }
-
-    joinDomain() {
-        this.store.dispatch(new Navigate(['/domain-registration/join']));
     }
 }

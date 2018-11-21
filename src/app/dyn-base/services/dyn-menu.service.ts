@@ -118,13 +118,14 @@ export class MenuService {
     };
 
     const blankAddBtn = {
-      title: '',
+      title: 'Coming Soon',
       caption: '',
       icon: 'plus',
     };
 
+
     const items: DynMenuItem[] = [
-      this.mb.setTitle('Inbox').setIcon('mail').build(),
+      this.mb.setTitle('Inbox').setIcon('mail').setBadgeCount(1).build(),
       this.mb.setTitle('Boards').setIcon('dashboard').setButton(newBoardBtn).setFoldersAllowed(true).build(),
       this.mb.setTitle('Teams').setIcon('appstore').setButton(blankAddBtn).build(),
       this.mb.setTitle('Projects').setIcon('rocket').setButton(blankAddBtn).build(),

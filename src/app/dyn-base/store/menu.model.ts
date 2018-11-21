@@ -12,6 +12,7 @@ export interface DynMenuItem {
     title: string;
     icon: string;
     button: DynMenuButton;
+    badgeCount: number;
     items: Array<DynMenuItem>
     isFolder: boolean;
     isSelected: boolean;
@@ -25,6 +26,7 @@ export class MenuItem implements DynMenuItem {
     title = null;
     icon = null;
     button = null;
+    badgeCount = 0;
     items = null;
     isFolder = false;
     isSelected = false;
@@ -37,6 +39,7 @@ export class MenuItem implements DynMenuItem {
         this.icon = builder.icon;
         this.button = builder.button;
         this.items = builder.items;
+        this.badgeCount = builder.badgeCount;
         this.isFolder = builder.isFolder;
         this.isSelected = builder.isSelected;
         this.clickAction = builder.clickAction;

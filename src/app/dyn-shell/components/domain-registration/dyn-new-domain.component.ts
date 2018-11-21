@@ -11,15 +11,16 @@ import { debounceTime } from 'rxjs/operators';
   template: `
     <form *ngIf="domain$ | async as domain" class="new_domain__form"
       nz-form [formGroup]="domainForm" (ngSubmit)="submit()" name="domainForm">
-      <h1 class="registration__heading">Name your domain</h1>
+      <h1 class="registration__heading">Name your team</h1>
+      <h4>Give your team a name they can be proud of</h4>
       <nz-form-item class="new_domain__form-item new_domain__form-input">
         <nz-form-control [nzValidateStatus]="domain.validationStatus" nzHasFeedback class="domain__ctrl">
           <nz-input-group nzPrefixIcon="anticon anticon-team" nzSize="large">
             <input #domainName type="text" (input)="checkDomain(domainName.value)" autocomplete="off"
-              nz-input formControlName="domain" nzRequired placeholder="Enter your domain name" id="domain">
+              nz-input formControlName="domain" nzRequired placeholder="Enter your team name" id="domain">
           </nz-input-group>
           <nz-form-explain
-            *ngIf="domainForm.get('domain').dirty && domainForm.get('domain').hasError('required')">We're gonna need a domain name!
+            *ngIf="domainForm.get('domain').dirty && domainForm.get('domain').hasError('required')">We're gonna need a team name!
           </nz-form-explain>
           <nz-form-explain
             *ngIf="domainForm.get('domain').dirty && domainForm.get('domain').hasError('minlength')">Too short try a longer name!
@@ -31,9 +32,9 @@ import { debounceTime } from 'rxjs/operators';
             *ngIf="domainForm.get('domain').dirty && domainForm.get('domain').hasError('pattern')">Sorry no wacky characters allowed!
           </nz-form-explain>
           <nz-form-explain
-            *ngIf="domain.domainChecked && domain.domainExists && domainForm.valid">Aww domain name already exists!
+            *ngIf="domain.domainChecked && domain.domainExists && domainForm.valid">Aww team name already exists!
           </nz-form-explain>
-          <nz-form-explain *ngIf="domain.domainChecked && !domain.domainExists && domainForm.valid">Domain name is good!</nz-form-explain>
+          <nz-form-explain *ngIf="domain.domainChecked && !domain.domainExists && domainForm.valid">Team name is good!</nz-form-explain>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item class="new_domain__form-item">
@@ -41,7 +42,7 @@ import { debounceTime } from 'rxjs/operators';
           <button
             [disabled]="tmpDisableBtn || !domain.domainChecked || domain.domainExists"
             class="domain__btn" nz-button [nzSize]="'Large'" nzType="dashed" [nzLoading]="domain.pending" type="submit">
-              Create Domain<i nz-icon type="arrow-right" theme="outline"></i>
+              Create Team<i nz-icon type="arrow-right" theme="outline"></i>
           </button>
         </nz-form-control>
       </nz-form-item>

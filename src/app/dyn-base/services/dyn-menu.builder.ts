@@ -6,6 +6,7 @@ export class MenuBuilder {
     private _title: string;
     private _icon: string;
     private _button: DynMenuButton;
+    private _badgeCount: number;
     private _items: Array<DynMenuItem>
     private _isFolder: boolean;
     private _parent: string;
@@ -36,6 +37,13 @@ export class MenuBuilder {
     }
     setButton(value: DynMenuButton): this {
         this._button = value;
+        return this;
+    }
+    get badgeCount() {
+        return this._badgeCount;
+    }
+    setBadgeCount(value: number): this {
+        this._badgeCount = value;
         return this;
     }
     get items() {
@@ -87,6 +95,7 @@ export class MenuBuilder {
         this._button = null;
         this._items = null
         this._isFolder = false;
+        this._badgeCount = 0;
         this._parent = null;
         this._clickAction = null;
         this._isSelected = false;

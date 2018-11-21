@@ -10,5 +10,6 @@ export class ShellStateModel {
         domainChecked: boolean;
         domainExists: boolean;
         validationStatus: 'success' | 'warning' | 'error' | 'validating'
+        joinDomainStatus: 'success' | 'warning' | 'error' | 'validating'
     }
 }

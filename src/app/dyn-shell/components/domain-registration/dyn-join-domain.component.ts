@@ -11,12 +11,12 @@ import * as shellActions from '../../store/shell.actions';
     template: `
     <form *ngIf="domain$ | async as domain" class="new_domain__form"
       nz-form [formGroup]="domainForm" (ngSubmit)="submit()" name="domainForm">
-      <h1 class="registration__heading">Name your domain</h1>
+      <h1 class="registration__heading">Find a party to join</h1>
       <nz-form-item class="new_domain__form-item new_domain__form-input">
-        <nz-form-control [nzValidateStatus]="domain.validationStatus" nzHasFeedback class="domain__ctrl">
+        <nz-form-control [nzValidateStatus]="domain.joinDomainStatus" nzHasFeedback class="domain__ctrl">
           <nz-input-group nzPrefixIcon="anticon anticon-team" nzSize="large">
             <input #domainName type="text" (input)="checkDomain(domainName.value)" autocomplete="off"
-              nz-input formControlName="domain" nzRequired placeholder="Enter your domain name" id="domain">
+              nz-input formControlName="domain" nzRequired placeholder="Enter domain name to join" id="domain">
           </nz-input-group>
           <nz-form-explain
             *ngIf="domainForm.get('domain').dirty && domainForm.get('domain').hasError('required')">We're gonna need a domain name!
@@ -31,17 +31,17 @@ import * as shellActions from '../../store/shell.actions';
             *ngIf="domainForm.get('domain').dirty && domainForm.get('domain').hasError('pattern')">Sorry no wacky characters allowed!
           </nz-form-explain>
           <nz-form-explain
-            *ngIf="domain.domainChecked && domain.domainExists && domainForm.valid">Aww domain name already exists!
+            *ngIf="domain.domainChecked && domain.domainExists && domainForm.valid">Woo hoo, domain exists!
           </nz-form-explain>
-          <nz-form-explain *ngIf="domain.domainChecked && !domain.domainExists && domainForm.valid">Domain name is good!</nz-form-explain>
+          <nz-form-explain *ngIf="domain.domainChecked && !domain.domainExists && domainForm.valid">Ahh snap, nobody here!</nz-form-explain>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item class="new_domain__form-item">
         <nz-form-control>
           <button
-            [disabled]="tmpDisableBtn || !domain.domainChecked || domain.domainExists"
+            [disabled]="tmpDisableBtn || !domain.domainChecked || !domain.domainExists"
             class="domain__btn" nz-button [nzSize]="'Large'" nzType="dashed" [nzLoading]="domain.pending" type="submit">
-              Create Domain<i nz-icon type="arrow-right" theme="outline"></i>
+              Request Invite<i nz-icon type="arrow-right" theme="outline"></i>
           </button>
         </nz-form-control>
       </nz-form-item>

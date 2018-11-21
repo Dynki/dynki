@@ -24,6 +24,7 @@ export class MenuItemComponent implements OnInit {
         items: null,
         isFolder: true,
         isSelected: false,
+        badgeCount: 0,
         foldersAllowed: true,
         title: 'New Folder',
         icon: 'anticon anticon-folder-add',
