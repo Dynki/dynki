@@ -17,7 +17,6 @@ export class AuthenticatedGuard implements CanActivate {
     return this.store.selectOnce(AuthState.getUser).pipe(
       map(u => {
         if (!u) {
-          console.log('AuthenticatedGuard::Dispatching Login Redirect')
           this.store.dispatch(new LoginRedirect());
         }
         return true;
