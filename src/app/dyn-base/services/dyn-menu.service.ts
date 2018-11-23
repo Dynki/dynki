@@ -11,6 +11,7 @@ import { DynMenuItem, DynMenu } from '../store/menu.model';
 
 import * as boardActions from '../../dyn-boards/store/board.actions';
 import * as menuActions from '../store/menu.actions';
+import { Navigate } from '@ngxs/router-plugin';
 
 @Injectable()
 export class MenuService {
@@ -123,9 +124,14 @@ export class MenuService {
       icon: 'plus',
     };
 
+    const AddBtn = {
+      title: 'Coming Soon',
+      caption: '',
+      icon: 'plus',
+    };
 
     const items: DynMenuItem[] = [
-      this.mb.setTitle('Inbox').setIcon('mail').setBadgeCount(1).build(),
+      this.mb.setTitle('Inbox').setIcon('mail').setBadgeCount(1).setClickAction(new Navigate(['messaging/inbox'])).build(),
       this.mb.setTitle('Boards').setIcon('dashboard').setButton(newBoardBtn).setFoldersAllowed(true).build(),
       this.mb.setTitle('Teams').setIcon('appstore').setButton(blankAddBtn).build(),
       this.mb.setTitle('Projects').setIcon('rocket').setButton(blankAddBtn).build(),

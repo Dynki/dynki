@@ -40,6 +40,8 @@ import { NewDomainComponent } from './components/domain-registration/dyn-new-dom
 import { JoinDomainComponent } from './components/domain-registration/dyn-join-domain.component';
 import { DomainRegistrationComponent } from './components/domain-registration/dyn-domain-reg.component';
 import { DomainService } from './services/dyn-domain.service';
+import { MessagingModule } from 'app/dyn-messaging/dyn-messaging.module';
+import { MessageState } from 'app/dyn-messaging/store/message.state';
 
 export const components = [
     FooterComponent,
@@ -70,10 +72,12 @@ export const components = [
       BaseState,
       ShellState,
       MenuState,
+      MessageState,
       BoardState
     ]),
     BaseModule,
     BoardModule,
+    MessagingModule,
     BrowserModule,
     FormsModule,
     HttpModule,

@@ -36,6 +36,10 @@ export class MenuItemComponent implements OnInit {
       this.store.dispatch(menuitem.button.clickAction);
     }
 
+    itemClick(action: any) {
+      this.store.dispatch(action);
+    }
+
     updateMenu(items: MenuItem[]) {
       this.store.dispatch(new boardActions.UpdateBoards(items.map(i => ({ id: i.clickAction.boardId, title: i.title }))));
     }

@@ -10,6 +10,7 @@ import { DomainRegistrationComponent } from '../components/domain-registration/d
 import { NewDomainComponent } from '../components/domain-registration/dyn-new-domain.component';
 import { JoinDomainComponent } from '../components/domain-registration/dyn-join-domain.component';
 import { DomainChoiceComponent } from '../components/domain-registration/dyn-domain-choice.component';
+import { DynMessagingComponent } from 'app/dyn-messaging/components/dyn-messaging.component';
 
 const appRoutes: Routes = [
   {
@@ -35,7 +36,8 @@ const appRoutes: Routes = [
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
-      { path: 'board/:boardId', component: DynBoardComponent}
+      { path: 'board/:boardId', component: DynBoardComponent},
+      { path: 'messaging/inbox', component: DynMessagingComponent }
     ]
   }
 
