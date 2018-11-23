@@ -1,17 +1,20 @@
-import { Component, Input, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import * as boardActions from '../../../../dyn-boards/store/board.actions';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'dyn-cell, [dyn-cell]',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <div class="table__row__cell__container" [ngClass]="{ table__row__cell__container__first: firstCol }">
-        <input (blur)="dispatchAction(event)" [(ngModel)]="value" #cell [innerHtml]="value">
-    </div>
+    selector: 'dyn-cell, [dyn-cell]',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    template: `
+    <form [formGroup]="cellForm" class="table__row__cell__container" [ngClass]="{ table__row__cell__container__first: firstCol }">
+        <input tabindex="0" (blur)="dispatchAction(event)" (keyDown.enter)="enterPressed(event)" [formControlName]="column.model" #cell>
+    </form>
     `
 })
-export class DynCellComponent {
+export class DynCellComponent implements OnInit {
+
+    cellForm: FormGroup;
 
     @ViewChild('cell') cellRef: ElementRef;
     @Input() action: any;
@@ -19,7 +22,6 @@ export class DynCellComponent {
 
     @Input() set row(row: any) {
         this._row = row;
-        this.checkCellValue();
     }
 
     get row(): any {
@@ -28,7 +30,6 @@ export class DynCellComponent {
 
     @Input() set column(col: any) {
         this._column = col;
-        this.checkCellValue();
         this.setCellClass(this._column.class);
     };
 
@@ -40,22 +41,18 @@ export class DynCellComponent {
     private _column: any;
     value: any;
 
-
-    checkCellValue() {
-        let value = '';
-
-        if (this.row && this.column) {
-            value = this.valueGetter(this.row, this.column.model);
-        }
-
-        if (this.value !== value) {
-            this.value = value;
-            this.cd.markForCheck();
-        }
-    }
-
-    valueGetter(row: any, model: any) {
-        return row[model];
+    ngOnInit() {
+        this.cellForm = this.formBuilder.group({ [this.column.model]: this.row[this.column.model] });
+        this.cellForm = new FormGroup(this.cellForm.controls, { updateOn: 'blur' });
+        this.cellForm.valueChanges.subscribe(row => {
+            console.log('Cell Changed::Row::', row);
+            // if (this.cellForm.dirty) {
+            //     console.log('Cell Changed::Row::', row);
+            //     const updatedRow = { ...this.row, ...{ [this.column.model]: this.cellForm.value[this.column.model] } };
+            //     this.store.dispatch(new boardActions.UpdateEntity(updatedRow));
+            //     this.cellForm.markAsPristine();
+            // }
+        });
     }
 
     setCellClass(className: string) {
@@ -64,12 +61,20 @@ export class DynCellComponent {
     }
 
     dispatchAction() {
-        const updatedRow = {...this.row, ...{ [this.column.model]: this.value } };
-        this.store.dispatch(new boardActions.UpdateEntity(updatedRow));
+        console.log(this.cellForm.value);
+        if (this.cellForm.dirty) {
+            const updatedRow = { ...this.row, ...{ [this.column.model]: this.cellForm.value[this.column.model] } };
+            this.store.dispatch(new boardActions.UpdateEntity(updatedRow));
+            this.cellRef.nativeElement.focus();
+        }
+    }
+
+    enterPressed() {
+        this.cellRef.nativeElement.blur();
     }
 
     constructor(
-        private cd: ChangeDetectorRef,
+        private formBuilder: FormBuilder,
         private store: Store
     ) { }
 }

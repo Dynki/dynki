@@ -17,12 +17,13 @@ import * as boardActions from '../../../../dyn-boards/store/board.actions'
                 </ul>
             </nz-dropdown>
         </div>
-        <div class="row__content draghandle">
+        <div class="row__content">
+            <div nzTitle="Drag me!" nz-tooltip class="draghandle" tabindex="0"></div>
             <div dyn-cell *ngFor="let column of columns; first as isFirst"
-                [column]="column" [firstCol]="isFirst" [row]="row" [action]="action"
-                [ngClass]="{'row__content__column': !isFirst , 'row__content__column--first': isFirst}"></div>
+            [column]="column" [firstCol]="isFirst" [row]="row" [action]="action"
+            [ngClass]="{'row__content__column': !isFirst , 'row__content__column--first': isFirst}"></div>
         </div>
-        <section class="row__terminator">
+        <section class="row__terminator" tabindex="-1">
             <div class="row__terminator__body"></div>
             <div class="row__terminator__border"></div>
         </section>

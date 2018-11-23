@@ -15,8 +15,6 @@ export class AppComponent {
 
   private _toggleSidebar() {
 
-    console.log('click');
-
     if (this._opened === true) {
       this._opened = false;
     } else {

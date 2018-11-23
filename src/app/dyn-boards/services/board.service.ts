@@ -57,6 +57,9 @@ export class BoardService {
   getBoard(boardId: string) {
     console.log('Board::Service::getBoard ', boardId);
     return this.db.collection('domains').doc(this.domainId).collection('boards').doc(boardId).snapshotChanges()
+    .pipe(
+      take(1)
+    )
     .subscribe(b => {
         if (b.payload.exists) {
           console.log('Board::Service::getBoard::b', b);

@@ -176,12 +176,19 @@ $mariner: #2b82c1;
             display: flex;
             width: 100%;
 
-            &::before {
+            .draghandle {
                 
-                content: '';
                 width: 7px;
                 height: 40px;
                 background-color: $mariner;
+
+                &:hover {
+                    background-color: lighten($mariner, 30%);
+                }
+
+                &:focus {
+                    background-color: lighten($mariner, 30%);
+                }
             }
     
             &__column {
@@ -239,7 +246,7 @@ $mariner: #2b82c1;
             min-width: 20px;
             max-width: 20px;
             padding-left: 5px;
-
+            
             &__dropdown {
                 display: none!important;
                 
@@ -251,6 +258,7 @@ $mariner: #2b82c1;
                 max-width: 20px!important;
     
                 nz-dropdown {
+                    cursor: pointer;
                     display: inline-block!important;
         
                     &:focus {
