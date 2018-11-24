@@ -1,0 +1,120 @@
+.inbox {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 2fr 5fr;
+    min-height: 100vh;
+    margin: 0;
+
+
+}
+
+.msglist {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    border-right: 1px solid #e8e8e8;
+
+    .header {
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-content: center;
+        align-items: center;
+        padding: 15px;
+
+        height: 50px;
+        width: 100%;
+
+        .select-heading {
+            font-weight: bold;
+
+        }
+
+        .sort {
+            .ant-select-selection {
+                border: none!important;
+            }
+        }
+
+        .switch {
+            margin-left: auto;
+        }
+    }
+
+    .msgs {
+        height: 100vh;
+        width: 100%;
+        background: #F6F6F6;
+
+        &__card {
+            border-right: none;
+
+            .ant-card-body {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-content: start;
+                align-items: start;
+                padding-left: 15px;
+                padding-right: 15px;
+
+            }    
+            .panel-left {
+                width: 30px;
+                display: flex;
+                flex-direction: column;
+                justify-content: start;
+                align-content: center;
+                align-items: center;
+                padding-top: 5px;
+                margin-right: 15px;
+
+                .avatar {
+                    font-size: 20px;
+                    color: #fff;
+                    background: #3095DE;
+                    text-align: center;
+                    border-radius: 16px;
+                    width: 30px;
+                    height: 30px;
+                }
+            }
+
+            .panel-right {
+                width: 100%;
+
+                .first-line {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: start;
+                    align-content: center;
+                    align-items: center;
+                    margin-bottom: 10px;
+
+                    .from {
+                        font-size: 12px;
+                    }
+
+                    .created {
+                        margin-left: auto;
+                    }
+                }
+
+                .subject {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: start;
+                    align-content: center;
+                    align-items: center;
+
+                    nz-badge {
+                        padding-left: 10px!important;
+                        padding-bottom: 7px!important;
+                    }
+                }
+            }
+        }
+    }
+}
