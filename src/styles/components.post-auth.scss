@@ -56,6 +56,7 @@
             height: calc(100vh - 65px);
             overflow: hidden;
             overflow-y: scroll;
+            height: 100%;
 
             @supports (-ms-accelerator:true) {
                 /* IE Edge 12+ CSS styles go here */ 

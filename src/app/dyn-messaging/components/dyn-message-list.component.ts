@@ -13,8 +13,8 @@ import { IMessages } from '../store/message.model';
             </nz-select>
             <nz-switch class="switch" nzCheckedChildren="Un-Read" nzUnCheckedChildren="All Mail"></nz-switch>
         </div>
-        <div class="msgs" *ngFor="let msg of data.messages; index as i">
-            <nz-card class="msgs__card">
+        <div class="msgs">
+            <nz-card *ngFor="let msg of data; index as i" class="msgs__card">
                 <div class="panel-left">
                     <div class="avatar">D</div>
                 </div>
@@ -25,7 +25,7 @@ import { IMessages } from '../store/message.model';
                     </div>
                     <div class="subject">
                         <h1>{{msg.subject}}</h1>
-                        <nz-badge nzStatus="processing"></nz-badge>
+                        <nz-badge *ngIf="!msg.read" nzStatus="processing"></nz-badge>
                     </div>
                     <p class="body">{{msg.body}}</p>
                 </div>

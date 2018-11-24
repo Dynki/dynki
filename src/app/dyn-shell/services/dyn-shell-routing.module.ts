@@ -34,7 +34,7 @@ const appRoutes: Routes = [
     path: '', component: PostAuthComponent,
     canActivate: [AuthenticatedGuard],
     children: [
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: '', redirectTo: 'messaging/inbox', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
       { path: 'board/:boardId', component: DynBoardComponent},
       { path: 'messaging/inbox', component: DynMessagingComponent }

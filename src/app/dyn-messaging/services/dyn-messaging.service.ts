@@ -26,10 +26,10 @@ export class MessagingService {
         this.domainId = this.store.selectSnapshot(BaseState.domainId);
       });
 
-      this.afAuth.authState.subscribe(u => {
-          this.userInfo = u
-        });
-   }
+    this.afAuth.authState.subscribe(u => {
+      this.userInfo = u
+    });
+  }
 
   getMessages() {
     console.log('Messaging::Service::getMessages');
@@ -44,18 +44,44 @@ export class MessagingService {
     //   this.store.dispatch(new boardActions.RefreshBoards(boards));
     // })
     const messages: IMessages = {
-        messages: [
+      messages: [
         {
-            id: '232425t34534',
-            from: 'Dynki Team',
-            to: ['Dean Selvey'],
-            subject: 'Welcome to Dynki',
-            body: 'Welcome to Dynki, we hope you enjoy it',
-            sent: true,
-            created: new Date(),
-            author: 'Dynki Team',
-            status: 'Unread'
+          id: '232425t34534',
+          from: 'Dynki Team',
+          to: ['Dean Selvey'],
+          subject: 'Welcome to Dynki',
+          body: 'Welcome to Dynki, we hope you enjoy it',
+          sent: true,
+          created: new Date(),
+          author: 'Dynki Team',
+          status: 'Unread',
+          read: false
+        },
+        {
+          id: '232425t345eqweq34',
+          from: 'Mark Webber',
+          to: ['Dean Selvey'],
+          subject: 'Abu Dhabi GP',
+          body: 'The gran prix is on are you watching it?',
+          sent: true,
+          created: new Date(),
+          author: 'Mark Webber',
+          status: 'read',
+          read: true
+        },
+        {
+          id: '232425t3sdarew45eqweq34',
+          from: 'Fernando Alonso',
+          to: ['Dean Selvey'],
+          subject: 'Abu Dhabi GP',
+          body: 'Nearly through to Q3?',
+          sent: true,
+          created: new Date(),
+          author: 'Mark Webber',
+          status: 'read',
+          read: true
         }]
+
     }
 
     this.store.dispatch(new messageActions.RefreshMessages(messages));

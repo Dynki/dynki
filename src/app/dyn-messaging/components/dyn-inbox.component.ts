@@ -16,7 +16,7 @@ import { IMessages, IMessage } from '../store/message.model';
 export class DynInboxComponent {
 
     @Select(MessageState.getMessages)
-    message$: Observable<IMessages>;
+    message$: Observable<IMessage[]>;
 
     @Select(MessageState.getCurrentMsg)
     currentMsg: Observable<IMessage>;

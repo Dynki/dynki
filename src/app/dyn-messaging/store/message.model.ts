@@ -11,6 +11,7 @@ export interface IMessage {
     created: Date;
     author: string;
     status: string;
+    read: boolean;
 }
 
 export class IMessages {
@@ -31,6 +32,7 @@ export class Message implements IMessage {
     subject: string;
     body: string;
     sent: boolean;
+    read: boolean;
     status: string;
 
     constructor(subject: string, to: Array<string>, body: string, userInfo: UserInfo) {
@@ -42,5 +44,6 @@ export class Message implements IMessage {
         this.body = body;
         this.sent = false;
         this.status = 'Draft';
+        this.read = false;
     }
 }

@@ -17,8 +17,8 @@ export class MessageState {
      * Selectors
      */
     @Selector()
-    static getMessages(state: MessageStateModel): IMessages {
-        return state.messages;
+    static getMessages(state: MessageStateModel): IMessage[] {
+        return state.messages.messages;
     }
 
     @Selector()
