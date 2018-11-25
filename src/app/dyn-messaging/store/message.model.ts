@@ -6,7 +6,7 @@ export interface IMessage {
     from: string;
     to: Array<string>;
     subject: string;
-    body: string;
+    body: Array<object>;
     sent: boolean;
     created: Date;
     author: string;
@@ -30,12 +30,12 @@ export class Message implements IMessage {
     from: string;
     to: Array<string>;
     subject: string;
-    body: string;
+    body: Array<object>;
     sent: boolean;
     read: boolean;
     status: string;
 
-    constructor(subject: string, to: Array<string>, body: string, userInfo: UserInfo) {
+    constructor(subject: string, to: Array<string>, body: object[], userInfo: UserInfo) {
         this.author = userInfo.uid;
         this.created = moment().toDate();
         this.from = userInfo.displayName;

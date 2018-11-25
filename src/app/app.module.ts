@@ -7,6 +7,7 @@ import 'hammerjs';
 import { AngularFireModule } from '@angular/fire';
 import { SidebarModule } from 'ng-sidebar';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { QuillModule } from 'ngx-quill';
 
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';

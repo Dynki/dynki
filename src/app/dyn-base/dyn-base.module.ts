@@ -22,6 +22,7 @@ import { DynCellComponent } from './components/table/column/dyn-cell.component';
 import { DynNewRowComponent } from './components/table/row/dyn-new-row.component';
 import { SortableDirective } from './directives/dyn-sortable.directive';
 import { BaseService } from './services/base.service';
+import { DynEditorComponent } from './components/editor/dyn-editor.component';
 
 export const COMPONENTS = [
   FolderItemComponent,
@@ -33,7 +34,8 @@ export const COMPONENTS = [
   DynRowComponent,
   DynTableComponent,
   DynCellComponent,
-  DynNewRowComponent
+  DynNewRowComponent,
+  DynEditorComponent
 ]
 
 @NgModule({

@@ -40,11 +40,22 @@ export class MessageState {
         this.msgService.getMessages();
     }
 
+    @Action(messagActions.GetMessage)
+    getMessage(ctx: StateContext<MessageStateModel>, event: messagActions.GetMessage) {
+        console.log('Message::State:GetMessage');
+        this.msgService.getMessage(event.messageId);
+    }
+
     /**
      * Events
      */
     @Action(messagActions.RefreshMessages)
     refreshMessages(ctx: StateContext<MessageStateModel>, event: messagActions.RefreshMessages) {
         ctx.patchState({ messages: event.messages });
+    }
+
+    @Action(messagActions.SetCurrentMessage)
+    setCurrentMessage(ctx: StateContext<MessageStateModel>, event: messagActions.SetCurrentMessage) {
+        ctx.patchState({ currentMsg: event.msg });
     }
 }

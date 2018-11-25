@@ -15,6 +15,74 @@ import * as messageActions from '../store/message.actions';
 export class MessagingService {
 
   private userInfo: UserInfo;
+  private messages: IMessages = {
+    messages: [
+      {
+        id: '232425t34534',
+        from: 'Dynki Team',
+        to: ['Dean Selvey'],
+        subject: 'Welcome to Dynki',
+        body: [
+          { insert: 'Hi @Dean Selvey,' },
+          { insert: '\n' },
+          { insert: '\n' },
+          { insert: 'Thanks for choosing to give us a try.' },
+          { insert: '\n' },
+          { insert: 'You can now invite your people to your team.' },
+          { insert: '\n' },
+          { insert: '\n' },
+          { insert: 'Once again thanks for choosing us.' },
+          { insert: '\n' },
+          { insert: '\n' },
+          { insert: 'Regards' },
+          { insert: '\n' },
+          { insert: 'Team Dynki', attributes: { bold: true } }
+        ],
+        sent: true,
+        created: new Date(),
+        author: 'Dynki Team',
+        status: 'Unread',
+        read: false
+      },
+      {
+        id: '232425t345eqweq34',
+        from: 'Mark Webber',
+        to: ['Dean Selvey'],
+        subject: 'Abu Dhabi GP',
+        body: [
+          { insert: 'Hiya,' },
+          { insert: '\n' },
+          { insert: '\n' },
+          { insert: 'Are you watching the qualifying?.' },
+          { insert: '\n' },
+          { insert: 'I hope Danny Ric does well.' },
+        ],
+        sent: true,
+        created: new Date(),
+        author: 'Mark Webber',
+        status: 'read',
+        read: true
+      },
+      {
+        id: '232425t3sdarew45eqweq34',
+        from: 'Fernando Alonso',
+        to: ['Dean Selvey'],
+        subject: 'Abu Dhabi GP',
+        body: [
+          { insert: 'Hola,' },
+          { insert: '\n' },
+          { insert: '\n' },
+          { insert: 'Thanks for supporting me on my last race.' },
+          { insert: '\n' },
+          { insert: 'Lets hope the bloody car makes it' },
+        ],
+        sent: true,
+        created: new Date(),
+        author: 'Mark Webber',
+        status: 'read',
+        read: true
+      }]
+  }
 
   @Select(BaseState.domainId)
   private domainId$: Observable<string>;
@@ -33,57 +101,11 @@ export class MessagingService {
 
   getMessages() {
     console.log('Messaging::Service::getMessages');
-    // return this.db.collection('domains').doc(this.domainId).collection('boardsInDomain').doc('appBoards').snapshotChanges()
-    // .pipe(
-    //   map(a => {
-    //     const data = a.payload.data();
-    //     const id = a.payload.id;
-    //     return { id, ...data } as IMessages;
-    //   })
-    // ).subscribe((boards: IBoards) => {
-    //   this.store.dispatch(new boardActions.RefreshBoards(boards));
-    // })
-    const messages: IMessages = {
-      messages: [
-        {
-          id: '232425t34534',
-          from: 'Dynki Team',
-          to: ['Dean Selvey'],
-          subject: 'Welcome to Dynki',
-          body: 'Welcome to Dynki, we hope you enjoy it',
-          sent: true,
-          created: new Date(),
-          author: 'Dynki Team',
-          status: 'Unread',
-          read: false
-        },
-        {
-          id: '232425t345eqweq34',
-          from: 'Mark Webber',
-          to: ['Dean Selvey'],
-          subject: 'Abu Dhabi GP',
-          body: 'The gran prix is on are you watching it?',
-          sent: true,
-          created: new Date(),
-          author: 'Mark Webber',
-          status: 'read',
-          read: true
-        },
-        {
-          id: '232425t3sdarew45eqweq34',
-          from: 'Fernando Alonso',
-          to: ['Dean Selvey'],
-          subject: 'Abu Dhabi GP',
-          body: 'Nearly through to Q3?',
-          sent: true,
-          created: new Date(),
-          author: 'Mark Webber',
-          status: 'read',
-          read: true
-        }]
+    this.store.dispatch(new messageActions.RefreshMessages(this.messages));
+  }
 
-    }
-
-    this.store.dispatch(new messageActions.RefreshMessages(messages));
+  getMessage(id: string) {
+    console.log('Messaging::Service::getMessage::id::', id);
+    this.store.dispatch(new messageActions.SetCurrentMessage(this.messages.messages.find(m => m.id === id)));
   }
 }

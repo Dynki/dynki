@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { IMessages } from '../store/message.model';
+import * as msgActions from '../store/message.actions'
+import { Store } from '@ngxs/store';
 
 @Component({
     selector: 'dyn-msglist, [dyn-msglist]',
@@ -14,9 +16,9 @@ import { IMessages } from '../store/message.model';
             <nz-switch class="switch" nzCheckedChildren="Un-Read" nzUnCheckedChildren="All Mail"></nz-switch>
         </div>
         <div class="msgs">
-            <nz-card *ngFor="let msg of data; index as i" class="msgs__card">
+            <nz-card *ngFor="let msg of data; index as i" class="msgs__card" (click)="loadMsg(msg)">
                 <div class="panel-left">
-                    <div class="avatar">D</div>
+                    <div class="avatar">{{msg.from | slice:0:1}}</div>
                 </div>
                 <div class="panel-right">
                     <div class="first-line">
@@ -27,7 +29,8 @@ import { IMessages } from '../store/message.model';
                         <h1>{{msg.subject}}</h1>
                         <nz-badge *ngIf="!msg.read" nzStatus="processing"></nz-badge>
                     </div>
-                    <p class="body">{{msg.body}}</p>
+                    <div *ngIf="msg.body[0]" class="body">{{msg.body[0].insert}}</div>
+                    <div *ngIf="msg.body[1]" class="body">{{msg.body[1].insert}}</div>
                 </div>
             </nz-card>
         </div>
@@ -40,6 +43,12 @@ export class DynMessagingListComponent {
 
     sortOrder = 'recent';
 
-    constructor() {
+    constructor(
+        private store: Store
+    ) {
+    }
+
+    loadMsg(msg) {
+        this.store.dispatch(new msgActions.GetMessage(msg.id));
     }
 }

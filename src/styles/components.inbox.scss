@@ -1,3 +1,8 @@
+.ql-container {
+    height: calc(100% - 80px)!important;
+    border: none!important;
+}
+
 .inbox {
     display: grid;
     grid-template-rows: 1fr;
@@ -5,7 +10,33 @@
     min-height: 100vh;
     margin: 0;
     height: 100%;
+}
 
+.msg {
+    .from {
+        height: 50px;
+        border-bottom: 1px solid #e8e8e8;
+        display: flex;
+        justify-content: start;
+        align-content: center;
+        align-items: center;
+        padding-left: 15px;
+
+        .avatar {
+            font-size: 20px;
+            color: #fff;
+            background: #3095DE;
+            text-align: center;
+            border-radius: 16px;
+            width: 30px;
+            height: 30px;
+        }
+
+        .name {
+            padding-left: 15px;
+            font-weight: bold;
+        }
+    }
 }
 
 .msglist {
@@ -24,6 +55,7 @@
         align-content: center;
         align-items: center;
         padding: 15px;
+        border-bottom: 1px solid #e8e8e8;
 
         height: 50px;
         width: 100%;
@@ -48,6 +80,8 @@
         height: calc(100vh - 100px);
         width: 100%;
         background: #F6F6F6;
+        padding-left: 5px;
+        padding-top: 5px;
 
         overflow-y: scroll;
         overflow-x: hidden; 
@@ -73,6 +107,7 @@
     
         &__card {
             border-right: none;
+            cursor: pointer;
 
             .ant-card-body {
                 display: flex;
