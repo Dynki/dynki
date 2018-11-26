@@ -102,6 +102,7 @@ export class MessageState {
         const state = ctx.getState();
         state.messages.messages.map(m => {
             m.selected = m.id === event.msg.id ? true : false;
+            m.read = m.id === event.msg.id ? true : m.read;
             return m;
         })
         ctx.patchState({ ...state, currentMsg: event.msg });

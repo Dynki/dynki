@@ -10,6 +10,7 @@ import { DynMessagingListComponent } from './components/dyn-message-list.compone
 import { MessagingService } from './services/dyn-messaging.service';
 import { DynMessageComponent } from './components/dyn-message.component';
 import { QuillModule } from 'ngx-quill';
+import { MomentModule } from 'ngx-moment';
 ​
 export const COMPONENTS = [DynMessagingComponent, DynInboxComponent, DynMessagingListComponent, DynMessageComponent];
 
@@ -21,6 +22,7 @@ export const COMPONENTS = [DynMessagingComponent, DynInboxComponent, DynMessagin
     NgZorroAntdModule,
     FormsModule,
     QuillModule,
+    MomentModule,
     ReactiveFormsModule,
     NgxsFormPluginModule,
     AppMaterialModule

@@ -10,6 +10,7 @@ import { BaseState } from 'app/dyn-base/store/base.state';
 import * as baseActions from '../../dyn-base/store/base.actions';
 import { IMessages } from '../store/message.model';
 import * as messageActions from '../store/message.actions';
+import * as moment from 'moment';
 
 @Injectable()
 export class MessagingService {
@@ -32,7 +33,7 @@ export class MessagingService {
           { insert: 'Team Dynki', attributes: { bold: true } }
         ]},
         sent: true,
-        created: new Date(),
+        created: moment().year(2018).month(10).date(26).hour(21).minute(15).toDate(),
         author: 'Dynki Team',
         status: 'Unread',
         read: false,
@@ -50,10 +51,10 @@ export class MessagingService {
           'I hope Danny Ric does well.' },
         ]},
         sent: true,
-        created: new Date(),
+        created: moment().year(2018).month(10).date(20).hour(9).minute(15).toDate(),
         author: 'Mark Webber',
         status: 'read',
-        read: true,
+        read: false,
         selected: false
       },
       {
@@ -68,7 +69,7 @@ export class MessagingService {
           'Lets hope the bloody car makes it' },
         ]},
         sent: true,
-        created: new Date(),
+        created: moment().year(2018).month(8).date(19).hour(18).minute(45).toDate(),
         author: 'Mark Webber',
         status: 'read',
         read: true,

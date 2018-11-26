@@ -27,7 +27,7 @@ import { Store } from '@ngxs/store';
                     <div class="panel-right">
                         <div class="first-line">
                             <div class="from">{{msg.from}}</div>
-                            <div class="created">10.43 AM</div>
+                            <div class="created">{{msg.created | amTimeAgo:true}}</div>
                         </div>
                         <div class="subject">
                             <h1>{{msg.subject}}</h1>

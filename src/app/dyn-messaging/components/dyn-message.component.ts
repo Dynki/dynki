@@ -8,6 +8,7 @@ import { IMessage } from '../store/message.model';
         <div class="from">
             <div class="avatar">{{data.from | slice:0:1}}</div>
             <div class="name">{{data.from}}</div>
+            <div class="date">{{data.created | amCalendar}}</div>
         </div>
         <quill-editor [(ngModel)]="data.body" format="object" readOnly="true" [modules]="modules"></quill-editor>
     </div>

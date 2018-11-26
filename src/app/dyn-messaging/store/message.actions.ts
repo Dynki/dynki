@@ -6,8 +6,14 @@ export enum MessageActionTypes {
   REFRESH_MESSAGES  = '[Messaging] Refresh Messages',
   SET_CURRENT_MESSAGE = '[Messaging] Set Current Message',
   SET_UNREAD_FILTER = '[Messaging] Set Unread Filter',
-  SELECT_FIRST_MSG  = '[Messaging] Select First Message'
+  SELECT_FIRST_MSG  = '[Messaging] Select First Message',
+  SET_ORDER         = '[Messaging] Set Order'
 };
+
+export class SetOrder {
+    static type = MessageActionTypes.SET_ORDER;
+    constructor(public order: string) {}
+}
 
 export class SelectFirstMsg {
     static type = MessageActionTypes.SELECT_FIRST_MSG;
@@ -40,6 +46,7 @@ export class GetMessage {
 }
 
 export type MessageActions =
+    SetOrder            |
     SelectFirstMsg      |
     SetUnReadFilter     |
     RefreshMessages     |
