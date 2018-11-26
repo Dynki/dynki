@@ -107,7 +107,20 @@
     
         &__card {
             border-right: none;
+            border-left: solid;
+            border-left-color: #ffffff;
             cursor: pointer;
+
+            &--selected {
+                border-left-color: #3095DE!important;
+                background: #E6F7FF!important;
+            }
+
+            &:hover {
+                border-left-color: #FFD3AC;
+                background: #FFF8F1;
+            }
+
 
             .ant-card-body {
                 display: flex;

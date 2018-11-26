@@ -22,65 +22,57 @@ export class MessagingService {
         from: 'Dynki Team',
         to: ['Dean Selvey'],
         subject: 'Welcome to Dynki',
-        body: [
-          { insert: 'Hi @Dean Selvey,' },
-          { insert: '\n' },
-          { insert: '\n' },
-          { insert: 'Thanks for choosing to give us a try.' },
-          { insert: '\n' },
-          { insert: 'You can now invite your people to your team.' },
-          { insert: '\n' },
-          { insert: '\n' },
-          { insert: 'Once again thanks for choosing us.' },
-          { insert: '\n' },
-          { insert: '\n' },
-          { insert: 'Regards' },
-          { insert: '\n' },
+        body: {
+          ops: [
+          { insert: 'Hi @Dean Selvey, \n\n' +
+          'Thanks for choosing to give us a try. \n' +
+          'You can now invite your people to your team. \n\n' +
+          'Once again thanks for choosing us. \n\n' +
+          'Regards \n' },
           { insert: 'Team Dynki', attributes: { bold: true } }
-        ],
+        ]},
         sent: true,
         created: new Date(),
         author: 'Dynki Team',
         status: 'Unread',
-        read: false
+        read: false,
+        selected: false
       },
       {
         id: '232425t345eqweq34',
         from: 'Mark Webber',
         to: ['Dean Selvey'],
         subject: 'Abu Dhabi GP',
-        body: [
-          { insert: 'Hiya,' },
-          { insert: '\n' },
-          { insert: '\n' },
-          { insert: 'Are you watching the qualifying?.' },
-          { insert: '\n' },
-          { insert: 'I hope Danny Ric does well.' },
-        ],
+        body: {
+          ops: [
+          { insert: 'Hiya, \n\n' +
+          'Are you watching the qualifying?.\n' +
+          'I hope Danny Ric does well.' },
+        ]},
         sent: true,
         created: new Date(),
         author: 'Mark Webber',
         status: 'read',
-        read: true
+        read: true,
+        selected: false
       },
       {
         id: '232425t3sdarew45eqweq34',
         from: 'Fernando Alonso',
         to: ['Dean Selvey'],
         subject: 'Abu Dhabi GP',
-        body: [
-          { insert: 'Hola,' },
-          { insert: '\n' },
-          { insert: '\n' },
-          { insert: 'Thanks for supporting me on my last race.' },
-          { insert: '\n' },
-          { insert: 'Lets hope the bloody car makes it' },
-        ],
+        body: {
+          ops: [
+          { insert: 'Hola, \n\n' +
+          'Thanks for supporting me on my last race.\n' +
+          'Lets hope the bloody car makes it' },
+        ]},
         sent: true,
         created: new Date(),
         author: 'Mark Webber',
         status: 'read',
-        read: true
+        read: true,
+        selected: false
       }]
   }
 

@@ -6,12 +6,17 @@ export interface IMessage {
     from: string;
     to: Array<string>;
     subject: string;
-    body: Array<object>;
+    body: IMsgBody;
     sent: boolean;
     created: Date;
     author: string;
     status: string;
     read: boolean;
+    selected: boolean;
+}
+
+export interface IMsgBody {
+    ops: Array<object>;
 }
 
 export class IMessages {
@@ -21,6 +26,8 @@ export class IMessages {
 export interface MessageStateModel {
     messages: IMessages;
     currentMsg: IMessage;
+    sortOrder: string;
+    unReadOnly: boolean;
 }
 
 export class Message implements IMessage {
@@ -30,12 +37,13 @@ export class Message implements IMessage {
     from: string;
     to: Array<string>;
     subject: string;
-    body: Array<object>;
+    body: { ops: Array<object> };
     sent: boolean;
     read: boolean;
     status: string;
+    selected: boolean;
 
-    constructor(subject: string, to: Array<string>, body: object[], userInfo: UserInfo) {
+    constructor(subject: string, to: Array<string>, body: IMsgBody, userInfo: UserInfo) {
         this.author = userInfo.uid;
         this.created = moment().toDate();
         this.from = userInfo.displayName;
@@ -45,5 +53,6 @@ export class Message implements IMessage {
         this.sent = false;
         this.status = 'Draft';
         this.read = false;
+        this.selected = false;
     }
 }
