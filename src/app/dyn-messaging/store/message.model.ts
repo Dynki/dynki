@@ -12,6 +12,7 @@ export interface IMessage {
     author: string;
     status: string;
     read: boolean;
+    reading: boolean;
     selected: boolean;
 }
 
@@ -40,6 +41,7 @@ export class Message implements IMessage {
     body: { ops: Array<object> };
     sent: boolean;
     read: boolean;
+    reading: boolean;
     status: string;
     selected: boolean;
 
@@ -53,6 +55,7 @@ export class Message implements IMessage {
         this.sent = false;
         this.status = 'Draft';
         this.read = false;
+        this.reading = false;
         this.selected = false;
     }
 }

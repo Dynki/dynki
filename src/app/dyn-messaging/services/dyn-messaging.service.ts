@@ -37,6 +37,7 @@ export class MessagingService {
         author: 'Dynki Team',
         status: 'Unread',
         read: false,
+        reading: false,
         selected: false
       },
       {
@@ -55,6 +56,7 @@ export class MessagingService {
         author: 'Mark Webber',
         status: 'read',
         read: false,
+        reading: false,
         selected: false
       },
       {
@@ -73,6 +75,7 @@ export class MessagingService {
         author: 'Mark Webber',
         status: 'read',
         read: true,
+        reading: false,
         selected: false
       }]
   }
