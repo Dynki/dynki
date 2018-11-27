@@ -109,6 +109,14 @@
             background-color: #767676;
         }
     
+        .no-msgs {
+            z-index: 0;
+            position: sticky;
+            top: 50px;
+            width: 100%;
+            text-align: center;
+            margin-top: -21px;
+        }
     
         &__card {
             border-right: none;

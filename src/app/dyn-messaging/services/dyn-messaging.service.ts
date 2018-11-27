@@ -8,7 +8,7 @@ import { map, switchMap, take } from 'rxjs/operators';
 import { Store, Select, Actions, ofActionDispatched } from '@ngxs/store';
 import { BaseState } from 'app/dyn-base/store/base.state';
 import * as baseActions from '../../dyn-base/store/base.actions';
-import { IMessages } from '../store/message.model';
+import { IMessages, IMessage } from '../store/message.model';
 import * as messageActions from '../store/message.actions';
 import * as moment from 'moment';
 
@@ -103,5 +103,25 @@ export class MessagingService {
   getMessage(id: string) {
     console.log('Messaging::Service::getMessage::id::', id);
     this.store.dispatch(new messageActions.SetCurrentMessage(this.messages.messages.find(m => m.id === id)));
+  }
+
+  sortMessages(msgs: IMessage[], order: string) {
+    return msgs.sort((m1, m2) => {
+      let filter;
+
+      if (order === 'from') {
+          filter = m1.from < m2.from ? -1 : (m1.from > m2.from ? 1 : 0);
+      }
+
+      if (order === 'oldest') {
+          filter = m1.created < m2.created ? -1 : (m1.created > m2.created ? 1 : 0);
+      }
+
+      if (order === 'recent') {
+          filter = m1.created < m2.created ? 1 : (m1.created > m2.created ? -1 : 0);
+      }
+
+      return filter;
+    });
   }
 }

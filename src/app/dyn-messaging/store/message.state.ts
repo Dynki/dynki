@@ -1,6 +1,7 @@
 import { Action, Selector, State, StateContext, Store, Actions } from '@ngxs/store';
 
-import { MessageStateModel, IMessages, IMessage } from './message.model';
+
+import { MessageStateModel, IMessage } from './message.model';
 import * as messagActions from '../store/message.actions';
 import { MessagingService } from '../services/dyn-messaging.service';
 
@@ -72,15 +73,21 @@ export class MessageState {
     selectFirstMessage(ctx: StateContext<MessageStateModel>, event: messagActions.SelectFirstMsg) {
         console.log('Message::State:SelectFirstMessage');
         const msgs = ctx.getState().messages;
+        const firstUnreadMsg = ctx.getState().unReadOnly;
         if (msgs.messages.length > 0) {
-            const msgIdx = (event.firstUnreadMsg && msgs.messages.findIndex(m => !m.read))
+            const msgIdx = (firstUnreadMsg && msgs.messages.findIndex(m => !m.read))
                 ? msgs.messages.findIndex(m => !m.read)
                 : 0;
 
-            const msg = msgs.messages[msgIdx].selected = true;
+            if (msgIdx !== -1) {
+                msgs.messages[msgIdx].selected = true;
+            }
 
             ctx.patchState({ messages: msgs });
-            ctx.dispatch(new messagActions.GetMessage(msgs.messages[msgIdx].id));
+
+            if (msgIdx !== -1) {
+                ctx.dispatch(new messagActions.GetMessage(msgs.messages[msgIdx].id));
+            }
         }
     }
 
@@ -89,6 +96,8 @@ export class MessageState {
      */
     @Action(messagActions.RefreshMessages)
     refreshMessages(ctx: StateContext<MessageStateModel>, event: messagActions.RefreshMessages) {
+        const order = ctx.getState().sortOrder;
+        event.messages.messages = this.msgService.sortMessages(event.messages.messages, order);
         ctx.patchState({ messages: event.messages });
         ctx.dispatch(new messagActions.SelectFirstMsg());
     }
@@ -127,6 +136,14 @@ export class MessageState {
     setUnReadFilter(ctx: StateContext<MessageStateModel>, event: messagActions.SetUnReadFilter) {
         ctx.patchState({ unReadOnly: event.payload });
         ctx.dispatch(new messagActions.SetMsgsRead());
+        ctx.dispatch(new messagActions.SelectFirstMsg());
+    }
+
+    @Action(messagActions.SetOrder)
+    setOrder(ctx: StateContext<MessageStateModel>, event: messagActions.SetOrder) {
+        const msgs = ctx.getState().messages;
+        msgs.messages = this.msgService.sortMessages(msgs.messages, event.order);
+        ctx.patchState({ messages: msgs, sortOrder: event.order });
         ctx.dispatch(new messagActions.SelectFirstMsg());
     }
 }

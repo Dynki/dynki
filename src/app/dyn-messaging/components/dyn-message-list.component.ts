@@ -8,7 +8,7 @@ import { Store } from '@ngxs/store';
     template: `
     <section class="msglist">
         <div class="header">
-            <nz-select class="sort" nzPlaceHolder="Sort" [(ngModel)]="sortOrder">
+            <nz-select class="sort" nzPlaceHolder="Sort" [(ngModel)]="sortOrder" (ngModelChange)="sortOrderChange($event)">
                 <nz-option nzValue="recent" nzLabel="Recent"></nz-option>
                 <nz-option nzValue="oldest" nzLabel="Oldest"></nz-option>
                 <nz-option nzValue="from" nzLabel="From"></nz-option>
@@ -17,6 +17,7 @@ import { Store } from '@ngxs/store';
                 class="switch" [(ngModel)]="switchValue" nzCheckedChildren="Un-Read" nzUnCheckedChildren="All Mail"></nz-switch>
         </div>
         <div class="msgs">
+            <div class="no-msgs">No news is good news!</div>
             <div *ngFor="let msg of data; index as i" >
                 <nz-card *ngIf="(!switchValue) || (switchValue && !msg.read)" class="msgs__card" (click)="loadMsg(msg)"
                     [ngClass]="{ 'msgs__card--selected': msg.selected }">
@@ -63,5 +64,9 @@ export class DynMessagingListComponent {
 
     clickSwitch() {
         this.store.dispatch(new msgActions.SetUnReadFilter(this.switchValue));
+    }
+
+    sortOrderChange(value: string) {
+        this.store.dispatch(new msgActions.SetOrder(value));
     }
 }
