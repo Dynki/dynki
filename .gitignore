@@ -3,6 +3,7 @@
 # compiled output
 /dist
 /tmp
+/public 
 
 # dependencies
 /node_modules
@@ -38,3 +39,7 @@ testem.log
 #System Files
 .DS_Store
 Thumbs.db
+
+.firebase/*
+.firebaserc
+firebase.json

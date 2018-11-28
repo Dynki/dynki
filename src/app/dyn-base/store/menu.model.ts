@@ -1,4 +1,5 @@
 import { MenuBuilder } from '../services/dyn-menu.builder';
+import { Observable } from 'rxjs';
 
 export interface DynMenu {
     id?: string;
@@ -12,7 +13,7 @@ export interface DynMenuItem {
     title: string;
     icon: string;
     button: DynMenuButton;
-    badgeCount: number;
+    badgeCount: Observable<number>;
     items: Array<DynMenuItem>
     isFolder: boolean;
     isSelected: boolean;
@@ -26,7 +27,7 @@ export class MenuItem implements DynMenuItem {
     title = null;
     icon = null;
     button = null;
-    badgeCount = 0;
+    badgeCount = undefined;
     items = null;
     isFolder = false;
     isSelected = false;

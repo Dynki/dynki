@@ -4,7 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { UserInfo } from 'firebase';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Store, Actions, ofActionDispatched, ofActionSuccessful } from '@ngxs/store';
+import { Store, Actions, ofActionDispatched, ofActionSuccessful, Select } from '@ngxs/store';
 
 import { MenuBuilder } from './dyn-menu.builder';
 import { DynMenuItem, DynMenu } from '../store/menu.model';
@@ -12,6 +12,7 @@ import { DynMenuItem, DynMenu } from '../store/menu.model';
 import * as boardActions from '../../dyn-boards/store/board.actions';
 import * as menuActions from '../store/menu.actions';
 import { Navigate } from '@ngxs/router-plugin';
+import { MessageState } from 'app/dyn-messaging/store/message.state';
 
 @Injectable()
 export class MenuService {
@@ -19,6 +20,8 @@ export class MenuService {
   private userInfo: UserInfo;
   private collectionName: string;
   private menuCollection: string;
+
+  @Select(MessageState.unReadMsgCount) msgCnt: Observable<number>;
 
   constructor(
       private db: AngularFirestore,
@@ -131,9 +134,9 @@ export class MenuService {
     };
 
     const items: DynMenuItem[] = [
-      this.mb.setTitle('Inbox').setIcon('mail').setBadgeCount(1).setClickAction(new Navigate(['messaging/inbox'])).build(),
+      this.mb.setTitle('Inbox').setIcon('mail').setBadgeCount(this.msgCnt).setClickAction(new Navigate(['messaging/inbox'])).build(),
+      this.mb.setTitle('Team').setIcon('appstore').setClickAction(new Navigate(['team/users'])).build(),
       this.mb.setTitle('Boards').setIcon('dashboard').setButton(newBoardBtn).setFoldersAllowed(true).build(),
-      this.mb.setTitle('Teams').setIcon('appstore').setButton(blankAddBtn).build(),
       this.mb.setTitle('Projects').setIcon('rocket').setButton(blankAddBtn).build(),
       this.mb.setTitle('Tags').setIcon('tags').setButton(blankAddBtn).build()
     ]

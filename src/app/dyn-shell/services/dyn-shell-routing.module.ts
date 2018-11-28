@@ -11,6 +11,7 @@ import { NewDomainComponent } from '../components/domain-registration/dyn-new-do
 import { JoinDomainComponent } from '../components/domain-registration/dyn-join-domain.component';
 import { DomainChoiceComponent } from '../components/domain-registration/dyn-domain-choice.component';
 import { DynMessagingComponent } from 'app/dyn-messaging/components/dyn-messaging.component';
+import { TeamComponent } from 'app/dyn-teams/components';
 
 const appRoutes: Routes = [
   {
@@ -36,6 +37,7 @@ const appRoutes: Routes = [
     children: [
       { path: '', redirectTo: 'messaging/inbox', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
+      { path: 'team/users', component: TeamComponent },
       { path: 'board/:boardId', component: DynBoardComponent},
       { path: 'messaging/inbox', component: DynMessagingComponent }
     ]

@@ -74,7 +74,7 @@ export class MessagingService {
         created: moment().year(2018).month(8).date(19).hour(18).minute(45).toDate(),
         author: 'Mark Webber',
         status: 'read',
-        read: true,
+        read: false,
         reading: false,
         selected: false
       }]

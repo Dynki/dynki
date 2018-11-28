@@ -69,11 +69,13 @@
         grid-template-rows: auto;
         grid-template-columns: 20fr 1fr;
         grid-template-areas: "content menu";
+        padding-right: 10px;
     }
 
     &__detail {
         margin-top: 40px;
-        grid-area: "content"
+        grid-area: "content";
+        padding-right: 8px;
     }
 
     &__menu {

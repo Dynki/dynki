@@ -28,7 +28,7 @@
     <span class="menu__item__title" title>
         <i *ngIf="menuitem.icon" nz-icon [type]="menuitem.icon" theme="outline"></i>
         <span>{{menuitem.title}}</span>
-        <nz-badge *ngIf="menuitem.badgeCount > 0" class="menu__item__badge" [nzCount]="menuitem.badgeCount" nzDot="false">
+        <nz-badge *ngIf="menuitem.badgeCount | async as cnt" class="menu__item__badge" [nzCount]="cnt" nzDot="false">
         </nz-badge>
     </span>
 </li>

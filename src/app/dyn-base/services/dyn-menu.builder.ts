@@ -1,12 +1,13 @@
 import { DynMenuButton, DynMenuItem, MenuItem } from '../store/menu.model';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class MenuBuilder {
     private _title: string;
     private _icon: string;
     private _button: DynMenuButton;
-    private _badgeCount: number;
+    private _badgeCount: Observable<number>;
     private _items: Array<DynMenuItem>
     private _isFolder: boolean;
     private _parent: string;
@@ -42,7 +43,7 @@ export class MenuBuilder {
     get badgeCount() {
         return this._badgeCount;
     }
-    setBadgeCount(value: number): this {
+    setBadgeCount(value: Observable<number>): this {
         this._badgeCount = value;
         return this;
     }
@@ -95,7 +96,7 @@ export class MenuBuilder {
         this._button = null;
         this._items = null
         this._isFolder = false;
-        this._badgeCount = 0;
+        this._badgeCount = undefined;
         this._parent = null;
         this._clickAction = null;
         this._isSelected = false;

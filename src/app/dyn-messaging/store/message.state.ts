@@ -40,6 +40,12 @@ export class MessageState {
     }
 
     @Selector()
+    static unReadMsgCount(state: MessageStateModel): number {
+        const count = state.messages.messages.reduce((acc, cur) => cur.read === false ? ++acc : acc, 0);
+        return count;
+    }
+
+    @Selector()
     static getCurrentMsg(state: MessageStateModel): IMessage {
         return state.currentMsg;
     }
