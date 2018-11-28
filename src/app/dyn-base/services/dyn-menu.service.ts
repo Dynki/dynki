@@ -3,7 +3,7 @@ import { AngularFirestore, AngularFirestoreDocument, DocumentReference } from '@
 import { AngularFireAuth } from '@angular/fire/auth';
 import { UserInfo } from 'firebase';
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, delay } from 'rxjs/operators';
 import { Store, Actions, ofActionDispatched, ofActionSuccessful, Select } from '@ngxs/store';
 
 import { MenuBuilder } from './dyn-menu.builder';
@@ -134,7 +134,8 @@ export class MenuService {
     };
 
     const items: DynMenuItem[] = [
-      this.mb.setTitle('Inbox').setIcon('mail').setBadgeCount(this.msgCnt).setClickAction(new Navigate(['messaging/inbox'])).build(),
+      this.mb.setTitle('Inbox').setIcon('mail')
+        .setBadgeCount(this.msgCnt.pipe(delay(0))).setClickAction(new Navigate(['messaging/inbox'])).build(),
       this.mb.setTitle('Team').setIcon('appstore').setClickAction(new Navigate(['team/users'])).build(),
       this.mb.setTitle('Boards').setIcon('dashboard').setButton(newBoardBtn).setFoldersAllowed(true).build(),
       this.mb.setTitle('Projects').setIcon('rocket').setButton(blankAddBtn).build(),
