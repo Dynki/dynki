@@ -32,12 +32,16 @@ export class MenuItemComponent implements OnInit {
       }
     }
 
-    dispatchBtnAction(menuitem: DynMenuItem) {
-      this.store.dispatch(menuitem.button.clickAction);
+    dispatchBtnAction(mi: DynMenuItem) {
+      if (mi.button.clickAction) {
+        this.store.dispatch(mi.button.clickAction);
+      }
     }
 
-    itemClick(action: any) {
-      this.store.dispatch(action);
+    itemClick(mi: DynMenuItem) {
+      if (mi.clickAction) {
+        this.store.dispatch(mi.clickAction);
+      }
     }
 
     updateMenu(items: MenuItem[]) {

@@ -24,7 +24,7 @@
     </div>
     <!-- <dyn-sub-menu *ngIf="menuitem.foldersAllowed" [subitem]="folderitem"></dyn-sub-menu> -->
 </li>
-<li *ngIf="!menuitem.items" nz-menu-item (click)="itemClick(menuitem.clickAction)">
+<li *ngIf="!menuitem.items" nz-menu-item (click)="itemClick(menuitem)">
     <span class="menu__item__title" title>
         <i *ngIf="menuitem.icon" nz-icon [type]="menuitem.icon" theme="outline"></i>
         <span>{{menuitem.title}}</span>

@@ -3,25 +3,24 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { TeamComponent, TeamDetailComponent } from './components';
-import { TeamRoutingModule, TeamService, TruncatePipe } from './services';
+import { TeamComponent } from './components';
+import { TeamService, TruncatePipe } from './services';
+import { TeamHeadingComponent } from './components/dyn-team-heading.component';
 
 // other imports
 @NgModule({
   declarations: [
     TeamComponent,
-    TeamDetailComponent,
+    TeamHeadingComponent,
     TruncatePipe
   ],
   imports: [
     CommonModule,
     FlexLayoutModule,
-    TeamRoutingModule,
     ReactiveFormsModule
   ],
   exports: [
-    TeamComponent,
-    TeamRoutingModule
+    TeamComponent
   ],
   providers: [
       TeamService
