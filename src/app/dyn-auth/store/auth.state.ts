@@ -176,10 +176,16 @@ export class AuthState implements NgxsOnInit {
 
 
     @Action(fromAuth.SignUp)
-    onSignUp(ctx: StateContext<AuthState>, event: fromAuth.SignUp) {
+    onSignUp(ctx: StateContext<AuthStateModel>, event: fromAuth.SignUp) {
+        ctx.patchState({ pending: true });
         this.afAuth.auth.createUserWithEmailAndPassword(event.payload.username, event.payload.password)
-            .then(() => ctx.dispatch(new fromAuth.VerificationEmail(this.afAuth.auth.currentUser.reload())))
-            .catch((err) => ctx.dispatch(new fromAuth.RegisterError(err)))
+            .then(() => {
+                ctx.dispatch(new fromAuth.VerificationEmail(this.afAuth.auth.currentUser.reload()))
+            })
+            .catch((err) => {
+                ctx.patchState({ pending: false });
+                ctx.dispatch(new fromAuth.RegisterError(err))
+            })
     }
 
     @Action(fromAuth.LoginFailure)
@@ -193,9 +199,13 @@ export class AuthState implements NgxsOnInit {
     }
 
     @Action(fromAuth.VerificationEmail)
-    onVerificationEmail(ctx: StateContext<AuthState>) {
+    onVerificationEmail(ctx: StateContext<AuthStateModel>) {
         this.afAuth.auth.currentUser.sendEmailVerification()
-            .then(() => this._notification.create('info', 'Please verify account', 'Please check your email to verify your account'))
+            .then(() => {
+                ctx.patchState({ pending: false });
+                ctx.dispatch(new Navigate(['/login/auth']));
+                this._notification.create('info', 'Please verify account', 'Please check your email to verify your account')
+            })
             .catch((err) => ctx.dispatch(new fromAuth.VerificationError({ message: 'Failed to send verification email' })))
     }
 

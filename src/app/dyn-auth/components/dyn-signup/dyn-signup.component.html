@@ -5,7 +5,8 @@
       <nz-input-group nzPrefixIcon="anticon anticon-user" nzSize="large">
         <input type="text" nz-input formControlName="username" placeholder="Username" nzRequired>
       </nz-input-group>
-      <nz-form-explain *ngIf="form.get('username').dirty && form.get('username').errors">Please input your username!</nz-form-explain>
+      <nz-form-explain *ngIf="form.get('username').dirty && form.get('username').hasError('required')">We're gonna need an email address :-P</nz-form-explain>
+      <nz-form-explain *ngIf="form.get('username').dirty && form.get('username').hasError('pattern')">This don't look like an email address ;-)</nz-form-explain>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
@@ -13,18 +14,18 @@
       <nz-input-group nzPrefixIcon="anticon anticon-lock" nzSize="large">
         <input type="password" nz-input formControlName="password" placeholder="Password" nzRequired>
       </nz-input-group>
-      <nz-form-explain *ngIf="form.get('password').dirty && form.get('password').errors">Please input your Password!</nz-form-explain>
+      <nz-form-explain *ngIf="form.get('password').dirty && form.get('password').hasError('required')">We need a password to proceed!</nz-form-explain>
     </nz-form-control>
   </nz-form-item>
   <div class="buttons">
       <nz-form-item>
           <nz-form-control>
             <label nz-checkbox formControlName="agree" class="agree" nzRequired>
-                <span>Agree to terms</span>
+                <span>Agree to <a>terms</a></span>
             </label>
           </nz-form-control>
       </nz-form-item>
-      <button class="domain__btn" nz-button [nzSize]="'Large'" nzType="dashed" [nzLoading]="(pending$ | async)" type="submit">
+      <button [disabled]="(!form.get('agree').value && form.dirty) || !form.dirty" class="domain__btn" nz-button [nzSize]="'Large'" nzType="dashed" [nzLoading]="(pending$ | async)" type="submit">
           Create Account<i nz-icon type="check" theme="outline"></i>
       </button>
     

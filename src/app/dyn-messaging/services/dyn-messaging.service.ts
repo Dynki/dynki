@@ -39,45 +39,45 @@ export class MessagingService {
         read: false,
         reading: false,
         selected: false
-      },
-      {
-        id: '232425t345eqweq34',
-        from: 'Mark Webber',
-        to: ['Dean Selvey'],
-        subject: 'Abu Dhabi GP',
-        body: {
-          ops: [
-          { insert: 'Hiya, \n\n' +
-          'Are you watching the qualifying?.\n' +
-          'I hope Danny Ric does well.' },
-        ]},
-        sent: true,
-        created: moment().year(2018).month(10).date(20).hour(9).minute(15).toDate(),
-        author: 'Mark Webber',
-        status: 'read',
-        read: false,
-        reading: false,
-        selected: false
-      },
-      {
-        id: '232425t3sdarew45eqweq34',
-        from: 'Fernando Alonso',
-        to: ['Dean Selvey'],
-        subject: 'Abu Dhabi GP',
-        body: {
-          ops: [
-          { insert: 'Hola, \n\n' +
-          'Thanks for supporting me on my last race.\n' +
-          'Lets hope the bloody car makes it' },
-        ]},
-        sent: true,
-        created: moment().year(2018).month(8).date(19).hour(18).minute(45).toDate(),
-        author: 'Mark Webber',
-        status: 'read',
-        read: false,
-        reading: false,
-        selected: false
       }]
+      // {
+      //   id: '232425t345eqweq34',
+      //   from: 'Mark Webber',
+      //   to: ['Dean Selvey'],
+      //   subject: 'Abu Dhabi GP',
+      //   body: {
+      //     ops: [
+      //     { insert: 'Hiya, \n\n' +
+      //     'Are you watching the qualifying?.\n' +
+      //     'I hope Danny Ric does well.' },
+      //   ]},
+      //   sent: true,
+      //   created: moment().year(2018).month(10).date(20).hour(9).minute(15).toDate(),
+      //   author: 'Mark Webber',
+      //   status: 'read',
+      //   read: false,
+      //   reading: false,
+      //   selected: false
+      // },
+      // {
+      //   id: '232425t3sdarew45eqweq34',
+      //   from: 'Fernando Alonso',
+      //   to: ['Dean Selvey'],
+      //   subject: 'Abu Dhabi GP',
+      //   body: {
+      //     ops: [
+      //     { insert: 'Hola, \n\n' +
+      //     'Thanks for supporting me on my last race.\n' +
+      //     'Lets hope the bloody car makes it' },
+      //   ]},
+      //   sent: true,
+      //   created: moment().year(2018).month(8).date(19).hour(18).minute(45).toDate(),
+      //   author: 'Mark Webber',
+      //   status: 'read',
+      //   read: false,
+      //   reading: false,
+      //   selected: false
+      // }]
   }
 
   @Select(BaseState.domainId)
