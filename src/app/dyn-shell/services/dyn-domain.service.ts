@@ -24,7 +24,12 @@ export class DomainService {
         return this.afAuth.idToken.pipe(
             flatMap(token => this.httpClient.post(
                 url,
-                { uid: this.afAuth.auth.currentUser.uid, name: name },
+                {
+                    uid: this.afAuth.auth.currentUser.uid,
+                    name: name,
+                    email: this.afAuth.auth.currentUser.email,
+                    displayName: this.afAuth.auth.currentUser.displayName
+                },
                 { headers: { token, uid: this.afAuth.auth.currentUser.uid } }))
         )
     }

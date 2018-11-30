@@ -137,7 +137,7 @@ export class MenuService {
       this.mb.setTitle('Inbox').setIcon('mail')
         .setBadgeCount(this.msgCnt.pipe(delay(0))).setClickAction(new Navigate(['messaging/inbox'])).build(),
       this.mb.setTitle('Team').setIcon('appstore').setClickAction(new Navigate(['team/users'])).build(),
-      this.mb.setTitle('Boards').setIcon('dashboard').setButton(newBoardBtn).setFoldersAllowed(true).build(),
+      this.mb.setTitle('Boards').setIcon('schedule').setButton(newBoardBtn).setFoldersAllowed(true).build(),
       this.mb.setTitle('Projects').setIcon('rocket').setButton(blankAddBtn).build(),
       this.mb.setTitle('Tags').setIcon('tags').setButton(blankAddBtn).build()
     ]
