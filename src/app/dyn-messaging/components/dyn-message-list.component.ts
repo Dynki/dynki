@@ -6,7 +6,8 @@ import { Store } from '@ngxs/store';
 @Component({
     selector: 'dyn-msglist, [dyn-msglist]',
     template: `
-    <section class="msglist">
+    <nz-skeleton *ngIf="!pending" [nzActive]="true"></nz-skeleton>
+    <section *ngIf="pending" class="msglist">
         <div class="header">
             <nz-select class="sort" nzPlaceHolder="Sort" [(ngModel)]="sortOrder" (ngModelChange)="sortOrderChange($event)">
                 <nz-option nzValue="recent" nzLabel="Recent"></nz-option>
@@ -49,6 +50,7 @@ import { Store } from '@ngxs/store';
 export class DynMessagingListComponent {
 
     @Input() data: IMessages;
+    @Input() pending: boolean;
 
     sortOrder = 'recent';
     switchValue = false;

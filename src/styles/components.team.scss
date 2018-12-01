@@ -1,3 +1,16 @@
 .team {
     padding: 15px;
 }
+
+.team-heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-content: center;
+    align-items: center;
+    margin-bottom: 12px;
+
+    .invite-btn {
+        margin-left: auto;
+    }
+}

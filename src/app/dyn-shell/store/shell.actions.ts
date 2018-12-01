@@ -3,7 +3,19 @@ export enum ShellActionTypes {
     DOMAIN_NAME_EXISTS  = '[Shell] Domain Name Exists',
     DOMAIN_NAME_UNIQUE  = '[Shell] Domain Name Unique',
     CREATE_DOMAIN       = '[Shell] Create Domain',
-    DOMAIN_CREATED      = '[Shell] Domain Created'
+    DOMAIN_CREATED      = '[Shell] Domain Created',
+    GET_DOMAIN_MEMBERS  = '[Shell] Get Domain Members',
+    REFRESH_DOMAIN_MEMBERS  = '[Shell] Refrehs Domain Members'
+}
+
+export class GetDomainMembers {
+    static type = ShellActionTypes.GET_DOMAIN_MEMBERS;
+    constructor() { }
+}
+
+export class RefreshDomainMembers {
+    static type = ShellActionTypes.REFRESH_DOMAIN_MEMBERS;
+    constructor(public members: any) { }
 }
 
 export class CreateDomain {
@@ -32,6 +44,8 @@ export class DomainNameUnique {
 }
 
 export type DomainActions =
+    GetDomainMembers |
+    RefreshDomainMembers |
     CreateDomain     |
     DomainNameExists |
     DomainNameUnique |

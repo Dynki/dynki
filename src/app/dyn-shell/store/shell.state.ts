@@ -19,7 +19,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
             joinDomainStatus: undefined,
             checkingDomainName: false,
             domainChecked: false,
-            domainExists: false
+            domainExists: false,
+            members: []
         }
     }
 })
@@ -43,6 +44,11 @@ export class ShellState {
     @Selector()
     static domainChecked(state: ShellStateModel): boolean {
         return state.domain.domainChecked;
+    }
+
+    @Selector()
+    static domainMembers(state: ShellStateModel): any {
+        return state.domain.members;
     }
 
     constructor(
@@ -122,6 +128,20 @@ export class ShellState {
             validationStatus: 'success',
             joinDomainStatus: 'error'
         };
+        ctx.patchState({ domain });
+    }
+
+    @Action(shellActions.GetDomainMembers)
+    getDomainMembers(ctx: StateContext<ShellStateModel>, event: shellActions.GetDomainMembers) {
+        console.log('ShellState::GetDomainMembers');
+        this.domainService.getMembers();
+    }
+
+    @Action(shellActions.RefreshDomainMembers)
+    refreshDomainMembers(ctx: StateContext<ShellStateModel>, event: shellActions.RefreshDomainMembers) {
+        console.log('ShellState::RefreshDomainMembers');
+        const domain = ctx.getState().domain;
+        domain.members = event.members;
         ctx.patchState({ domain });
     }
 }

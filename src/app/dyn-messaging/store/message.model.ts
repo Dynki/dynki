@@ -29,6 +29,7 @@ export interface MessageStateModel {
     currentMsg: IMessage;
     sortOrder: string;
     unReadOnly: boolean;
+    pending: boolean;
 }
 
 export class Message implements IMessage {

@@ -6,18 +6,22 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { TeamComponent } from './components';
 import { TeamService, TruncatePipe } from './services';
 import { TeamHeadingComponent } from './components/dyn-team-heading.component';
+import { TeamMembersComponent } from './components/dyn-team-members.component';
+import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 // other imports
 @NgModule({
   declarations: [
     TeamComponent,
     TeamHeadingComponent,
+    TeamMembersComponent,
     TruncatePipe
   ],
   imports: [
     CommonModule,
     FlexLayoutModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgZorroAntdModule
   ],
   exports: [
     TeamComponent

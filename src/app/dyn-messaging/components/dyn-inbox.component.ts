@@ -7,13 +7,16 @@ import { IMessage } from '../store/message.model';
 @Component({
     selector: 'dyn-inbox',
     template: `
-    <section class="inbox">
-        <section class="list" dyn-msglist *ngIf="message$ | async as messages" [data]="messages"></section>
-        <section class="item" dyn-msg *ngIf="currentMsg$ | async as msg" [data]="msg"></section>
+    <section class="inbox" *ngIf="pending$ | async as pending">
+        <section class="list" dyn-msglist *ngIf="message$ | async as messages" [data]="messages" [pending]="pending"></section>
+        <section class="item" dyn-msg *ngIf="currentMsg$ | async as msg" [data]="msg" [pending]="pending"></section>
     </section>
     `
 })
 export class DynInboxComponent {
+
+    @Select(MessageState.pending)
+    pending$: Observable<boolean>;
 
     @Select(MessageState.getMessages)
     message$: Observable<IMessage[]>;

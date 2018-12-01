@@ -17,6 +17,7 @@ import { IMessage } from '../store/message.model';
 export class DynMessageComponent implements OnInit {
 
     @Input() data: IMessage;
+    @Input() pending: boolean;
 
     modules = {};
 

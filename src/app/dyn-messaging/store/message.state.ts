@@ -8,6 +8,7 @@ import { MessagingService } from '../services/dyn-messaging.service';
 @State<MessageStateModel>({
     name: 'message',
     defaults: {
+        pending: false,
         messages: undefined,
         sortOrder: undefined,
         unReadOnly: false,
@@ -35,8 +36,18 @@ export class MessageState {
      * Selectors
      */
     @Selector()
+    static getState(state: MessageStateModel): MessageStateModel {
+        return state;
+    }
+
+    @Selector()
     static getMessages(state: MessageStateModel): IMessage[] {
         return state.messages.messages;
+    }
+
+    @Selector()
+    static pending(state: MessageStateModel): boolean {
+        return state.pending;
     }
 
     @Selector()
@@ -72,6 +83,7 @@ export class MessageState {
     @Action(messagActions.GetMessage)
     getMessage(ctx: StateContext<MessageStateModel>, event: messagActions.GetMessage) {
         console.log('Message::State:GetMessage');
+        ctx.patchState({ pending: true });
         this.msgService.getMessage(event.messageId);
     }
 
@@ -104,7 +116,7 @@ export class MessageState {
     refreshMessages(ctx: StateContext<MessageStateModel>, event: messagActions.RefreshMessages) {
         const order = ctx.getState().sortOrder;
         event.messages.messages = this.msgService.sortMessages(event.messages.messages, order);
-        ctx.patchState({ messages: event.messages });
+        ctx.patchState({ messages: event.messages, pending: false });
         ctx.dispatch(new messagActions.SelectFirstMsg());
     }
 
