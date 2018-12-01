@@ -30,15 +30,16 @@ export class ToolbarComponent implements OnInit {
   }
 
   handleMenuSelect(event: { index: number, item: MdcMenuItem }) {
-    switch (event.index) {
-      case 0:
-        break;
-      case 1:
-        this.logout();
-        break;
-      default:
-        break;
-    }
+    // switch (event.index) {
+    //   case 0:
+    //     break;
+    //   case 1:
+    //     this.logout();
+    //     break;
+    //   default:
+    //     break;
+    // }
+    this.logout();
   }
 
   logout(): void {
