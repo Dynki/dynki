@@ -7,7 +7,7 @@ import {
     EventEmitter
 } from '@angular/core';
 
-import { Sortable } from '@shopify/draggable';
+import { Sortable } from '@shopify/draggable/lib/es5/draggable.bundle.legacy';
 
 @Directive({
     selector: '[dynSortable]'

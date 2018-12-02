@@ -7,12 +7,19 @@
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 2fr 5fr;
+    grid-template-areas: "list msg";
     min-height: 100vh;
     margin: 0;
     height: 100%;
+
+    .item {
+        grid-area: msg;
+    }
 }
 
 .msg {
+    grid-area: msg;
+
     .from {
         height: 50px;
         border-bottom: 1px solid #e8e8e8;
@@ -45,6 +52,7 @@
 }
 
 .msglist {
+    grid-area: list;
     display: flex;
     flex-direction: column;
     justify-content: start;
