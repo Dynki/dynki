@@ -97,8 +97,9 @@
                     }
                 }
 
-                dyn-sign-up {
+                dyn-signup {
                     width:100%;
+                    min-width: 280px;
                 }
 
                 dyn-new-domain {
@@ -248,3 +249,24 @@
     
     }
 }
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 0px) and (max-device-width : 680px) {
+    .domain__choice {
+        .brand {
+            visibility: hidden;
+        }
+
+        .section {
+            &__img {
+                visibility: hidden;
+            }
+            .main {
+                &__pic {
+                    visibility: hidden;
+                }
+            }
+        }
+    }
+}
+    

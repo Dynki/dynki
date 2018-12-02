@@ -1,5 +1,5 @@
 <form class="registration" nz-form [formGroup]="form" (ngSubmit)="submit()" name="registerForm">
-  <h1 class="registration__heading">Sign Up for Free</h1>
+  <h1 class="registration__heading">Free Sign Up</h1>
   <nz-form-item>
     <nz-form-control>
       <nz-input-group nzPrefixIcon="anticon anticon-user" nzSize="large">
@@ -26,7 +26,7 @@
           </nz-form-control>
       </nz-form-item>
       <button [disabled]="(!form.get('agree').value && form.dirty) || !form.dirty" class="domain__btn" nz-button [nzSize]="'Large'" nzType="dashed" [nzLoading]="(pending$ | async)" type="submit">
-          Create Account<i nz-icon type="check" theme="outline"></i>
+          Go<i nz-icon type="check" theme="outline"></i>
       </button>
     
       <!-- <button nz-button name="registerBtn" [nzLoading]="(pending | async)"  class="registration__button" [nzType]="'primary'" [nzSize]="'large'" type="submit" aria-label="register">Create Account</button> -->
