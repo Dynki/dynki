@@ -20,6 +20,7 @@
               "src/favicon.ico"
             ],
             "styles": [
+              "src/styles-app-loading.scss",
               "src/styles.scss",
               "node_modules/ng-zorro-antd/src/ng-zorro-antd.min.css"
             ],

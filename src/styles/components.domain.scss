@@ -222,7 +222,7 @@
 
             &__pic {
                 grid-area: pic;
-                background-image: url(/assets/img/dog.jpg), none;
+                background-image: url(/assets/img/dog-sm.jpg), none;
                 background-size:     cover;
                 background-repeat:   no-repeat;
                 background-position: center center;  
@@ -237,7 +237,6 @@
         }
 
         &__img {
-
             width: 55px;
             height: 42px;
             margin-left: 11px;

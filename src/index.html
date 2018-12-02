@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,21 +13,164 @@
   <base href="/">
 
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-  <link rel="icon" type="image/x-icon" href="./assets/img/icons/favicon.ico">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
   <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="./assets/img/icons/favicon.ico">
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
   <link href="//cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
-  <link href="//cdn.quilljs.com/1.0.0/quill.bubble.css" rel="stylesheet">
 
   <!-- Core build with no theme, formatting, non-essential modules -->
   <link href="//cdn.quilljs.com/1.0.0/quill.core.css" rel="stylesheet">
+
+  <style type="text/css">
+    body,
+    html {
+      height: 100%;
+      margin: 0px;
+    }
+
+    .app-loading {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-content: center;
+      align-items: center;
+      background-color: #D1D4DB;
+      height: 100%;
+      width: 100%;
+    }
+
+    .sk-folding-cube {
+      margin: 20px auto;
+      width: 40px;
+      height: 40px;
+      position: relative;
+      -webkit-transform: rotateZ(45deg);
+      transform: rotateZ(45deg);
+    }
+
+    .sk-folding-cube .sk-cube {
+      float: left;
+      width: 50%;
+      height: 50%;
+      position: relative;
+      -webkit-transform: scale(1.1);
+      -ms-transform: scale(1.1);
+      transform: scale(1.1);
+    }
+
+    .sk-folding-cube .sk-cube:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      -webkit-animation: sk-foldCubeAngle 2.4s infinite linear both;
+      animation: sk-foldCubeAngle 2.4s infinite linear both;
+      -webkit-transform-origin: 100% 100%;
+      -ms-transform-origin: 100% 100%;
+      transform-origin: 100% 100%;
+    }
+
+    .sk-folding-cube .sk-cube2 {
+      -webkit-transform: scale(1.1) rotateZ(90deg);
+      transform: scale(1.1) rotateZ(90deg);
+    }
+
+    .sk-folding-cube .sk-cube3 {
+      -webkit-transform: scale(1.1) rotateZ(180deg);
+      transform: scale(1.1) rotateZ(180deg);
+    }
+
+    .sk-folding-cube .sk-cube4 {
+      -webkit-transform: scale(1.1) rotateZ(270deg);
+      transform: scale(1.1) rotateZ(270deg);
+    }
+
+    .sk-folding-cube .sk-cube2:before {
+      -webkit-animation-delay: 0.3s;
+      animation-delay: 0.3s;
+    }
+
+    .sk-folding-cube .sk-cube3:before {
+      -webkit-animation-delay: 0.6s;
+      animation-delay: 0.6s;
+    }
+
+    .sk-folding-cube .sk-cube4:before {
+      -webkit-animation-delay: 0.9s;
+      animation-delay: 0.9s;
+    }
+
+    @-webkit-keyframes sk-foldCubeAngle {
+
+      0%,
+      10% {
+        -webkit-transform: perspective(140px) rotateX(-180deg);
+        transform: perspective(140px) rotateX(-180deg);
+        opacity: 0;
+      }
+
+      25%,
+      75% {
+        -webkit-transform: perspective(140px) rotateX(0deg);
+        transform: perspective(140px) rotateX(0deg);
+        opacity: 1;
+      }
+
+      90%,
+      100% {
+        -webkit-transform: perspective(140px) rotateY(180deg);
+        transform: perspective(140px) rotateY(180deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes sk-foldCubeAngle {
+
+      0%,
+      10% {
+        -webkit-transform: perspective(140px) rotateX(-180deg);
+        transform: perspective(140px) rotateX(-180deg);
+        opacity: 0;
+      }
+
+      25%,
+      75% {
+        -webkit-transform: perspective(140px) rotateX(0deg);
+        transform: perspective(140px) rotateX(0deg);
+        opacity: 1;
+      }
+
+      90%,
+      100% {
+        -webkit-transform: perspective(140px) rotateY(180deg);
+        transform: perspective(140px) rotateY(180deg);
+        opacity: 0;
+      }
+    }
+  </style>
 </head>
+
 <body>
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/draggable.bundle.legacy.js"></script>
 
-  <dyn-root fxFlex fxLayout="row" fxFlexFill>Loading...</dyn-root>
+  <dyn-root fxFlex fxLayout="row" fxFlexFill>
+    <!-- loading layout replaced by app after startupp -->
+    <div class="app-loading">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAI8AAAA5CAMAAAA4LojJAAACDVBMVEXR1NvR1ODR1OLR1OTR1OXR1OnR1OrR1OvR1OzR1O7R1O/R1PHR2uvR2u7R2u/R2vDR2vLR3enR3ezR3fDR4PHR4PLR4fHR5PXR5/bR6ffR6vfX1NvX6PbX7fja6fbd1Nvd2tvd4ujd6PLd7/nd8Pre1Nve3dve6/fe7fje7/ng1Nvh2tvh4uTh5Ozh7/nh8frj1Nvj6/Lj7/nj8/zk1Nvk2tvk7/nk8frm1Nvm2tvm9P3n1Nvn9f7p2tvp5ujp8fjq1Nvq9/7q9//s1Nvs2tvs3dvs6OTs8ffs9v7s9/3s9//t1Nvt1ODt3dvt9/7t+P7t+P/v4Nvv4+Dv5uDv7/Lv7/Xv8fbv+f/w4Nvw4dvw49vw+v/y5Nvy6eLy7evy7ezy+v7y+//z6ODz7Ojz8vzz/P/16dv16tv16+X18/H1+Pr1/P71/P/1/f/27Nv27eD27eX2+Pr2+/72/v/47+D47+X47+j4/v/4///58OT58eX59O/5/v/5///78uj78un78uv78+n78+r79Oz7+Pf7/P/7/f77///89Ov89vD8/v/8///+9ez+9vD++PH++PL++PX++fP++vX++vj+/fj+/f3+/f7+////9+//9/D/+PH/+PL/+fL/+vP/+/X//Pb//Pr//P3//ff//f3//vj//vn//vr//vz//v7///n///r///z///3///7////huvkoAAACyElEQVR4Ae2X+VsNURjH31H2fVEYyZIl2UXkWrLvLiL7nj0iJISI6CJL3bFEJItb8/0bvaeZ61VPz63cczU/zOeHuc8zz505n2fO933POeRxfHx8fHx8fDaGa9dQW/ocC7/Opu4zJoQ/1FUenUb/QhC/tlBb+haiYUmcPszP21k97vMy32HvlWoA3w/3tM8TimJMvgq0FGvwEeLwYXrlWGg54RkfJtNCw1IP+Rh5wD3qFGPSLPO/+NCoUjQuo5EXwjXpRMLccO021WmeE9HwlY/AvNndkc+Ex+GnM6X/xO1DAdhn1LX5EAm9j+OdqUZ+T8biajiopLX3mR7Cq0Ua6ksYZ6lbqVV4RsJYC5eo1Sd5E/D53IrZG+4Ajcvb+8xwdHT6DLyJepOSgmhaK3HZrCZRjfwhFz9OmsSMuAhcEx/RIY0+8ir+ImUUZWgJKpyRv4S+7SKHNOCt+LjFyTqafYwCNK1qTcyneeSSgchOZ2RIexpQgoZs8REdnT7y+gzYp/9Os+sjf086yOLygDFHdBLwfWhIiSuhwu2qBRHZ117c/RWdhOSHWehMEhPgNItBhz5GjoXmA5QAn2Hlqr6Y0eWokDTH9tnKOsDHqeKjt/9IkTNp/KFi+0ROWXi4gB809fusVv052gQvq9wWcJBi+wD2fTN5Bxefdh+eJTcsSqQ+XdIcy8e+wcaDi7hja/OR9f0WuaS1LmK5/OpOfOxiUowP4UW6+Gjf//Qr4pniSwXF8pG7Ri7s6+Kjf3+oSl7S3KmPapyR/Zr3z2dJ4Ep/EFRp7qIPpZSyh57zxZ7zHZwvAvga4jR32YcyVdEn7vyVWgVeVrvhY+TxhOvxqas8MpGEaMnjLnXDhwYVommd+GiGfSTNHiC1StLsBQKQNHuA/kWSZi8wBSgj75BS6qU0bw8Dqrl5hSCAmizyDPPz89eb5OPj4xMXvwGQuNekPlN3pgAAAABJRU5ErkJggg==">
+      <div class="sk-folding-cube">
+        <div class="sk-cube1 sk-cube"></div>
+        <div class="sk-cube2 sk-cube"></div>
+        <div class="sk-cube4 sk-cube"></div>
+        <div class="sk-cube3 sk-cube"></div>
+      </div>
+    </div>
+  </dyn-root>
 
 </body>
+
 </html>
