@@ -1,0 +1,81 @@
+.user {
+    padding: 15px;
+    height: 100%;
+
+    .profile {
+        height: 100%;
+        display: grid;
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+        grid-template-rows: 200px 1fr;
+        grid-template-columns: 200px 1fr;
+        grid-template-areas: "header1 header2"
+                             "content1 content2";
+
+        .u-header1 {
+            grid-area: header1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-content: center;
+            align-items: center;
+            width: 100%;
+
+            @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+                /* IE10+ CSS styles go here */
+                .ant-card-body {
+                    padding: 0px!important;
+                }
+            }
+            
+            .u-heading {
+                text-align: center;
+            }
+
+            .avatar {
+                background-color: #3095DE;
+                color: #fff;
+                height: 85px;
+                width: 85px;
+                text-align: center;
+                font-size: 51px;
+                border-radius: 49px;
+                margin: auto;
+                margin-bottom: 15px;
+                margin-top: 15px;
+            }
+        }
+        .u-header2 {
+            grid-area: header2;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+
+            .nag {
+                padding-bottom: 15px;
+            }
+
+            .input-area {
+                display: flex;
+                flex-direction: row;
+                
+                .new-name {
+                    max-width: 250px;
+                    margin-right: 15px;
+                }
+            }
+        }
+                    
+        .u-content {
+            grid-area: content1;
+            grid-column-end: content2;
+            height: 100%;
+
+            form {
+                max-width: 500px;
+            }
+        }
+    }
+}

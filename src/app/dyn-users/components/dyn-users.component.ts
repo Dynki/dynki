@@ -8,7 +8,7 @@ import { UserInfo } from 'firebase';
     selector: 'dyn-user',
     template: `
     <section class="user">
-        <section class="profile" dyn-userprofile *ngIf="user$ | async as user" [user]="user"></section>
+        <section dyn-userprofile *ngIf="user$ | async as user" [user]="user"></section>
     </section>
     `
 })
