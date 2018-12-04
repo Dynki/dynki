@@ -29,6 +29,7 @@ export class BoardService {
       this.afAuth.authState.subscribe(u => {
           this.userInfo = u
         });
+
    }
 
   async createBoard(type: string): Promise<Board> {

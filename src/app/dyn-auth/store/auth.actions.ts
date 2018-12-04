@@ -18,7 +18,8 @@ export enum AuthActionTypes {
   SIGN_UP           = '[Auth] Sign Up',
   REGISTER_REDIRECT = '[Auth] Register Redirect',
   REGISTER_ERROR    = '[Auth] Register Error',
-  REFRESH_TOKEN     = '[Auth] Refresh Token'
+  REFRESH_TOKEN     = '[Auth] Refresh Token',
+  CHANGE_PASSWORD   = '[Auth] Change Password'
 }
 
 export class RefreshToken {

@@ -42,6 +42,7 @@ import { DomainRegistrationComponent } from './components/domain-registration/dy
 import { DomainService } from './services/dyn-domain.service';
 import { MessagingModule } from 'app/dyn-messaging/dyn-messaging.module';
 import { MessageState } from 'app/dyn-messaging/store/message.state';
+import { UsersModule } from 'app/dyn-users/dyn-users.module';
 
 export const components = [
     FooterComponent,
@@ -79,6 +80,7 @@ export const components = [
     BoardModule,
     MessagingModule,
     BrowserModule,
+    UsersModule,
     FormsModule,
     HttpModule,
     TimerModule,

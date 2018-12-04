@@ -12,6 +12,7 @@ import { JoinDomainComponent } from '../components/domain-registration/dyn-join-
 import { DomainChoiceComponent } from '../components/domain-registration/dyn-domain-choice.component';
 import { DynMessagingComponent } from 'app/dyn-messaging/components/dyn-messaging.component';
 import { TeamComponent } from 'app/dyn-teams/components';
+import { DynUserComponent } from 'app/dyn-users/components/dyn-users.component';
 
 const appRoutes: Routes = [
   {
@@ -38,6 +39,7 @@ const appRoutes: Routes = [
       { path: '', redirectTo: 'messaging/inbox', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
       { path: 'team/users', component: TeamComponent },
+      { path: 'user/profile', component: DynUserComponent },
       { path: 'board/:boardId', component: DynBoardComponent},
       { path: 'messaging/inbox', component: DynMessagingComponent }
     ]

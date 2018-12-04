@@ -5,6 +5,7 @@ import { User } from '../../../dyn-auth/store/auth.model';
 
 import { MdcMenu, MdcMenuItem } from '@angular-mdc/web';
 import { Store } from '@ngxs/store';
+import { Navigate } from '@ngxs/router-plugin';
 
 @Component({
   selector: 'dyn-toolbar',
@@ -30,16 +31,17 @@ export class ToolbarComponent implements OnInit {
   }
 
   handleMenuSelect(event: { index: number, item: MdcMenuItem }) {
-    // switch (event.index) {
-    //   case 0:
-    //     break;
-    //   case 1:
-    //     this.logout();
-    //     break;
-    //   default:
-    //     break;
-    // }
-    this.logout();
+    switch (event.index) {
+      case 0:
+        this.store.dispatch(new Navigate(['user/profile']));
+        break;
+      case 1:
+        this.logout();
+        break;
+      default:
+        break;
+    }
+    // this.logout();
   }
 
   logout(): void {
