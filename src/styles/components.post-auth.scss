@@ -53,10 +53,9 @@
         main {
             padding-left: 4px;
             grid-column-start: 2;
-            height: calc(100vh - 65px);
             overflow: hidden;
             overflow-y: scroll;
-            height: 100%;
+            //height: 100%;
 
             @supports (-ms-accelerator:true) {
                 /* IE Edge 12+ CSS styles go here */ 
@@ -65,9 +64,10 @@
 
             @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
                 /* IE10+ CSS styles go here */
-                padding-top: 65px;
-                height: 100vh!important;
-           }
+                display: block!important;
+                margin-top: 60px!important;
+                height: calc(100vh - 60px)!important;
+            }
         }
 
 

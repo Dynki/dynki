@@ -12,6 +12,20 @@
     margin: 0;
     height: 100%;
 
+
+    @supports (-ms-accelerator:true) {
+        /* IE Edge 12+ CSS styles go here */ 
+        height: 100%!important;
+        margin-top: 0px!important;
+    }
+
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+        /* IE10+ CSS styles go here */
+        height: calc(100% - 200px)!important;
+        margin-top: 0px!important;
+    }
+
+
     .item {
         grid-area: msg;
     }
@@ -98,6 +112,17 @@
 
         overflow-y: scroll;
         overflow-x: hidden; 
+
+        @supports (-ms-accelerator:true) {
+            /* IE Edge 12+ CSS styles go here */ 
+            height: calc(100vh - 114px)!important;
+        }
+    
+        @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+            /* IE10+ CSS styles go here */
+            height: calc(100% - 114px)!important;
+       }
+    
         
         &::-webkit-scrollbar-track
         {

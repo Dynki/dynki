@@ -35,7 +35,8 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
             <nz-form-item>
                 <nz-form-label [nzSm]="7" [nzXs]="24" nzFor="displayName">Display Name</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
-                    <input nz-input formControlName="displayName" id="displayName">
+                    <input class="new-name" nz-input formControlName="displayName" placeholder="Display name goes here" id="displayName">
+                    <button nz-button nzType="default">Apply</button>
                 </nz-form-control>
             </nz-form-item>
         </form>

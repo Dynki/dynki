@@ -3,7 +3,7 @@
     height: 100%;
 
     .profile {
-        height: 100%;
+        height: calc(100vh - 90px);
         display: grid;
         grid-column-gap: 10px;
         grid-row-gap: 10px;
