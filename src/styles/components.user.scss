@@ -75,6 +75,18 @@
 
             form {
                 max-width: 500px;
+
+                .display-name {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-content: center;
+                    align-items: center;
+
+                    .new-name {
+                        margin-right: 15px;
+                    }
+                }
             }
         }
     }
