@@ -73,18 +73,38 @@
             grid-column-end: content2;
             height: 100%;
 
-            form {
-                max-width: 500px;
+            .ant-card-body {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-content: space-between;
+                align-items: center;
 
-                .display-name {
+                img {
+                    width: 400px;
+                    height: 400px;
+                }
+
+                &__left {
                     display: flex;
-                    flex-direction: row;
-                    justify-content: center;
-                    align-content: center;
-                    align-items: center;
+                    flex-direction: column;
+                    width: 100%;
 
-                    .new-name {
-                        margin-right: 15px;
+    
+                    form {
+                        max-width: 500px;
+        
+                        .display-name {
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: center;
+                            align-content: center;
+                            align-items: center;
+        
+                            .new-name {
+                                margin-right: 15px;
+                            }
+                        }
                     }
                 }
             }

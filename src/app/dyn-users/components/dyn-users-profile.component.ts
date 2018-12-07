@@ -25,22 +25,25 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
             </section>
         </nz-card>
         <nz-card class="u-content">
-        <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
-            <nz-form-item>
-                <nz-form-label [nzSm]="7" [nzXs]="24" nzFor="email">Username</nz-form-label>
-                <nz-form-control [nzSm]="14" [nzXs]="24">
-                    <input readonly nz-input formControlName="username" id="username">
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item class="display-name">
-                <nz-form-label [nzSm]="7" [nzXs]="24" nzFor="displayName">Display Name</nz-form-label>
-                <nz-form-control [nzSm]="14" [nzXs]="24" class="new-name">
-                    <input nz-input formControlName="displayName" placeholder="Display name goes here" id="displayName">
-                </nz-form-control>
-                <button nz-button nzType="primary">Apply</button>
-            </nz-form-item>
-        </form>
-        <button nz-button nzType="default">Change Password</button>
+            <div class="u-content__left">
+                <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+                    <nz-form-item>
+                        <nz-form-label [nzSm]="7" [nzXs]="24" nzFor="email">Username</nz-form-label>
+                        <nz-form-control [nzSm]="14" [nzXs]="24">
+                            <input readonly nz-input formControlName="username" id="username">
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item class="display-name">
+                        <nz-form-label [nzSm]="7" [nzXs]="24" nzFor="displayName">Display Name</nz-form-label>
+                        <nz-form-control [nzSm]="14" [nzXs]="24" class="new-name">
+                            <input nz-input formControlName="displayName" placeholder="Display name goes here" id="displayName">
+                        </nz-form-control>
+                        <button nz-button nzType="primary">Apply</button>
+                    </nz-form-item>
+                </form>
+                <button nz-button nzType="default">Change Password</button>
+            </div>
+            <img src="./assets/img/santa.PNG">
         </nz-card>
     </div>
     `
