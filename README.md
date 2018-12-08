@@ -9,3 +9,5 @@ Column Types
   - Text
 
 Inbox Messaging
+
+Team Management
