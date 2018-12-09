@@ -41,10 +41,46 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
                         <button nz-button nzType="primary">Apply</button>
                     </nz-form-item>
                 </form>
-                <button nz-button nzType="default">Change Password</button>
+                <button nz-button nzType="default" (click)="changePassword()">Change Password</button>
             </div>
             <img src="./assets/img/santa.PNG">
         </nz-card>
+        <nz-modal
+            [nzFooter]="modalFooter"
+            [(nzVisible)]="isVisible"
+            nzTitle="Change Password"
+            (nzOnCancel)="handleCancel()"
+            (nzOnOk)="handleOk()"
+            [nzOkLoading]="isOkLoading">
+            <div class="password">
+                <div class="left">
+                    <div>Passwords must contain</div>
+                    <div class="checklist">
+                        <i nz-icon type="close" theme="outline"></i>
+                        <div>At least 6 characters</div>
+                    </div>
+                    <div class="checklist">
+                        <i nz-icon type="close" theme="outline"></i>
+                        <div>At least 1 upper case letter (A..Z)</div>
+                    </div>
+                    <div class="checklist">
+                        <i nz-icon type="close" theme="outline"></i>
+                        <div>At least 1 lower case letter (a..z)</div>
+                    </div>
+                    <div class="checklist">
+                        <i nz-icon type="close" theme="outline"></i>
+                        <div>At least 1 number (0..9)</div>
+                    </div>
+                </div>
+                <div class="right">
+                </div>
+            </div>
+            <ng-template #modalFooter>
+                <span>Modal Footer: </span>
+                <button nz-button nzType="default" (click)="handleCancel()">Custom Callback</button>
+                <button nz-button nzType="primary" (click)="handleOk()" [nzLoading]="isConfirmLoading">Custom Submit</button>
+            </ng-template>
+        </nz-modal>
     </div>
     `
 })
@@ -56,11 +92,14 @@ export class DynUserProfileComponent implements OnInit {
     current;
     newName: string;
     alias: string;
+    isVisible = false;
 
     constructor(private fb: FormBuilder) {
     }
 
     ngOnInit() {
+        this.isVisible = false;
+
         this.validateForm = this.fb.group({
             displayName      : [ null, [ Validators.required ] ],
             username         : [ null, [ Validators.email, Validators.required ] ],
@@ -84,5 +123,13 @@ export class DynUserProfileComponent implements OnInit {
         } else if (control.value !== this.validateForm.controls.password.value) {
           return { confirm: true, error: true };
         }
-      };
+    };
+
+    changePassword() {
+        this.isVisible = true;
+    }
+
+    handleCancel(): void {
+        // this.isVisible = false;
+    }
 }
