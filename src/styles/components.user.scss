@@ -73,40 +73,43 @@
             grid-column-end: content2;
             height: 100%;
 
-            .ant-card-body {
+            &__left {
+                margin: 15px;
                 display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                align-content: space-between;
-                align-items: center;
+                flex-direction: column;
+                width: 100%;
+                min-width: 400px;
 
-                img {
-                    width: 400px;
-                    height: 400px;
-                }
 
-                &__left {
-                    display: flex;
-                    flex-direction: column;
-                    width: 100%;
-
+                form {
     
-                    form {
-                        max-width: 500px;
-        
-                        .display-name {
-                            display: flex;
-                            flex-direction: row;
-                            justify-content: center;
-                            align-content: center;
-                            align-items: center;
-        
-                            .new-name {
-                                margin-right: 15px;
-                            }
+                    .display-name {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        align-content: center;
+                        align-items: center;
+    
+                        .new-name {
+                            margin-right: 15px;
                         }
                     }
                 }
+            }
+
+            .ant-card-body {
+                display: flex;
+                flex-direction: row;
+                justify-content: start;
+                align-items: start;
+                padding: 0px;
+
+                img {
+                    width: 50%;
+                    height: 50%;
+                    margin-left: auto;
+                }
+
             }
         }
     }
