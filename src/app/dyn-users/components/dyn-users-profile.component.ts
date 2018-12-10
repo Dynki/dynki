@@ -130,6 +130,6 @@ export class DynUserProfileComponent implements OnInit {
     }
 
     handleCancel(): void {
-        // this.isVisible = false;
+        this.isVisible = false;
     }
 }
