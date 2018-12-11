@@ -170,6 +170,10 @@ dyn-sub-menu {
             top: 2px;
             z-index: 1000;
             position: absolute!important;
+
+            span {
+                display: contents!important;
+            }
         }
 
         .draghandle {
