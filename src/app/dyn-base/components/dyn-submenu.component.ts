@@ -4,6 +4,7 @@ import { Store } from '@ngxs/store';
 import { DynMenuItem } from '../store/menu.model';
 import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
+import * as menuActions from '../store/menu.actions';
 
 @Component({
   selector: 'dyn-sub-menu',
@@ -12,7 +13,7 @@ import { Subscription } from 'rxjs';
 export class SubMenuComponent {
     @Input() subitem: DynMenuItem;
     @Input() parentName: string;
-    buttonVisible: false;
+    buttonVisible: boolean;
     subs = new Subscription();
 
     constructor(private store: Store) {
@@ -40,4 +41,9 @@ export class SubMenuComponent {
       }
     }
 
+    enterLeave(enter = false) {
+      this.buttonVisible = enter ? true : false;
+
+      this.store.dispatch(new menuActions.SetActiveMenu(this.subitem));
+    }
 }

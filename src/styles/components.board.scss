@@ -42,6 +42,10 @@
     &__content {
         padding-left: 15px;  
         grid-area: content;
+
+        .board_img {
+            width: 100%;
+        }
     }    
 
 }

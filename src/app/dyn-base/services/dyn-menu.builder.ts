@@ -14,6 +14,7 @@ export class MenuBuilder {
     private _clickAction: any;
     private _isSelected: boolean;
     private _foldersAllowed: boolean;
+    private _data: any;
 
     constructor() {
         this.reset();
@@ -89,6 +90,13 @@ export class MenuBuilder {
         this._clickAction = value;
         return this;
     }
+    get data() {
+        return this._data;
+    }
+    setData(data) {
+        this._data = data;
+        return this;
+    }
 
     reset() {
         this._title = null;
@@ -101,6 +109,7 @@ export class MenuBuilder {
         this._clickAction = null;
         this._isSelected = false;
         this._foldersAllowed = false;
+        this._data = null;
     }
 
     build(): MenuItem {

@@ -9,7 +9,8 @@ export enum MenuActionTypes {
     UPDATE_FOLDER   = '[Menu] Update Folder',
     DELETE_FOLDER   = '[Menu] Delete Folder',
     LOAD_MENU       = '[Menu] Load Menu',
-    UPDATE_MENU     = '[Menu] Update Menu'
+    UPDATE_MENU     = '[Menu] Update Menu',
+    SET_ACTIVE_MENU = '[Menu] Set Active Menu'
 };
 
 export class InitMenus {
@@ -58,6 +59,11 @@ export class DeleteFolder {
     constructor(public folderItem: DynMenuItem) { }
 }
 
+export class SetActiveMenu {
+    static type = MenuActionTypes.SET_ACTIVE_MENU;
+    constructor(public payload: DynMenuItem) { }
+}
+
 export type MenuActions =
     InitMenus       |
     LoadItems       |
@@ -65,4 +71,5 @@ export type MenuActions =
     NewMenuFolder   |
     LoadFolders     |
     UpdateFolder    |
+    SetActiveMenu   |
     DeleteFolder;

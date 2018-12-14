@@ -1,6 +1,7 @@
 <div class="choose-board">
     <dyn-menu [menu]="menu$ | async"></dyn-menu>
-    <div class="choose-board__content">
+    <div *ngIf="activeMenu$ | async as menu" class="choose-board__content">
         <h1>Select template to use</h1>
+        <img class="board_img" [src]="menu.data">
     </div>
 </div>

@@ -19,6 +19,7 @@ export interface DynMenuItem {
     isSelected: boolean;
     foldersAllowed: boolean;
     clickAction: any;
+    data: any;
 }
 
 export class MenuItem implements DynMenuItem {
@@ -33,6 +34,7 @@ export class MenuItem implements DynMenuItem {
     isSelected = false;
     foldersAllowed = false;
     clickAction = null;
+    data = null;
 
     constructor(builder: MenuBuilder) {
         this.parent = builder.parent;
@@ -45,6 +47,7 @@ export class MenuItem implements DynMenuItem {
         this.isSelected = builder.isSelected;
         this.clickAction = builder.clickAction;
         this.foldersAllowed = builder.foldersAllowed;
+        this.data = builder.data;
     }
 }
 
@@ -53,9 +56,11 @@ export interface DynMenuButton {
     title?: string;
     type?: string;
     icon?: string;
-    clickAction?: any;
+    clickAction?
+    : any;
 }
 
 export interface MenuStateModel {
     menus: Array<DynMenu>;
+    activeMenu: DynMenuItem;
 }

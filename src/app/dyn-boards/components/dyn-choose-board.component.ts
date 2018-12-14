@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { DynMenu } from '../../dyn-base/store/menu.model';
+import { DynMenu, DynMenuItem } from '../../dyn-base/store/menu.model';
 import { MenuState } from '../../dyn-base/store/menu.state';
 import { Select } from '@ngxs/store';
 
@@ -13,6 +13,9 @@ export class DynChooseBoardTypeComponent {
 
   @Select(MenuState.getMenu('Choose-Template'))
   public menu$: Observable<DynMenu>;
+
+  @Select(MenuState.activeMenu)
+  public activeMenu$: Observable<DynMenuItem>;
 
   constructor() { }
 }

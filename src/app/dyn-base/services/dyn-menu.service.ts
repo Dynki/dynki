@@ -155,8 +155,8 @@ export class MenuService {
         caption: 'Select',
         title: 'Use this template',
         clickAction: new boardActions.CreateBoard('Scratch'),
-        icon: undefined
-      }).build(),
+        icon: undefined,
+      }).setData('./assets/img/scratch.PNG').build(),
       this.mb.setTitle('Track Time').setButton({
         caption: 'Select',
         title: 'Use this template',

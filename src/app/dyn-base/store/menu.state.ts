@@ -1,14 +1,15 @@
 import { Action, Selector, State, StateContext, createSelector } from '@ngxs/store';
 
 import * as menuActions from './menu.actions';
-import { MenuStateModel, DynMenu } from './menu.model';
+import { MenuStateModel, DynMenu, DynMenuItem } from './menu.model';
 import { MenuService } from '../services/dyn-menu.service';
 import { MenuBuilder } from '../services/dyn-menu.builder';
 
 @State<MenuStateModel>({
     name: 'menu',
     defaults: {
-        menus: []
+        menus: [],
+        activeMenu: null
     }
 })
 export class MenuState {
@@ -16,6 +17,10 @@ export class MenuState {
     /**
      * Selectors
      */
+    @Selector() static activeMenu(state: MenuStateModel): DynMenuItem {
+        return state.activeMenu;
+    }
+
     @Selector() static menus(state: MenuStateModel): DynMenu[] {
         return state.menus;
     }
@@ -32,6 +37,11 @@ export class MenuState {
     /**
      * Commands
      */
+    @Action(menuActions.SetActiveMenu)
+    setActiveMenu(ctx: StateContext<MenuStateModel>, event: menuActions.SetActiveMenu) {
+        ctx.patchState({ activeMenu: event.payload });
+    }
+
     @Action(menuActions.InitMenus)
     initMenus(ctx: StateContext<MenuStateModel>) {
         this.menuService.initialiseMenus();

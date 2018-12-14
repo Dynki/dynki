@@ -1,4 +1,4 @@
-<ul class="menu__submenu-item dragcontainer" (mouseenter)="buttonVisible=true" (mouseleave)="buttonVisible=false">
+<ul class="menu__submenu-item dragcontainer" (mouseenter)="enterLeave(true)" (mouseleave)="enterLeave()">
     <i [hidden]="!buttonVisible" class="draghandle anticon anticon-arrows-alt"></i>
     <span [hidden]="buttonVisible" class="spacer"></span>
     <button 

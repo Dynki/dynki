@@ -28,7 +28,8 @@ export class MenuItemComponent implements OnInit {
         foldersAllowed: true,
         title: 'New Folder',
         icon: 'anticon anticon-folder-add',
-        clickAction: new boardActions.AddFolder()
+        clickAction: new boardActions.AddFolder(),
+        data: null
       }
     }
 
