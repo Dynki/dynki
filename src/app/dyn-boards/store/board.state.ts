@@ -144,7 +144,7 @@ export class BoardState {
         currentBoard.entities.push({ id, description: event.description });
 
         this.boardService.updateBoard(currentBoard);
-        ctx.dispatch(new boardActions.UpdateTitle(currentBoard));
+        // ctx.dispatch(new boardActions.UpdateTitle(currentBoard));
     }
 
     @Action(boardActions.UpdateEntity)
