@@ -58,6 +58,9 @@ export class BoardService {
   getBoard(boardId: string) {
     console.log('Board::Service::getBoard ', boardId);
     return this.db.collection('domains').doc(this.domainId).collection('boards').doc(boardId).snapshotChanges()
+    .pipe(
+      take(1)
+    )
     .subscribe(b => {
         if (b.payload.exists) {
           console.log('Board::Service::getBoard::b', b);
@@ -128,7 +131,8 @@ export class BoardService {
 
   updateBoard(board: Board) {
     console.log('Board::Service::UpdateBoard', board);
-    this.db.collection('domains').doc(this.domainId).collection('boards').doc(board.id).set(board);
+    this.db.collection('domains').doc(this.domainId).collection('boards').doc(board.id).set(board)
+    .then(() => this.store.dispatch(new boardActions.DisplayBoard(board)));
   }
 
   updateBoards(boards: Board[]) {

@@ -6,6 +6,7 @@ import { DynMenu } from '../../../dyn-base/store/menu.model';
 import { Observable } from 'rxjs/observable';
 import { MenuState } from '../../../dyn-base/store/menu.state';
 import { BaseState } from 'app/dyn-base/store/base.state';
+import { Navigate } from '@ngxs/router-plugin';
 
 @Component({
   selector: 'dyn-side-menu',
@@ -25,5 +26,9 @@ export class SideMenuComponent {
 
   chooseBoard() {
     this.store.dispatch(new boardActions.ChooseBoardType());
+  }
+
+  gotoTeam() {
+    this.store.dispatch(new Navigate(['team/users']));
   }
 }

@@ -1,9 +1,9 @@
-<nz-breadcrumb *ngIf="domainName$ | async as domainName" class="side-menu__bc" nzTitle="Your team's lovely name" nzPlacement="top" nz-tooltip>
+<nz-breadcrumb *ngIf="domainName$ | async as domainName" class="side-menu__bc" nzTitle="Your lovely team" nzPlacement="top" nz-tooltip>
     <nz-breadcrumb-item>
         <i nz-icon type="home"></i>
     </nz-breadcrumb-item>
     <nz-breadcrumb-item>
-        <span>{{domainName}}</span>
+        <button class="domain_btn" nz-button nzType="dashed" (click)="gotoTeam()">{{domainName}}</button>
     </nz-breadcrumb-item>
 </nz-breadcrumb>
 <dyn-menu [menu]="menu$ | async"></dyn-menu>

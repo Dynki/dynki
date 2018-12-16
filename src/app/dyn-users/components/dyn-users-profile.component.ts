@@ -41,7 +41,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
                         <button nz-button nzType="primary">Apply</button>
                     </nz-form-item>
                 </form>
-                <button nz-button nzType="default" (click)="changePassword()">Change Password</button>
+                <!-- <button nz-button nzType="default" (click)="changePassword()">Change Password</button> !-->
             </div>
             <img src="./assets/img/santa.PNG">
         </nz-card>
