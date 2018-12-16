@@ -133,6 +133,7 @@ export class MenuService {
       icon: 'plus',
     };
 
+
     const items: DynMenuItem[] = [
       this.mb.setTitle('Inbox').setIcon('mail')
         .setBadgeCount(this.msgCnt.pipe(delay(0))).setClickAction(new Navigate(['messaging/inbox'])).build(),
@@ -150,6 +151,14 @@ export class MenuService {
   }
 
   initialiseNewBoardMenu() {
+    const comingSoonBtn = {
+      title: undefined,
+      caption: 'Coming Soon',
+      icon: undefined,
+    };
+
+    const comingSoonImg = './assets/img/scratch-blur.PNG';
+
     const subMenuItems1 = [
       this.mb.setTitle('Start From Scratch').setButton({
         caption: 'Select',
@@ -157,46 +166,21 @@ export class MenuService {
         clickAction: new boardActions.CreateBoard('Scratch'),
         icon: undefined,
       }).setData('./assets/img/scratch.PNG').build(),
-      this.mb.setTitle('Track Time').setButton({
-        caption: 'Select',
-        title: 'Use this template',
-        clickAction: new boardActions.CreateBoard('TimeTracking'),
-        icon: undefined
-      }).build(),
-      this.mb.setTitle('Team Tasks').setButton({
-        caption: 'Select',
-        title: 'Use this template',
-        clickAction: new boardActions.CreateBoard('TeamTasks'),
-        icon: undefined
-      }).build(),
-      this.mb.setTitle('Project Planning').setButton({
-        caption: 'Select',
-        title: 'Use this template',
-        clickAction: new boardActions.CreateBoard('ProjectPlanning'),
-        icon: undefined
-      }).build()
+      // this.mb.setTitle('Track Time').setButton(comingSoonBtn).setData(comingSoonImg).build(),
+      // this.mb.setTitle('Team Tasks').setButton(comingSoonBtn).setData(comingSoonImg).build(),
+      // this.mb.setTitle('Project Planning').setButton(comingSoonBtn).setData(comingSoonImg).build()
     ]
-    const subMenuItems2 = [
-      this.mb.setTitle('Sprint Planning').setButton({
-        caption: 'Select',
-        title: 'Use this template',
-        clickAction: new boardActions.CreateBoard('SprintPlanning'),
-        icon: undefined
-      }).build(),
-    ]
-    const subMenuItems3 = [
-      this.mb.setTitle('Project Planning').setButton({
-        caption: 'Select',
-        title: 'Use this template',
-        clickAction: new boardActions.CreateBoard('ProjectPlanning'),
-        icon: undefined
-      }).build(),
-    ]
+    // const subMenuItems2 = [
+    //   this.mb.setTitle('Sprint Planning').setButton(comingSoonBtn).setData(comingSoonImg).build()
+    // ]
+    // const subMenuItems3 = [
+    //   this.mb.setTitle('Project Planning').setButton(comingSoonBtn).setData(comingSoonImg).build()
+    // ]
 
     const items = [
       this.mb.setTitle('Classic Templates').setSubmenu(subMenuItems1).build(),
-      this.mb.setTitle('Software Development').setSubmenu(subMenuItems2).build(),
-      this.mb.setTitle('Project Management').setSubmenu(subMenuItems3).build(),
+      // this.mb.setTitle('Software Development').setSubmenu(subMenuItems2).build(),
+      // this.mb.setTitle('Project Management').setSubmenu(subMenuItems3).build(),
     ]
 
     const menu = {
