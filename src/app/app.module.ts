@@ -8,6 +8,7 @@ import { AngularFireModule } from '@angular/fire';
 import { SidebarModule } from 'ng-sidebar';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { QuillModule } from 'ngx-quill';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
@@ -40,6 +41,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     AppComponent
   ],
   imports: [
+    NoopAnimationsModule,
     AppMaterialModule,
     BrowserAnimationsModule,
     BrowserModule,

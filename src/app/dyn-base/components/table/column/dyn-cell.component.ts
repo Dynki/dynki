@@ -8,7 +8,14 @@ import { FormBuilder, FormGroup } from '@angular/forms';
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
     <form [formGroup]="cellForm" class="table__row__cell__container" [ngClass]="{ table__row__cell__container__first: firstCol }">
-        <input tabindex="0" (blur)="dispatchAction(event)" (keyDown.enter)="enterPressed(event)" [formControlName]="column.model" #cell>
+        <button
+            dynSelect
+            nzTitle="Are you sure delete this task?"
+            (nzOnConfirm)="confirm()"
+            (nzOnCancel)="cancel()"
+            nzPlacement="bottom"
+            nz-button>Select
+        </button>
     </form>
     `
 })
@@ -57,7 +64,10 @@ export class DynCellComponent implements OnInit {
 
     setCellClass(className: string) {
         const cssClass = 'table__row__cell--' + className
-        this.cellRef.nativeElement.className = cssClass;
+
+        if (this.cellRef && this.cellRef.nativeElement) {
+            this.cellRef.nativeElement.className = cssClass;
+        }
     }
 
     dispatchAction() {

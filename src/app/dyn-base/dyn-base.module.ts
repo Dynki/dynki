@@ -23,6 +23,10 @@ import { DynNewRowComponent } from './components/table/row/dyn-new-row.component
 import { SortableDirective } from './directives/dyn-sortable.directive';
 import { BaseService } from './services/base.service';
 import { DynEditorComponent } from './components/editor/dyn-editor.component';
+import { DynSelectComponent } from './components/table/cell/dyn-select.component';
+import { DynSelectDirective } from './components/table/cell/dyn-select.directive';
+
+import { OverlayModule, Overlay } from '@angular/cdk/overlay';
 
 export const COMPONENTS = [
   FolderItemComponent,
@@ -35,7 +39,8 @@ export const COMPONENTS = [
   DynTableComponent,
   DynCellComponent,
   DynNewRowComponent,
-  DynEditorComponent
+  DynEditorComponent,
+  DynSelectComponent,
 ]
 
 @NgModule({
@@ -43,13 +48,15 @@ export const COMPONENTS = [
   imports: [
     CommonModule,
     FormsModule,
+    OverlayModule,
     ReactiveFormsModule,
     DragulaModule.forRoot(),
     NgZorroAntdModule
   ],
-  declarations: [...COMPONENTS, SortableDirective],
-  exports: COMPONENTS,
-  providers: [BaseService, MenuService, MenuBuilder]
+  declarations: [...COMPONENTS, SortableDirective, DynSelectDirective],
+  exports: [...COMPONENTS, ReactiveFormsModule, FormsModule],
+  providers: [BaseService, MenuService, MenuBuilder],
+  entryComponents: [DynSelectComponent]
 })
 export class BaseModule {}
 

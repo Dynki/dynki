@@ -1,0 +1,39 @@
+<ng-content></ng-content>
+<ng-template
+  #overlay="cdkConnectedOverlay"
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="overlayOrigin"
+  [cdkConnectedOverlayHasBackdrop]="_hasBackdrop"
+  (backdropClick)="hide()"
+  (detach)="hide()"
+  (positionChange)="onPositionChange($event)"
+  [cdkConnectedOverlayPositions]="_positions"
+  [cdkConnectedOverlayOpen]="visible$ | async">
+  <div class="ant-popover" [ngClass]="_classMap" [ngStyle]="nzOverlayStyle">
+    <div class="ant-popover-content">
+      <div class="ant-popover-arrow"></div>
+      <div class="ant-popover-inner pop__select">
+        <div>
+          <div class="ant-popover-inner-content">
+            <div class="ant-popover-message">
+              <ng-container>
+                <i nz-icon type="exclamation-circle" theme="fill"></i>
+                <div class="ant-popover-message-title">{{ nzTitle }}</div>
+              </ng-container>
+            </div>
+            <div class="ant-popover-buttons">
+              <button nz-button [nzSize]="'small'" (click)="onCancel()">
+                <ng-container *ngIf="nzCancelText">{{ nzCancelText }}</ng-container>
+                <ng-container *ngIf="!nzCancelText">{{ 'Modal.cancelText' | nzI18n }}</ng-container>
+              </button>
+              <button nz-button [nzSize]="'small'" [nzType]="nzOkType" (click)="onConfirm()">
+                <ng-container *ngIf="nzOkText">{{ nzOkText }}</ng-container>
+                <ng-container *ngIf="!nzOkText">{{ 'Modal.okText' | nzI18n }}</ng-container>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
