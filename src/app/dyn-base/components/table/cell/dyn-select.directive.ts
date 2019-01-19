@@ -17,6 +17,7 @@ import { DynSelectComponent } from './dyn-select.component';
 
 @Directive({
     selector: '[dynSelect]',
+    // tslint:disable-next-line
     host: {
         '[class.ant-popover-open]': 'isTooltipOpen'
     }

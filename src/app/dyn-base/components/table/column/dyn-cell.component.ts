@@ -1,29 +1,26 @@
-import { Component, Input, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, ViewChild, OnInit, ComponentFactoryResolver, ElementRef } from '@angular/core';
 import { Store } from '@ngxs/store';
 import * as boardActions from '../../../../dyn-boards/store/board.actions';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Cell, CellFactory } from 'app/dyn-boards/services/board-cell.factory';
+import { DynCellDirective } from '../cell/dyn-cell.directive';
 
 @Component({
     selector: 'dyn-cell, [dyn-cell]',
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
     <form [formGroup]="cellForm" class="table__row__cell__container" [ngClass]="{ table__row__cell__container__first: firstCol }">
-        <button
-            dynSelect
-            nzTitle="Are you sure delete this task?"
-            (nzOnConfirm)="confirm()"
-            (nzOnCancel)="cancel()"
-            nzPlacement="bottom"
-            nz-button>Select
-        </button>
+        <ng-template dynCellHost></ng-template>
     </form>
     `
 })
 export class DynCellComponent implements OnInit {
 
     cellForm: FormGroup;
+    cell: Cell;
 
     @ViewChild('cell') cellRef: ElementRef;
+    @ViewChild(DynCellDirective) cellHost: DynCellDirective;
     @Input() action: any;
     @Input() firstCol: boolean;
 
@@ -49,6 +46,8 @@ export class DynCellComponent implements OnInit {
     value: any;
 
     ngOnInit() {
+        this.cell = this.cellFactory.createCell(this.column.class, this.column.model, this.column.title);
+        this.cell.values = this.column.values;
         this.cellForm = this.formBuilder.group({ [this.column.model]: this.row[this.column.model] });
         this.cellForm = new FormGroup(this.cellForm.controls, { updateOn: 'blur' });
         this.cellForm.valueChanges.subscribe(row => {
@@ -60,6 +59,11 @@ export class DynCellComponent implements OnInit {
             //     this.cellForm.markAsPristine();
             // }
         });
+
+        const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.cell.component);
+        const viewContainerRef = this.cellHost.viewContainerRef;
+        const componentRef = viewContainerRef.createComponent(componentFactory);
+        (<any>componentRef.instance).column = this.column;
     }
 
     setCellClass(className: string) {
@@ -85,6 +89,8 @@ export class DynCellComponent implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder,
-        private store: Store
+        private store: Store,
+        private cellFactory: CellFactory,
+        private componentFactoryResolver: ComponentFactoryResolver
     ) { }
 }

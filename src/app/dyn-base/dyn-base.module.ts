@@ -27,6 +27,9 @@ import { DynSelectComponent } from './components/table/cell/dyn-select.component
 import { DynSelectDirective } from './components/table/cell/dyn-select.directive';
 
 import { OverlayModule, Overlay } from '@angular/cdk/overlay';
+import { DynSelectCellComponent } from './components/table/cell/dyn-select-cell.component';
+import { DynTextCellComponent } from './components/table/cell/dyn-text-cell.component';
+import { DynCellDirective } from './components/table/cell/dyn-cell.directive';
 
 export const COMPONENTS = [
   FolderItemComponent,
@@ -41,6 +44,8 @@ export const COMPONENTS = [
   DynNewRowComponent,
   DynEditorComponent,
   DynSelectComponent,
+  DynSelectCellComponent,
+  DynTextCellComponent
 ]
 
 @NgModule({
@@ -53,7 +58,7 @@ export const COMPONENTS = [
     DragulaModule.forRoot(),
     NgZorroAntdModule
   ],
-  declarations: [...COMPONENTS, SortableDirective, DynSelectDirective],
+  declarations: [...COMPONENTS, SortableDirective, DynSelectDirective, DynCellDirective],
   exports: [...COMPONENTS, ReactiveFormsModule, FormsModule],
   providers: [BaseService, MenuService, MenuBuilder],
   entryComponents: [DynSelectComponent]

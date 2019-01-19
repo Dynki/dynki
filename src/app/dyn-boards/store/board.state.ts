@@ -9,6 +9,7 @@ import * as menuActions from '../../dyn-base/store/menu.actions';
 import { MenuBuilder } from '../../dyn-base/services/dyn-menu.builder';
 import { Navigate } from '@ngxs/router-plugin';
 import { take, tap } from 'rxjs/operators';
+import { CellFactory } from '../services/board-cell.factory';
 
 @State<BoardStateModel>({
     name: 'board',
@@ -52,7 +53,8 @@ export class BoardState {
         private store: Store,
         private modalService: NzModalService,
         private boardService: BoardService,
-        private mb: MenuBuilder
+        private mb: MenuBuilder,
+        private cellFactory: CellFactory
     ) { }
 
     /**
@@ -181,11 +183,9 @@ export class BoardState {
     addColumn(ctx: StateContext<BoardStateModel>, event: boardActions.AddColumn) {
         const currentBoard = ctx.getState().currentBoard;
 
-        currentBoard.columns.push({
-            title: event.type,
-            class: event.type,
-            model: 'column' + currentBoard.columns.length
-        });
+        const model = 'column' + currentBoard.columns.length;
+        const newCell = this.cellFactory.createCell(event.type, model, model);
+        currentBoard.columns.push(newCell);
         this.boardService.updateBoard(currentBoard);
     }
 

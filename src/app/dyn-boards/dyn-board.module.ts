@@ -9,11 +9,14 @@ import { DynBoardDetailComponent } from './components/dyn-board-detail.component
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { AppMaterialModule } from '../material.module';
+import { CellFactory } from './services/board-cell.factory';
+import { DynTextCellComponent } from 'app/dyn-base/components/table/cell/dyn-text-cell.component';
+import { DynSelectCellComponent } from 'app/dyn-base/components/table/cell/dyn-select-cell.component';
 ​
 export const COMPONENTS = [DynChooseBoardTypeComponent, DynBoardComponent, DynBoardDetailComponent];
 
 @NgModule({
-  entryComponents: [DynChooseBoardTypeComponent, DynBoardDetailComponent],
+  entryComponents: [DynChooseBoardTypeComponent, DynBoardDetailComponent, DynTextCellComponent, DynSelectCellComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [
     BaseModule,
@@ -26,7 +29,7 @@ export const COMPONENTS = [DynChooseBoardTypeComponent, DynBoardComponent, DynBo
   ],
   declarations: COMPONENTS,
   exports: COMPONENTS,
-  providers: [BoardService]
+  providers: [BoardService, CellFactory]
 })
 export class BoardModule {}
 
