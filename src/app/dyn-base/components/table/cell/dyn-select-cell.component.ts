@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'dyn-select-cell',
@@ -13,4 +14,7 @@ import { Component } from '@angular/core';
     </button>
     `
 })
-export class DynSelectCellComponent { }
+export class DynSelectCellComponent {
+
+    @Input() formGroup: FormGroup;
+}

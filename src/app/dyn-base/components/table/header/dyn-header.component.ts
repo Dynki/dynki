@@ -27,6 +27,10 @@ import { Store } from '@ngxs/store';
                         <i class="anticon anticon-form"></i>
                         <span>Text</span>
                     </li>
+                    <li nz-menu-item class="table__header__menu__container__dropdown__item" (click)="addColumn('select')">
+                        <i nz-icon type="tag" theme="twotone"></i>
+                        <span>Select</span>
+                    </li>
                 </ul>
             </nz-dropdown>
         </div>

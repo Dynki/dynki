@@ -60,9 +60,11 @@ export class DynCellComponent implements OnInit {
             // }
         });
 
-        const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.cell.component);
+        const comp = this.cellFactory.componentMap[this.cell.class];
+        const componentFactory = this.componentFactoryResolver.resolveComponentFactory(comp);
         const viewContainerRef = this.cellHost.viewContainerRef;
         const componentRef = viewContainerRef.createComponent(componentFactory);
+        (<any>componentRef.instance).formGroup = this.cellForm;
         (<any>componentRef.instance).column = this.column;
     }
 

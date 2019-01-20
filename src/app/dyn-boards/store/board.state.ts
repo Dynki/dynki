@@ -184,8 +184,9 @@ export class BoardState {
         const currentBoard = ctx.getState().currentBoard;
 
         const model = 'column' + currentBoard.columns.length;
-        const newCell = this.cellFactory.createCell(event.type, model, model);
+        const newCell = JSON.parse(JSON.stringify(this.cellFactory.createCell(event.type, model, model)));
         currentBoard.columns.push(newCell);
+        console.log('CurrentBoard::', currentBoard);
         this.boardService.updateBoard(currentBoard);
     }
 

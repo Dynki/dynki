@@ -1,14 +1,11 @@
-import { DynTextCellComponent } from 'app/dyn-base/components/table/cell/dyn-text-cell.component';
-import { DynSelectComponent } from 'app/dyn-base/components/table/cell/dyn-select.component';
-import { Component, Type } from '@angular/core';
+import { DynTextCellComponent } from "app/dyn-base/components/table/cell/dyn-text-cell.component";
+import { DynSelectCellComponent } from "app/dyn-base/components/table/cell/dyn-select-cell.component";
 
 export interface Cell {
     class: string;
     model: string;
     title: string;
     values: Array<CellValue>;
-    types: Object;
-    component: Type<any>;
 }
 
 interface CellValue {
@@ -22,11 +19,6 @@ export interface ICellFactory {
 }
 
 class BaseCell implements Cell {
-
-    types = {
-        text: DynTextCellComponent,
-        select: DynSelectComponent
-    }
 
     component = undefined;
 
@@ -46,7 +38,6 @@ class TextCell extends BaseCell {
 
     constructor(model: string, title: string) {
         super(model, title);
-        this.component = this.types['text'];
     }
 }
 
@@ -56,11 +47,16 @@ class SelectCell extends BaseCell {
 
     constructor(model: string, title: string) {
         super(model, title);
-        this.component = this.types['select'];
     }
 }
 
 export class CellFactory implements ICellFactory {
+
+    componentMap = {
+        'text': DynTextCellComponent,
+        'select': DynSelectCellComponent
+    }
+
     createCell(type: string, model: string, title: string): Cell {
         switch (type) {
             case 'text':
