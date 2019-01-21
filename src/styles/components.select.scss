@@ -1,0 +1,41 @@
+.dyn-select {
+    &__btn {
+        width: 100%;
+        height: 100%!important;
+        border: none!important;
+        border-radius: 0px!important;
+        // background-color: #eff1f3!important;
+        box-shadow: none!important;
+        color: #fff!important;
+    }
+
+    &__container {
+        left: -70px!important;
+    }
+
+    &__content {
+        padding: 5px 5px!important;
+    }
+
+    &__msgtitle {
+        padding-left: 0px!important;
+    }
+
+    &__item {
+        height: 33px;
+        min-width: 100px;
+        text-align: center;
+        padding-top: 5px;
+        color: #ffffff;
+        margin: 5px;
+        border: solid;
+        border-width: 2px;
+        border-color: #ffffff;
+        width: 121px!important;
+
+        &:hover {
+            border-color: #2b82c1!important;
+            cursor: pointer;
+        }
+    }
+}

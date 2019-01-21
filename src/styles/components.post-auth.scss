@@ -54,8 +54,8 @@
             padding-left: 4px;
             grid-column-start: 2;
             overflow: hidden;
-            overflow-y: scroll;
-            //height: 100%;
+            overflow-y: auto;
+            height: calc(100vh - 63px);
 
             @supports (-ms-accelerator:true) {
                 /* IE Edge 12+ CSS styles go here */ 

@@ -8,7 +8,6 @@
     grid-template-rows: 1fr;
     grid-template-columns: 2fr 5fr;
     grid-template-areas: "list msg";
-    min-height: 100vh;
     margin: 0;
     height: 100%;
 
@@ -104,13 +103,13 @@
     }
 
     .msgs {
-        height: calc(100vh - 100px);
+        height: calc(100vh - 118px);
         width: 100%;
         background: #F6F6F6;
         padding-left: 5px;
         padding-top: 5px;
 
-        overflow-y: scroll;
+        overflow-y: auto;
         overflow-x: hidden; 
 
         @supports (-ms-accelerator:true) {

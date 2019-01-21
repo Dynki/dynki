@@ -206,3 +206,8 @@ dyn-sub-menu {
 .draghandle {
     cursor: pointer;
 }
+
+dyn-menu {
+    display: block;
+    height: calc(100% - 60px)!important;
+}

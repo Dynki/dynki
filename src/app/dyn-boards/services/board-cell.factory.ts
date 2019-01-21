@@ -1,5 +1,6 @@
-import { DynTextCellComponent } from "app/dyn-base/components/table/cell/dyn-text-cell.component";
-import { DynSelectCellComponent } from "app/dyn-base/components/table/cell/dyn-select-cell.component";
+import { DynTextCellComponent } from 'app/dyn-base/components/table/cell/dyn-text-cell.component';
+import { DynSelectCellComponent } from 'app/dyn-base/components/table/cell/dyn-select-cell.component';
+import { Utils } from 'app/shared/utils';
 
 export interface Cell {
     class: string;
@@ -43,7 +44,9 @@ class TextCell extends BaseCell {
 
 class SelectCell extends BaseCell {
     class = 'select';
-    values = [{ key: '0', title: '', color: 'red' }];
+    values = [
+        { key: Utils.newGuid(), title: 'Yes', color: '1E8E3E' },
+        { key: Utils.newGuid(), title: 'No', color: 'D73026' }];
 
     constructor(model: string, title: string) {
         super(model, title);

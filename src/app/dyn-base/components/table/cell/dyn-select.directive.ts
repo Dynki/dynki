@@ -38,12 +38,17 @@ export class DynSelectDirective extends NzPopconfirmDirective implements OnInit 
         'nzOkText',
         'nzOkType',
         'nzCancelText',
-        'nzCondition'
+        'nzCondition',
+        'row',
+        'column',
+        'formGroup'
     ];
 
     @Input() nzOkText: string;
     @Input() nzOkType: string;
     @Input() nzCancelText: string;
+    @Input() row: any;
+    @Input() column: any;
     @Input() @InputBoolean() nzCondition: boolean;
     @Output() readonly nzOnCancel = new EventEmitter<void>();
     @Output() readonly nzOnConfirm = new EventEmitter<void>();
@@ -75,4 +80,5 @@ export class DynSelectDirective extends NzPopconfirmDirective implements OnInit 
         }
         this.tooltip.setOverlayOrigin(this);
     }
+
 }

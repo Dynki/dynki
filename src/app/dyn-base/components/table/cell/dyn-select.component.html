@@ -9,18 +9,25 @@
   (positionChange)="onPositionChange($event)"
   [cdkConnectedOverlayPositions]="_positions"
   [cdkConnectedOverlayOpen]="visible$ | async">
-  <div class="ant-popover" [ngClass]="_classMap" [ngStyle]="nzOverlayStyle">
+  <div class="ant-popover dyn-select__container" [ngClass]="_classMap" [ngStyle]="nzOverlayStyle">
     <div class="ant-popover-content">
       <div class="ant-popover-arrow"></div>
       <div class="ant-popover-inner pop__select">
         <div>
-          <div class="ant-popover-inner-content">
+          <div class="ant-popover-inner-content dyn-select__content">
             <div class="ant-popover-message">
               <ng-container>
-                <div class="ant-popover-message-title">
-                    Select This
+                <div class="ant-popover-message-title dyn-select__msgtitle">
+                    <div *ngFor="let col of column.values; index as i;">
+                        <div class="dyn-select__item" (click)="onClick(col)" [ngStyle]="{'background-color': '#'+col.color}">{{col.title}}</div>
+                    </div>
                 </div>
               </ng-container>
+            </div>
+            <div>
+                <button nzTitle="edit labels" nzPlacement="right" nz-button nz-tooltip>
+                    <i nz-icon type="edit" theme="outline"></i>
+                </button>
             </div>
             <div class="ant-popover-buttons">
               <button nz-button [nzSize]="'small'" (click)="onCancel()">
