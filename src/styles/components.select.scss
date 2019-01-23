@@ -38,4 +38,18 @@
             cursor: pointer;
         }
     }
+
+    &__text {
+        height: 33px;
+        min-width: 100px;
+        text-align: center;
+        padding-top: 5px;
+        color: #ffffff;
+        margin: 5px;
+        border: solid;
+        border-width: 2px;
+        border-color: #ffffff;
+        width: 121px!important;
+    }
+
 }

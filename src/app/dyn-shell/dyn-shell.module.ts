@@ -70,11 +70,11 @@ export const components = [
     AuthModule.forRoot(),
     SidebarModule.forRoot(),
     NgxsModule.forRoot([
+      BoardState,
       BaseState,
       ShellState,
       MenuState,
-      MessageState,
-      BoardState
+      MessageState
     ]),
     BaseModule,
     BoardModule,

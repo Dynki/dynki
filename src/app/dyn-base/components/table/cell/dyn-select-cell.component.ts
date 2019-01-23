@@ -1,5 +1,11 @@
-import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Select, Actions, ofActionDispatched } from '@ngxs/store';
+import { BoardState } from 'app/dyn-boards/store/board.state';
+import { Observable } from 'rxjs/observable';
+import { Board } from 'app/dyn-boards/store/board.model';
+import { takeWhile } from 'rxjs/operators';
+import * as boardActions from 'app/dyn-boards/store/board.actions';
 
 @Component({
   selector: 'dyn-select-cell',
@@ -19,27 +25,41 @@ import { FormGroup } from '@angular/forms';
     </button>
     `
 })
-export class DynSelectCellComponent implements OnInit, AfterViewInit {
+export class DynSelectCellComponent implements OnInit, AfterViewInit, OnDestroy {
 
     @Input() formGroup: FormGroup;
     @Input() row: any;
     @Input() column: any;
+    @Input() board$: Observable<Board>;
 
     textContent: string;
+    keepAlive = true;
 
     btnColor = '#EFF1F3';
+
+    constructor(public actions$: Actions) {
+        this.actions$
+            .pipe(ofActionDispatched(boardActions.UpdateColumn))
+            .subscribe((col) => this.getCellContent(col));
+    }
 
     ngOnInit() {
     }
 
+    ngOnDestroy() {
+        this.keepAlive = false;
+    }
+
     ngAfterViewInit() {
-        const colVal = this.column.values.find(v => v.key === this.row[this.column.model]);
+        // this.board$.pipe(
+        //     takeWhile(() => this.keepAlive)
+        // ).subscribe(b => this.getCellContent(b.columns));
+        this.getCellContent(this.column);
+    }
+
+    getCellContent(col) {
+        const colVal = col.values.find(v => v.key === this.row[col.model]);
         this.textContent = colVal ? colVal.title : '';
         this.btnColor = colVal ? '#' + colVal.color : '#EFF1F3';
-        console.log('Row::', this.row);
-        console.log('Col::', this.column);
-        console.log('Col::Values::', this.column.values);
-        console.log('FormGroup::Value::', this.formGroup.value[this.column.model]);
-        console.log('Btn::Color::', this.btnColor);
     }
 }

@@ -2,6 +2,10 @@ import { Component, Input, ChangeDetectionStrategy, ViewChild, OnInit, Component
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Cell, CellFactory } from 'app/dyn-boards/services/board-cell.factory';
 import { DynCellDirective } from './dyn-cell.directive';
+import { Observable } from 'rxjs';
+import { Board } from 'app/dyn-boards/store/board.model';
+import { Select } from '@ngxs/store';
+import { BoardState } from 'app/dyn-boards/store/board.state';
 
 @Component({
     selector: 'dyn-cell, [dyn-cell]',
@@ -20,6 +24,8 @@ export class DynCellComponent implements OnInit {
     @ViewChild(DynCellDirective) cellHost: DynCellDirective;
     @Input() action: any;
     @Input() firstCol: boolean;
+    @Select(BoardState.getCurrentBoard)
+    public board$: Observable<Board>;
 
     @Input() set row(row: any) {
         this._row = row;
@@ -58,6 +64,7 @@ export class DynCellComponent implements OnInit {
         (<any>componentRef.instance).formGroup = this.cellForm;
         (<any>componentRef.instance).column = this.column;
         (<any>componentRef.instance).row = this.row;
+        (<any>componentRef.instance).board$ = this.board$;
     }
 
     constructor(

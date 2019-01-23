@@ -19,14 +19,29 @@
               <ng-container>
                 <div class="ant-popover-message-title dyn-select__msgtitle">
                     <div *ngFor="let col of column.values; index as i;">
-                        <div class="dyn-select__item" (click)="onClick(col)" [ngStyle]="{'background-color': '#'+col.color}">{{col.title}}</div>
+                        <div 
+                          *ngIf="!editMode"
+                          class="dyn-select__item"
+                          (click)="onClick(col)"
+                          [ngStyle]="{'background-color': '#'+col.color}">{{col.title}}
+                        </div>
+                        <input 
+                          *ngIf="editMode"
+                          class="dyn-select__text"
+                          tabindex="0"
+                          [ngStyle]="{'background-color': '#'+col.color}"
+                          (blur)="dispatchAction(col)"
+                          [(ngModel)]="col.title"
+                        #text>
+            
                     </div>
                 </div>
               </ng-container>
             </div>
             <div>
-                <button nzTitle="edit labels" nzPlacement="right" nz-button nz-tooltip>
-                    <i nz-icon type="edit" theme="outline"></i>
+                <button (click)="toggleEditMode()" nzTitle="edit labels" nzPlacement="right" nz-button nz-tooltip>
+                    <i nz-icon *ngIf="editMode" type="edit" theme="outline"></i>
+                    <i nz-icon *ngIf="!editMode" type="edit" theme="fill"></i>
                 </button>
             </div>
             <div class="ant-popover-buttons">
