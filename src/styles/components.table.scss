@@ -179,6 +179,7 @@ $mariner: #2b82c1;
             .draghandle {
                 
                 width: 7px;
+                min-width: 7px;
                 height: 40px;
                 background-color: $mariner;
 
@@ -197,6 +198,7 @@ $mariner: #2b82c1;
 
             &__column--first {
                 flex-grow: 1;
+                min-width: 300px;
             }
 
         }
@@ -286,6 +288,7 @@ $mariner: #2b82c1;
             text-align: left;
             width: 100%;
             padding-left: 20px;
+            max-width: calc(100vw - 302px);
 
             input {
                 margin-right: 1px!important;

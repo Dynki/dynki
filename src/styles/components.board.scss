@@ -81,6 +81,7 @@
         margin-bottom: 90px;
         grid-area: "content";
         padding-right: 8px;
+        overflow-x: auto;
     }
 
     &__menu {

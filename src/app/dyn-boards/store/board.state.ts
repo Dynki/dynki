@@ -10,6 +10,7 @@ import { MenuBuilder } from '../../dyn-base/services/dyn-menu.builder';
 import { Navigate } from '@ngxs/router-plugin';
 import { take, tap } from 'rxjs/operators';
 import { CellFactory } from '../services/board-cell.factory';
+import { Utils } from 'app/shared/utils';
 
 @State<BoardStateModel>({
     name: 'board',
@@ -183,7 +184,7 @@ export class BoardState {
     addColumn(ctx: StateContext<BoardStateModel>, event: boardActions.AddColumn) {
         const currentBoard = ctx.getState().currentBoard;
 
-        const model = 'column' + currentBoard.columns.length;
+        const model = Utils.newGuid();
         const newCell = JSON.parse(JSON.stringify(this.cellFactory.createCell(event.type, model, model)));
         currentBoard.columns.push(newCell);
         console.log('CurrentBoard::', currentBoard);

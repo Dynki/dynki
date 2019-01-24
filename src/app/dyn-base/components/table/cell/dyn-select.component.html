@@ -43,7 +43,10 @@
                     <i nz-icon *ngIf="editMode" type="edit" theme="outline"></i>
                     <i nz-icon *ngIf="!editMode" type="edit" theme="fill"></i>
                 </button>
-            </div>
+                <button *ngIf="editMode" (click)="AddItem()" nzTitle="add label" nzPlacement="right" nz-button nz-tooltip>
+                  <i nz-icon type="plus" theme="outline"></i>
+              </button>
+          </div>
             <div class="ant-popover-buttons">
               <button nz-button [nzSize]="'small'" (click)="onCancel()">
                 <ng-container *ngIf="nzCancelText">{{ nzCancelText }}</ng-container>

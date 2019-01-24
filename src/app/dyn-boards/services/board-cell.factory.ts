@@ -30,13 +30,12 @@ class BaseCell implements Cell {
 
     constructor(model: string, title: string) {
         this.model = model;
-        this.title = title;
     }
 }
 
 class TextCell extends BaseCell {
     class = 'text';
-
+    title = 'text';
     constructor(model: string, title: string) {
         super(model, title);
     }
@@ -44,6 +43,7 @@ class TextCell extends BaseCell {
 
 class SelectCell extends BaseCell {
     class = 'select';
+    title = 'select';
     values = [
         { key: Utils.newGuid(), title: 'Yes', color: '1E8E3E' },
         { key: Utils.newGuid(), title: 'No', color: 'D73026' }];
