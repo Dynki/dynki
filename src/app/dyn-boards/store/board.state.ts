@@ -1,4 +1,5 @@
-import { Action, Selector, State, StateContext, Store, Actions } from '@ngxs/store';
+import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
+import * as moment from 'moment';
 
 import * as boardActions from './board.actions';
 import { BoardStateModel, IBoard, IBoardEntity, IBoards } from './board.model';
@@ -42,7 +43,12 @@ export class BoardState {
 
     @Selector()
     static getCurrentBoardEntities(state: BoardStateModel): IBoardEntity[] {
-        return state.currentBoard.entities;
+        return [...state.currentBoard.entities];
+    }
+
+    @Selector()
+    static getCurrentBoardColumns(state: BoardStateModel): Array<any> {
+        return [...state.currentBoard.columns];
     }
 
     @Selector()
@@ -94,8 +100,6 @@ export class BoardState {
 
     @Action(boardActions.RefreshBoards)
     refreshBoards(ctx: StateContext<BoardStateModel>, event: boardActions.RefreshBoards) {
-        console.log('Board::State::RefreshBoards');
-
         let boards;
         if (event.boards) {
             ctx.patchState({ boards: event.boards });
@@ -176,7 +180,9 @@ export class BoardState {
     updateColumn(ctx: StateContext<BoardStateModel>, event: boardActions.UpdateColumn) {
         const currentBoard = ctx.getState().currentBoard;
         const colIndex = currentBoard.columns.findIndex(c => c.model === event.column.model);
+        currentBoard.modifiedDate = moment().toDate();
         currentBoard.columns[colIndex] = event.column;
+        ctx.patchState({ currentBoard });
         this.boardService.updateBoard(currentBoard);
     }
 
@@ -187,7 +193,6 @@ export class BoardState {
         const model = Utils.newGuid();
         const newCell = JSON.parse(JSON.stringify(this.cellFactory.createCell(event.type, model, model)));
         currentBoard.columns.push(newCell);
-        console.log('CurrentBoard::', currentBoard);
         this.boardService.updateBoard(currentBoard);
     }
 
@@ -254,7 +259,6 @@ export class BoardState {
 
     @Action(boardActions.RemoveBoard)
     removeBoard(ctx: StateContext<BoardStateModel>, event: boardActions.RemoveBoard) {
-        console.log('Board::State::RemoveBoard', event.board);
         this.boardService.removeBoard(event.board);
         ctx.dispatch(new boardActions.RefreshBoards());
     }

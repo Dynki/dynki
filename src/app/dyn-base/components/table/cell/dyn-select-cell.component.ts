@@ -1,6 +1,6 @@
-import { Component, Input, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Select, Actions, ofActionDispatched } from '@ngxs/store';
+import { Select, Actions, ofActionDispatched, ofActionSuccessful } from '@ngxs/store';
 import { BoardState } from 'app/dyn-boards/store/board.state';
 import { Observable } from 'rxjs/observable';
 import { Board } from 'app/dyn-boards/store/board.model';
@@ -9,6 +9,7 @@ import * as boardActions from 'app/dyn-boards/store/board.actions';
 
 @Component({
   selector: 'dyn-select-cell',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <button
         [style.backgroundColor]="btnColor"
@@ -32,7 +33,7 @@ export class DynSelectCellComponent implements OnInit, AfterViewInit, OnDestroy 
     @Input() column: any;
     @Input() board$: Observable<Board>;
 
-    textContent: string;
+    private textContent: string;
     keepAlive = true;
 
     btnColor = '#EFF1F3';
@@ -40,7 +41,9 @@ export class DynSelectCellComponent implements OnInit, AfterViewInit, OnDestroy 
     constructor(public actions$: Actions) {
         this.actions$
             .pipe(ofActionDispatched(boardActions.UpdateColumn))
-            .subscribe((col) => this.getCellContent(col));
+            .subscribe(col => {
+                this.getCellContent(col)
+            });
     }
 
     ngOnInit() {
@@ -51,15 +54,18 @@ export class DynSelectCellComponent implements OnInit, AfterViewInit, OnDestroy 
     }
 
     ngAfterViewInit() {
-        // this.board$.pipe(
-        //     takeWhile(() => this.keepAlive)
-        // ).subscribe(b => this.getCellContent(b.columns));
         this.getCellContent(this.column);
     }
 
-    getCellContent(col) {
-        const colVal = col.values.find(v => v.key === this.row[col.model]);
-        this.textContent = colVal ? colVal.title : '';
-        this.btnColor = colVal ? '#' + colVal.color : '#EFF1F3';
+    getCellContent(column) {
+        const col = column.column ? column.column : column;
+        if (col.values && col.model === this.column.model) {
+            const colVal = col.values.find(v => v.key === this.row[col.model]);
+            this.textContent = colVal ? colVal.title : '';
+            const backColor = colVal ? '#' + colVal.color : '#EFF1F3';
+            if (backColor !== this.btnColor) {
+                this.btnColor = backColor;
+            }
+        }
     }
 }

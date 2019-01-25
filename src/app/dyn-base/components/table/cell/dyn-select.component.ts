@@ -35,14 +35,17 @@ export class DynSelectComponent extends NzPopconfirmComponent implements OnInit 
     }
 
     dispatchAction(col) {
-        console.log('DisPatchAction::row::', this.row);
-        console.log('DisPatchAction::col::', col);
-        //this.store.dispatch(new boardActions.UpdateColumn(col));
+        this.column.values.forEach(v => {
+            if (v.key === col.key) {
+                v.title = col.title
+            }
+            return v;
+        });
+
+        this.store.dispatch(new boardActions.UpdateColumn(this.column));
     }
 
     enterPressed() {
         this.textRef.nativeElement.blur();
     }
-
-
 }

@@ -33,7 +33,7 @@ export class BoardService {
    }
 
   async createBoard(type: string): Promise<Board> {
-    console.log('Board::Service::CreateBoard');
+    // console.log('Board::Service::CreateBoard');
       const data = JSON.parse(JSON.stringify(new Board('Task', type, '', this.userInfo)));
       const docRef = await this.db.collection('domains').doc(this.domainId).collection('boards').add(data);
       const newDoc = await this.db.collection('domains').doc(this.domainId).collection('boards').doc(docRef.id).get().toPromise();
@@ -42,7 +42,7 @@ export class BoardService {
   }
 
   getBoards() {
-    console.log('Board::Service::getBoards');
+    // console.log('Board::Service::getBoards');
     return this.db.collection('domains').doc(this.domainId).collection('boardsInDomain').doc('appBoards').snapshotChanges()
     .pipe(
       map(a => {
@@ -56,7 +56,7 @@ export class BoardService {
   }
 
   getBoard(boardId: string) {
-    console.log('Board::Service::getBoard ', boardId);
+    // console.log('Board::Service::getBoard ', boardId);
     return this.db.collection('domains').doc(this.domainId).collection('boards').doc(boardId).snapshotChanges()
     .pipe(
       take(1)
@@ -75,7 +75,7 @@ export class BoardService {
   }
 
   updateBoardTitle(board: IBoard) {
-    console.log('Board::Service::UpdateBoardTitle');
+    // console.log('Board::Service::UpdateBoardTitle');
     return this.db.collection('domains').doc(this.domainId).collection('boardsInDomain').doc('appBoards').get().pipe(
       take(1),
       switchMap(b => {
@@ -92,7 +92,7 @@ export class BoardService {
   }
 
   attachBoard(board: IBoard) {
-    console.log('Board::Service::AttachBoard');
+    // console.log('Board::Service::AttachBoard');
     return this.db.collection('domains').doc(this.domainId).collection('boardsInDomain').doc('appBoards').get()
     .pipe(
       take(1),
@@ -113,7 +113,7 @@ export class BoardService {
   }
 
   AddBoardFolder(boards: IBoards) {
-    console.log('Board::Service::UpdateBoardTitle');
+    // console.log('Board::Service::UpdateBoardTitle');
     const newFolder = { id: null, title: 'New Folder' } as Board;
     newFolder.isFolder = true;
     boards.boards.push(newFolder);
@@ -130,13 +130,13 @@ export class BoardService {
   }
 
   updateBoard(board: Board) {
-    console.log('Board::Service::UpdateBoard', board);
+    // console.log('Board::Service::UpdateBoard', board);
     this.db.collection('domains').doc(this.domainId).collection('boards').doc(board.id).set(board)
     .then(() => this.store.dispatch(new boardActions.DisplayBoard(board)));
   }
 
   updateBoards(boards: Board[]) {
-    console.log('Board::Service::UpdateBoardTitle');
+    // console.log('Board::Service::UpdateBoardTitle');
     this.db.collection('domains').doc(this.domainId).collection('boardsInDomain').doc('appBoards').set({ boards });
   }
 
