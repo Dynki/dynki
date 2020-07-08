@@ -1,4 +1,4 @@
-Dynki - Board Management
+Dynki - Free task management software
 
 Live site - https://dynki.com
 
@@ -7,7 +7,11 @@ Board Types
 
 Column Types
   - Text
-
-Inbox Messaging
+  - Number
+  - Multi Choice
+  - Date
+  - Due Date
+  - People 
+  - Timer
 
 Team Management
