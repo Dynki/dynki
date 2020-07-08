@@ -1,6 +1,6 @@
 Dynki - Board Management
 
-Demo - https://dynki-c5141.firebaseapp.com
+Demo - https://dynki.com
 
 Board Types
   - Scratch
